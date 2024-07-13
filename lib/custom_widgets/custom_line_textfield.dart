@@ -1,0 +1,51 @@
+import 'package:flutter/material.dart';
+import 'package:sizer/sizer.dart';
+
+class CustomLineTextField extends StatefulWidget {
+  String? hint;
+      String? name;
+  TextEditingController? controller;
+   CustomLineTextField({Key? key,this.controller,this.name,this.hint,}) : super(key: key);
+
+  @override
+  State<CustomLineTextField> createState() => _CustomLineTextFieldState();
+}
+
+class _CustomLineTextFieldState extends State<CustomLineTextField> {
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Padding(
+          padding:  EdgeInsets.only(left: 4.w,right: 4.w),
+          child: Row(
+            children: [
+              Text(
+                widget.name!,
+                style: TextStyle(color: Colors.black,fontSize: 10.sp),
+              ),
+            ],
+          ),
+        ),
+        //SizedBox(height: 0.3.h,),
+        Padding(
+          padding:  EdgeInsets.only(left: 4.w,right: 4.w),
+          child: Container(
+            height: 3.h,
+            //width: 90.w,
+            child: TextField(
+              controller: widget.controller,
+              style: TextStyle(fontSize: 10.sp,color: Colors.black),
+              decoration: InputDecoration(
+                  hintText: widget.hint,
+                  hintStyle: TextStyle(fontSize: 9.sp),
+                contentPadding: EdgeInsets.only(bottom: 1.6.h)
+              ),
+            ),
+          ),
+        ),
+        SizedBox(height: 2.5.h,),
+      ],
+    );
+  }
+}
