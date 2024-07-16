@@ -1,6 +1,9 @@
 import 'package:db_2_0/view/screens/auth_screens/forgot_password_screen/Forget%20Provider/foget_provider.dart';
 import 'package:db_2_0/view/screens/auth_screens/login_screen/Login%20Provider/login_provider.dart';
 import 'package:db_2_0/view/screens/auth_screens/signup_detail_screen/SignUp%20Provider/sign_up_provider.dart';
+import 'package:db_2_0/view/screens/home_screen/DashBoard%20Provider/dashboard_provider.dart';
+import 'package:db_2_0/view/screens/order_screens/Provider/all_order_peovider.dart';
+import 'package:db_2_0/view/screens/product_screens/Provider/all_product_provider.dart';
 import 'package:db_2_0/view/screens/splash_screen/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get_storage/get_storage.dart';
@@ -16,6 +19,9 @@ void main() async{
       ChangeNotifierProvider(create: (_) => LoginProvider()),
       ChangeNotifierProvider(create: (_) => SignUpProvider()),
       ChangeNotifierProvider(create: (_) => ForgetOtpProvider()),
+      ChangeNotifierProvider(create: (_) => HomePageProvider()),
+      ChangeNotifierProvider(create: (_) => AllProductProvider()),
+      ChangeNotifierProvider(create: (_) => AllOrderProvider()),
     ],
     child: const MyApp(),
   ),);

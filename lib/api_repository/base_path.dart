@@ -4,3 +4,7 @@ const signupUrl = 'seller-registers/1';
 const forgetOtpSendUrl = 'request_otp';
 const verifyOtpSendUrl = 'verify_otp';
 const resetPasswordUrl = 'seller-resetpassword';
+const dashBoardUrl = 'dasboard-static';
+const storeOnOffUrl = 'store-onoff';
+const productScreenUrl = 'store-products';
+const ordersScreenUrl = 'store-orders';
