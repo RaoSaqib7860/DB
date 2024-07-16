@@ -1,12 +1,14 @@
 import 'package:db_2_0/view/screens/order_screens/create_order_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../../custom_widgets/app_colors.dart';
 import '../../../custom_widgets/custom_bottomsheet.dart';
 import '../../../custom_widgets/custom_dialogue.dart';
 import '../../../custom_widgets/custom_fill_container.dart';
+import 'Provider/all_order_peovider.dart';
 import 'all_order_screens/all_screen.dart';
 
 class AllOrdersScreen extends StatefulWidget {

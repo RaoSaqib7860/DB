@@ -2,6 +2,7 @@ import 'package:db_2_0/api_repository/api_utils.dart';
 import 'package:db_2_0/view/screens/home_screen/home_screen.dart';
 import 'package:flutter/material.dart';
 
+import '../../../bottom_sheet/bottom_sheet.dart';
 import '../../../store_setup_screen/store_setup_screen.dart';
 import '../Model/login_model.dart';
 
@@ -41,7 +42,7 @@ class LoginProvider extends ChangeNotifier {
       Navigator.pushReplacement(
           context!,
           MaterialPageRoute(
-            builder: (context) => HomeScreen(),
+            builder: (context) => BottomSheetScreen(),
           ));
       // if (result != null) {
       //   print('object222222');
