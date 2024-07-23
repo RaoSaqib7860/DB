@@ -85,7 +85,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             child: Text(
                               'Mobile Number',
                               style: TextStyle(
-                                fontSize: 12.sp,
+                                fontSize: 11.6.sp,
                                 color: index == 2 ? Colors.white : Colors.black,
                               ),
                             ),

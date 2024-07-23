@@ -29,6 +29,8 @@ class _DeliveryMainScreenState extends State<DeliveryMainScreen> {
                   fontSize: 10.sp
               ),
               indicatorColor: Colors.white,
+              labelColor: Colors.white,
+              unselectedLabelColor: Colors.grey,
               labelPadding: EdgeInsets.only(bottom: 0.5.h),
               tabs: [
                 Text(

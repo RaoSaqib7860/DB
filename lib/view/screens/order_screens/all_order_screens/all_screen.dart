@@ -26,8 +26,7 @@ class _AllScreenState extends State<AllScreen> {
   }
   @override
   Widget build(BuildContext context) {
-    final AllOrderProvider provider = Provider.of<AllOrderProvider>(
-        context);
+    final AllOrderProvider provider = Provider.of<AllOrderProvider>(context);
     return Stack(
       children: [
         Padding(
