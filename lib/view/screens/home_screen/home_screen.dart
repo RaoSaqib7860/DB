@@ -3,12 +3,16 @@ import 'dart:async';
 import 'package:db_2_0/custom_widgets/app_colors.dart';
 import 'package:db_2_0/custom_widgets/data_loading.dart';
 import 'package:fl_chart/fl_chart.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_switch/flutter_switch.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 
+import '../../../custom_widgets/custom_bottomsheet.dart';
+import '../../../custom_widgets/custom_fill_container.dart';
 import '../account_screen/domain_setting_screen/domain_setting_screen.dart';
 import 'DashBoard Provider/dashboard_provider.dart';
 import 'home_screens/logo_screen.dart';
@@ -23,6 +27,8 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   bool _value = false;
+  int ind = 0;
+  bool click = false;
 
   late ScrollController _scrollController;
   late Timer _timer;
@@ -527,22 +533,218 @@ class _HomeScreenState extends State<HomeScreen> {
                                     fontSize: 13.sp,
                                     fontWeight: FontWeight.bold),
                               ),
-                              Row(
-                                children: [
-                                  Text(
-                                    'Lifetime',
-                                    style: TextStyle(
-                                        color: Colors.black,
-                                        fontSize: 11.sp,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                  //SizedBox(width: 0.1.w,),
-                                  Icon(
-                                    Icons.keyboard_arrow_down_outlined,
-                                    color: Colors.black,
-                                    size: 3.h,
-                                  ),
-                                ],
+                              GestureDetector(
+                                onTap: () {
+                                  customBottomSheet(
+                                      context: context,
+                                      widget: Column(
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: [
+                                          SizedBox(height: 2.h,),
+                                          Row(
+                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                'Apply Filter',
+                                                style: TextStyle(
+                                                    color: Colors.black,
+                                                    fontSize: 11.sp,
+                                                    fontWeight: FontWeight.bold
+                                                ),
+                                              ),
+                                              GestureDetector(
+                                                  onTap: () {
+                                                    Navigator.pop(context);
+                                                  },
+                                                  child: SvgPicture.asset('assets/svgs/cross.svg',height: 2.5.h,)),
+                                            ],
+                                          ),
+                                          SizedBox(height: 1.h,),
+                                          Text(
+                                            'Filter by date',
+                                            style: TextStyle(
+                                              color: Colors.black,
+                                              fontSize: 11.sp,
+                                            ),
+                                          ),
+                                          SizedBox(height: 3.h,),
+                                          GestureDetector(
+                                            onTap: () {
+                                              ind = 0;
+                                              setState(() {
+
+                                              });
+                                            },
+                                            child: Row(
+                                              children: [
+                                                ind == 0 ?
+                                                customFillContainer()
+                                                    : SvgPicture.asset('assets/svgs/empp.svg',height: 2.5.h,),
+                                                SizedBox(width: 2.w,),
+                                                Text(
+                                                  'Lifetime',
+                                                  style: TextStyle(
+                                                    color: Colors.black,
+                                                    fontSize: 11.sp,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                          SizedBox(height: 2.h,),
+                                          GestureDetector(
+                                            onTap: () {
+                                              ind = 1;
+                                              setState(() {
+
+                                              });
+                                            },
+                                            child: Row(
+                                              children: [
+                                                ind == 1 ?
+                                                customFillContainer()
+                                                    : SvgPicture.asset('assets/svgs/empp.svg',height: 2.5.h,),
+                                                SizedBox(width: 2.w,),
+                                                Text(
+                                                  'Today',
+                                                  style: TextStyle(
+                                                    color: Colors.black,
+                                                    fontSize: 11.sp,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                          SizedBox(height: 2.h,),
+                                          GestureDetector(
+                                            onTap: () {
+                                              ind = 2;
+                                              setState(() {
+
+                                              });
+                                            },
+                                            child: Row(
+                                              children: [
+                                                ind == 2 ?
+                                                customFillContainer()
+                                                    : SvgPicture.asset('assets/svgs/empp.svg',height: 2.5.h,),
+                                                SizedBox(width: 2.w,),
+                                                Text(
+                                                  'Yesterday',
+                                                  style: TextStyle(
+                                                    color: Colors.black,
+                                                    fontSize: 11.sp,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                          SizedBox(height: 2.h,),
+                                          GestureDetector(
+                                            onTap: () {
+                                              ind = 3;
+                                              setState(() {
+
+                                              });
+                                            },
+                                            child: Row(
+                                              children: [
+                                                ind == 3 ?
+                                                customFillContainer()
+                                                    : SvgPicture.asset('assets/svgs/empp.svg',height: 2.5.h,),
+                                                SizedBox(width: 2.w,),
+                                                Text(
+                                                  'Last week',
+                                                  style: TextStyle(
+                                                    color: Colors.black,
+                                                    fontSize: 11.sp,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                          SizedBox(height: 2.h,),
+                                          GestureDetector(
+                                            onTap: () {
+                                              ind = 4;
+                                              setState(() {
+
+                                              });
+                                            },
+                                            child: Row(
+                                              children: [
+                                                ind == 4 ?
+                                                customFillContainer()
+                                                    : SvgPicture.asset('assets/svgs/empp.svg',height: 2.5.h,),
+                                                SizedBox(width: 2.w,),
+                                                Text(
+                                                  'Last 30 days',
+                                                  style: TextStyle(
+                                                    color: Colors.black,
+                                                    fontSize: 11.sp,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                          SizedBox(height: 1.h,),
+                                          Divider(thickness: 1,color: Colors.grey,),
+                                          SizedBox(height: 1.h,),
+                                          Padding(
+                                            padding: EdgeInsets.only(left: 7.w, right: 4.w),
+                                            child: Row(
+                                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                              children: [
+                                                Text(
+                                                  'Reset Filter',
+                                                  style: TextStyle(
+                                                      color: Colors.black,
+                                                      fontSize: 11.sp,
+                                                      fontWeight: FontWeight.bold
+                                                  ),
+                                                ),
+                                                Container(
+                                                  decoration: BoxDecoration(
+                                                      color: blueColor,
+                                                      borderRadius: BorderRadius.circular(5)
+                                                  ),
+                                                  child: Padding(
+                                                    padding: EdgeInsets.symmetric(horizontal: 4.w,vertical: 0.7.h),
+                                                    child: Text(
+                                                      'View Results',
+                                                      style: TextStyle(
+                                                        color: Colors.white,
+                                                        fontSize: 11.sp,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                          SizedBox(height: 2.h,)
+                                        ],
+                                      )
+                                  );
+                                },
+                                child: Row(
+                                  children: [
+                                    Text(
+                                      'Lifetime',
+                                      style: TextStyle(
+                                          color: Colors.black,
+                                          fontSize: 11.sp,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                    //SizedBox(width: 0.1.w,),
+                                    Icon(
+                                      Icons.keyboard_arrow_down_outlined,
+                                      color: Colors.black,
+                                      size: 3.h,
+                                    ),
+                                  ],
+                                ),
                               )
                             ],
                           ),
@@ -591,25 +793,33 @@ class _HomeScreenState extends State<HomeScreen> {
                                           //fontWeight: FontWeight.bold
                                         ),
                                       ),
-                                      Row(
-                                        children: [
-                                          Text(
-                                            'Show more',
-                                            style: TextStyle(
-                                              fontSize: 9.sp,
-                                              color: blueColor,
-                                              //fontWeight: FontWeight.bold
+                                      GestureDetector(
+                                        onTap: () {
+                                          click = !click;
+                                          setState(() {
+
+                                          });
+                                        },
+                                        child: Row(
+                                          children: [
+                                            Text(
+                                              'Show more',
+                                              style: TextStyle(
+                                                fontSize: 9.sp,
+                                                color: blueColor,
+                                                //fontWeight: FontWeight.bold
+                                              ),
                                             ),
-                                          ),
-                                          SizedBox(
-                                            width: 1.w,
-                                          ),
-                                          Icon(
-                                            Icons.arrow_drop_down,
-                                            color: blueColor,
-                                            size: 3.h,
-                                          )
-                                        ],
+                                            SizedBox(
+                                              width: 1.w,
+                                            ),
+                                            Icon(
+                                              Icons.arrow_drop_down,
+                                              color: blueColor,
+                                              size: 3.h,
+                                            )
+                                          ],
+                                        ),
                                       )
                                     ],
                                   ),
@@ -644,6 +854,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         SizedBox(
                           height: 2.h,
                         ),
+                        if(click == false)
                         Padding(
                           padding: EdgeInsets.symmetric(horizontal: 5.w),
                           child: Container(
@@ -761,6 +972,152 @@ class _HomeScreenState extends State<HomeScreen> {
                             ),
                           ),
                         ),
+                        if(click == true)
+                          Padding(
+                            padding:  EdgeInsets.symmetric(horizontal: 5.w),
+                            child: Column(
+                              children: [
+                                Container(
+                                  width: 100.w,
+                                  decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      borderRadius: BorderRadius.circular(3),
+                                      boxShadow: [
+                                        BoxShadow(color: Colors.grey.withAlpha(50),offset: Offset(1, 1),spreadRadius: 1,blurRadius: 2),
+                                        BoxShadow(color: Colors.grey.withAlpha(50),offset: Offset(-1, -1),spreadRadius: 1,blurRadius: 2),
+                                      ]
+                                  ),
+                                  child: Padding(
+                                    padding: EdgeInsets.symmetric(horizontal: 3.w,),
+                                    child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        SizedBox(height: 1.3.h,),
+                                        Text(
+                                          'Total Orders - 2024',
+                                          style: TextStyle(
+                                            fontSize: 10.sp,
+                                            color: Colors.black,
+                                            //fontWeight: FontWeight.bold
+                                          ),
+                                        ),
+                                        SizedBox(height: 0.8.h,),
+                                        Row(
+                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Text(
+                                              '10',
+                                              style: TextStyle(
+                                                  fontSize: 12.sp,
+                                                  color: Colors.black,
+                                                  fontWeight: FontWeight.bold
+                                              ),
+                                            ),
+                                            SvgPicture.asset('assets/svgs/l1.svg',height: 2.3.h,),
+                                          ],
+                                        ),
+                                        SizedBox(height: 1.3.h,),
+
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(height: 1.5.h,),
+                                Container(
+                                  width: 100.w,
+                                  decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      borderRadius: BorderRadius.circular(3),
+                                      boxShadow: [
+                                        BoxShadow(color: Colors.grey.withAlpha(50),offset: Offset(1, 1),spreadRadius: 1,blurRadius: 2),
+                                        BoxShadow(color: Colors.grey.withAlpha(50),offset: Offset(-1, -1),spreadRadius: 1,blurRadius: 2),
+                                      ]
+                                  ),
+                                  child: Padding(
+                                    padding: EdgeInsets.symmetric(horizontal: 3.w,),
+                                    child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        SizedBox(height: 1.3.h,),
+                                        Text(
+                                          'Total Customers',
+                                          style: TextStyle(
+                                            fontSize: 10.sp,
+                                            color: Colors.black,
+                                            //fontWeight: FontWeight.bold
+                                          ),
+                                        ),
+                                        SizedBox(height: 0.8.h,),
+                                        Row(
+                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Text(
+                                              '5',
+                                              style: TextStyle(
+                                                  fontSize: 12.sp,
+                                                  color: Colors.black,
+                                                  fontWeight: FontWeight.bold
+                                              ),
+                                            ),
+                                            SvgPicture.asset('assets/svgs/l2.svg',height: 2.3.h,),
+                                          ],
+                                        ),
+                                        SizedBox(height: 1.3.h,),
+
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(height: 1.5.h,),
+                                Container(
+                                  width: 100.w,
+                                  decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      borderRadius: BorderRadius.circular(3),
+                                      boxShadow: [
+                                        BoxShadow(color: Colors.grey.withAlpha(50),offset: Offset(1, 1),spreadRadius: 1,blurRadius: 2),
+                                        BoxShadow(color: Colors.grey.withAlpha(50),offset: Offset(-1, -1),spreadRadius: 1,blurRadius: 2),
+                                      ]
+                                  ),
+                                  child: Padding(
+                                    padding: EdgeInsets.symmetric(horizontal: 3.w,),
+                                    child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        SizedBox(height: 1.3.h,),
+                                        Text(
+                                          'Total Products',
+                                          style: TextStyle(
+                                            fontSize: 10.sp,
+                                            color: Colors.black,
+                                            //fontWeight: FontWeight.bold
+                                          ),
+                                        ),
+                                        SizedBox(height: 0.8.h,),
+                                        Row(
+                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Text(
+                                              '10 / 500',
+                                              style: TextStyle(
+                                                  fontSize: 12.sp,
+                                                  color: Colors.black,
+                                                  fontWeight: FontWeight.bold
+                                              ),
+                                            ),
+                                            SvgPicture.asset('assets/svgs/l3.svg',height: 2.3.h,),
+                                          ],
+                                        ),
+                                        SizedBox(height: 1.3.h,),
+
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(height: 2.h,),
+                              ],
+                            ),
+                          ),
                         SizedBox(
                           height: 2.h,
                         ),
