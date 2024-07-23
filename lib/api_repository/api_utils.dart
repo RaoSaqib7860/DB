@@ -156,5 +156,21 @@ class DataProvider{
       return null;
     }
   }
+  Future addProductApi({Map<String , dynamic>? map}) async {
+    print('map is === $map');
+    final response = await http.post(Uri.parse('$baseURL$addProductScreenUrl'), body: map,headers: {
+      'csrf' : '5574499YmRzanYyZzExa2J3Y3N1b2Y='
+    });
+    var data = jsonDecode(response.body);
+    if (data['result'] == 'success') {
+      log("loginFunction code is = ${response.statusCode}");
+
+      Get.snackbar('Success','${data['message']}');
+      return true;
+    }else{
+      Get.snackbar('Alert','${data['message']}');
+      return false;
+    }
+  }
 
 }
