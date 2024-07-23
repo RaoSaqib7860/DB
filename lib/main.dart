@@ -3,6 +3,7 @@ import 'package:db_2_0/view/screens/auth_screens/login_screen/Login%20Provider/l
 import 'package:db_2_0/view/screens/auth_screens/signup_detail_screen/SignUp%20Provider/sign_up_provider.dart';
 import 'package:db_2_0/view/screens/home_screen/DashBoard%20Provider/dashboard_provider.dart';
 import 'package:db_2_0/view/screens/order_screens/Provider/all_order_peovider.dart';
+import 'package:db_2_0/view/screens/product_screens/Provider/add_product_provider.dart';
 import 'package:db_2_0/view/screens/product_screens/Provider/all_product_provider.dart';
 import 'package:db_2_0/view/screens/splash_screen/splash_screen.dart';
 import 'package:flutter/material.dart';
@@ -22,6 +23,7 @@ void main() async{
       ChangeNotifierProvider(create: (_) => HomePageProvider()),
       ChangeNotifierProvider(create: (_) => AllProductProvider()),
       ChangeNotifierProvider(create: (_) => AllOrderProvider()),
+      ChangeNotifierProvider(create: (_) => AddProductProvider()),
     ],
     child: const MyApp(),
   ),);
