@@ -60,7 +60,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     final HomePageProvider provider = Provider.of<HomePageProvider>(context);
-    dynamic values = double.parse('${provider.dashboardModel!.data!.storageUsed}').toStringAsFixed(2);
+
     return DataLoading(
       isLoading: provider.loading,
       child: Scaffold(
@@ -1496,7 +1496,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                           RichText(
                                               text: TextSpan(children: [
                                             TextSpan(
-                                              text: '${values}',
+                                              text: '${provider.values}',
                                               style: TextStyle(
                                                 color: redColor,
                                                 fontSize: 8.sp,

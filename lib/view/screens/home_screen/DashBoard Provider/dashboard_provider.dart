@@ -8,6 +8,7 @@ class HomePageProvider extends ChangeNotifier {
   final GlobalKey<ScaffoldState> scaffoldkey = GlobalKey();
   bool loading = false;
   DashBoardModel? dashboardModel;
+  dynamic values;
   get_dashboard_data() async{
     print('objectis${user_model.data!.userId}');
     loading = true;
@@ -17,6 +18,7 @@ class HomePageProvider extends ChangeNotifier {
     print('objectis${dashboardModel!.toJson()}');
     update_state();
     print('objectis${user_model.data!.userId}');
+     values = double.parse('${dashboardModel!.data!.storageUsed}').toStringAsFixed(2);
     loading = false;
     update_state();
   }
