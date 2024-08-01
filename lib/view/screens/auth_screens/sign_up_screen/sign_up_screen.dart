@@ -89,7 +89,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           child: Text(
                             'Mobile Number',
                             style: TextStyle(
-                                fontSize: 12.sp,
+                                fontSize: 11.6.sp,
                                 color: index == 2 ? Colors.white : Colors.black,
                             ),
                           ),

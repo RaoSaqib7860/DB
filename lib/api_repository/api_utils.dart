@@ -94,9 +94,11 @@ class DataProvider{
   Future getHome({String? userId}) async {
     DashBoardModel? dashBoardModel;
     final response = await http.post(
-      Uri.parse('$baseURL$dashBoardUrl'),body: {
+      Uri.parse('$baseURL$dashBoardUrl'),
+        body: {
         'user_id' : userId
-    },headers: {
+    },
+        headers: {
       'csrf' : '5574499YmRzanYyZzExa2J3Y3N1b2Y='
     });
     print('the data is user id == ${userId}');
