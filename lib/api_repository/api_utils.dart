@@ -9,6 +9,7 @@ import '../view/screens/auth_screens/login_screen/Login Provider/login_model_glo
 import '../view/screens/auth_screens/login_screen/Model/login_model.dart';
 import '../view/screens/home_screen/Models/dashboard_model.dart';
 import '../view/screens/order_screens/Models/all_order_model.dart';
+import '../view/screens/order_screens/Models/order_info_model.dart';
 import '../view/screens/product_screens/Models/all_product_model.dart';
 import 'base_path.dart';
 
@@ -172,6 +173,39 @@ class DataProvider{
     }else{
       Get.snackbar('Alert','${data['message']}');
       return false;
+    }
+  }
+  Future updateOrderApi({Map<String , dynamic>? map}) async {
+    print('map is === $map');
+    final response = await http.post(Uri.parse('$baseURL$updateOrderInfoUrl'), body: map,headers: {
+      'csrf' : '5574499YmRzanYyZzExa2J3Y3N1b2Y='
+    });
+    var data = jsonDecode(response.body);
+    if (data['result'] == 'success') {
+      log("loginFunction code is = ${response.statusCode}");
+
+      Get.snackbar('Success','${data['message']}');
+      return true;
+    }else{
+      Get.snackbar('Alert','${data['message']}');
+      return false;
+    }
+  }
+  Future orderInfoApi({Map<String , dynamic>? map}) async {
+    print('map is === $map');
+    OrderInfoModel? orderInfoModel;
+    final response = await http.post(Uri.parse('$baseURL$orderInfoUrl'), body: map,headers: {
+      'csrf' : '5574499YmRzanYyZzExa2J3Y3N1b2Y='
+    });
+    var data = jsonDecode(response.body);
+    if (data['result'] == 'success') {
+      log("loginFunction code is = ${response.statusCode}");
+      orderInfoModel = OrderInfoModel.fromJson(data);
+      Get.snackbar('Success','${data['message']}');
+      return orderInfoModel;
+    }else{
+      Get.snackbar('Alert','${data['message']}');
+      return null;
     }
   }
 

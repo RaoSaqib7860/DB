@@ -9,3 +9,5 @@ const storeOnOffUrl = 'store-onoff';
 const productScreenUrl = 'store-products';
 const ordersScreenUrl = 'store-orders';
 const addProductScreenUrl = 'add-product';
+const orderInfoUrl = 'order-info';
+const updateOrderInfoUrl = 'order-customer-update';

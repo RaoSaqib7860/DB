@@ -212,7 +212,7 @@ class _AllScreenState extends State<AllScreen> {
                                   SvgPicture.asset('assets/svgs/frame.svg',height: 3.7.h,),
                                   GestureDetector(
                                     onTap: () {
-                                      Navigator.push(context, MaterialPageRoute(builder: (context) => AllOrderDetailScreen(),));
+                                      Navigator.push(context, MaterialPageRoute(builder: (context) => AllOrderDetailScreen(orderId: provider.allOrderModel!.data!.orders![index].id.toString(),),));
                                     },
                                     child: Container(
                                       decoration: BoxDecoration(
