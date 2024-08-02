@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../../../../api_repository/api_utils.dart';
@@ -102,6 +103,7 @@ class _DeliveryLocationAddState extends State<DeliveryLocationAdd> {
                       'method': 'add',
                       'title': controller.text
                     });
+                    Get.snackbar('Success', 'Delivery Locations added Successfully!');
                   } else {
                     await DataProvider().delivery_locationApi_crud(map: {
                       'user_id': user_model.data!.id.toString(),
@@ -109,6 +111,7 @@ class _DeliveryLocationAddState extends State<DeliveryLocationAdd> {
                       'city_id': widget.city_id.toString(),
                       'title': controller.text
                     });
+                    Get.snackbar('Success', 'Delivery Locations updated Successfully!');
                   }
                 },
                 child: Container(

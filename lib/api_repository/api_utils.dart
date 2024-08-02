@@ -7,8 +7,10 @@ import 'package:http/http.dart' as http;
 import '../utils_services/storage_util.dart';
 import '../view/screens/auth_screens/login_screen/Login Provider/login_model_globle.dart';
 import '../view/screens/auth_screens/login_screen/Model/login_model.dart';
+import '../view/screens/delivery_screens/models/delivery_cost_model.dart';
 import '../view/screens/delivery_screens/models/delivery_location_model.dart';
 import '../view/screens/delivery_screens/models/delivery_order_model.dart';
+import '../view/screens/delivery_screens/models/tcs_information_model.dart';
 import '../view/screens/home_screen/Models/dashboard_model.dart';
 import '../view/screens/order_screens/Models/all_order_model.dart';
 import '../view/screens/order_screens/Models/order_info_model.dart';
@@ -283,9 +285,48 @@ class DataProvider {
     }
   }
 
+  Future delivery_costApi({Map<String, dynamic>? map}) async {
+    print('map is === $map');
+    DeliveryCostModel? deliveryLocationModel;
+    final response = await http.post(Uri.parse('$baseURL$delivery_method'),
+        body: map, headers: headers);
+    var data = jsonDecode(response.body);
+    log("loginFunction code is = ${data}");
+    if (data['result'] == 'success') {
+      deliveryLocationModel = DeliveryCostModel.fromJson(data);
+      return deliveryLocationModel;
+    } else {
+      Get.snackbar('Alert', '${data['message']}');
+      return null;
+    }
+  }
+
+  Future tcs_infoApi({Map<String, dynamic>? map}) async {
+    print('map is === $map');
+    TCSInformationModel? tcsInformationModel;
+    final response = await http.post(Uri.parse('$baseURL$tcs_info'),
+        body: map, headers: headers);
+    var data = jsonDecode(response.body);
+    log("loginFunction code is = ${data}");
+    if (data['result'] == 'success') {
+      tcsInformationModel = TCSInformationModel.fromJson(data);
+      return tcsInformationModel;
+    } else {
+      Get.snackbar('Alert', '${data['message']}');
+      return null;
+    }
+  }
+
   Future delivery_locationApi_crud({Map<String, dynamic>? map}) async {
     print('map is === $map');
     final response = await http.post(Uri.parse('$baseURL$delivery_location'),
+        body: map, headers: headers);
+    log("loginFunction code is = ${response.body}");
+  }
+
+  Future delivery_costApi_crud({Map<String, dynamic>? map}) async {
+    print('map is === $map');
+    final response = await http.post(Uri.parse('$baseURL$delivery_method'),
         body: map, headers: headers);
     log("loginFunction code is = ${response.body}");
   }
@@ -295,5 +336,21 @@ class DataProvider {
         body: map, headers: headers);
     var data = jsonDecode(response.body);
     log("loginFunction code is = $data");
+  }
+  Future tcs_remove_ordersApi({Map<String, dynamic>? map}) async {
+    final response = await http.post(Uri.parse('$baseURL$tcs_remove_orders'),
+        body: map, headers: headers);
+    var data = jsonDecode(response.body);
+    log("loginFunction code is = $data");
+  }
+  Future tcs_deliveryApi({Map<String, dynamic>? map}) async {
+    print('map is === $map');
+    final response = await http.post(Uri.parse('$baseURL$tcs_delivery'),
+        body: map, headers: headers);
+    var data = jsonDecode(response.body);
+    log("tcs_deliveryApi code is = $data");
+    if(data['result']=='Failed'){
+      Get.snackbar('Alert', '${data['message']}');
+    }
   }
 }
