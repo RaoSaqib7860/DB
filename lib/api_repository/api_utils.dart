@@ -3,7 +3,7 @@ import 'dart:developer';
 
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
-
+import 'package:dio/dio.dart' as dio;
 import '../utils_services/storage_util.dart';
 import '../view/screens/auth_screens/login_screen/Login Provider/login_model_globle.dart';
 import '../view/screens/auth_screens/login_screen/Model/login_model.dart';
@@ -15,6 +15,10 @@ import '../view/screens/order_screens/Models/order_info_model.dart';
 import '../view/screens/product_screens/Models/all_product_model.dart';
 import '../view/screens/product_screens/Models/brand_product_model.dart';
 import '../view/screens/product_screens/Models/category_product_model.dart';
+import '../view/screens/product_screens/Models/edit_product_model.dart';
+import '../view/screens/product_screens/Models/edit_product_price_model.dart';
+import '../view/screens/product_screens/Models/update_product_image_model.dart';
+import '../view/screens/product_screens/Models/update_product_seo_model.dart';
 import 'base_path.dart';
 
 class DataProvider {
@@ -155,6 +159,62 @@ class DataProvider {
       Get.snackbar('Alert', '${data['message']}');
       return null;
     }
+  }
+  Future updateProductApi({Map<String, dynamic>? map}) async {
+    print('map is === $map');
+    UpdateProductModel? updateProductModel;
+    final response = await http.post(Uri.parse('$baseURL$updateProductInfoUrl'),
+        body: map, headers: headers);
+    var data = jsonDecode(response.body);
+    if (data['result'] == 'success') {
+      log("loginFunction code is = ${response.statusCode}");
+      updateProductModel = UpdateProductModel.fromJson(data);
+      return updateProductModel;
+    } else {
+      Get.snackbar('Alert', '${data['message']}');
+      return null;
+    }
+  }
+  Future updateProductPriceApi({Map<String, dynamic>? map}) async {
+    print('map is === $map');
+    UpdateProductPriceModel? updateProductPriceModel;
+    final response = await http.post(Uri.parse('$baseURL$updateProductPriceInfoUrl'),
+        body: map, headers: headers);
+    var data = jsonDecode(response.body);
+    if (data['result'] == 'success') {
+      log("loginFunction code is = ${response.statusCode}");
+      updateProductPriceModel = UpdateProductPriceModel.fromJson(data);
+      return updateProductPriceModel;
+    } else {
+      Get.snackbar('Alert', '${data['message']}');
+      return null;
+    }
+  }
+  Future updateProductSEOApi({Map<String, dynamic>? map}) async {
+    print('map is === $map');
+    UpdateProductSEOModel? updateProductSEOModel;
+    final response = await http.post(Uri.parse('$baseURL$updateProductSEOInfoUrl'),
+        body: map, headers: headers);
+    var data = jsonDecode(response.body);
+    if (data['result'] == 'success') {
+      log("loginFunction code is = ${response.statusCode}");
+      updateProductSEOModel = UpdateProductSEOModel.fromJson(data);
+      return updateProductSEOModel;
+    } else {
+      Get.snackbar('Alert', '${data['message']}');
+      return null;
+    }
+  }
+   Future update_Image_api({dio.FormData? uploadMedia}) async {
+    print('objectmapis${uploadMedia}');
+     UpdateProductImageModel? updateProductImageModel;
+    final response = await dio.Dio().post('$baseURL$updateProductImageInfoUrl',
+        data: uploadMedia,
+        options: dio.Options(headers: headers));
+    var data = response.data;
+     updateProductImageModel = UpdateProductImageModel.fromJson(data);
+    print('Add Product result data =$data');
+    return updateProductImageModel;
   }
 
   Future domain_request_api({Map<String, dynamic>? map}) async {
