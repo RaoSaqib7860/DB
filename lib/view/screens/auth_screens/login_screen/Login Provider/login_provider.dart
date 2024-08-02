@@ -1,6 +1,7 @@
 import 'package:db_2_0/api_repository/api_utils.dart';
 import 'package:db_2_0/view/screens/home_screen/home_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../../../bottom_sheet/bottom_sheet.dart';
 import '../../../store_setup_screen/store_setup_screen.dart';
@@ -12,6 +13,7 @@ class LoginProvider extends ChangeNotifier {
   final formKey = GlobalKey<FormState>();
   bool isPasswordShow = false;
   TextEditingController emailController = TextEditingController();
+  TextEditingController phoneController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   bool? validate_email_phone(String? value) {
     bool emailValid = RegExp(
@@ -28,34 +30,24 @@ class LoginProvider extends ChangeNotifier {
     }
   }
 
-  login_api(BuildContext? context) async {
+  login_api({BuildContext? context, bool? is_email}) async {
     try {
       loading = true;
       updateState();
-      LoginModel? result = await DataProvider().loginFunction(map: {
-        'email': emailController.text,
+      var result = await DataProvider().loginFunction(map: {
+        'email': is_email == true ? emailController.text : phoneController.text,
         'password': passwordController.text,
       });
-      print('object11111');
       loading = false;
       updateState();
-      Navigator.pushReplacement(
-          context!,
-          MaterialPageRoute(
-            builder: (context) => BottomSheetScreen(),
-          ));
-      // if (result != null) {
-      //   print('object222222');
-      //
-      // }
+      if (result != null) {
+        Get.offAll(BottomSheetScreen());
+      }
     } catch (e) {
       loading = false;
       print('error is ==== $e');
       updateState();
     }
-    // if (formKey.currentState!.validate()){
-    //
-    // }
   }
 
   updateState() {

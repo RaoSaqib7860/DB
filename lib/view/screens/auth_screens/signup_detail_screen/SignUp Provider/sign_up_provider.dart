@@ -1,8 +1,11 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../../../api_repository/api_utils.dart';
+import '../../../bottom_sheet/bottom_sheet.dart';
 import '../../login_screen/Model/login_model.dart';
 import '../../login_screen/login_screen.dart';
 
@@ -62,7 +65,6 @@ class SignUpProvider extends ChangeNotifier {
   //   'wholesaler',
   //   'beauty_care'
   // ];
-  List list = [];
   String? selected_categgory;
   bool? checkboxSelected = false;
 
@@ -86,57 +88,35 @@ class SignUpProvider extends ChangeNotifier {
   sign_up_api(BuildContext? context) async {
     print('object index of = ${index}');
     try {
-
-      if(checkboxSelected == true){
-        loading = true;
-        updateState();
-        var result =  await DataProvider().signUpApi(map: {
+      loading = true;
+      updateState();
+      var result = await DataProvider().signUpApi(map: {
+        'email': emailController.text,
+        'name': businessNameController.text,
+        'password': passwordController.text,
+        'business_industory': '1',
+        'domain': domainController.text,
+        'country': 'Pakistan',
+        'category': '${list_of_category.indexOf(selected_categgory) + 1}',
+        'mobile': mobileController.text
+      });
+      print('result is ==== ${result}');
+      loading = false;
+      updateState();
+      if (result == true) {
+        await DataProvider().loginFunction(map: {
           'email': emailController.text,
-          'name': businessNameController.text,
           'password': passwordController.text,
-          'business_industory': selected_categgory,
-          'domain': domainController.text,
-          'country': 'Pakistan',
-          'category': '$index',
-          'mobile': mobileController.text
         });
-
-        //LoginModel responceModel = LoginModel.fromJson(result);
-        print('result is ==== ${result}');
-        // SharedPrefs sf = SharedPrefs();
-        // sf.saveUser(responceModel.toJson());
-        // sf.saveToken(responceModel.accessToken);
-        // sf.saveaslogin('1');
-        // sf.saveid(responceModel.user!.id.toString());
-        loading = false;
-        updateState();
-        Navigator.push(
-            context!,
-            MaterialPageRoute(
-              builder: (context) => LoginScreen(),
-            ));
-      //   if (list.isNotEmpty && result != null)
-      //     Navigator.push(
-      //         context!,
-      //         MaterialPageRoute(
-      //           builder: (context) => LoginScreen(),
-      //         ));
-       }
-      else{
-        Get.snackbar('Alert','Please select the term and conditions');
+        Get.offAll(BottomSheetScreen());
       }
     } catch (e) {
       loading = false;
       updateState();
-    }
-    if (formKey.currentState!.validate()){
-
     }
   }
 
   updateState() {
     notifyListeners();
   }
-
-
 }

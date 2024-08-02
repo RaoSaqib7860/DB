@@ -1,4 +1,3 @@
-
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
@@ -29,25 +28,32 @@ class _SignUpScreenState extends State<SignUpScreen> {
         widgets: SingleChildScrollView(
           child: Column(
             children: [
-              SizedBox(height: 9.h,),
-              Image(image: AssetImage('assets/images/app_logo.png'),height: 8.h,),
-              SizedBox(height: 10.h,),
+              SizedBox(
+                height: 9.h,
+              ),
+              Image(
+                image: AssetImage('assets/images/app_logo.png'),
+                height: 8.h,
+              ),
+              SizedBox(
+                height: 10.h,
+              ),
               Text(
                 'Start 7 days Free Trial',
                 style: TextStyle(
-                  fontSize: 16.sp,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black
-                ),
+                    fontSize: 16.sp,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black),
               ),
-              SizedBox(height: 4.h,),
+              SizedBox(
+                height: 4.h,
+              ),
               Container(
                 width: 54.w,
                 decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(40),
-                  border: Border.all(color: Colors.grey,width: 1)
-                ),
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(40),
+                    border: Border.all(color: Colors.grey, width: 1)),
                 child: Row(
                   children: [
                     GestureDetector(
@@ -58,16 +64,17 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       },
                       child: Container(
                         decoration: BoxDecoration(
-                            color: index == 1 ? redColor:Colors.white,
-                            borderRadius: BorderRadius.circular(40),
+                          color: index == 1 ? redColor : Colors.white,
+                          borderRadius: BorderRadius.circular(40),
                         ),
                         child: Padding(
-                          padding: EdgeInsets.symmetric(vertical: 1.2.h,horizontal: 5.w),
+                          padding: EdgeInsets.symmetric(
+                              vertical: 1.2.h, horizontal: 5.w),
                           child: Text(
                             'Email',
                             style: TextStyle(
-                                fontSize: 12.sp,
-                                color: index == 1 ? Colors.white:Colors.black,
+                              fontSize: 12.sp,
+                              color: index == 1 ? Colors.white : Colors.black,
                             ),
                           ),
                         ),
@@ -85,12 +92,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           borderRadius: BorderRadius.circular(40),
                         ),
                         child: Padding(
-                          padding: EdgeInsets.symmetric(vertical: 1.2.h,horizontal: 3.w),
+                          padding: EdgeInsets.symmetric(
+                              vertical: 1.2.h, horizontal: 3.w),
                           child: Text(
                             'Mobile Number',
                             style: TextStyle(
-                                fontSize: 12.sp,
-                                color: index == 2 ? Colors.white : Colors.black,
+                              fontSize: 12.sp,
+                              color: index == 2 ? Colors.white : Colors.black,
                             ),
                           ),
                         ),
@@ -99,8 +107,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   ],
                 ),
               ),
-              SizedBox(height: 2.5.h,),
-              if(index==1)
+              SizedBox(
+                height: 2.5.h,
+              ),
+              if (index == 1)
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 14.w),
                   child: CustomTextField(
@@ -108,7 +118,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     controller: emailController,
                   ),
                 ),
-              if(index==2)
+              if (index == 2)
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 14.w),
                   child: CustomTextField(
@@ -116,29 +126,33 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     controller: phoneController,
                   ),
                 ),
-              SizedBox(height: 7.h,),
+              SizedBox(
+                height: 7.h,
+              ),
               GestureDetector(
                 onTap: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => SignUpDetailScreen(email: emailController.text, mobile: phoneController.text),));
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => SignUpDetailScreen(),
+                      ));
                 },
                 child: Container(
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(5),
-                    color: blueColor
-                  ),
+                      borderRadius: BorderRadius.circular(5), color: blueColor),
                   child: Padding(
-                    padding:  EdgeInsets.symmetric(vertical: 0.7.h,horizontal: 4.w),
+                    padding:
+                        EdgeInsets.symmetric(vertical: 0.7.h, horizontal: 4.w),
                     child: Text(
                       'Create Account',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 13.sp
-                      ),
+                      style: TextStyle(color: Colors.white, fontSize: 13.sp),
                     ),
                   ),
                 ),
               ),
-              SizedBox(height: 6.h,),
+              SizedBox(
+                height: 6.h,
+              ),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 6.w),
                 child: Divider(
@@ -146,37 +160,32 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   color: Colors.grey.withAlpha(200),
                 ),
               ),
-              SizedBox(height: 1.h,),
-              RichText(
-                  text: TextSpan(
-                      children: [
-                        TextSpan(
-                            text: 'Already a Member? ',
-                            style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 15.sp
-                            )
-                        ),
-                        TextSpan(
-                            recognizer: new TapGestureRecognizer()
-                              ..onTap = () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => LoginScreen()),
-                                );
-                              },
-                            text: 'Login' ,
-                            style: TextStyle(
-                                color: Color(0xffAD172A),
-                                fontSize: 15.sp,
-                                fontWeight: FontWeight.bold
-                            )
-                        )
-                      ]
-                  )
+              SizedBox(
+                height: 1.h,
               ),
-              SizedBox(height: 1.h,),
+              RichText(
+                  text: TextSpan(children: [
+                TextSpan(
+                    text: 'Already a Member? ',
+                    style: TextStyle(color: Colors.black, fontSize: 15.sp)),
+                TextSpan(
+                    recognizer: new TapGestureRecognizer()
+                      ..onTap = () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => LoginScreen()),
+                        );
+                      },
+                    text: 'Login',
+                    style: TextStyle(
+                        color: Color(0xffAD172A),
+                        fontSize: 15.sp,
+                        fontWeight: FontWeight.bold))
+              ])),
+              SizedBox(
+                height: 1.h,
+              ),
             ],
           ),
         ),

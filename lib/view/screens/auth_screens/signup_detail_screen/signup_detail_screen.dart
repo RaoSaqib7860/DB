@@ -12,48 +12,53 @@ import '../login_screen/login_screen.dart';
 import 'SignUp Provider/sign_up_provider.dart';
 
 class SignUpDetailScreen extends StatefulWidget {
-  final String? email;
-  final String? mobile;
-   SignUpDetailScreen({Key? key,this.email, this.mobile}) : super(key: key);
+  SignUpDetailScreen({Key? key}) : super(key: key);
 
   @override
   State<SignUpDetailScreen> createState() => _SignUpDetailScreenState();
 }
 
 class _SignUpDetailScreenState extends State<SignUpDetailScreen> {
-  SignUpProvider? provider;
-
   @override
   void initState() {
     super.initState();
-    provider = Provider.of<SignUpProvider>(context, listen: false);
-    provider!.emailController = TextEditingController(text: widget.email);
-    provider!.mobileController = TextEditingController(text: widget.mobile);
   }
+
   @override
   Widget build(BuildContext context) {
     final SignUpProvider provider = Provider.of<SignUpProvider>(context);
     return DataLoading(
       isLoading: provider.loading,
-      child: Scaffold(
-        body: CustomContainer(
-          widgets: SingleChildScrollView(
+      child: GestureDetector(
+        onTap: () {
+          FocusManager.instance.primaryFocus?.unfocus();
+        },
+        child: Scaffold(
+          body: SingleChildScrollView(
             child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 4.w),
+              padding: EdgeInsets.symmetric(horizontal: 7.w),
               child: Column(
                 children: [
-                  SizedBox(height: 9.h,),
-                  Image(image: AssetImage('assets/images/app_logo.png'),height: 8.h,),
-                  SizedBox(height: 3.h,),
-                  Text(
-                    'Enter business details',
-                    style: TextStyle(
-                        fontSize: 16.sp,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black
-                    ),
+                  SizedBox(
+                    height: 9.h,
                   ),
-                  SizedBox(height: 1.h,),
+                  Image(
+                    image: AssetImage('assets/images/app_logo.png'),
+                    height: 6.h,
+                  ),
+                  SizedBox(
+                    height: 3.h,
+                  ),
+                  Text(
+                    'Enter Business Details',
+                    style: TextStyle(
+                        fontSize: 14.sp,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black),
+                  ),
+                  SizedBox(
+                    height: 1.h,
+                  ),
                   Row(
                     children: [
                       Text(
@@ -61,19 +66,20 @@ class _SignUpDetailScreenState extends State<SignUpDetailScreen> {
                         style: TextStyle(
                             fontSize: 12.sp,
                             color: Colors.black,
-                          fontWeight: FontWeight.w500
-                        ),
+                            fontWeight: FontWeight.w500),
                       ),
                     ],
                   ),
-                  SizedBox(height: 0.5.h,),
+                  SizedBox(
+                    height: 0.5.h,
+                  ),
                   CustomTextField(
                     hintText: 'Enter Email',
-                    filled: true,
-                    fillColor: Colors.grey.withAlpha(100),
                     controller: provider.emailController,
                   ),
-                  SizedBox(height: 1.2.h,),
+                  SizedBox(
+                    height: 1.2.h,
+                  ),
                   Row(
                     children: [
                       Text(
@@ -81,17 +87,20 @@ class _SignUpDetailScreenState extends State<SignUpDetailScreen> {
                         style: TextStyle(
                             fontSize: 12.sp,
                             color: Colors.black,
-                            fontWeight: FontWeight.w500
-                        ),
+                            fontWeight: FontWeight.w500),
                       ),
                     ],
                   ),
-                  SizedBox(height: 0.5.h,),
+                  SizedBox(
+                    height: 0.5.h,
+                  ),
                   CustomTextField(
                     hintText: 'Enter Business Name',
                     controller: provider.businessNameController,
                   ),
-                  SizedBox(height: 1.2.h,),
+                  SizedBox(
+                    height: 1.2.h,
+                  ),
                   Row(
                     children: [
                       Text(
@@ -99,17 +108,20 @@ class _SignUpDetailScreenState extends State<SignUpDetailScreen> {
                         style: TextStyle(
                             fontSize: 12.sp,
                             color: Colors.black,
-                            fontWeight: FontWeight.w500
-                        ),
+                            fontWeight: FontWeight.w500),
                       ),
                     ],
                   ),
-                  SizedBox(height: 0.5.h,),
+                  SizedBox(
+                    height: 0.5.h,
+                  ),
                   CustomTextField(
                     hintText: 'Enter mobile number',
                     controller: provider.mobileController,
                   ),
-                  SizedBox(height: 1.2.h,),
+                  SizedBox(
+                    height: 1.2.h,
+                  ),
                   Row(
                     children: [
                       Text(
@@ -117,173 +129,166 @@ class _SignUpDetailScreenState extends State<SignUpDetailScreen> {
                         style: TextStyle(
                             fontSize: 12.sp,
                             color: Colors.black,
-                            fontWeight: FontWeight.w500
-                        ),
+                            fontWeight: FontWeight.w500),
                       ),
                     ],
                   ),
-                  SizedBox(height: 0.5.h,),
+                  SizedBox(
+                    height: 0.5.h,
+                  ),
                   GestureDetector(
                     onTap: () {
-                        showModalBottomSheet(
-                            context: context,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.vertical(top: Radius.circular(30)),
-
-                          ),
-                          isScrollControlled: true,
-                            builder: (context) {
-                              return Padding(
-                                padding: MediaQuery.of(context).viewInsets,
-                                child: StatefulBuilder(
-                                    builder: (context, setState) {
-                                      return ClipRRect(
-                                        borderRadius: BorderRadius.only(topLeft: Radius.circular(30),topRight: Radius.circular(30),),
-                                        child: Container(
-                                          height: 85.h,
-                                          decoration: BoxDecoration(
-                                              borderRadius: BorderRadius.only(topLeft: Radius.circular(30),topRight: Radius.circular(30),)
-                                          ),
-                                          child: Scaffold(
-                                            body: Padding(
-                                              padding:  EdgeInsets.symmetric(horizontal: 4.w,vertical: 3.h),
-                                              child: Center(
-                                                child: Column(
-                                                  children: [
-                                                    Text(
-                                                      'Select Category',
-                                                      style: TextStyle(
-                                                        color: blueColor,
-                                                        fontSize: 14.sp,
-                                                        fontWeight: FontWeight.w500
-                                                      ),
-                                                    ),
-                                                    SizedBox(height: 2.h,),
-                                                    Expanded(
-                                                        child: SingleChildScrollView(
-                                                          child: Column(
-                                                              children: provider.list_of_category.map((e) {
-
-                                                                return InkWell(
-                                                                  child: provider.list.contains(provider.list_of_category.indexOf(e))
-                                                                      ? selected_checkboxContainer(text: '$e')
-                                                                      : checkboxContainer(text: '$e'),
-                                                                  onTap: () {
-                                                                    //selected_interest = e;
-                                                                    if(provider.list.contains(provider.list_of_category.indexOf(e))){
-                                                                      provider.list.remove(provider.list_of_category.indexOf(e));
-                                                                      provider.selected_categgory = e;
-                                                                      provider.index = provider.list_of_category.indexOf(e);
-                                                                      setState(() {});
-                                                                    }
-                                                                    else{
-                                                                      provider.list.add(provider.list_of_category.indexOf(e));
-                                                                      provider.selected_categgory = e;
-                                                                     // setState(() {});
-                                                                    }
-                                                                    setState(() {});
-                                                                  },
-
-                                                                );
-                                                              }).toList()),
-                                                        )
-                                                    )
-                                                  ],
-                                                ),
+                      showModalBottomSheet(
+                        context: context,
+                        shape: const RoundedRectangleBorder(
+                          borderRadius:
+                              BorderRadius.vertical(top: Radius.circular(30)),
+                        ),
+                        isScrollControlled: true,
+                        builder: (context) {
+                          return Padding(
+                            padding: MediaQuery.of(context).viewInsets,
+                            child: StatefulBuilder(
+                              builder: (context, setState) {
+                                return ClipRRect(
+                                  borderRadius: const BorderRadius.only(
+                                    topLeft: Radius.circular(30),
+                                    topRight: Radius.circular(30),
+                                  ),
+                                  child: Container(
+                                    height: 85.h,
+                                    decoration: const BoxDecoration(
+                                        borderRadius: BorderRadius.only(
+                                      topLeft: Radius.circular(30),
+                                      topRight: Radius.circular(30),
+                                    )),
+                                    child: Scaffold(
+                                      body: Padding(
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: 4.w, vertical: 3.h),
+                                        child: Center(
+                                          child: Column(
+                                            children: [
+                                              Text(
+                                                'Select Category',
+                                                style: TextStyle(
+                                                    color: blueColor,
+                                                    fontSize: 14.sp,
+                                                    fontWeight:
+                                                        FontWeight.w500),
                                               ),
-                                            ),
-                                            bottomNavigationBar: Container(
-                                              color: Colors.white,
-                                              child: Padding(
-                                                padding: EdgeInsets.symmetric(vertical: 1.h,horizontal: 4.w),
-                                                child: GestureDetector(
-                                                  onTap: () {
-                                                    if(provider.selected_categgory != null){
+                                              SizedBox(
+                                                height: 2.h,
+                                              ),
+                                              Expanded(
+                                                  child: SingleChildScrollView(
+                                                child: Column(
+                                                    children: provider
+                                                        .list_of_category
+                                                        .map((e) {
+                                                  return InkWell(
+                                                    child: provider
+                                                                .selected_categgory ==
+                                                            e
+                                                        ? selected_checkboxContainer(
+                                                            text: '$e')
+                                                        : checkboxContainer(
+                                                            text: '$e'),
+                                                    onTap: () {
+                                                      provider
+                                                          .selected_categgory = e;
+                                                      setState(() {});
+                                                    },
+                                                  );
+                                                }).toList()),
+                                              ))
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                      bottomNavigationBar: Container(
+                                        color: Colors.white,
+                                        child: Padding(
+                                          padding: EdgeInsets.symmetric(
+                                              vertical: 1.h, horizontal: 4.w),
+                                          child: GestureDetector(
+                                            onTap: () {
+                                              if (provider.selected_categgory !=
+                                                  null) {
+                                                selected_checkboxContainer(
+                                                    text: provider
+                                                        .selected_categgory!);
+                                                provider.updateState();
+                                              }
 
-                                                        selected_checkboxContainer(text: provider.selected_categgory!);
-                                                        provider.updateState();
-
-                                                    }
-
-                                                    Navigator.pop(context);
-                                                  },
-                                                  child: Container(
-                                                    height: 5.h,
-                                                    decoration: BoxDecoration(
-                                                      borderRadius: BorderRadius.circular(5),
-                                                      color: blueColor
-                                                    ),
-                                                    child: Center(
-                                                      child: Text(
-                                                        'Save',
-                                                        style: TextStyle(
-                                                          color: Colors.white,
-                                                          fontSize: 12.sp,
-                                                          fontWeight: FontWeight.bold
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  ),
+                                              Navigator.pop(context);
+                                            },
+                                            child: Container(
+                                              height: 5.h,
+                                              decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(5),
+                                                  color: blueColor),
+                                              child: Center(
+                                                child: Text(
+                                                  'Save',
+                                                  style: TextStyle(
+                                                      color: Colors.white,
+                                                      fontSize: 12.sp,
+                                                      fontWeight:
+                                                          FontWeight.bold),
                                                 ),
                                               ),
                                             ),
                                           ),
                                         ),
-                                      );
-                                    },
-                                ),
-                              );
-                            },
-                        );
+                                      ),
+                                    ),
+                                  ),
+                                );
+                              },
+                            ),
+                          );
+                        },
+                      );
                     },
                     child: Container(
                       height: 4.5.h,
                       decoration: BoxDecoration(
-                        border: Border.all(color: Colors.grey,width: 1),
+                        border: Border.all(color: Colors.grey, width: 1),
                         borderRadius: BorderRadius.circular(5),
                       ),
                       child: Padding(
-                        padding:  EdgeInsets.symmetric(horizontal: 2.w),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Container(
-                              width: 80.w,
-                              child: SingleChildScrollView(
-                                scrollDirection: Axis.horizontal,
-                                child: Text(
-                                    provider.selected_categgory !=null ? provider.selected_categgory!:'Select business industry',
-                                    style: TextStyle(color: Colors.black54,fontSize: 11.sp)
+                          padding: EdgeInsets.symmetric(horizontal: 2.w),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Expanded(
+                                child: Container(
+                                  child: SingleChildScrollView(
+                                    scrollDirection: Axis.horizontal,
+                                    child: Text(
+                                        provider.selected_categgory != null
+                                            ? provider.selected_categgory!
+                                            : 'Select business industry',
+                                        style: TextStyle(
+                                            color: Colors.black54,
+                                            fontSize: 11.sp)),
+                                  ),
                                 ),
                               ),
-                            ),
-                            Icon(Icons.keyboard_arrow_down_outlined,color: Colors.black54,size: 3.5.h,),
-                          ],
-                        )
-                        // DropdownButton(
-                        //   isExpanded: true,
-                        //   value: dropdownvalue,
-                        //   underline: Container(),
-                        //   items: items.map((String items) {
-                        //     return DropdownMenuItem(
-                        //       value: items,
-                        //       child: Text(items,style: TextStyle(color: Colors.black54,fontSize: 11.sp),),
-                        //     );
-                        //   }).toList(),
-                        //   onChanged: (String? newValue) {
-                        //     setState(() {
-                        //       dropdownvalue = newValue!;
-                        //     });
-                        //   },
-                        //   hint: const Text(
-                        //     "Font Family",
-                        //     style: TextStyle(fontWeight: FontWeight.bold,color: Colors.black),
-                        //   ),
-                        // ),
-                      ),
+                              Icon(
+                                Icons.keyboard_arrow_down_outlined,
+                                color: Colors.black54,
+                                size: 3.5.h,
+                              ),
+                            ],
+                          )),
                     ),
                   ),
-                  SizedBox(height: 1.2.h,),
+                  SizedBox(
+                    height: 1.2.h,
+                  ),
                   Row(
                     children: [
                       Text(
@@ -291,53 +296,38 @@ class _SignUpDetailScreenState extends State<SignUpDetailScreen> {
                         style: TextStyle(
                             fontSize: 12.sp,
                             color: Colors.black,
-                            fontWeight: FontWeight.w500
-                        ),
+                            fontWeight: FontWeight.w500),
                       ),
                     ],
                   ),
-                  SizedBox(height: 0.5.h,),
+                  SizedBox(
+                    height: 0.5.h,
+                  ),
                   Container(
                     height: 4.5.h,
                     decoration: BoxDecoration(
-                      border: Border.all(color: Colors.grey,width: 1),
+                      border: Border.all(color: Colors.grey, width: 1),
                       borderRadius: BorderRadius.circular(5),
                     ),
                     child: Padding(
-                      padding:  EdgeInsets.symmetric(horizontal: 2.w),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                              'E-commerce Website',
-                              style: TextStyle(color: Colors.black54,fontSize: 11.sp)
-                          ),
-                          Icon(Icons.keyboard_arrow_down_outlined,color: Colors.black54,size: 3.5.h,),
-                        ],
-                      )
-                      // DropdownButton(
-                      //   isExpanded: true,
-                      //   value: dropdownvalue,
-                      //   underline: Container(),
-                      //   items: items.map((String items) {
-                      //     return DropdownMenuItem(
-                      //       value: items,
-                      //       child: Text(items,style: TextStyle(color: Colors.black54,fontSize: 11.sp),),
-                      //     );
-                      //   }).toList(),
-                      //   onChanged: (String? newValue) {
-                      //     setState(() {
-                      //       dropdownvalue = newValue!;
-                      //     });
-                      //   },
-                      //   hint: const Text(
-                      //     "Font Family",
-                      //     style: TextStyle(fontWeight: FontWeight.bold,color: Colors.black),
-                      //   ),
-                      // ),
-                    ),
+                        padding: EdgeInsets.symmetric(horizontal: 2.w),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text('E-commerce',
+                                style: TextStyle(
+                                    color: Colors.black54, fontSize: 11.sp)),
+                            // Icon(
+                            //   Icons.keyboard_arrow_down_outlined,
+                            //   color: Colors.black54,
+                            //   size: 3.5.h,
+                            // ),
+                          ],
+                        )),
                   ),
-                  SizedBox(height: 1.2.h,),
+                  SizedBox(
+                    height: 1.2.h,
+                  ),
                   Row(
                     children: [
                       Text(
@@ -345,58 +335,64 @@ class _SignUpDetailScreenState extends State<SignUpDetailScreen> {
                         style: TextStyle(
                             fontSize: 12.sp,
                             color: Colors.black,
-                            fontWeight: FontWeight.w500
-                        ),
+                            fontWeight: FontWeight.w500),
                       ),
                     ],
                   ),
-                  SizedBox(height: 0.5.h,),
+                  SizedBox(
+                    height: 0.5.h,
+                  ),
                   Container(
                     height: 4.5.h,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(5),
-                      border: Border.all(color: Colors.grey,width: 1)
-                    ),
+                        border: Border.all(color: Colors.grey, width: 1)),
                     child: Row(
                       children: [
                         Container(
-                          width: 63.w,
+                          width: 55.w,
                           height: 4.5.h,
                           child: TextField(
                             style: TextStyle(fontSize: 12.sp),
                             textAlign: TextAlign.right,
                             controller: provider.domainController,
-                           // obscureText: widget.obsecureText !=null ? widget.obsecureText! : false,
                             obscuringCharacter: '*',
                             decoration: InputDecoration(
-                              border: OutlineInputBorder(borderRadius: BorderRadius.circular(0),borderSide: BorderSide.none),
+                              border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(0),
+                                  borderSide: BorderSide.none),
                               hintText: 'business name',
-                              //labelText: 'Keyword',
-                              //labelStyle: TextStyle(fontSize: 10.sp,color: Colors.grey),
-                              hintStyle: TextStyle(fontSize: 11.sp,color: Colors.grey),
-                              contentPadding: EdgeInsets.only(top: 0.5.h,left: 2.w,right: 2.w),
+                              hintStyle: TextStyle(
+                                  fontSize: 11.sp, color: Colors.grey),
+                              contentPadding: EdgeInsets.only(
+                                  top: 0.5.h, left: 2.w, right: 2.w),
                             ),
                           ),
                         ),
                         Expanded(
                           child: Row(
-                          children: [
-                            Container(
-                              height: 4.5.h,
-                              width: 0.4.w,
-                              color: Colors.grey,
-                            ),
-                            SizedBox(width:3.w),
-                            Text(
-                              '.dialboxx.com',
-                              style: TextStyle(fontSize: 11.sp,color: Colors.black.withAlpha(200)),
-                            )
-                          ],
-                        ),),
+                            children: [
+                              Container(
+                                height: 4.5.h,
+                                width: 0.4.w,
+                                color: Colors.grey,
+                              ),
+                              SizedBox(width: 3.w),
+                              Text(
+                                '.dialboxx.com',
+                                style: TextStyle(
+                                    fontSize: 11.sp,
+                                    color: Colors.black.withAlpha(200)),
+                              )
+                            ],
+                          ),
+                        ),
                       ],
                     ),
                   ),
-                  SizedBox(height: 1.2.h,),
+                  SizedBox(
+                    height: 1.2.h,
+                  ),
                   Row(
                     children: [
                       Text(
@@ -404,18 +400,21 @@ class _SignUpDetailScreenState extends State<SignUpDetailScreen> {
                         style: TextStyle(
                             fontSize: 12.sp,
                             color: Colors.black,
-                            fontWeight: FontWeight.w500
-                        ),
+                            fontWeight: FontWeight.w500),
                       ),
                     ],
                   ),
-                  SizedBox(height: 0.5.h,),
+                  SizedBox(
+                    height: 0.5.h,
+                  ),
                   CustomTextField(
                     obsecureText: true,
                     hintText: 'Enter Password',
                     controller: provider.passwordController,
                   ),
-                  SizedBox(height: 1.h,),
+                  SizedBox(
+                    height: 1.h,
+                  ),
                   Row(
                     children: [
                       Text(
@@ -423,103 +422,125 @@ class _SignUpDetailScreenState extends State<SignUpDetailScreen> {
                         style: TextStyle(
                             fontSize: 12.sp,
                             color: Colors.black,
-                            fontWeight: FontWeight.w500
-                        ),
+                            fontWeight: FontWeight.w500),
                       ),
                     ],
                   ),
-                  SizedBox(height: 0.5.h,),
+                  SizedBox(
+                    height: 0.5.h,
+                  ),
                   CustomTextField(
                     obsecureText: true,
                     hintText: 'Enter Confirm Password',
                     controller: provider.cPasswordController,
                   ),
-                  SizedBox(height: 1.h,),
+                  SizedBox(
+                    height: 2.h,
+                  ),
                   GestureDetector(
                     onTap: () {
-                      provider.checkboxSelected = true;
-                      setState(() {
-
-                      });
+                      provider.checkboxSelected = !provider.checkboxSelected!;
+                      setState(() {});
                     },
                     child: Row(
                       children: [
-                        if(provider.checkboxSelected == true)
-                          SvgPicture.asset('assets/svgs/tickss.svg',height: 2.5.h,),
-                        if(provider.checkboxSelected == false)
-                        SvgPicture.asset('assets/svgs/empty_checkbox.svg',height: 2.5.h,),
-                        SizedBox(width: 2.w,),
-                        RichText(
-                            text: TextSpan(
-                                children: [
-                                  TextSpan(
-                                      text: 'I agree with the  ',
-                                      style: TextStyle(
-                                          color: Colors.black,
-                                          fontSize: 12.sp
-                                      )
-                                  ),
-                                  TextSpan(
-                                      text: 'term ' ,
-                                      style: TextStyle(
-                                          color: blueColor,
-                                          fontSize: 12.sp,
-                                          //fontWeight: FontWeight.bold
-                                      )
-                                  ),
-                                  TextSpan(
-                                      text: 'and ' ,
-                                      style: TextStyle(
-                                          color: Colors.black,
-                                          fontSize: 12.sp,
-                                          //fontWeight: FontWeight.bold
-                                      )
-                                  ),
-                                  TextSpan(
-                                      text: 'conditions' ,
-                                      style: TextStyle(
-                                          color: blueColor,
-                                          fontSize: 12.sp,
-                                          //fontWeight: FontWeight.bold
-                                      )
-                                  )
-                                ]
-                            )
+                        if (provider.checkboxSelected == true)
+                          SvgPicture.asset(
+                            'assets/svgs/tickss.svg',
+                            height: 2.5.h,
+                          ),
+                        if (provider.checkboxSelected == false)
+                          SvgPicture.asset(
+                            'assets/svgs/empty_checkbox.svg',
+                            height: 2.5.h,
+                          ),
+                        SizedBox(
+                          width: 2.w,
                         ),
-
+                        RichText(
+                            text: TextSpan(children: [
+                          TextSpan(
+                              text: 'I agree with the  ',
+                              style: TextStyle(
+                                  color: Colors.black, fontSize: 12.sp)),
+                          TextSpan(
+                              text: 'term ',
+                              style: TextStyle(
+                                color: blueColor,
+                                fontSize: 12.sp,
+                                //fontWeight: FontWeight.bold
+                              )),
+                          TextSpan(
+                              text: 'and ',
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 12.sp,
+                                //fontWeight: FontWeight.bold
+                              )),
+                          TextSpan(
+                              text: 'conditions',
+                              style: TextStyle(
+                                color: blueColor,
+                                fontSize: 12.sp,
+                              ))
+                        ])),
                       ],
                     ),
                   ),
-                  SizedBox(height: 2.h,),
+                  SizedBox(
+                    height: 4.h,
+                  ),
                   GestureDetector(
                     onTap: () {
-                      // if(provider.passwordController.text != provider.cPasswordController.text){
-                      //   Get.snackbar('Alert!', 'Password must be same');
-                      // }
-                      // else{
-                         provider.sign_up_api(context);
-                      // }
-                      // if(list.isNotEmpty)
-                      // Navigator.push(context, MaterialPageRoute(builder: (context) => LoginScreen(),));
+                      if (provider.emailController.text.isNotEmpty) {
+                        if (provider.businessNameController.text.isNotEmpty) {
+                          if (provider.domainController.text.isNotEmpty) {
+                            if (provider.mobileController.text.isNotEmpty) {
+                              if (provider.passwordController.text.isNotEmpty) {
+                                if (provider.selected_categgory != null) {
+                                  if (provider.checkboxSelected == true) {
+                                    provider.sign_up_api(context);
+                                  } else {
+                                    Get.snackbar('Alert',
+                                        'You must accept the term and conditions to register an account.');
+                                  }
+                                } else {
+                                  Get.snackbar('Alert', 'Category is empty.');
+                                }
+                              } else {
+                                Get.snackbar('Alert', 'Password is empty.');
+                              }
+                            } else {
+                              Get.snackbar('Alert', 'Mobile number is empty.');
+                            }
+                          } else {
+                            Get.snackbar('Alert', 'Domain is empty.');
+                          }
+                        } else {
+                          Get.snackbar('Alert', 'Business Name is empty.');
+                        }
+                      } else {
+                        Get.snackbar('Alert', 'Email is empty.');
+                      }
                     },
                     child: Container(
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(3),
-                          color: blueColor
-                      ),
+                          color: blueColor),
                       child: Padding(
-                        padding:  EdgeInsets.symmetric(vertical: 0.7.h,horizontal: 14.w),
+                        padding: EdgeInsets.symmetric(
+                            vertical: 0.7.h, horizontal: 14.w),
                         child: Text(
                           'Next',
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 13.sp
-                          ),
+                          style:
+                              TextStyle(color: Colors.white, fontSize: 13.sp),
                         ),
                       ),
                     ),
                   ),
-                  SizedBox(height: 1.2.h,),
+                  SizedBox(
+                    height: 8.h,
+                  ),
                 ],
               ),
             ),
@@ -535,14 +556,19 @@ class _SignUpDetailScreenState extends State<SignUpDetailScreen> {
         Container(
           color: Colors.blue.withAlpha(50),
           child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 3.w,vertical: 0.8.h),
+            padding: EdgeInsets.symmetric(horizontal: 3.w, vertical: 0.8.h),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Row(
                   children: [
-                    SvgPicture.asset('assets/svgs/empty_circle.svg',height: 1.6.h,),
-                    SizedBox(width: 2.w,),
+                    SvgPicture.asset(
+                      'assets/svgs/empty_circle.svg',
+                      height: 1.6.h,
+                    ),
+                    SizedBox(
+                      width: 2.w,
+                    ),
                     Container(
                       width: 65.w,
                       child: Text(
@@ -550,13 +576,15 @@ class _SignUpDetailScreenState extends State<SignUpDetailScreen> {
                         style: TextStyle(
                             color: Color(0xff727272),
                             fontSize: 10.sp,
-                            height: 0.16.h
-                        ),
+                            height: 0.16.h),
                       ),
                     )
                   ],
                 ),
-                SvgPicture.asset('assets/svgs/$text.svg',height: 5.h,),
+                SvgPicture.asset(
+                  'assets/svgs/$text.svg',
+                  height: 5.h,
+                ),
               ],
             ),
           ),
@@ -574,7 +602,7 @@ class _SignUpDetailScreenState extends State<SignUpDetailScreen> {
         Container(
           color: Colors.blue.withAlpha(50),
           child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 3.w,vertical: 0.8.h),
+            padding: EdgeInsets.symmetric(horizontal: 3.w, vertical: 0.8.h),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -582,14 +610,18 @@ class _SignUpDetailScreenState extends State<SignUpDetailScreen> {
                   children: [
                     Container(
                         decoration: BoxDecoration(
-                            border: Border.all(color: Colors.grey,width: 1),
-                          shape: BoxShape.circle
-                        ),
+                            border: Border.all(color: Colors.grey, width: 1),
+                            shape: BoxShape.circle),
                         child: Padding(
-                          padding:  EdgeInsets.all(1.2),
-                          child: SvgPicture.asset('assets/svgs/fill_circle.svg',height: 1.3.h,),
+                          padding: EdgeInsets.all(1.2),
+                          child: SvgPicture.asset(
+                            'assets/svgs/fill_circle.svg',
+                            height: 1.3.h,
+                          ),
                         )),
-                    SizedBox(width: 2.w,),
+                    SizedBox(
+                      width: 2.w,
+                    ),
                     Container(
                       width: 65.w,
                       child: Text(
@@ -597,13 +629,15 @@ class _SignUpDetailScreenState extends State<SignUpDetailScreen> {
                         style: TextStyle(
                             color: Color(0xff727272),
                             fontSize: 10.sp,
-                            height: 0.16.h
-                        ),
+                            height: 0.16.h),
                       ),
                     )
                   ],
                 ),
-                SvgPicture.asset('assets/svgs/$text.svg',height: 5.h,),
+                SvgPicture.asset(
+                  'assets/svgs/$text.svg',
+                  height: 5.h,
+                ),
               ],
             ),
           ),
@@ -614,5 +648,4 @@ class _SignUpDetailScreenState extends State<SignUpDetailScreen> {
       ],
     );
   }
-
 }

@@ -32,8 +32,7 @@ class Data {
   int? incomplete;
   int? trash;
   Request? request;
-  int? currentPage;
-  int? lastPage;
+  int? count;
 
   Data(
       {this.posts,
@@ -42,8 +41,7 @@ class Data {
         this.incomplete,
         this.trash,
         this.request,
-        this.currentPage,
-        this.lastPage});
+        this.count});
 
   Data.fromJson(Map<String, dynamic> json) {
     if (json['posts'] != null) {
@@ -58,8 +56,7 @@ class Data {
     trash = json['trash'];
     request =
     json['request'] != null ? new Request.fromJson(json['request']) : null;
-    currentPage = json['current_page'];
-    lastPage = json['last_page'];
+    count = json['count'];
   }
 
   Map<String, dynamic> toJson() {
@@ -74,8 +71,7 @@ class Data {
     if (this.request != null) {
       data['request'] = this.request!.toJson();
     }
-    data['current_page'] = this.currentPage;
-    data['last_page'] = this.lastPage;
+    data['count'] = this.count;
     return data;
   }
 }
@@ -92,7 +88,10 @@ class Posts {
   String? createdAt;
   String? updatedAt;
   int? domainId;
+  int? orderCount;
   Preview? preview;
+  Price? price;
+  Stock? stock;
 
   Posts(
       {this.id,
@@ -106,7 +105,10 @@ class Posts {
         this.createdAt,
         this.updatedAt,
         this.domainId,
-        this.preview});
+        this.orderCount,
+        this.preview,
+        this.price,
+        this.stock});
 
   Posts.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -120,8 +122,11 @@ class Posts {
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
     domainId = json['domain_id'];
+    orderCount = json['order_count'];
     preview =
     json['preview'] != null ? new Preview.fromJson(json['preview']) : null;
+    price = json['price'] != null ? new Price.fromJson(json['price']) : null;
+    stock = json['stock'] != null ? new Stock.fromJson(json['stock']) : null;
   }
 
   Map<String, dynamic> toJson() {
@@ -137,8 +142,15 @@ class Posts {
     data['created_at'] = this.createdAt;
     data['updated_at'] = this.updatedAt;
     data['domain_id'] = this.domainId;
+    data['order_count'] = this.orderCount;
     if (this.preview != null) {
       data['preview'] = this.preview!.toJson();
+    }
+    if (this.price != null) {
+      data['price'] = this.price!.toJson();
+    }
+    if (this.stock != null) {
+      data['stock'] = this.stock!.toJson();
     }
     return data;
   }
@@ -187,24 +199,107 @@ class Media {
   }
 }
 
+class Price {
+  int? id;
+  int? termId;
+  int? price;
+  int? regularPrice;
+  int? specialPrice;
+  int? priceType;
+  String? startingDate;
+  String? endingDate;
+  int? pstatus;
+
+  Price(
+      {this.id,
+        this.termId,
+        this.price,
+        this.regularPrice,
+        this.specialPrice,
+        this.priceType,
+        this.startingDate,
+        this.endingDate,
+        this.pstatus});
+
+  Price.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    termId = json['term_id'];
+    price = json['price'];
+    regularPrice = json['regular_price'];
+    specialPrice = json['special_price'];
+    priceType = json['price_type'];
+    startingDate = json['starting_date'];
+    endingDate = json['ending_date'];
+    pstatus = json['pstatus'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['term_id'] = this.termId;
+    data['price'] = this.price;
+    data['regular_price'] = this.regularPrice;
+    data['special_price'] = this.specialPrice;
+    data['price_type'] = this.priceType;
+    data['starting_date'] = this.startingDate;
+    data['ending_date'] = this.endingDate;
+    data['pstatus'] = this.pstatus;
+    return data;
+  }
+}
+
+class Stock {
+  int? id;
+  int? termId;
+  int? stockManage;
+  int? stockStatus;
+  int? stockQty;
+  String? sku;
+
+  Stock(
+      {this.id,
+        this.termId,
+        this.stockManage,
+        this.stockStatus,
+        this.stockQty,
+        this.sku});
+
+  Stock.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    termId = json['term_id'];
+    stockManage = json['stock_manage'];
+    stockStatus = json['stock_status'];
+    stockQty = json['stock_qty'];
+    sku = json['sku'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['term_id'] = this.termId;
+    data['stock_manage'] = this.stockManage;
+    data['stock_status'] = this.stockStatus;
+    data['stock_qty'] = this.stockQty;
+    data['sku'] = this.sku;
+    return data;
+  }
+}
+
 class Request {
   String? userId;
   String? type;
-  String? page;
 
-  Request({this.userId, this.type, this.page});
+  Request({this.userId, this.type});
 
   Request.fromJson(Map<String, dynamic> json) {
     userId = json['user_id'];
     type = json['type'];
-    page = json['page'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['user_id'] = this.userId;
     data['type'] = this.type;
-    data['page'] = this.page;
     return data;
   }
 }

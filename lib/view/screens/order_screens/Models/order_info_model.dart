@@ -3,7 +3,7 @@ class OrderInfoModel {
   String? error;
   String? message;
   OrderData? orderData;
-  TcsData? tcsData;
+  TCS? tcsData;
 
   OrderInfoModel(
       {this.result, this.error, this.message, this.orderData, this.tcsData});
@@ -15,9 +15,8 @@ class OrderInfoModel {
     orderData = json['order_data'] != null
         ? new OrderData.fromJson(json['order_data'])
         : null;
-    tcsData = json['tcs_data'] != null
-        ? new TcsData.fromJson(json['tcs_data'])
-        : null;
+    tcsData =
+        json['tcs_data'] != null ? new TCS.fromJson(json['tcs_data']) : null;
   }
 
   Map<String, dynamic> toJson() {
@@ -28,9 +27,7 @@ class OrderInfoModel {
     if (this.orderData != null) {
       data['order_data'] = this.orderData!.toJson();
     }
-    if (this.tcsData != null) {
-      data['tcs_data'] = this.tcsData!.toJson();
-    }
+    data['tcs_data'] = this.tcsData;
     return data;
   }
 }
@@ -40,7 +37,7 @@ class OrderData {
   String? orderNo;
   String? transactionId;
   int? categoryId;
-  String? customerId;
+  int? customerId;
   int? userId;
   int? orderType;
   int? paymentStatus;
@@ -53,33 +50,33 @@ class OrderData {
   String? mobile;
   int? domainId;
   List<OrderItem>? orderItem;
-  String? customer;
+  Customer? customer;
   OrderContent? orderContent;
   ShippingInfo? shippingInfo;
   City? getway;
 
   OrderData(
       {this.id,
-        this.orderNo,
-        this.transactionId,
-        this.categoryId,
-        this.customerId,
-        this.userId,
-        this.orderType,
-        this.paymentStatus,
-        this.status,
-        this.tax,
-        this.shipping,
-        this.total,
-        this.createdAt,
-        this.updatedAt,
-        this.mobile,
-        this.domainId,
-        this.orderItem,
-        this.customer,
-        this.orderContent,
-        this.shippingInfo,
-        this.getway});
+      this.orderNo,
+      this.transactionId,
+      this.categoryId,
+      this.customerId,
+      this.userId,
+      this.orderType,
+      this.paymentStatus,
+      this.status,
+      this.tax,
+      this.shipping,
+      this.total,
+      this.createdAt,
+      this.updatedAt,
+      this.mobile,
+      this.domainId,
+      this.orderItem,
+      this.customer,
+      this.orderContent,
+      this.shippingInfo,
+      this.getway});
 
   OrderData.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -104,7 +101,9 @@ class OrderData {
         orderItem!.add(new OrderItem.fromJson(v));
       });
     }
-    customer = json['customer'];
+    customer = json['customer'] != null
+        ? new Customer.fromJson(json['customer'])
+        : null;
     orderContent = json['order_content'] != null
         ? new OrderContent.fromJson(json['order_content'])
         : null;
@@ -135,7 +134,9 @@ class OrderData {
     if (this.orderItem != null) {
       data['order_item'] = this.orderItem!.map((v) => v.toJson()).toList();
     }
-    data['customer'] = this.customer;
+    if (this.customer != null) {
+      data['customer'] = this.customer!.toJson();
+    }
     if (this.orderContent != null) {
       data['order_content'] = this.orderContent!.toJson();
     }
@@ -153,25 +154,25 @@ class OrderItem {
   int? id;
   int? orderId;
   int? termId;
-  String? info;
+  Info? info;
   int? qty;
   int? amount;
   Term? term;
 
   OrderItem(
       {this.id,
-        this.orderId,
-        this.termId,
-        this.info,
-        this.qty,
-        this.amount,
-        this.term});
+      this.orderId,
+      this.termId,
+      this.info,
+      this.qty,
+      this.amount,
+      this.term});
 
   OrderItem.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     orderId = json['order_id'];
     termId = json['term_id'];
-    info = json['info'];
+    info = json['info'] != null ? new Info.fromJson(json['info']) : null;
     qty = json['qty'];
     amount = json['amount'];
     term = json['term'] != null ? new Term.fromJson(json['term']) : null;
@@ -182,12 +183,164 @@ class OrderItem {
     data['id'] = this.id;
     data['order_id'] = this.orderId;
     data['term_id'] = this.termId;
-    data['info'] = this.info;
+    if (this.info != null) {
+      data['info'] = this.info!.toJson();
+    }
     data['qty'] = this.qty;
     data['amount'] = this.amount;
     if (this.term != null) {
       data['term'] = this.term!.toJson();
     }
+    return data;
+  }
+}
+
+class Info {
+  List<AttributeOuter>? attributeOuter;
+  List<Options>? options;
+
+  Info({this.attributeOuter, this.options});
+
+  Info.fromJson(Map<String, dynamic> json) {
+    if (json['attribute'] != null) {
+      attributeOuter = <AttributeOuter>[];
+      json['attribute'].forEach((v) {
+        attributeOuter!.add(new AttributeOuter.fromJson(v));
+      });
+    }
+    if (json['options'] != null) {
+      options = <Options>[];
+      json['options'].forEach((v) {
+        options!.add(new Options.fromJson(v));
+      });
+    }
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    if (this.attributeOuter != null) {
+      data['attribute'] = this.attributeOuter!.map((v) => v.toJson()).toList();
+    }
+    if (this.options != null) {
+      data['options'] = this.options!.map((v) => v.toJson()).toList();
+    }
+    return data;
+  }
+}
+
+class AttributeOuter {
+  int? id;
+  int? categoryId;
+  int? variationId;
+  int? termId;
+  Attribute? attribute;
+  Attribute? variation;
+
+  AttributeOuter(
+      {this.id,
+      this.categoryId,
+      this.variationId,
+      this.termId,
+      this.attribute,
+      this.variation});
+
+  AttributeOuter.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    categoryId = json['category_id'];
+    variationId = json['variation_id'];
+    termId = json['term_id'];
+    attribute = json['attribute'] != null
+        ? new Attribute.fromJson(json['attribute'])
+        : null;
+    variation = json['variation'] != null
+        ? new Attribute.fromJson(json['variation'])
+        : null;
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['category_id'] = this.categoryId;
+    data['variation_id'] = this.variationId;
+    data['term_id'] = this.termId;
+    if (this.attribute != null) {
+      data['attribute'] = this.attribute!.toJson();
+    }
+    if (this.variation != null) {
+      data['variation'] = this.variation!.toJson();
+    }
+    return data;
+  }
+}
+
+class Attribute {
+  int? id;
+  String? name;
+
+  Attribute({this.id, this.name});
+
+  Attribute.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    name = json['name'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['name'] = this.name;
+    return data;
+  }
+}
+
+class Options {
+  int? id;
+  int? userId;
+  int? termId;
+  String? name;
+  int? type;
+  int? amount;
+  int? amountType;
+  int? isRequired;
+  int? selectType;
+  int? pId;
+
+  Options(
+      {this.id,
+      this.userId,
+      this.termId,
+      this.name,
+      this.type,
+      this.amount,
+      this.amountType,
+      this.isRequired,
+      this.selectType,
+      this.pId});
+
+  Options.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    userId = json['user_id'];
+    termId = json['term_id'];
+    name = json['name'];
+    type = json['type'];
+    amount = json['amount'];
+    amountType = json['amount_type'];
+    isRequired = json['is_required'];
+    selectType = json['select_type'];
+    pId = json['p_id'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['user_id'] = this.userId;
+    data['term_id'] = this.termId;
+    data['name'] = this.name;
+    data['type'] = this.type;
+    data['amount'] = this.amount;
+    data['amount_type'] = this.amountType;
+    data['is_required'] = this.isRequired;
+    data['select_type'] = this.selectType;
+    data['p_id'] = this.pId;
     return data;
   }
 }
@@ -207,16 +360,16 @@ class Term {
 
   Term(
       {this.id,
-        this.title,
-        this.slug,
-        this.userId,
-        this.status,
-        this.featured,
-        this.type,
-        this.isAdmin,
-        this.createdAt,
-        this.updatedAt,
-        this.domainId});
+      this.title,
+      this.slug,
+      this.userId,
+      this.status,
+      this.featured,
+      this.type,
+      this.isAdmin,
+      this.createdAt,
+      this.updatedAt,
+      this.domainId});
 
   Term.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -249,11 +402,56 @@ class Term {
   }
 }
 
+class Customer {
+  int? id;
+  String? name;
+  String? mobile;
+  String? email;
+  int? domainId;
+  int? createdBy;
+  String? createdAt;
+  String? updatedAt;
+
+  Customer(
+      {this.id,
+      this.name,
+      this.mobile,
+      this.email,
+      this.domainId,
+      this.createdBy,
+      this.createdAt,
+      this.updatedAt});
+
+  Customer.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    name = json['name'];
+    mobile = json['mobile'];
+    email = json['email'];
+    domainId = json['domain_id'];
+    createdBy = json['created_by'];
+    createdAt = json['created_at'];
+    updatedAt = json['updated_at'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['name'] = this.name;
+    data['mobile'] = this.mobile;
+    data['email'] = this.email;
+    data['domain_id'] = this.domainId;
+    data['created_by'] = this.createdBy;
+    data['created_at'] = this.createdAt;
+    data['updated_at'] = this.updatedAt;
+    return data;
+  }
+}
+
 class OrderContent {
   int? id;
   int? orderId;
   String? key;
-  String? value;
+  Value? value;
 
   OrderContent({this.id, this.orderId, this.key, this.value});
 
@@ -261,7 +459,7 @@ class OrderContent {
     id = json['id'];
     orderId = json['order_id'];
     key = json['key'];
-    value = json['value'];
+    value = json['value'] != null ? new Value.fromJson(json['value']) : null;
   }
 
   Map<String, dynamic> toJson() {
@@ -269,7 +467,54 @@ class OrderContent {
     data['id'] = this.id;
     data['order_id'] = this.orderId;
     data['key'] = this.key;
-    data['value'] = this.value;
+    if (this.value != null) {
+      data['value'] = this.value!.toJson();
+    }
+    return data;
+  }
+}
+
+class Value {
+  String? name;
+  String? email;
+  String? phone;
+  dynamic comment;
+  String? address;
+  String? zipCode;
+  String? couponDiscount;
+  String? subTotal;
+
+  Value(
+      {this.name,
+      this.email,
+      this.phone,
+      this.comment,
+      this.address,
+      this.zipCode,
+      this.couponDiscount,
+      this.subTotal});
+
+  Value.fromJson(Map<String, dynamic> json) {
+    name = json['name'];
+    email = json['email'];
+    phone = json['phone'];
+    comment = json['comment'];
+    address = json['address'];
+    zipCode = json['zip_code'];
+    couponDiscount = json['coupon_discount'];
+    subTotal = json['sub_total'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['name'] = this.name;
+    data['email'] = this.email;
+    data['phone'] = this.phone;
+    data['comment'] = this.comment;
+    data['address'] = this.address;
+    data['zip_code'] = this.zipCode;
+    data['coupon_discount'] = this.couponDiscount;
+    data['sub_total'] = this.subTotal;
     return data;
   }
 }
@@ -283,10 +528,10 @@ class ShippingInfo {
 
   ShippingInfo(
       {this.orderId,
-        this.locationId,
-        this.shippingId,
-        this.city,
-        this.shippingMethod});
+      this.locationId,
+      this.shippingId,
+      this.city,
+      this.shippingMethod});
 
   ShippingInfo.fromJson(Map<String, dynamic> json) {
     orderId = json['order_id'];
@@ -318,7 +563,7 @@ class City {
   String? name;
   String? slug;
   String? type;
-  String? pId;
+  dynamic pId;
   int? featured;
   int? menuStatus;
   int? isAdmin;
@@ -332,20 +577,20 @@ class City {
 
   City(
       {this.id,
-        this.name,
-        this.slug,
-        this.type,
-        this.pId,
-        this.featured,
-        this.menuStatus,
-        this.isAdmin,
-        this.createdAt,
-        this.updatedAt,
-        this.userId,
-        this.topMenu,
-        this.domainId,
-        this.freeShipping,
-        this.childAttributeQty});
+      this.name,
+      this.slug,
+      this.type,
+      this.pId,
+      this.featured,
+      this.menuStatus,
+      this.isAdmin,
+      this.createdAt,
+      this.updatedAt,
+      this.userId,
+      this.topMenu,
+      this.domainId,
+      this.freeShipping,
+      this.childAttributeQty});
 
   City.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -386,7 +631,7 @@ class City {
   }
 }
 
-class TcsData {
+class TCS {
   int? id;
   int? sellerid;
   int? orderid;
@@ -412,33 +657,33 @@ class TcsData {
   int? domainId;
   String? productTitle;
 
-  TcsData(
+  TCS(
       {this.id,
-        this.sellerid,
-        this.orderid,
-        this.costCenterCode,
-        this.consigneeName,
-        this.consigneeAddress,
-        this.consigneeMobNo,
-        this.consigneeEmail,
-        this.originCityName,
-        this.destinationCityName,
-        this.weight,
-        this.pieces,
-        this.codAmount,
-        this.customerReferenceNo,
-        this.services,
-        this.productDetails,
-        this.fragile,
-        this.remarks,
-        this.insuranceValue,
-        this.status,
-        this.result,
-        this.orderdatetime,
-        this.domainId,
-        this.productTitle});
+      this.sellerid,
+      this.orderid,
+      this.costCenterCode,
+      this.consigneeName,
+      this.consigneeAddress,
+      this.consigneeMobNo,
+      this.consigneeEmail,
+      this.originCityName,
+      this.destinationCityName,
+      this.weight,
+      this.pieces,
+      this.codAmount,
+      this.customerReferenceNo,
+      this.services,
+      this.productDetails,
+      this.fragile,
+      this.remarks,
+      this.insuranceValue,
+      this.status,
+      this.result,
+      this.orderdatetime,
+      this.domainId,
+      this.productTitle});
 
-  TcsData.fromJson(Map<String, dynamic> json) {
+  TCS.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     sellerid = json['sellerid'];
     orderid = json['orderid'];

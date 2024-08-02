@@ -29,8 +29,6 @@ class _CustomTextFieldState extends State<CustomTextField> {
           hintText: widget.hintText,
           filled: widget.filled !=null ?widget.filled : false,
           fillColor: widget.fillColor != null ? widget.fillColor : null,
-          //labelText: 'Keyword',
-          //labelStyle: TextStyle(fontSize: 10.sp,color: Colors.grey),
           hintStyle: TextStyle(fontSize: 11.sp,color: Colors.grey),
           contentPadding: EdgeInsets.only(top: 0.5.h,left: 2.w,right: 2.w),
         ),

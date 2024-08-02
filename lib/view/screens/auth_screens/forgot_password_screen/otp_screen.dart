@@ -1,28 +1,19 @@
 import 'dart:async';
 import 'package:db_2_0/custom_widgets/data_loading.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:provider/provider.dart';
-
 import '../../../../api_repository/api_utils.dart';
 import '../confirm_password_screen/confirm_password_screen.dart';
-import 'Forget Provider/foget_provider.dart';
 
 class OtpScreens extends StatefulWidget {
   final String? email;
-  final String? number;
-  final String? password;
-  final bool? just_verification;
 
   OtpScreens({
     Key? key,
     this.email,
-    this.password,
-    this.number,
-    this.just_verification=false,
   }) : super(key: key);
 
   @override
@@ -62,16 +53,7 @@ class _OtpScreensState extends State<OtpScreens> {
     });
   }
 
-  // @override
-  // void initState() {
-  //   onTapRecognizer = TapGestureRecognizer()
-  //     ..onTap = () {
-  //       Navigator.pop(context);
-  //     };
-  //   errorController = StreamController<ErrorAnimationType>();
-  //   super.initState();
-  // }
-
+  bool loading = false;
   @override
   void dispose() {
     errorController!.close();
@@ -80,22 +62,29 @@ class _OtpScreensState extends State<OtpScreens> {
 
   @override
   Widget build(BuildContext context) {
-    final _provider = Provider.of<ForgetOtpProvider>(context);
     var height = Get.height;
     var width = Get.width;
     return DataLoading(
-      isLoading: _provider.loading,
+      isLoading: loading,
       child: SafeArea(
         child: Listener(
           onPointerDown: (PointerDownEvent event) =>
               FocusManager.instance.primaryFocus?.unfocus(),
           child: Scaffold(
-            backgroundColor: Theme.of(context).brightness == Brightness.light ? Colors.white:Colors.black,
+            backgroundColor: Theme.of(context).brightness == Brightness.light
+                ? Colors.white
+                : Colors.black,
             appBar: AppBar(
-                backgroundColor: Theme.of(context).brightness == Brightness.light ? Colors.white:Colors.black,
+                backgroundColor:
+                    Theme.of(context).brightness == Brightness.light
+                        ? Colors.white
+                        : Colors.black,
                 elevation: 0,
                 leading: IconButton(
-                  icon: Icon(Icons.arrow_back_ios, color: Theme.of(context).brightness == Brightness.dark ? Colors.white:Colors.black),
+                  icon: Icon(Icons.arrow_back_ios,
+                      color: Theme.of(context).brightness == Brightness.dark
+                          ? Colors.white
+                          : Colors.black),
                   onPressed: () {
                     Navigator.of(context).pop();
                   },
@@ -136,11 +125,14 @@ class _OtpScreensState extends State<OtpScreens> {
                                     fontWeight: FontWeight.w400),
                               ),
                               Text(
-                                '${widget.number} 0r ${widget.email}',
+                                ' ${widget.email}',
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                     fontSize: 15,
-                                    color: Theme.of(context).brightness == Brightness.dark ? Colors.white:Colors.black,
+                                    color: Theme.of(context).brightness ==
+                                            Brightness.dark
+                                        ? Colors.white
+                                        : Colors.black,
                                     letterSpacing: 0.5,
                                     fontWeight: FontWeight.w400),
                               ),
@@ -172,37 +164,34 @@ class _OtpScreensState extends State<OtpScreens> {
                               pinTheme: PinTheme(
                                 shape: PinCodeFieldShape.box,
                                 borderRadius: BorderRadius.circular(5),
-                                //inactiveColor: offBlackAvatr,
-                                //inactiveFillColor: offBlackAvatr,
                                 fieldHeight: 50,
-                                //activeColor: offBlackAvatr,
                                 fieldWidth: 40,
                                 activeFillColor:
                                     hasError ? Colors.black : Colors.white,
                               ),
                               animationDuration: Duration(milliseconds: 300),
-                              backgroundColor: Theme.of(context).brightness == Brightness.light ? Colors.white:Colors.black,
+                              backgroundColor: Theme.of(context).brightness ==
+                                      Brightness.light
+                                  ? Colors.white
+                                  : Colors.black,
                               enableActiveFill: true,
                               errorAnimationController: errorController,
                               controller: textEditingController,
                               onCompleted: (v) async {
-                                _provider.loading = true;
-                                setState(() {
-
-                                });
-                                bool result = await DataProvider().verifyOtpSendFunction(map: {
+                                loading = true;
+                                setState(() {});
+                                bool result = await DataProvider()
+                                    .verifyOtpSendFunction(map: {
                                   'otp': textEditingController.text,
                                   'email': widget.email,
                                 });
-                                _provider.loading = true;
-                                setState(() {
-
-                                });
+                                loading = false;
+                                setState(() {});
                                 if (result) {
-                                  Navigator.push(context, MaterialPageRoute(builder: (context) => ConfirmPasswordScreen(),));
-                                  Get.snackbar('Success','Verify Successfully');
+                                  Get.to(ConfirmPasswordScreen(
+                                    email: widget.email,
+                                  ));
                                 }
-
                               },
                               onChanged: (value) {
                                 setState(() {
@@ -219,7 +208,10 @@ class _OtpScreensState extends State<OtpScreens> {
                               ? "Please fill up all the cells properly"
                               : "",
                           style: TextStyle(
-                              color: Theme.of(context).brightness == Brightness.dark ? Colors.white:Colors.red,
+                              color: Theme.of(context).brightness ==
+                                      Brightness.dark
+                                  ? Colors.white
+                                  : Colors.red,
                               fontSize: 11,
                               fontWeight: FontWeight.w400),
                         ),
@@ -233,7 +225,10 @@ class _OtpScreensState extends State<OtpScreens> {
                           'Clear Text',
                           style: TextStyle(
                             fontSize: 13,
-                            color: Theme.of(context).brightness == Brightness.dark ? Colors.white:Colors.black,
+                            color:
+                                Theme.of(context).brightness == Brightness.dark
+                                    ? Colors.white
+                                    : Colors.black,
                           ),
                         )),
                         onTap: () {
@@ -247,7 +242,12 @@ class _OtpScreensState extends State<OtpScreens> {
                         children: <Widget>[
                           Text(
                             'Didn\'t receive the code? ',
-                            style: TextStyle(color: Theme.of(context).brightness == Brightness.dark ? Colors.white:Colors.black, fontSize: 13),
+                            style: TextStyle(
+                                color: Theme.of(context).brightness ==
+                                        Brightness.dark
+                                    ? Colors.white
+                                    : Colors.black,
+                                fontSize: 13),
                           ),
                           InkWell(
                             // onTap: () async {
@@ -267,8 +267,14 @@ class _OtpScreensState extends State<OtpScreens> {
                                     : 'Wait 30 seconds = ',
                                 style: TextStyle(
                                     color: isotp == false
-                                        ? Theme.of(context).brightness == Brightness.dark ? Colors.green:Colors.blue
-                                        : Theme.of(context).brightness == Brightness.dark ? Colors.white:Colors.black,
+                                        ? Theme.of(context).brightness ==
+                                                Brightness.dark
+                                            ? Colors.green
+                                            : Colors.blue
+                                        : Theme.of(context).brightness ==
+                                                Brightness.dark
+                                            ? Colors.white
+                                            : Colors.black,
                                     fontWeight: FontWeight.w500,
                                     fontSize: 14)),
                           ),
@@ -311,4 +317,3 @@ class _OtpScreensState extends State<OtpScreens> {
     );
   }
 }
-

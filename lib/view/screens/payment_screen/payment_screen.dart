@@ -22,25 +22,20 @@ class _PaymentScreenState extends State<PaymentScreen> {
           backgroundColor: blueColor,
           leading: SizedBox(),
           bottom: PreferredSize(
-              preferredSize: Size.fromHeight(1.h),
+            preferredSize: Size.fromHeight(1.h),
             child: TabBar(
-              labelStyle: TextStyle(
-                fontSize: 10.sp
-              ),
+              labelStyle: TextStyle(fontSize: 10.sp),
               indicatorColor: Colors.white,
               labelPadding: EdgeInsets.only(bottom: 0.5.h),
               tabs: [
                 Text(
-                    'Payment Method',
-
+                  'Payment Method',
                 ),
                 Text(
                   'Transactions',
-
                 ),
                 Text(
                   'Payout Detail',
-
                 ),
               ],
             ),

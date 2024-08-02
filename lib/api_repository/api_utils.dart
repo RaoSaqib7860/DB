@@ -7,20 +7,21 @@ import 'package:http/http.dart' as http;
 import '../utils_services/storage_util.dart';
 import '../view/screens/auth_screens/login_screen/Login Provider/login_model_globle.dart';
 import '../view/screens/auth_screens/login_screen/Model/login_model.dart';
+import '../view/screens/delivery_screens/models/delivery_location_model.dart';
+import '../view/screens/delivery_screens/models/delivery_order_model.dart';
 import '../view/screens/home_screen/Models/dashboard_model.dart';
 import '../view/screens/order_screens/Models/all_order_model.dart';
 import '../view/screens/order_screens/Models/order_info_model.dart';
 import '../view/screens/product_screens/Models/all_product_model.dart';
+import '../view/screens/product_screens/Models/brand_product_model.dart';
+import '../view/screens/product_screens/Models/category_product_model.dart';
 import 'base_path.dart';
 
-class DataProvider{
-
-  Future loginFunction({Map<String , dynamic>? map}) async {
-    //String? deviceId = await getId();
-    print('objectnamwp${map} ');
-    final response = await http.post(Uri.parse('$baseURL$userLogin'), body: map,headers: {
-      'csrf' : '5574499YmRzanYyZzExa2J3Y3N1b2Y='
-    });
+class DataProvider {
+  var headers = {'csrf': '5574499YmRzanYyZzExa2J3Y3N1b2Y='};
+  Future loginFunction({Map<String, dynamic>? map}) async {
+    final response = await http.post(Uri.parse('$baseURL$userLogin'),
+        body: map, headers: headers);
     print('objectnamwb${response.body} ');
     var data = jsonDecode(response.body);
     if (data['result'] == 'success') {
@@ -28,183 +29,271 @@ class DataProvider{
       log("loginFunction code is = ${response.statusCode}");
       storage.write('userData', user_model.toJson());
       print('objectnamw${user_model.data!.userId} ');
-      // snackBarFailer('${data['message']}');
-      Get.snackbar('Success','${data['message']}');
+      Get.snackbar('Success', '${data['message']}');
       return user_model;
-    }else{
-      Get.snackbar('Alert','${data['message']}');
+    } else {
+      Get.snackbar('Alert', '${data['message']}');
       return null;
     }
   }
-  Future<bool> forgetOtpSendFunction({Map<String , dynamic>? map}) async {
-    final response = await http.post(Uri.parse('$baseURL$forgetOtpSendUrl'),body: map, );
+
+  Future<bool> forgetOtpSendFunction({Map<String, dynamic>? map}) async {
+    final response = await http.post(
+      Uri.parse('$baseURL$forgetOtpSendUrl'),
+      body: map,
+    );
     var data = jsonDecode(response.body);
-    if (data['result'] == 'success') {
-      Get.snackbar('Success','${data['message']}');
+    print('${data}');
+    if (data['success'] == 'OTP sent successfully') {
+      Get.snackbar('Success', '${data['success']}');
       return true;
-    }else{
-      Get.snackbar('Alert','${data['message']}');
-      return false;
-    }
-  }
-  Future<bool> verifyOtpSendFunction({Map<String , dynamic>? map}) async {
-    final response = await http.post(Uri.parse('$baseURL$verifyOtpSendUrl'),body: map, );
-    var data = jsonDecode(response.body);
-    if (data['result'] == 'success') {
-      Get.snackbar('Success','${data['message']}');
-      return true;
-    }else{
-      Get.snackbar('Alert','${data['message']}');
-      return false;
-    }
-  }
-  Future<bool> resetPasswordFunction({Map<String , dynamic>? map}) async {
-    final response = await http.post(Uri.parse('$baseURL$resetPasswordUrl'),body: map, );
-    var data = jsonDecode(response.body);
-    if (data['result'] == 'success') {
-      Get.snackbar('Success','${data['message']}');
-      return true;
-    }else{
-      Get.snackbar('Alert','${data['message']}');
+    } else {
+      Get.snackbar('Alert', '${data['message']}');
       return false;
     }
   }
 
-  Future signUpApi({Map<String , dynamic>? map}) async {
-    //String? deviceId = await getId();
-   // LoginModel? loginModel = LoginModel();
-    print('map is === $map');
-    final response = await http.post(Uri.parse('$baseURL$signupUrl'), body: map,headers: {
-      'csrf' : '5574499YmRzanYyZzExa2J3Y3N1b2Y='
-    });
+  Future<bool> verifyOtpSendFunction({Map<String, dynamic>? map}) async {
+    final response = await http.post(Uri.parse('$baseURL$verifyOtpSendUrl'),
+        body: map, headers: headers);
     var data = jsonDecode(response.body);
-    if (data['result'] == 'Success') {
-      //loginModel = LoginModel.fromJson(data);
-      log("loginFunction code is = ${response.statusCode}");
-      // user_model = LoginModel.fromJson(data);
-      // storage.write('userData', user_model.toJson());
-      // snackBarFailer('${data['message']}');
-      Get.snackbar('Success','${data['message']}');
+    print('${data}');
+    if (data['status'] == 200) {
       return true;
-    }else{
-      Get.snackbar('Alert','${data['message']}');
-      return null;
+    } else {
+      Get.snackbar('Alert', '${data['success']}');
+      return false;
+    }
+  }
+
+  Future<bool> resetPasswordFunction({Map<String, dynamic>? map}) async {
+    final response = await http.post(Uri.parse('$baseURL$resetPasswordUrl'),
+        body: map, headers: headers);
+    var data = jsonDecode(response.body);
+    print('result...$data');
+    if (data['result'] == 'success') {
+      Get.snackbar('Success', '${data['message']}');
+      return true;
+    } else {
+      Get.snackbar('Alert', '${data['message']}');
+      return false;
+    }
+  }
+
+  Future signUpApi({Map<String, dynamic>? map}) async {
+    try {
+      print('map is === $map');
+      final response = await http.post(Uri.parse('$baseURL$signupUrl'),
+          body: map, headers: headers);
+      print('signUpApi responce ... ${response}');
+      var data = jsonDecode(response.body);
+      if (response.statusCode == 200) {
+        Get.snackbar('Success', '${data['message']}');
+        return true;
+      } else {
+        Map map = data['errors'];
+        Get.snackbar('Alert', '${map.values.first}');
+        return null;
+      }
+    } catch (e) {
+      print('exception....${e}');
     }
   }
 
   Future getHome({String? userId}) async {
     DashBoardModel? dashBoardModel;
-    final response = await http.post(
-      Uri.parse('$baseURL$dashBoardUrl'),body: {
-        'user_id' : userId
-    },headers: {
-      'csrf' : '5574499YmRzanYyZzExa2J3Y3N1b2Y='
-    });
+    final response = await http.post(Uri.parse('$baseURL$dashBoardUrl'),
+        body: {'user_id': userId}, headers: headers);
     print('the data is user id == ${userId}');
     var data = jsonDecode(response.body);
     log("status code is ${data}");
     return data;
   }
 
-  Future storeOnOffApi({Map<String , dynamic>? map}) async {
+  Future storeOnOffApi({Map<String, dynamic>? map}) async {
     print('map is === $map');
-    final response = await http.post(Uri.parse('$baseURL$storeOnOffUrl'), body: map,headers: {
-      'csrf' : '5574499YmRzanYyZzExa2J3Y3N1b2Y='
-    });
+    final response = await http.post(Uri.parse('$baseURL$storeOnOffUrl'),
+        body: map, headers: headers);
     var data = jsonDecode(response.body);
-    if (data['result'] == 'Success') {
-      log("loginFunction code is = ${response.statusCode}");
-      Get.snackbar('Success','${data['message']}');
-      return true;
-    }else{
-      Get.snackbar('Alert','${data['message']}');
-      return null;
-    }
-  }
-  Future allProductModelApi({Map<String , dynamic>? map}) async {
-    print('map is === $map');
-    AllProductModel? allProductModel;
-    final response = await http.post(Uri.parse('$baseURL$productScreenUrl'), body: map,headers: {
-      'csrf' : '5574499YmRzanYyZzExa2J3Y3N1b2Y='
-    });
-    var data = jsonDecode(response.body);
+    print('${data}');
     if (data['result'] == 'success') {
       log("loginFunction code is = ${response.statusCode}");
-      allProductModel = AllProductModel.fromJson(data);
-      //log("data code is = ${allProductModel.toJson()}");
-      Get.snackbar('Success','${data['message']}');
-      return allProductModel;
-    }else{
-      Get.snackbar('Alert','${data['message']}');
+      return true;
+    } else {
+      Get.snackbar('Alert', '${data['message']}');
       return null;
     }
   }
-  Future allOrderModelApi({Map<String , dynamic>? map}) async {
+
+  Future allProductModelApi({Map<String, dynamic>? map}) async {
+    print('map is === $map');
+    AllProductModel? allProductModel;
+    final response = await http.post(Uri.parse('$baseURL$productScreenUrl'),
+        body: map, headers: headers);
+    var data = jsonDecode(response.body);
+    log("loginFunction code is = ${data}");
+    if (data['result'] == 'success') {
+      allProductModel = AllProductModel.fromJson(data);
+      return allProductModel;
+    } else {
+      Get.snackbar('Alert', '${data['message']}');
+      return null;
+    }
+  }
+
+  Future allOrderModelApi({Map<String, dynamic>? map}) async {
     print('map is === $map');
     AllOrderModel? allOrderModel;
-    final response = await http.post(Uri.parse('$baseURL$ordersScreenUrl'), body: map,headers: {
-      'csrf' : '5574499YmRzanYyZzExa2J3Y3N1b2Y='
-    });
+    final response = await http.post(Uri.parse('$baseURL$ordersScreenUrl'),
+        body: map, headers: headers);
     var data = jsonDecode(response.body);
     if (data['result'] == 'success') {
       log("loginFunction code is = ${response.statusCode}");
       allOrderModel = AllOrderModel.fromJson(data);
-      //log("data code is = ${allProductModel.toJson()}");
-      Get.snackbar('Success','${data['message']}');
       return allOrderModel;
-    }else{
-      Get.snackbar('Alert','${data['message']}');
+    } else {
+      Get.snackbar('Alert', '${data['message']}');
       return null;
     }
   }
-  Future addProductApi({Map<String , dynamic>? map}) async {
+
+  Future domain_request_api({Map<String, dynamic>? map}) async {
     print('map is === $map');
-    final response = await http.post(Uri.parse('$baseURL$addProductScreenUrl'), body: map,headers: {
-      'csrf' : '5574499YmRzanYyZzExa2J3Y3N1b2Y='
-    });
+    final response = await http.post(Uri.parse('$baseURL$domain_request'),
+        body: map, headers: headers);
+    var data = jsonDecode(response.body);
+    print('$data');
+    if (data['result'] == 'success') {
+      log("loginFunction code is = ${response.statusCode}");
+      Get.snackbar('Success', '${data['message']}');
+    } else {
+      Get.snackbar('Alert', '${data['message']}');
+    }
+  }
+
+  Future addProductApi({Map<String, dynamic>? map}) async {
+    print('map is === $map');
+    final response = await http.post(Uri.parse('$baseURL$addProductScreenUrl'),
+        body: map, headers: headers);
     var data = jsonDecode(response.body);
     if (data['result'] == 'success') {
       log("loginFunction code is = ${response.statusCode}");
 
-      Get.snackbar('Success','${data['message']}');
+      Get.snackbar('Success', '${data['message']}');
       return true;
-    }else{
-      Get.snackbar('Alert','${data['message']}');
+    } else {
+      Get.snackbar('Alert', '${data['message']}');
       return false;
     }
   }
-  Future updateOrderApi({Map<String , dynamic>? map}) async {
+
+  Future updateOrderApi({Map<String, dynamic>? map}) async {
     print('map is === $map');
-    final response = await http.post(Uri.parse('$baseURL$updateOrderInfoUrl'), body: map,headers: {
-      'csrf' : '5574499YmRzanYyZzExa2J3Y3N1b2Y='
-    });
+    final response = await http.post(Uri.parse('$baseURL$updateOrderInfoUrl'),
+        body: map, headers: headers);
     var data = jsonDecode(response.body);
     if (data['result'] == 'success') {
       log("loginFunction code is = ${response.statusCode}");
 
-      Get.snackbar('Success','${data['message']}');
+      Get.snackbar('Success', '${data['message']}');
       return true;
-    }else{
-      Get.snackbar('Alert','${data['message']}');
+    } else {
+      Get.snackbar('Alert', '${data['message']}');
       return false;
     }
   }
-  Future orderInfoApi({Map<String , dynamic>? map}) async {
+
+  Future orderInfoApi({Map<String, dynamic>? map}) async {
     print('map is === $map');
     OrderInfoModel? orderInfoModel;
-    final response = await http.post(Uri.parse('$baseURL$orderInfoUrl'), body: map,headers: {
-      'csrf' : '5574499YmRzanYyZzExa2J3Y3N1b2Y='
-    });
+    final response = await http.post(Uri.parse('$baseURL$orderInfoUrl'),
+        body: map, headers: headers);
     var data = jsonDecode(response.body);
     if (data['result'] == 'success') {
       log("loginFunction code is = ${response.statusCode}");
       orderInfoModel = OrderInfoModel.fromJson(data);
-      Get.snackbar('Success','${data['message']}');
       return orderInfoModel;
-    }else{
-      Get.snackbar('Alert','${data['message']}');
+    } else {
+      Get.snackbar('Alert', '${data['message']}');
       return null;
     }
   }
 
+  Future get_categoriesApi({Map<String, dynamic>? map}) async {
+    print('map is === $map');
+    CateoryProductModel? orderInfoModel;
+    final response = await http.post(Uri.parse('$baseURL$get_categories'),
+        body: map, headers: headers);
+    var data = jsonDecode(response.body);
+    if (data['result'] == 'success') {
+      log("loginFunction code is = ${response.statusCode}");
+      orderInfoModel = CateoryProductModel.fromJson(data);
+      return orderInfoModel;
+    } else {
+      Get.snackbar('Alert', '${data['message']}');
+      return null;
+    }
+  }
+
+  Future get_brandsApi({Map<String, dynamic>? map}) async {
+    print('map is === $map');
+    BrandsProductModel? orderInfoModel;
+    final response = await http.post(Uri.parse('$baseURL$get_brands'),
+        body: map, headers: headers);
+    var data = jsonDecode(response.body);
+    if (data['result'] == 'success') {
+      log("loginFunction code is = ${response.statusCode}");
+      orderInfoModel = BrandsProductModel.fromJson(data);
+      return orderInfoModel;
+    } else {
+      Get.snackbar('Alert', '${data['message']}');
+      return null;
+    }
+  }
+
+  Future delivery_ordersApi({Map<String, dynamic>? map}) async {
+    print('map is === $map');
+    DeliveryOrders? orderInfoModel;
+    final response = await http.post(Uri.parse('$baseURL$delivery_orders'),
+        body: map, headers: headers);
+    var data = jsonDecode(response.body);
+    log("loginFunction code is = ${data}");
+    if (data['result'] == 'success') {
+      orderInfoModel = DeliveryOrders.fromJson(data);
+      return orderInfoModel;
+    } else {
+      Get.snackbar('Alert', '${data['message']}');
+      return null;
+    }
+  }
+
+  Future delivery_locationApi({Map<String, dynamic>? map}) async {
+    print('map is === $map');
+    DeliveryLocationModel? deliveryLocationModel;
+    final response = await http.post(Uri.parse('$baseURL$delivery_location'),
+        body: map, headers: headers);
+    var data = jsonDecode(response.body);
+    log("loginFunction code is = ${data}");
+    if (data['result'] == 'success') {
+      deliveryLocationModel = DeliveryLocationModel.fromJson(data);
+      return deliveryLocationModel;
+    } else {
+      Get.snackbar('Alert', '${data['message']}');
+      return null;
+    }
+  }
+
+  Future delivery_locationApi_crud({Map<String, dynamic>? map}) async {
+    print('map is === $map');
+    final response = await http.post(Uri.parse('$baseURL$delivery_location'),
+        body: map, headers: headers);
+    log("loginFunction code is = ${response.body}");
+  }
+
+  Future order_status_updateApi({Map<String, dynamic>? map}) async {
+    final response = await http.post(Uri.parse('$baseURL$order_status_update'),
+        body: map, headers: headers);
+    var data = jsonDecode(response.body);
+    log("loginFunction code is = $data");
+  }
 }

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
-
 import '../../../custom_widgets/app_colors.dart';
 import 'create_order_screen.dart';
 

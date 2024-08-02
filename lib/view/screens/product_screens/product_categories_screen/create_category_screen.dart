@@ -244,7 +244,7 @@ class _CreateCategoryScreenState extends State<CreateCategoryScreen> {
                   GestureDetector(
                     onTap: () {
                       //Navigator.pop(context);
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => ProductScreen(dropdownvalue: 'Product Categories'),));
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => ProductScreen(),));
                     },
                     child: Padding(
                       padding: EdgeInsets.only(left: 4.w,right: 4.w),

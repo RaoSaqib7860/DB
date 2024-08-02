@@ -25,23 +25,20 @@ class _DeliveryMainScreenState extends State<DeliveryMainScreen> {
           bottom: PreferredSize(
             preferredSize: Size.fromHeight(1.h),
             child: TabBar(
-              labelStyle: TextStyle(
-                  fontSize: 10.sp
-              ),
+              labelStyle: TextStyle(fontSize: 10.sp),
               indicatorColor: Colors.white,
               labelPadding: EdgeInsets.only(bottom: 0.5.h),
+              labelColor: Colors.white,
+              unselectedLabelColor: Colors.grey[400],
               tabs: [
                 Text(
                   'Delivery Orders',
-
                 ),
                 Text(
                   'Delivery Location',
-
                 ),
                 Text(
                   'Delivery Cost',
-
                 ),
               ],
             ),
