@@ -183,8 +183,10 @@ class _PublishScreenState extends State<PublishScreen> {
                               )
                             : RefreshIndicator(
                                 onRefresh: () async {
-                                  await provider.get_product_data(
-                                      map: {'user_id': '${user_model.data!.userId}', 'type': '1'});
+                                  await provider.get_product_data(map: {
+                                    'user_id': '${user_model.data!.userId}',
+                                    'type': '1'
+                                  });
                                 },
                                 child: ListView.builder(
                                   itemCount: provider
@@ -404,10 +406,22 @@ class _PublishScreenState extends State<PublishScreen> {
                                                         Row(
                                                           children: [
                                                             InkWell(
-                                                              onTap: (){
-                                                                Navigator.push(context, MaterialPageRoute(builder: (context) => EditProductScreen(dropdownvalue: 'Product',productId: '${provider.allProductModel!.data!.posts![index].id.toString()}',),));
+                                                              onTap: () {
+                                                                Navigator.push(
+                                                                    context,
+                                                                    MaterialPageRoute(
+                                                                      builder:
+                                                                          (context) =>
+                                                                              EditProductScreen(
+                                                                        dropdownvalue:
+                                                                            'Product',
+                                                                        productId:
+                                                                            '${provider.allProductModel!.data!.posts![index].id.toString()}',
+                                                                      ),
+                                                                    ));
                                                               },
-                                                              child: SvgPicture.asset(
+                                                              child: SvgPicture
+                                                                  .asset(
                                                                 'assets/svgs/settng.svg',
                                                                 height: 2.7.h,
                                                               ),

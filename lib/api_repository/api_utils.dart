@@ -147,6 +147,7 @@ class DataProvider {
       return null;
     }
   }
+
   Future allBrandsApi({Map<String, dynamic>? map}) async {
     print('map is === $map');
     AllBrandsModel? allBrandsModel;
@@ -178,6 +179,7 @@ class DataProvider {
       return null;
     }
   }
+
   Future updateProductApi({Map<String, dynamic>? map}) async {
     print('map is === $map');
     UpdateProductModel? updateProductModel;
@@ -193,11 +195,14 @@ class DataProvider {
       return null;
     }
   }
+
   Future updateProductPriceApi({Map<String, dynamic>? map}) async {
     print('map is === $map');
     UpdateProductPriceModel? updateProductPriceModel;
-    final response = await http.post(Uri.parse('$baseURL$updateProductPriceInfoUrl'),
-        body: map, headers: headers);
+    final response = await http.post(
+        Uri.parse('$baseURL$updateProductPriceInfoUrl'),
+        body: map,
+        headers: headers);
     var data = jsonDecode(response.body);
     if (data['result'] == 'success') {
       log("loginFunction code is = ${response.statusCode}");
@@ -208,11 +213,14 @@ class DataProvider {
       return null;
     }
   }
+
   Future updateProductSEOApi({Map<String, dynamic>? map}) async {
     print('map is === $map');
     UpdateProductSEOModel? updateProductSEOModel;
-    final response = await http.post(Uri.parse('$baseURL$updateProductSEOInfoUrl'),
-        body: map, headers: headers);
+    final response = await http.post(
+        Uri.parse('$baseURL$updateProductSEOInfoUrl'),
+        body: map,
+        headers: headers);
     var data = jsonDecode(response.body);
     if (data['result'] == 'success') {
       log("loginFunction code is = ${response.statusCode}");
@@ -223,14 +231,14 @@ class DataProvider {
       return null;
     }
   }
-   Future update_Image_api({dio.FormData? uploadMedia}) async {
+
+  Future update_Image_api({dio.FormData? uploadMedia}) async {
     print('objectmapis${uploadMedia}');
-     UpdateProductImageModel? updateProductImageModel;
+    UpdateProductImageModel? updateProductImageModel;
     final response = await dio.Dio().post('$baseURL$updateProductImageInfoUrl',
-        data: uploadMedia,
-        options: dio.Options(headers: headers));
+        data: uploadMedia, options: dio.Options(headers: headers));
     var data = response.data;
-     updateProductImageModel = UpdateProductImageModel.fromJson(data);
+    updateProductImageModel = UpdateProductImageModel.fromJson(data);
     print('Add Product result data =$data');
     return updateProductImageModel;
   }
@@ -413,19 +421,21 @@ class DataProvider {
     var data = jsonDecode(response.body);
     log("loginFunction code is = $data");
   }
+
   Future tcs_remove_ordersApi({Map<String, dynamic>? map}) async {
     final response = await http.post(Uri.parse('$baseURL$tcs_remove_orders'),
         body: map, headers: headers);
     var data = jsonDecode(response.body);
     log("loginFunction code is = $data");
   }
+
   Future tcs_deliveryApi({Map<String, dynamic>? map}) async {
     print('map is === $map');
     final response = await http.post(Uri.parse('$baseURL$tcs_delivery'),
         body: map, headers: headers);
     var data = jsonDecode(response.body);
     log("tcs_deliveryApi code is = $data");
-    if(data['result']=='Failed'){
+    if (data['result'] == 'Failed') {
       Get.snackbar('Alert', '${data['message']}');
     }
   }
