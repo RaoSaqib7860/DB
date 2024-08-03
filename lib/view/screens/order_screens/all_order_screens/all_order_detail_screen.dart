@@ -914,6 +914,11 @@ class _AllOrderDetailScreenState extends State<AllOrderDetailScreen> {
                                                   builder: (context) =>
                                                       EditShippingAddressScreen(
                                                     orderId: widget.orderId,
+                                                        name: '${provider.orderInfoModel?.orderData?.orderContent?.value?.name}',
+                                                        email: '${provider.orderInfoModel?.orderData?.orderContent?.value?.email}',
+                                                        phone: '${provider.orderInfoModel?.orderData?.orderContent?.value?.phone}',
+                                                        zipCode: '${provider.orderInfoModel?.orderData?.orderContent?.value?.zipCode}',
+                                                        address: '${provider.orderInfoModel?.orderData?.orderContent?.value?.address}',
                                                   ),
                                                 )).then((value) {
                                               provider.get_order_detail_data(

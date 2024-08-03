@@ -11,13 +11,36 @@ import '../Provider/all_order_peovider.dart';
 
 class EditShippingAddressScreen extends StatefulWidget {
   String? orderId;
-   EditShippingAddressScreen({Key? key, required this.orderId}) : super(key: key);
+  String? name;
+  String? email;
+  String? phone;
+  String? zipCode;
+  String? address;
+  String? shippingMethod;
+   EditShippingAddressScreen({Key? key, required this.orderId,this.name,this.email,this.address,this.phone,this.shippingMethod,this.zipCode}) : super(key: key);
 
   @override
   State<EditShippingAddressScreen> createState() => _EditShippingAddressScreenState();
 }
 
 class _EditShippingAddressScreenState extends State<EditShippingAddressScreen> {
+  @override
+  void initState() {
+    sent_data();
+    super.initState();
+  }
+  sent_data(){
+    final AllOrderProvider provider =
+    Provider.of<AllOrderProvider>(context, listen: false);
+    provider.nameController.text = widget.name!;
+    provider.emailController.text = widget.email!;
+    provider.phoneController.text = widget.phone!;
+    provider.zipController.text = widget.zipCode!;
+    provider.addressController.text = widget.address!;
+    setState(() {
+
+    });
+  }
   @override
   Widget build(BuildContext context) {
     final AllOrderProvider provider = Provider.of<AllOrderProvider>(
