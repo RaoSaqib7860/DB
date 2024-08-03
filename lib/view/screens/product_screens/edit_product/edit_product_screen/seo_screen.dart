@@ -27,17 +27,24 @@ class _SEOScreenState extends State<SEOScreen> {
   TextEditingController desController = TextEditingController();
   @override
   void initState() {
+    api_call();
+    super.initState();
+  }
+  api_call()async{
     final AddProductProvider provider =
     Provider.of<AddProductProvider>(context, listen: false);
-    provider.update_SEO_product_data(productId: widget.productId);
-    super.initState();
+   await provider.update_SEO_product_data(productId: widget.productId);
+    titleController.text = provider.updateProductSEOModel!.data!.metaTitle!;
+    keyController.text = provider.updateProductSEOModel!.data!.metaKeyword!;
+    desController.text = provider.updateProductSEOModel!.data!.metaDescription!;
+    setState(() {
+
+    });
   }
   @override
   Widget build(BuildContext context) {
     final AddProductProvider provider = Provider.of<AddProductProvider>(context);
-    titleController.text = provider.updateProductSEOModel!.data!.metaTitle!;
-    keyController.text = provider.updateProductSEOModel!.data!.metaKeyword!;
-    desController.text = provider.updateProductSEOModel!.data!.metaDescription!;
+
     return DataLoading(
       isLoading: provider.loading,
       child: Scaffold(

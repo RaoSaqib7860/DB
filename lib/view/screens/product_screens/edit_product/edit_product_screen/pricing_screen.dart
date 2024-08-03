@@ -39,25 +39,32 @@ class _PricingScreenState extends State<PricingScreen> {
   String dropdownvalue = 'Item 1';
   @override
   void initState() {
-    final AddProductProvider provider =
-    Provider.of<AddProductProvider>(context, listen: false);
-    provider.update_price_product_data(productId: widget.productId);
+    api_call();
     super.initState();
   }
-
-  @override
-  Widget build(BuildContext context) {
-    final AddProductProvider provider = Provider.of<AddProductProvider>(context);
+  api_call()async{
+    final AddProductProvider provider =
+    Provider.of<AddProductProvider>(context, listen: false);
+   await provider.update_price_product_data(productId: widget.productId);
     //final String htmlContent = """${provider.updateProductModel!.data!.product!.content!.value!}""";
     priceController.text = provider.updateProductPriceModel!.data!.price!.price.toString();
     regPriceController.text = provider.updateProductPriceModel!.data!.price!.regularPrice.toString();
     sDateController.text = provider.updateProductPriceModel!.data!.price!.startingDate!;
     endDateController.text = provider.updateProductPriceModel!.data!.price!.endingDate!;
+    setState(() {
+
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final AddProductProvider provider = Provider.of<AddProductProvider>(context);
+
     return DataLoading(
       isLoading: provider.loading,
       child: Scaffold(
         body: SingleChildScrollView(
-          child: Container(
+          child:provider.updateProductPriceModel == null? SizedBox(): Container(
             child: Padding(
               padding:  EdgeInsets.symmetric(horizontal: 2.w),
               child: Column(

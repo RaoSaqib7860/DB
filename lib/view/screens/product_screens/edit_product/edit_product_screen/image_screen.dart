@@ -27,10 +27,13 @@ class ImageScreen extends StatefulWidget {
 class _ImageScreenState extends State<ImageScreen> {
   @override
   void initState() {
+    api_call();
+    super.initState();
+  }
+  api_call()async{
     final AddProductProvider provider =
     Provider.of<AddProductProvider>(context, listen: false);
-    provider.update_Image_product_data(productId: widget.productId);
-    super.initState();
+   await provider.update_Image_product_data(productId: widget.productId);
   }
   @override
   Widget build(BuildContext context) {
@@ -39,7 +42,7 @@ class _ImageScreenState extends State<ImageScreen> {
       isLoading: provider.loading,
       child: Scaffold(
         body: SingleChildScrollView(
-          child: Container(
+          child:provider.updateProductImageModel == null? SizedBox(): Container(
             height: 100.h,
             width: 100.w,
             child: Padding(

@@ -46,32 +46,35 @@ class _ProductScreenState extends State<ProductScreen> {
   String dropdownvalue = 'Item 1';
   @override
   void initState() {
-    final AddProductProvider provider =
-    Provider.of<AddProductProvider>(context, listen: false);
-    provider.update_product_data(productId: widget.productId);
-
-    setState(() {
-
-    });
+    api_call();
     super.initState();
   }
-  @override
-  Widget build(BuildContext context) {
-    final AddProductProvider provider = Provider.of<AddProductProvider>(context);
-    //final String htmlContent = """${provider.updateProductModel!.data!.product!.content!.value!}""";
+  api_call()async{
+    final AddProductProvider provider =
+    Provider.of<AddProductProvider>(context, listen: false);
+   await provider.update_product_data(productId: widget.productId);
+//final String htmlContent = """${provider.updateProductModel!.data!.product!.content!.value!}""";
     nameControllerT.text = provider.updateProductModel!.data!.product!.title!;
     slugController.text = provider.updateProductModel!.data!.product!.slug!;
     //categoryController.text = htmlContent;
     featuresController.text = provider.updateProductModel!.data!.product!.featured!.toString();
     desController.text = provider.updateProductModel!.data!.product!.content!.value!;
     contentController.text = provider.updateProductModel!.data!.product!.title!;
-    return Scaffold(
-      body: SingleChildScrollView(
-        child: Container(
-          child: Padding(
-            padding:  EdgeInsets.symmetric(horizontal: 2.w),
-            child: DataLoading(
-              isLoading: provider.loading,
+    setState(() {
+
+    });
+  }
+  @override
+  Widget build(BuildContext context) {
+    final AddProductProvider provider = Provider.of<AddProductProvider>(context);
+
+    return DataLoading(
+      isLoading: provider.loading,
+      child: Scaffold(
+        body: SingleChildScrollView(
+          child:provider.updateProductModel == null? SizedBox(): Container(
+            child: Padding(
+              padding:  EdgeInsets.symmetric(horizontal: 2.w),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
