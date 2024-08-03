@@ -17,6 +17,7 @@ import '../../../../../custom_widgets/custom_line_textfield.dart';
 import '../../../../../custom_widgets/custom_toast.dart';
 import 'package:get/get.dart';
 
+import '../../Models/category_product_model.dart';
 import '../../Provider/add_product_provider.dart';
 
 class ProductScreen extends StatefulWidget {
@@ -43,7 +44,7 @@ class _ProductScreenState extends State<ProductScreen> {
     'Item 4',
     'Item 5',
   ];
-  String dropdownvalue = 'Item 1';
+  Categories? dropdownvalue;
   @override
   void initState() {
     api_call();
@@ -198,7 +199,7 @@ class _ProductScreenState extends State<ProductScreen> {
                       ),
                       items: provider.allBrandsModel!.data!.categories!.map((e) {
                         return DropdownMenuItem(
-                          //value: e.name,
+                          value: e.name,
                           child: Text('${e.name}',style: TextStyle(color: Colors.black54),),
                         );
                       }).toList(),
@@ -208,8 +209,8 @@ class _ProductScreenState extends State<ProductScreen> {
                         });
                       },
                       hint:  Text(
-                        "Font Family",
-                        style: TextStyle(fontWeight: FontWeight.bold,color: Colors.black),
+                        "Select Brand",
+                        style: TextStyle(fontSize: 12,color: Colors.black),
                       ),
                     ),
                   ),
