@@ -20,7 +20,8 @@ import 'edit_product_screen/variants_screen.dart';
 
 class EditProductScreen extends StatefulWidget {
   String? dropdownvalue;
-  EditProductScreen({Key? key, this.dropdownvalue}) : super(key: key);
+  final String? productId;
+  EditProductScreen({Key? key, this.dropdownvalue,this.productId}) : super(key: key);
 
   @override
   State<EditProductScreen> createState() => _EditProductScreenState();
@@ -546,11 +547,11 @@ class _EditProductScreenState extends State<EditProductScreen> {
           // ),
           // SizedBox(height: 2.h,),
           if(widget.dropdownvalue == 'Product')
-            Expanded(child: ProductScreen()),
+            Expanded(child: ProductScreen(productId: widget.productId,)),
           if(widget.dropdownvalue == 'Pricing')
-            Expanded(child: PricingScreen()),
+            Expanded(child: PricingScreen(productId: widget.productId,)),
           if(widget.dropdownvalue == 'Images')
-            Expanded(child: ImageScreen()),
+            Expanded(child: ImageScreen(productId: widget.productId,)),
           if(index == 4)
             Expanded(child: OptionScreen()),
           if(index == 5)
@@ -560,7 +561,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
           if(index == 7)
             Expanded(child: FilesScreen()),
           if(widget.dropdownvalue == 'SEO')
-            Expanded(child: SEOScreen()),
+            Expanded(child: SEOScreen(productId: widget.productId,)),
           if(widget.dropdownvalue == 'Express Checkout')
             Expanded(child: CheckoutScreen())
         ],

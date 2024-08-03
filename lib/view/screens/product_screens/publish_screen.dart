@@ -403,9 +403,14 @@ class _PublishScreenState extends State<PublishScreen> {
                                                       children: [
                                                         Row(
                                                           children: [
-                                                            SvgPicture.asset(
-                                                              'assets/svgs/settng.svg',
-                                                              height: 2.7.h,
+                                                            InkWell(
+                                                              onTap: (){
+                                                                Navigator.push(context, MaterialPageRoute(builder: (context) => EditProductScreen(dropdownvalue: 'Product',productId: '${provider.allProductModel!.data!.posts![index].id.toString()}',),));
+                                                              },
+                                                              child: SvgPicture.asset(
+                                                                'assets/svgs/settng.svg',
+                                                                height: 2.7.h,
+                                                              ),
                                                             ),
                                                             SizedBox(
                                                               width: 2.w,
