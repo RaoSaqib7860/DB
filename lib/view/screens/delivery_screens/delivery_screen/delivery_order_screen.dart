@@ -13,6 +13,7 @@ import '../../auth_screens/login_screen/Login Provider/login_model_globle.dart';
 import '../../order_screens/all_order_screens/all_order_detail_screen.dart';
 import '../povider/delivery_provider.dart';
 import 'delivery_add_update_screen/delivery_order_add.dart';
+import 'delivery_detail.dart';
 import 'delivery_order_screens/tcs_screen.dart';
 
 class DeliveryOrderScreen extends StatefulWidget {
@@ -133,6 +134,7 @@ class _DeliveryOrderScreenState extends State<DeliveryOrderScreen> {
                     GestureDetector(
                       onTap: () {
                         // Navigator.push(context, MaterialPageRoute(builder: (context) => TcsScreen(),));
+                         Navigator.push(context, MaterialPageRoute(builder: (context) => DeliveryDetail(),));
                       },
                       child: Container(
                         decoration: BoxDecoration(
