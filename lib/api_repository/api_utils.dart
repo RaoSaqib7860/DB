@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:dio/dio.dart' as dio;
 import '../utils_services/storage_util.dart';
+import '../view/screens/Brands/Brands Model/brand_model.dart';
 import '../view/screens/auth_screens/login_screen/Login Provider/login_model_globle.dart';
 import '../view/screens/auth_screens/login_screen/Model/login_model.dart';
 import '../view/screens/delivery_screens/models/delivery_location_model.dart';
@@ -139,6 +140,21 @@ class DataProvider {
     if (data['result'] == 'success') {
       allProductModel = AllProductModel.fromJson(data);
       return allProductModel;
+    } else {
+      Get.snackbar('Alert', '${data['message']}');
+      return null;
+    }
+  }
+  Future allBrandsApi({Map<String, dynamic>? map}) async {
+    print('map is === $map');
+    AllBrandsModel? allBrandsModel;
+    final response = await http.post(Uri.parse('$baseURL$brandsScreenUrl'),
+        body: map, headers: headers);
+    var data = jsonDecode(response.body);
+    log("loginFunction code is = ${data}");
+    if (data['result'] == 'success') {
+      allBrandsModel = AllBrandsModel.fromJson(data);
+      return allBrandsModel;
     } else {
       Get.snackbar('Alert', '${data['message']}');
       return null;

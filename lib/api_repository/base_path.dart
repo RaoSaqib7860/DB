@@ -7,6 +7,7 @@ const resetPasswordUrl = 'seller-resetpassword';
 const dashBoardUrl = 'dasboard-static';
 const storeOnOffUrl = 'store-onoff';
 const productScreenUrl = 'store-products';
+const brandsScreenUrl = 'get-brands';
 const ordersScreenUrl = 'store-orders';
 const addProductScreenUrl = 'add-product';
 const orderInfoUrl = 'order-info';

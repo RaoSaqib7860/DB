@@ -53,6 +53,7 @@ class _ProductScreenState extends State<ProductScreen> {
     final AddProductProvider provider =
     Provider.of<AddProductProvider>(context, listen: false);
    await provider.update_product_data(productId: widget.productId);
+   await provider.get_brands_data();
 //final String htmlContent = """${provider.updateProductModel!.data!.product!.content!.value!}""";
     nameControllerT.text = provider.updateProductModel!.data!.product!.title!;
     slugController.text = provider.updateProductModel!.data!.product!.slug!;
@@ -195,13 +196,13 @@ class _ProductScreenState extends State<ProductScreen> {
                           color: Colors.grey,
                         ),
                       ),
-                      items: items.map((String items) {
+                      items: provider.allBrandsModel!.data!.categories!.map((e) {
                         return DropdownMenuItem(
-                          value: items,
-                          child: Text(items,style: TextStyle(color: Colors.black54),),
+                          //value: e.name,
+                          child: Text('${e.name}',style: TextStyle(color: Colors.black54),),
                         );
                       }).toList(),
-                      onChanged: (String? newValue) {
+                      onChanged: (dynamic newValue) {
                         setState(() {
                           dropdownvalue = newValue!;
                         });
