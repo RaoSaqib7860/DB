@@ -55,7 +55,7 @@ class _ProductScreenState extends State<ProductScreen> {
     featuresController.text =
         provider.updateProductModel!.data!.product!.featured!.toString();
     desController.text =
-        provider.updateProductModel!.data!.product!.content!.value!;
+        provider.updateProductModel!.data!.product!.content!.excerpt??'';
     contentController.text = provider.updateProductModel!.data!.product!.title!;
     setState(() {});
   }

@@ -1,9 +1,5 @@
-import 'dart:async';
-
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:db_2_0/custom_widgets/app_colors.dart';
 import 'package:db_2_0/custom_widgets/data_loading.dart';
-import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -12,12 +8,12 @@ import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:sizer/sizer.dart';
 import 'package:url_launcher/url_launcher.dart';
-
 import '../../../api_repository/api_utils.dart';
 import '../../../utils_services/storage_util.dart';
 import '../account_screen/domain_setting_screen/domain_setting_screen.dart';
 import '../auth_screens/login_screen/Model/login_model.dart';
 import 'DashBoard Provider/dashboard_provider.dart';
+import 'home_chart.dart';
 import 'home_screens/logo_screen.dart';
 import 'home_screens/website_design_screen.dart';
 
@@ -163,71 +159,71 @@ class _HomeScreenState extends State<HomeScreen> {
                         SizedBox(
                           height: 0.1.h,
                         ),
-                        Container(
-                          height: 20.h,
-                          child: Stack(
-                            children: [
-                              CarouselSlider(
-                                options: CarouselOptions(
-                                    height: 20.h,
-                                    viewportFraction: 1,
-                                    autoPlay: true,
-                                    onPageChanged: (a, b) {
-                                      print('$a');
-                                      if (mounted) {
-                                        active_scrool = a;
-                                        setState(() {});
-                                      }
-                                    },
-                                    autoPlayAnimationDuration:
-                                        Duration(seconds: 2),
-                                    autoPlayInterval: Duration(seconds: 6)),
-                                items: _imageUrls.map((i) {
-                                  return Builder(
-                                    builder: (BuildContext context) {
-                                      return SizedBox(
-                                        height: 20.h,
-                                        child: Image.asset(
-                                          '$i',
-                                          fit: BoxFit.cover,
-                                        ),
-                                      );
-                                    },
-                                  );
-                                }).toList(),
-                              ),
-                              Align(
-                                alignment: Alignment.bottomCenter,
-                                child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Row(
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: _imageUrls.map((e) {
-                                      if (_imageUrls.indexOf(e) ==
-                                          active_scrool) {
-                                        return Padding(
-                                          padding: const EdgeInsets.symmetric(
-                                              horizontal: 1.0),
-                                          child: SvgPicture.asset(
-                                              height: 1.h,
-                                              'assets/svgs/extra_fill_dot.svg'),
-                                        );
-                                      } else {
-                                        return Padding(
-                                          padding: const EdgeInsets.symmetric(
-                                              horizontal: 1.0),
-                                          child: SvgPicture.asset(
-                                              height: 0.7.h,
-                                              'assets/svgs/fill_dot.svg'),
-                                        );
-                                      }
-                                    }).toList(),
-                                  ),
-                                ),
-                              )
-                            ],
-                          ),
-                        ),
+                        // Container(
+                        //   height: 20.h,
+                        //   child: Stack(
+                        //     children: [
+                        //       CarouselSlider(
+                        //         options: CarouselOptions(
+                        //             height: 20.h,
+                        //             viewportFraction: 1,
+                        //             autoPlay: true,
+                        //             onPageChanged: (a, b) {
+                        //               print('$a');
+                        //               if (mounted) {
+                        //                 active_scrool = a;
+                        //                 setState(() {});
+                        //               }
+                        //             },
+                        //             autoPlayAnimationDuration:
+                        //                 Duration(seconds: 2),
+                        //             autoPlayInterval: Duration(seconds: 6)),
+                        //         items: _imageUrls.map((i) {
+                        //           return Builder(
+                        //             builder: (BuildContext context) {
+                        //               return SizedBox(
+                        //                 height: 20.h,
+                        //                 child: Image.asset(
+                        //                   '$i',
+                        //                   fit: BoxFit.cover,
+                        //                 ),
+                        //               );
+                        //             },
+                        //           );
+                        //         }).toList(),
+                        //       ),
+                        //       Align(
+                        //         alignment: Alignment.bottomCenter,
+                        //         child: Padding(
+                        //           padding: const EdgeInsets.all(8.0),
+                        //           child: Row(
+                        //             mainAxisSize: MainAxisSize.min,
+                        //             children: _imageUrls.map((e) {
+                        //               if (_imageUrls.indexOf(e) ==
+                        //                   active_scrool) {
+                        //                 return Padding(
+                        //                   padding: const EdgeInsets.symmetric(
+                        //                       horizontal: 1.0),
+                        //                   child: SvgPicture.asset(
+                        //                       height: 1.h,
+                        //                       'assets/svgs/extra_fill_dot.svg'),
+                        //                 );
+                        //               } else {
+                        //                 return Padding(
+                        //                   padding: const EdgeInsets.symmetric(
+                        //                       horizontal: 1.0),
+                        //                   child: SvgPicture.asset(
+                        //                       height: 0.7.h,
+                        //                       'assets/svgs/fill_dot.svg'),
+                        //                 );
+                        //               }
+                        //             }).toList(),
+                        //           ),
+                        //         ),
+                        //       )
+                        //     ],
+                        //   ),
+                        // ),
                         SizedBox(
                           height: 2.h,
                         ),
@@ -425,52 +421,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                   ),
                                   Container(
                                     height: 20.h,
-                                    child: AspectRatio(
-                                      aspectRatio: 1.5,
-                                      child: LineChart(
-                                        LineChartData(
-                                          gridData: FlGridData(show: false),
-                                          titlesData: FlTitlesData(show: false),
-                                          borderData: FlBorderData(show: false),
-                                          lineBarsData: [
-                                            LineChartBarData(
-                                              spots: [
-                                                FlSpot(0, 3),
-                                                FlSpot(1, 1),
-                                                FlSpot(2, 4),
-                                                FlSpot(3, 2),
-                                                FlSpot(4, 5),
-                                              ],
-                                              isCurved: true,
-                                              colors: [Colors.blue],
-                                              belowBarData:
-                                                  BarAreaData(show: false),
-                                              dotData: FlDotData(show: false),
-                                            ),
-                                            LineChartBarData(
-                                              spots: [
-                                                FlSpot(0, 1),
-                                                FlSpot(1, 4),
-                                                FlSpot(2, 2),
-                                                FlSpot(3, 5),
-                                                FlSpot(4, 3),
-                                              ],
-                                              isCurved: true,
-                                              colors: [Colors.green],
-                                              belowBarData:
-                                                  BarAreaData(show: false),
-                                              dotData: FlDotData(show: false),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  Center(
-                                    child: Text(
-                                      'Date',
-                                      style: TextStyle(
-                                          color: Colors.black, fontSize: 9.sp),
+                                    child: LineChartSample2(
+                                      dashboardModel: provider.dashboardModel,
                                     ),
                                   ),
                                 ],
@@ -493,23 +445,6 @@ class _HomeScreenState extends State<HomeScreen> {
                                     fontSize: 13.sp,
                                     fontWeight: FontWeight.bold),
                               ),
-                              Row(
-                                children: [
-                                  Text(
-                                    'Lifetime',
-                                    style: TextStyle(
-                                        color: Colors.black,
-                                        fontSize: 11.sp,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                  //SizedBox(width: 0.1.w,),
-                                  Icon(
-                                    Icons.keyboard_arrow_down_outlined,
-                                    color: Colors.black,
-                                    size: 3.h,
-                                  ),
-                                ],
-                              )
                             ],
                           ),
                         ),
@@ -557,26 +492,6 @@ class _HomeScreenState extends State<HomeScreen> {
                                           //fontWeight: FontWeight.bold
                                         ),
                                       ),
-                                      Row(
-                                        children: [
-                                          Text(
-                                            'Show more',
-                                            style: TextStyle(
-                                              fontSize: 9.sp,
-                                              color: blueColor,
-                                              //fontWeight: FontWeight.bold
-                                            ),
-                                          ),
-                                          SizedBox(
-                                            width: 1.w,
-                                          ),
-                                          Icon(
-                                            Icons.arrow_drop_down,
-                                            color: blueColor,
-                                            size: 3.h,
-                                          )
-                                        ],
-                                      )
                                     ],
                                   ),
                                   SizedBox(

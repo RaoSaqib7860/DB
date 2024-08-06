@@ -104,7 +104,7 @@ class AddProductProvider extends ChangeNotifier {
       //'media[]' : await MultipartFile.fromFile(profileImage!.path),
     }));
     updateProductImageModel = data;
-    print('objectismodel${updateProductPriceModel!.toJson()}');
+
     update_state();
     print('objectis${user_model.data!.userId}');
     loading = false;

@@ -28,16 +28,16 @@ class UpdateProductModel {
 class Data {
   Product? product;
   List<int>? categoryIds;
-  Content? contentx;
+  Value? content;
 
-  Data({this.product, this.categoryIds, this.contentx});
+  Data({this.product, this.categoryIds, this.content});
 
   Data.fromJson(Map<String, dynamic> json) {
     product =
     json['product'] != null ? new Product.fromJson(json['product']) : null;
     categoryIds = json['category_ids'].cast<int>();
-    contentx =
-    json['content'] != null ? new Content.fromJson(json['content']) : null;
+    content =
+    json['content'] != null ? new Value.fromJson(json['content']) : null;
   }
 
   Map<String, dynamic> toJson() {
@@ -46,8 +46,8 @@ class Data {
       data['product'] = this.product!.toJson();
     }
     data['category_ids'] = this.categoryIds;
-    if (this.contentx != null) {
-      data['content'] = this.contentx!.toJson();
+    if (this.content != null) {
+      data['content'] = this.content!.toJson();
     }
     return data;
   }
@@ -65,9 +65,9 @@ class Product {
   String? createdAt;
   String? updatedAt;
   int? domainId;
-  Content? content;
+  Value? content;
   List<PostCategories>? postCategories;
-  dynamic affiliate;
+  Null? affiliate;
 
   Product(
       {this.id,
@@ -98,7 +98,7 @@ class Product {
     updatedAt = json['updated_at'];
     domainId = json['domain_id'];
     content =
-    json['content'] != null ? new Content.fromJson(json['content']) : null;
+    json['content'] != null ? new Value.fromJson(json['content']) : null;
     if (json['post_categories'] != null) {
       postCategories = <PostCategories>[];
       json['post_categories'].forEach((v) {
@@ -137,7 +137,7 @@ class Content {
   int? id;
   int? termId;
   String? key;
-  String? value;
+  Value? value;
 
   Content({this.id, this.termId, this.key, this.value});
 
@@ -145,7 +145,7 @@ class Content {
     id = json['id'];
     termId = json['term_id'];
     key = json['key'];
-    value = json['value'];
+    value = json['value'] != null ? new Value.fromJson(json['value']) : null;
   }
 
   Map<String, dynamic> toJson() {
@@ -153,7 +153,28 @@ class Content {
     data['id'] = this.id;
     data['term_id'] = this.termId;
     data['key'] = this.key;
-    data['value'] = this.value;
+    if (this.value != null) {
+      data['value'] = this.value!.toJson();
+    }
+    return data;
+  }
+}
+
+class Value {
+  String? content;
+  String? excerpt;
+
+  Value({this.content, this.excerpt});
+
+  Value.fromJson(Map<String, dynamic> json) {
+    content = json['content'];
+    excerpt = json['excerpt'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['content'] = this.content;
+    data['excerpt'] = this.excerpt;
     return data;
   }
 }
@@ -173,25 +194,6 @@ class PostCategories {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['category_id'] = this.categoryId;
     data['term_id'] = this.termId;
-    return data;
-  }
-}
-
-class Contentx {
-  String? content;
-  String? excerpt;
-
-  Contentx({this.content, this.excerpt});
-
-  Contentx.fromJson(Map<String, dynamic> json) {
-    content = json['content'];
-    excerpt = json['excerpt'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['content'] = this.content;
-    data['excerpt'] = this.excerpt;
     return data;
   }
 }

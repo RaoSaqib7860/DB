@@ -26,3 +26,4 @@ const delivery_method = 'delivery-method';
 const tcs_info = 'tcs-info';
 const tcs_delivery = 'tcs-delivery';
 const tcs_remove_orders = 'tcs-remove-orders';
+const getstore_info = 'getstore-info';

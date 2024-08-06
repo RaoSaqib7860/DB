@@ -10,6 +10,8 @@ import '../../../../../custom_widgets/custom_form_field.dart';
 import '../../../auth_screens/login_screen/Login Provider/login_model_globle.dart';
 import '../../../order_screens/Models/all_order_model.dart';
 import '../../../order_screens/Models/all_order_model.dart' as all_order;
+import '../../../order_screens/Models/order_info_model.dart';
+import '../../models/store_info_model.dart';
 import '../../models/tcs_information_model.dart';
 
 class DeliveryOrderAdd extends StatefulWidget {
@@ -20,7 +22,8 @@ class DeliveryOrderAdd extends StatefulWidget {
 }
 
 class _DeliveryOrderAddState extends State<DeliveryOrderAdd> {
-  var items = ['0.5', '1.0', '1.5', '2.0', '2.5', '3.0', '3.0'];
+  var items = ['0.5', '1.0', '1.5', '2.0', '2.5', '3.0', '3.0 above'];
+  var items_prices = [0, 150, 200, 250, 350, 550, 2500];
   String? dropdownvalue;
   int ind = 0;
 
@@ -56,7 +59,42 @@ class _DeliveryOrderAddState extends State<DeliveryOrderAdd> {
     tcsInformationModel = await DataProvider().tcs_infoApi(map: {
       'user_id': '${user_model.data!.userId}',
     });
+    StoreInfoModel? storeInfoModel =
+        await DataProvider().getstore_infoApi(map: {
+      'user_id': '${user_model.data!.userId}',
+    });
+    sendingg_city_controller.text =
+        storeInfoModel?.data?.info?.costCenterCity ?? '';
     setState(() {});
+  }
+
+  OrderInfoModel? orderInfoModel;
+
+  get_odrder_details({int? orderId}) async {
+    var data = await DataProvider().orderInfoApi(map: {
+      'user_id': '${user_model.data!.userId}',
+      'order_id': '$orderId',
+    });
+    orderInfoModel = data;
+    customer_name_controller.text =
+        orderInfoModel?.orderData?.orderContent?.value?.name ?? '';
+    customer_address_controller.text =
+        orderInfoModel?.orderData?.orderContent?.value?.address ?? '';
+    customer_phone_controller.text =
+        orderInfoModel?.orderData?.orderContent?.value?.phone ?? '';
+    customer_email_controller.text =
+        orderInfoModel?.orderData?.orderContent?.value?.email ?? '';
+    ///
+    receiving_city_controller.text =
+        orderInfoModel?.orderData?.shippingInfo?.city?.name ?? '';
+    no_item_controller.text =
+        orderInfoModel?.orderData?.orderItem?.first.qty.toString() ?? '';
+    cod_ammount_controller.text =
+        orderInfoModel?.orderData?.total.toString() ?? '';
+
+    ///
+    item_title_controller.text =
+        orderInfoModel?.orderData?.orderItem?.first.term?.title ?? '';
   }
 
   @override
@@ -143,6 +181,7 @@ class _DeliveryOrderAddState extends State<DeliveryOrderAdd> {
                               setState(() {
                                 selected_order = newValue!;
                               });
+                              get_odrder_details(orderId: selected_order!.id);
                             },
                             hint: const Text(
                               "Select Order number",
@@ -158,31 +197,38 @@ class _DeliveryOrderAddState extends State<DeliveryOrderAdd> {
                       CustomFormField(
                           controller: customer_name_controller,
                           name: 'Customer Name',
+                          enable: false,
                           hint: 'Customer full name'),
                       CustomFormField(
                           controller: customer_address_controller,
                           name: 'Customer Address',
+                          enable: false,
                           hint: 'Customer complete address`'),
                       CustomFormField(
                           controller: customer_phone_controller,
                           name: 'Customer Cell #',
+                          enable: false,
                           hint: 'Customer mobile number'),
                       CustomFormField(
                           controller: customer_email_controller,
                           name: 'Customer Email',
+                          enable: false,
                           hint: 'Customer register email address'),
                       CustomFormField(
                           controller: item_title_controller,
                           name: 'Item',
+                          enable: false,
                           hint: 'Item title'),
                       CustomFormField(
                         name: 'Sending City',
                         hint: 'Karachi',
+                        enable: false,
                         controller: sendingg_city_controller,
                       ),
                       CustomFormField(
                           controller: receiving_city_controller,
                           name: 'Receiving City',
+                          enable: false,
                           hint: 'Receiving to city'),
                       Padding(
                         padding: EdgeInsets.symmetric(horizontal: 8.w),
@@ -231,9 +277,29 @@ class _DeliveryOrderAddState extends State<DeliveryOrderAdd> {
                                         );
                                       }).toList(),
                                       onChanged: (String? newValue) {
+                                        print('call oect');
                                         setState(() {
                                           dropdownvalue = newValue!;
                                         });
+                                        if (items.indexOf(dropdownvalue!) !=
+                                            6) {
+                                          cod_ammount_controller
+                                              .text = (orderInfoModel!
+                                                      .orderData!.total! +
+                                                  items_prices[items
+                                                      .indexOf(dropdownvalue!)])
+                                              .toString();
+                                        } else {
+                                          cod_ammount_controller.text =
+                                              (orderInfoModel!
+                                                          .orderData!.total! +
+                                                      items_prices[6])
+                                                  .toString();
+                                          print('2');
+                                        }
+                                        print(
+                                            'call oect${cod_ammount_controller.text}');
+                                        setState(() {});
                                       },
                                       hint: Text(
                                         "Item Weight",
@@ -266,6 +332,7 @@ class _DeliveryOrderAddState extends State<DeliveryOrderAdd> {
                                     style: TextStyle(
                                         fontSize: 10.sp, color: Colors.black),
                                     decoration: InputDecoration(
+                                        enabled: false,
                                         hintText: 'No of Items number',
                                         hintStyle: TextStyle(fontSize: 10.sp),
                                         contentPadding:
@@ -303,6 +370,7 @@ class _DeliveryOrderAddState extends State<DeliveryOrderAdd> {
                                         fontSize: 10.sp, color: Colors.black),
                                     decoration: InputDecoration(
                                         hintText: 'COD Amount',
+                                        enabled: false,
                                         hintStyle: TextStyle(fontSize: 10.sp),
                                         contentPadding:
                                             EdgeInsets.only(bottom: 1.6.h)),

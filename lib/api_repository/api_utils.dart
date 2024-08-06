@@ -11,6 +11,7 @@ import '../view/screens/auth_screens/login_screen/Model/login_model.dart';
 import '../view/screens/delivery_screens/models/delivery_cost_model.dart';
 import '../view/screens/delivery_screens/models/delivery_location_model.dart';
 import '../view/screens/delivery_screens/models/delivery_order_model.dart';
+import '../view/screens/delivery_screens/models/store_info_model.dart';
 import '../view/screens/delivery_screens/models/tcs_information_model.dart';
 import '../view/screens/home_screen/Models/dashboard_model.dart';
 import '../view/screens/order_screens/Models/all_order_model.dart';
@@ -305,6 +306,22 @@ class DataProvider {
     }
   }
 
+  Future getstore_infoApi({Map<String, dynamic>? map}) async {
+    print('map is === $map');
+    StoreInfoModel? orderInfoModel;
+    final response = await http.post(Uri.parse('$baseURL$getstore_info'),
+        body: map, headers: headers);
+    var data = jsonDecode(response.body);
+    if (data['result'] == 'success') {
+      log("loginFunction code is = ${response.statusCode}");
+      orderInfoModel = StoreInfoModel.fromJson(data);
+      return orderInfoModel;
+    } else {
+      Get.snackbar('Alert', '${data['message']}');
+      return null;
+    }
+  }
+
   Future get_categoriesApi({Map<String, dynamic>? map}) async {
     print('map is === $map');
     CateoryProductModel? orderInfoModel;
@@ -437,6 +454,9 @@ class DataProvider {
     log("tcs_deliveryApi code is = $data");
     if (data['result'] == 'Failed') {
       Get.snackbar('Alert', '${data['message']}');
+    }
+    if (data['result'] == 'success') {
+      Get.snackbar('Alert', '${data['message']}\n${data['data']}');
     }
   }
 }
