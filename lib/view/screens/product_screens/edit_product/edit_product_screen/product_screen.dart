@@ -3,13 +3,15 @@ import 'package:db_2_0/custom_widgets/data_loading.dart';
 import 'package:db_2_0/view/screens/bottom_sheet/bottom_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:html_editor_enhanced/html_editor.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 import 'package:flutter_switch/flutter_switch.dart';
 import '../../../../../custom_widgets/custom_line_textfield.dart';
 import '../../../../../custom_widgets/custom_toast.dart';
 import 'package:get/get.dart';
-import '../../Models/category_product_model.dart';
+import '../../../Brands/Brands Model/brand_model.dart';
+import '../../Models/category_product_model.dart' as category_product;
 import '../../Provider/add_product_provider.dart';
 
 class ProductScreen extends StatefulWidget {
@@ -27,7 +29,7 @@ class _ProductScreenState extends State<ProductScreen> {
   TextEditingController categoryController = TextEditingController();
   TextEditingController featuresController = TextEditingController();
   TextEditingController desController = TextEditingController();
-  TextEditingController contentController = TextEditingController();
+  HtmlEditorController contentController = HtmlEditorController();
   bool _value = false;
   var items = [
     'Item 1',
@@ -37,6 +39,7 @@ class _ProductScreenState extends State<ProductScreen> {
     'Item 5',
   ];
   Categories? dropdownvalue;
+  category_product.Categories? selected_categorie;
   @override
   void initState() {
     api_call();
@@ -48,15 +51,15 @@ class _ProductScreenState extends State<ProductScreen> {
         Provider.of<AddProductProvider>(context, listen: false);
     await provider.update_product_data(productId: widget.productId);
     await provider.get_brands_data();
-//final String htmlContent = """${provider.updateProductModel!.data!.product!.content!.value!}""";
+    await provider.get_categories_data();
+    contentController
+        .insertHtml(provider.updateProductModel?.data?.content?.content ?? '');
     nameControllerT.text = provider.updateProductModel!.data!.product!.title!;
     slugController.text = provider.updateProductModel!.data!.product!.slug!;
-    //categoryController.text = htmlContent;
     featuresController.text =
-        provider.updateProductModel!.data!.product!.featured!.toString();
+        provider.updateProductModel?.data?.product?.featured.toString() ?? '';
     desController.text =
-        provider.updateProductModel!.data!.product!.content!.excerpt??'';
-    contentController.text = provider.updateProductModel!.data!.product!.title!;
+        provider.updateProductModel?.data?.content?.excerpt ?? '';
     setState(() {});
   }
 
@@ -171,27 +174,14 @@ class _ProductScreenState extends State<ProductScreen> {
                           height: 0.5.h,
                         ),
                         Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 4.w),
-                          child: Container(
-                            height: 11.h,
-                            width: 88.w,
-                            child: TextField(
-                              keyboardType: TextInputType.multiline,
-                              textAlign: TextAlign.left,
-                              maxLines: null,
-                              expands: true,
-                              textAlignVertical: TextAlignVertical.top,
-                              style: TextStyle(fontSize: 12.sp),
-                              controller: contentController,
-                              decoration: InputDecoration(
-                                border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(0)),
-                                labelStyle: TextStyle(
-                                    fontSize: 10.sp, color: Colors.grey),
-                                hintStyle: TextStyle(fontSize: 10.sp),
-                                contentPadding: EdgeInsets.only(
-                                    top: 1.h, left: 2.w, right: 2.w),
-                              ),
+                          padding: EdgeInsets.only(left: 4.w, right: 4.w),
+                          child: HtmlEditor(
+                            controller: contentController, //required
+                            htmlEditorOptions: const HtmlEditorOptions(
+                              hint: "Write product content",
+                            ),
+                            otherOptions: OtherOptions(
+                              height: 25.h,
                             ),
                           ),
                         ),
@@ -246,12 +236,56 @@ class _ProductScreenState extends State<ProductScreen> {
                             ),
                           ),
                         SizedBox(
-                          height: 1.h,
+                          height: 2.h,
                         ),
-                        CustomLineTextField(
-                            name: 'Category',
-                            hint: 'None',
-                            controller: categoryController),
+                        Padding(
+                          padding: EdgeInsets.only(left: 4.w, right: 4.w),
+                          child: Text(
+                            'Category',
+                            style: TextStyle(color: Colors.black),
+                          ),
+                        ),
+                        if (provider.cateoryProductModel != null)
+                          Padding(
+                            padding: EdgeInsets.only(left: 4.w, right: 4.w),
+                            child: DropdownButton(
+                              isExpanded: true,
+                              value: dropdownvalue,
+                              icon: Icon(
+                                Icons.keyboard_arrow_down_outlined,
+                                color: Colors.black,
+                                size: 3.h,
+                              ),
+                              underline: Padding(
+                                padding: EdgeInsets.only(top: 1.h),
+                                child: Divider(
+                                  thickness: 1,
+                                  color: Colors.grey,
+                                ),
+                              ),
+                              items: provider
+                                  .cateoryProductModel!.data!.categories!
+                                  .map((e) {
+                                return DropdownMenuItem(
+                                  value: e.name,
+                                  child: Text(
+                                    '${e.name}',
+                                    style: TextStyle(color: Colors.black54),
+                                  ),
+                                );
+                              }).toList(),
+                              onChanged: (dynamic newValue) {
+                                setState(() {
+                                  selected_categorie = newValue!;
+                                });
+                              },
+                              hint: Text(
+                                "Select Category",
+                                style: TextStyle(
+                                    fontSize: 12, color: Colors.black),
+                              ),
+                            ),
+                          ),
                         CustomLineTextField(
                             name: 'Features',
                             hint: 'None',

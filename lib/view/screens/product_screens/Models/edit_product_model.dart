@@ -67,7 +67,7 @@ class Product {
   int? domainId;
   Value? content;
   List<PostCategories>? postCategories;
-  Null? affiliate;
+  dynamic affiliate;
 
   Product(
       {this.id,
