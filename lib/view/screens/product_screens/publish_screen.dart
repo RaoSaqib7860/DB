@@ -413,8 +413,6 @@ class _PublishScreenState extends State<PublishScreen> {
                                                                       builder:
                                                                           (context) =>
                                                                               EditProductScreen(
-                                                                        dropdownvalue:
-                                                                            'Product',
                                                                         productId:
                                                                             '${provider.allProductModel!.data!.posts![index].id.toString()}',
                                                                       ),

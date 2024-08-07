@@ -7,6 +7,7 @@ import 'package:sizer/sizer.dart';
 
 import '../../../../../custom_widgets/app_colors.dart';
 import '../../../../../custom_widgets/custom_toast.dart';
+import '../../../auth_screens/login_screen/Login Provider/login_model_globle.dart';
 import '../../../bottom_sheet/bottom_sheet.dart';
 import 'package:get/get.dart';
 
@@ -33,7 +34,10 @@ class _SEOScreenState extends State<SEOScreen> {
   api_call()async{
     final AddProductProvider provider =
     Provider.of<AddProductProvider>(context, listen: false);
-   await provider.update_SEO_product_data(productId: widget.productId);
+   await provider.update_SEO_product_data(map: {
+     'user_id': '${user_model.data!.userId}',
+     'product_id': '${widget.productId}',
+   });
     titleController.text = provider.updateProductSEOModel!.data!.metaTitle!;
     keyController.text = provider.updateProductSEOModel!.data!.metaKeyword!;
     desController.text = provider.updateProductSEOModel!.data!.metaDescription!;
@@ -221,7 +225,14 @@ class _SEOScreenState extends State<SEOScreen> {
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
                       GestureDetector(
-                        onTap: () {
+                        onTap: () async{
+                          await provider.update_SEO_product_data(map: {
+                            'user_id': '${user_model.data!.userId}',
+                            'product_id': '${widget.productId}',
+                            'meta_title': '${titleController.text}',
+                            'meta_keyword': '${keyController.text}',
+                            'meta_description': '${desController.text}',
+                          });
                           CustomToastManager.showToast(
                               context: context,
                               height: 8.h,
@@ -248,7 +259,7 @@ class _SEOScreenState extends State<SEOScreen> {
                                 ),
                               )
                           );
-                          Get.offAll(BottomSheetScreen(index: 2,));
+                          //Get.offAll(BottomSheetScreen(index: 2,));
                         },
                         child: Container(
                           decoration: BoxDecoration(

@@ -2,11 +2,13 @@
 import 'package:db_2_0/custom_widgets/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 
 //import '../category_screen/category_screen.dart';
 import '../../../../custom_widgets/custom_bottomsheet.dart';
 import '../../../../custom_widgets/custom_fill_container.dart';
+import '../Provider/add_product_provider.dart';
 import 'edit_product_screen/checkout_screen.dart';
 import 'edit_product_screen/files_screen.dart';
 import 'edit_product_screen/image_screen.dart';
@@ -18,9 +20,9 @@ import 'edit_product_screen/seo_screen.dart';
 import 'edit_product_screen/variants_screen.dart';
 
 class EditProductScreen extends StatefulWidget {
-  String? dropdownvalue;
+  
   final String? productId;
-  EditProductScreen({Key? key, this.dropdownvalue, this.productId})
+  EditProductScreen({Key? key, this.productId})
       : super(key: key);
 
   @override
@@ -32,6 +34,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final AddProductProvider provider = Provider.of<AddProductProvider>(context);
     return Scaffold(
       body: Column(
         children: [
@@ -104,13 +107,13 @@ class _EditProductScreenState extends State<EditProductScreen> {
                         ),
                         GestureDetector(
                           onTap: () {
-                            widget.dropdownvalue = 'Product';
+                            provider.selectedPage = 'Product';
                             setState(() {});
                             Navigator.pop(context);
                           },
                           child: Row(
                             children: [
-                              widget.dropdownvalue == 'Product'
+                              provider.selectedPage  == 'Product'
                                   ? customFillContainer()
                                   : SvgPicture.asset(
                                       'assets/svgs/empp.svg',
@@ -134,13 +137,13 @@ class _EditProductScreenState extends State<EditProductScreen> {
                         ),
                         GestureDetector(
                           onTap: () {
-                            widget.dropdownvalue = 'Pricing';
+                            provider.selectedPage  = 'Pricing';
                             setState(() {});
                             Navigator.pop(context);
                           },
                           child: Row(
                             children: [
-                              widget.dropdownvalue == 'Pricing'
+                              provider.selectedPage  == 'Pricing'
                                   ? customFillContainer()
                                   : SvgPicture.asset(
                                       'assets/svgs/empp.svg',
@@ -164,13 +167,13 @@ class _EditProductScreenState extends State<EditProductScreen> {
                         ),
                         GestureDetector(
                           onTap: () {
-                            widget.dropdownvalue = 'Images';
+                            provider.selectedPage  = 'Images';
                             setState(() {});
                             Navigator.pop(context);
                           },
                           child: Row(
                             children: [
-                              widget.dropdownvalue == 'Images'
+                              provider.selectedPage  == 'Images'
                                   ? customFillContainer()
                                   : SvgPicture.asset(
                                       'assets/svgs/empp.svg',
@@ -194,13 +197,13 @@ class _EditProductScreenState extends State<EditProductScreen> {
                         ),
                         GestureDetector(
                           onTap: () {
-                            widget.dropdownvalue = 'Inventory';
+                            provider.selectedPage  = 'Inventory';
                             setState(() {});
                             Navigator.pop(context);
                           },
                           child: Row(
                             children: [
-                              widget.dropdownvalue == 'Inventory'
+                              provider.selectedPage  == 'Inventory'
                                   ? customFillContainer()
                                   : SvgPicture.asset(
                                       'assets/svgs/empp.svg',
@@ -224,13 +227,13 @@ class _EditProductScreenState extends State<EditProductScreen> {
                         ),
                         GestureDetector(
                           onTap: () {
-                            widget.dropdownvalue = 'SEO';
+                            provider.selectedPage  = 'SEO';
                             setState(() {});
                             Navigator.pop(context);
                           },
                           child: Row(
                             children: [
-                              widget.dropdownvalue == 'SEO'
+                              provider.selectedPage  == 'SEO'
                                   ? customFillContainer()
                                   : SvgPicture.asset(
                                       'assets/svgs/empp.svg',
@@ -249,36 +252,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
                             ],
                           ),
                         ),
-                        SizedBox(
-                          height: 2.5.h,
-                        ),
-                        GestureDetector(
-                          onTap: () {
-                            widget.dropdownvalue = 'Express Checkout';
-                            setState(() {});
-                            Navigator.pop(context);
-                          },
-                          child: Row(
-                            children: [
-                              widget.dropdownvalue == 'Express Checkout'
-                                  ? customFillContainer()
-                                  : SvgPicture.asset(
-                                      'assets/svgs/empp.svg',
-                                      height: 2.5.h,
-                                    ),
-                              SizedBox(
-                                width: 2.w,
-                              ),
-                              Text(
-                                'Express Checkout',
-                                style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 11.sp,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
+
                         SizedBox(
                           height: 2.5.h,
                         ),
@@ -299,7 +273,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            widget.dropdownvalue!,
+                            provider.selectedPage !,
                             style:
                                 TextStyle(color: Colors.white, fontSize: 10.sp),
                           ),
@@ -317,32 +291,32 @@ class _EditProductScreenState extends State<EditProductScreen> {
           SizedBox(
             height: 1.h,
           ),
-          if (widget.dropdownvalue == 'Product')
+          if (provider.selectedPage  == 'Product')
             Expanded(
                 child: ProductScreen(
               productId: widget.productId,
             )),
-          if (widget.dropdownvalue == 'Pricing')
+          if (provider.selectedPage  == 'Pricing')
             Expanded(
                 child: PricingScreen(
               productId: widget.productId,
             )),
-          if (widget.dropdownvalue == 'Images')
+          if (provider.selectedPage  == 'Images')
             Expanded(
                 child: ImageScreen(
               productId: widget.productId,
             )),
           if (index == 4) Expanded(child: OptionScreen()),
           if (index == 5) Expanded(child: VariantScreen()),
-          if (widget.dropdownvalue == 'Inventory')
-            Expanded(child: InventoryScreen()),
+          if (provider.selectedPage  == 'Inventory')
+            Expanded(child: InventoryScreen(productId: widget.productId,)),
           if (index == 7) Expanded(child: FilesScreen()),
-          if (widget.dropdownvalue == 'SEO')
+          if (provider.selectedPage  == 'SEO')
             Expanded(
                 child: SEOScreen(
               productId: widget.productId,
             )),
-          if (widget.dropdownvalue == 'Express Checkout')
+          if (provider.selectedPage  == 'Express Checkout')
             Expanded(child: CheckoutScreen())
         ],
       ),

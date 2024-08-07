@@ -21,6 +21,7 @@ import '../view/screens/product_screens/Models/brand_product_model.dart';
 import '../view/screens/product_screens/Models/category_product_model.dart';
 import '../view/screens/product_screens/Models/edit_product_model.dart';
 import '../view/screens/product_screens/Models/edit_product_price_model.dart';
+import '../view/screens/product_screens/Models/update_inventory_model.dart';
 import '../view/screens/product_screens/Models/update_product_image_model.dart';
 import '../view/screens/product_screens/Models/update_product_seo_model.dart';
 import 'base_path.dart';
@@ -196,6 +197,21 @@ class DataProvider {
       return null;
     }
   }
+  Future updateInventoryProductApi({Map<String, dynamic>? map}) async {
+    print('map is === $map');
+    UpdateInventoryProduct? updateInventoryProduct;
+    final response = await http.post(Uri.parse('$baseURL$updateInventoryProductInfoUrl'),
+        body: map, headers: headers);
+    var data = jsonDecode(response.body);
+    if (data['result'] == 'success') {
+      log("loginFunction code is = ${response.statusCode}");
+      updateInventoryProduct = UpdateInventoryProduct.fromJson(data);
+      return updateInventoryProduct;
+    } else {
+      Get.snackbar('Alert', '${data['message']}');
+      return null;
+    }
+  }
 
   Future updateProductPriceApi({Map<String, dynamic>? map}) async {
     print('map is === $map');
@@ -277,6 +293,21 @@ class DataProvider {
   Future updateOrderApi({Map<String, dynamic>? map}) async {
     print('map is === $map');
     final response = await http.post(Uri.parse('$baseURL$updateOrderInfoUrl'),
+        body: map, headers: headers);
+    var data = jsonDecode(response.body);
+    if (data['result'] == 'success') {
+      log("loginFunction code is = ${response.statusCode}");
+
+      Get.snackbar('Success', '${data['message']}');
+      return true;
+    } else {
+      Get.snackbar('Alert', '${data['message']}');
+      return false;
+    }
+  }
+  Future getUpdateOrderApi({Map<String, dynamic>? map}) async {
+    print('map is ===ghj $map');
+    final response = await http.post(Uri.parse('$baseURL$getupdateOrderInfoUrl'),
         body: map, headers: headers);
     var data = jsonDecode(response.body);
     if (data['result'] == 'success') {

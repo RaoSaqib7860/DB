@@ -4,8 +4,10 @@ import 'package:sizer/sizer.dart';
 class CustomLineTextField extends StatefulWidget {
   String? hint;
       String? name;
+      bool? readOnly;
+      Function()? onClick;
   TextEditingController? controller;
-   CustomLineTextField({Key? key,this.controller,this.name,this.hint,}) : super(key: key);
+   CustomLineTextField({Key? key,this.controller,this.onClick,this.name,this.hint,this.readOnly=false}) : super(key: key);
 
   @override
   State<CustomLineTextField> createState() => _CustomLineTextFieldState();
@@ -33,7 +35,9 @@ class _CustomLineTextFieldState extends State<CustomLineTextField> {
           child: Container(
             height: 3.h,
             //width: 90.w,
-            child: TextField(
+            child: TextFormField(
+              onTap: widget.onClick,
+              readOnly: widget.readOnly!,
               controller: widget.controller,
               style: TextStyle(fontSize: 10.sp,color: Colors.black),
               decoration: InputDecoration(

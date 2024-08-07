@@ -1,4 +1,5 @@
 import 'package:db_2_0/custom_widgets/data_loading.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
@@ -7,6 +8,7 @@ import 'package:sizer/sizer.dart';
 import '../../../../../custom_widgets/app_colors.dart';
 import '../../../../../custom_widgets/custom_line_textfield.dart';
 import '../../../../../custom_widgets/custom_toast.dart';
+import '../../../auth_screens/login_screen/Login Provider/login_model_globle.dart';
 import '../../../bottom_sheet/bottom_sheet.dart';
 import 'package:get/get.dart';
 
@@ -37,20 +39,26 @@ class _PricingScreenState extends State<PricingScreen> {
     'Item 5',
   ];
   String dropdownvalue = 'Item 1';
+  String discountType = 'Fixed';
   @override
   void initState() {
     api_call();
     super.initState();
   }
+  String? inDate;
   api_call()async{
     final AddProductProvider provider =
     Provider.of<AddProductProvider>(context, listen: false);
-   await provider.update_price_product_data(productId: widget.productId);
+   await provider.update_price_product_data(map: {
+     'user_id': '${user_model.data!.userId}',
+     'product_id': '${widget.productId}',
+   });
     //final String htmlContent = """${provider.updateProductModel!.data!.product!.content!.value!}""";
     priceController.text = provider.updateProductPriceModel!.data!.price!.price.toString();
     regPriceController.text = provider.updateProductPriceModel!.data!.price!.regularPrice.toString();
     sDateController.text = provider.updateProductPriceModel!.data!.price!.startingDate!;
     endDateController.text = provider.updateProductPriceModel!.data!.price!.endingDate!;
+    discountController.text = provider.updateProductPriceModel!.data!.price!.specialPrice!.toString();
     setState(() {
 
     });
@@ -73,47 +81,86 @@ class _PricingScreenState extends State<PricingScreen> {
                   CustomLineTextField(name: 'Current Price',hint: '3500',controller: priceController),
                   CustomLineTextField(name: 'Regular Price',hint: '4000',controller: regPriceController),
                   //SizedBox(height: 2.h,),
-                  Padding(
-                    padding:  EdgeInsets.only(left: 4.w,right: 4.w),
-                    child: Text(
-                      'Discount Type',
-                      style: TextStyle(color: Colors.black,fontSize: 10.sp),
-                    ),
-                  ),
-                  Padding(
-                    padding:  EdgeInsets.only(left: 4.w,right: 4.w),
-                    child: DropdownButton(
-                      isExpanded: true,
-                      value: dropdownvalue,
-                      icon: Icon(Icons.keyboard_arrow_down_outlined,color: Colors.black,size: 3.h,),
-                      underline: Padding(
-                        padding:  EdgeInsets.only(top: 1.h),
-                        child: Divider(
-                          thickness: 1,
-                          color: Colors.grey,
-                        ),
-                      ),
-                      items: items.map((String items) {
-                        return DropdownMenuItem(
-                          value: items,
-                          child: Text(items,style: TextStyle(color: Colors.black54),),
-                        );
-                      }).toList(),
-                      onChanged: (String? newValue) {
-                        setState(() {
-                          dropdownvalue = newValue!;
-                        });
-                      },
-                      hint:  Text(
-                        "Font Family",
-                        style: TextStyle(fontWeight: FontWeight.bold,color: Colors.black),
-                      ),
-                    ),
-                  ),
+                  // Padding(
+                  //   padding:  EdgeInsets.only(left: 4.w,right: 4.w),
+                  //   child: Text(
+                  //     'Discount Type',
+                  //     style: TextStyle(color: Colors.black,fontSize: 10.sp),
+                  //   ),
+                  // ),
+                  CustomLineTextField(name: 'Discounted Type',hint: '$discountType',),
+                  // Padding(
+                  //   padding:  EdgeInsets.only(left: 4.w,right: 4.w),
+                  //   child: DropdownButton(
+                  //     isExpanded: true,
+                  //     value: dropdownvalue,
+                  //     icon: Icon(Icons.keyboard_arrow_down_outlined,color: Colors.black,size: 3.h,),
+                  //     underline: Padding(
+                  //       padding:  EdgeInsets.only(top: 1.h),
+                  //       child: Divider(
+                  //         thickness: 1,
+                  //         color: Colors.grey,
+                  //       ),
+                  //     ),
+                  //     items: items.map((String items) {
+                  //       return DropdownMenuItem(
+                  //         value: items,
+                  //         child: Text(items,style: TextStyle(color: Colors.black54),),
+                  //       );
+                  //     }).toList(),
+                  //     onChanged: (String? newValue) {
+                  //       setState(() {
+                  //         dropdownvalue = newValue!;
+                  //       });
+                  //     },
+                  //     hint:  Text(
+                  //       "Font Family",
+                  //       style: TextStyle(fontWeight: FontWeight.bold,color: Colors.black),
+                  //     ),
+                  //   ),
+                  // ),
                   SizedBox(height: 2.h,),
                   CustomLineTextField(name: 'Discounted Price',hint: '500',controller: discountController),
-                  CustomLineTextField(name: 'Special Price Start',hint: 'Date',controller: sDateController),
-                  CustomLineTextField(name: 'Special Price End',hint: 'Date',controller: endDateController),
+                  CustomLineTextField(
+                    onClick: (){
+                      _showDialog(
+                        CupertinoDatePicker(
+                          //initialDateTime: sDateController,
+                          mode: CupertinoDatePickerMode.date,
+                          use24hFormat: true,
+                          onDateTimeChanged: (DateTime newDate) {
+                            String d = newDate.toString();
+                            var splitDate = d.split(" ");
+                            sDateController.text =
+                            splitDate[0];
+                            //error_date = false;
+                            setState(() {});
+                          },
+                        ),
+                      );
+                    },
+                    readOnly: true,
+                      name: 'Special Price Start',
+                      hint: 'Date',
+                      controller: sDateController),
+                  CustomLineTextField(onClick: (){
+                    _showDialog(
+                      CupertinoDatePicker(
+                        //initialDateTime: sDateController,
+                        mode: CupertinoDatePickerMode.date,
+                        use24hFormat: true,
+                        onDateTimeChanged: (DateTime newDate) {
+                          String d = newDate.toString();
+                          var splitDate = d.split(" ");
+                          endDateController.text =
+                          splitDate[0];
+                          //error_date = false;
+                          setState(() {});
+                        },
+                      ),
+                    );
+                  },
+                      readOnly: true,name: 'Special Price End',hint: 'Date',controller: endDateController),
                   SizedBox(height: 2.h,),
                   Padding(
                     padding:  EdgeInsets.symmetric(horizontal: 4.w),
@@ -122,7 +169,18 @@ class _PricingScreenState extends State<PricingScreen> {
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
                         GestureDetector(
-                          onTap: () {
+                          onTap: () async{
+                            await provider.update_price_product_data(map: {
+                              'user_id': '${user_model.data!.userId}',
+                              'product_id': '${widget.productId}',
+                              'price': '${priceController.text}',
+                              'special_price': '${regPriceController.text}',
+                              'pstatus': '${discountController.text}',
+                              'price_type': '1',
+                              'special_price_start': '${sDateController.text}',
+                              'special_price_end': '${endDateController.text}',
+                             // 'special_id': '${widget.productId}',
+                            });
                             CustomToastManager.showToast(
                                 context: context,
                                 height: 8.h,
@@ -149,7 +207,7 @@ class _PricingScreenState extends State<PricingScreen> {
                                   ),
                                 )
                             );
-                            Get.offAll(BottomSheetScreen(index: 2,));
+
                           },
                           child: Container(
                             decoration: BoxDecoration(
@@ -191,5 +249,25 @@ class _PricingScreenState extends State<PricingScreen> {
         ),
       ),
     );
+  }
+  void _showDialog(Widget child) {
+    showCupertinoModalPopup<void>(
+        context: context,
+        builder: (BuildContext context) => Container(
+          height: 316,
+          padding: const EdgeInsets.only(top: 6.0),
+          // The Bottom margin is provided to align the popup above the system
+          // navigation bar.
+          margin: EdgeInsets.only(
+            bottom: MediaQuery.of(context).viewInsets.bottom,
+          ),
+          // Provide a background color for the popup.
+          color: CupertinoColors.systemBackground.resolveFrom(context),
+          // Use a SafeArea widget to avoid system overlaps.
+          child: SafeArea(
+            top: false,
+            child: child,
+          ),
+        ));
   }
 }

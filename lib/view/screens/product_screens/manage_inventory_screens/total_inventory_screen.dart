@@ -291,7 +291,7 @@ class _TotalInventoryScreenState extends State<TotalInventoryScreen> {
                                   children: [
                                     GestureDetector(
                                       onTap: () {
-                                        Navigator.push(context, MaterialPageRoute(builder: (context) => EditProductScreen(dropdownvalue: 'Inventory'),));
+                                       // Navigator.push(context, MaterialPageRoute(builder: (context) => EditProductScreen(dropdownvalue: 'Inventory'),));
                                        // Navigator.push(context, MaterialPageRoute(builder: (context) => InventoryScreen(),));
                                         //dropdownvalue = 'Inventory';
                                       },
