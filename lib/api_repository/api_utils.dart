@@ -181,6 +181,7 @@ class DataProvider {
     }
   }
 
+
   Future allProductModelApi({Map<String, dynamic>? map}) async {
     print('map is === $map');
     AllProductModel? allProductModel;
@@ -309,10 +310,44 @@ class DataProvider {
     print('Add Product result data =$data');
     return updateProductImageModel;
   }
+  Future updateStoreLogoApi({dio.FormData? uploadMedia}) async {
+    print('objectmapis${uploadMedia}');
+    final response = await dio.Dio().post('$baseURL$storeLogoUrl',
+        data: uploadMedia, options: dio.Options(headers: headers));
+    var data = response.data;
+    print('Add LOOOO$data');
+    return data;
+  }
 
   Future domain_request_api({Map<String, dynamic>? map}) async {
     print('map is === $map');
     final response = await http.post(Uri.parse('$baseURL$domain_request'),
+        body: map, headers: headers);
+    var data = jsonDecode(response.body);
+    print('$data');
+    if (data['result'] == 'success') {
+      log("loginFunction code is = ${response.statusCode}");
+      Get.snackbar('Success', '${data['message']}');
+    } else {
+      Get.snackbar('Alert', '${data['message']}');
+    }
+  }
+  Future stor_info_api({Map<String, dynamic>? map}) async {
+    print('map is === $map');
+    final response = await http.post(Uri.parse('$baseURL$store_info'),
+        body: map, headers: headers);
+    var data = jsonDecode(response.body);
+    print('$data');
+    if (data['result'] == 'success') {
+      log("loginFunction code is = ${response.statusCode}");
+      Get.snackbar('Success', '${data['message']}');
+    } else {
+      Get.snackbar('Alert', '${data['message']}');
+    }
+  }
+  Future stor_location_api({Map<String, dynamic>? map}) async {
+    print('map is === $map');
+    final response = await http.post(Uri.parse('$baseURL$store_location'),
         body: map, headers: headers);
     var data = jsonDecode(response.body);
     print('$data');

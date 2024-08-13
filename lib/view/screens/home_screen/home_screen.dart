@@ -13,6 +13,8 @@ import '../../../utils_services/storage_util.dart';
 import '../account_screen/domain_setting_screen/domain_setting_screen.dart';
 import '../auth_screens/login_screen/Model/login_model.dart';
 import 'DashBoard Provider/dashboard_provider.dart';
+import 'Store Information/Pickup_location/pickup_location.dart';
+import 'Store Information/store_info_screen.dart';
 import 'home_chart.dart';
 import 'home_screens/logo_screen.dart';
 import 'home_screens/website_design_screen.dart';
@@ -1093,25 +1095,33 @@ class _HomeScreenState extends State<HomeScreen> {
                                           bottomContainer(
                                               title: 'Add Store Information',
                                               subtitle:
-                                                  'Online Stores with complete information increase customer trust by 70%'),
+                                                  'Online Stores with complete information increase customer trust by 70%',
+                                          ontap: (){
+                                            Navigator.pop(context);
+                                            Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      StoreInformation(),
+                                                ));
+
+                                          }
+                                          ),
                                           bottomContainer(
                                               title: 'Add Pickup Location',
                                               subtitle:
-                                                  'Make fulfilling orders easier by adding Pickup Location for your delivery.'),
-                                          bottomContainer(
-                                            title: 'Add Fix Website Design',
-                                            subtitle:
-                                                'Design your website by choosing layout and colors to increase your conversion rate.',
-                                            ontap: () {
-                                              Navigator.pop(context);
-                                              Navigator.push(
-                                                  context,
-                                                  MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        WebsiteDesignScreen(),
-                                                  ));
-                                            },
-                                          )
+                                                  'Make fulfilling orders easier by adding Pickup Location for your delivery.',
+                                               ontap: (){
+
+                                                 Navigator.pop(context);
+                                                 Navigator.push(
+                                                     context,
+                                                     MaterialPageRoute(
+                                                       builder: (context) =>
+                                                           PickupLocation(),
+                                                     ));
+                                               }
+                                           ),
                                         ],
                                       ),
                                     ),
