@@ -25,17 +25,16 @@ class _PaymentScreenState extends State<PaymentScreen> {
             preferredSize: Size.fromHeight(1.h),
             child: TabBar(
               labelStyle: TextStyle(fontSize: 10.sp),
-              indicatorColor: Colors.white,
+              indicatorColor: blueColor,
+              dividerColor: blueColor,
               labelPadding: EdgeInsets.only(bottom: 0.5.h),
               tabs: [
                 Text(
                   'Payment Method',
-                ),
-                Text(
-                  'Transactions',
-                ),
-                Text(
-                  'Payout Detail',
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 15,
+                      fontWeight: FontWeight.bold),
                 ),
               ],
             ),
@@ -44,8 +43,6 @@ class _PaymentScreenState extends State<PaymentScreen> {
         body: TabBarView(
           children: [
             PaymentMainScreen(),
-            TransactionScreen(),
-            PayoutDetailScreen(),
           ],
         ),
       ),

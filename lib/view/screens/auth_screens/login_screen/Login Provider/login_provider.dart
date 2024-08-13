@@ -37,11 +37,17 @@ class LoginProvider extends ChangeNotifier {
       var result = await DataProvider().loginFunction(map: {
         'email': is_email == true ? emailController.text : phoneController.text,
         'password': passwordController.text,
-      });
+      }, context: context);
       loading = false;
       updateState();
+      LoginModel? loginModel = result;
       if (result != null) {
-        Get.offAll(BottomSheetScreen());
+        if (loginModel!.data!.isProduct == 1 &&
+            loginModel.data!.isPaymentMethod == 1) {
+          Get.offAll(BottomSheetScreen());
+        } else {
+          Get.to(StoreSetupScreen());
+        }
       }
     } catch (e) {
       loading = false;

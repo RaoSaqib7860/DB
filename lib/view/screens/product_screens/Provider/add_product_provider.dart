@@ -8,7 +8,9 @@ import 'package:image_picker/image_picker.dart';
 import 'package:sizer/sizer.dart';
 import '../../../../api_repository/api_utils.dart';
 import '../../../../custom_widgets/custom_toast.dart';
+import '../../../../utils_services/storage_util.dart';
 import '../../auth_screens/login_screen/Login Provider/login_model_globle.dart';
+import '../../auth_screens/login_screen/Model/login_model.dart';
 import '../Models/category_product_model.dart';
 import '../Models/edit_product_model.dart';
 import '../Models/edit_product_price_model.dart';
@@ -38,33 +40,40 @@ class AddProductProvider extends ChangeNotifier {
       update_state();
     }
   }
-String? selectedPage = 'Product';
-  add_product_data() async {
+
+  String? selectedPage = 'Product';
+  Future add_product_data() async {
     loading = true;
     update_state();
-    var data = await DataProvider().addProductApi(map: {
+    await DataProvider().addProductApi(map: {
       'user_id': '${user_model.data!.userId}',
       'title': '${nameController.text}',
       'price': '${priceController.text}',
       'price_type': '1',
-      //'stock_manage' : '',
-      //'stock_qty' : '',
+      'stock_manage': value ? '1' : '0',
+      'stock_qty': quantityController.text
     });
+    var data = await storage.read('userData');
+    print('${data}');
+    LoginModel loginModel = LoginModel.fromJson(data);
+    loginModel.data!.isProduct = 1;
+    storage.write('userData', loginModel.toJson());
     loading = false;
     update_state();
   }
-  get_update_product_data({Map<String,dynamic>? map,BuildContext? context}) async {
+
+  get_update_product_data(
+      {Map<String, dynamic>? map, BuildContext? context}) async {
     loading = true;
     update_state();
-    var data = await DataProvider().getUpdateOrderApi(map: map).then((value){
+    var data = await DataProvider().getUpdateOrderApi(map: map).then((value) {
       CustomToastManager.showToast(
           context: context,
           height: 8.h,
           width: 60.w,
           message: Center(
             child: Padding(
-              padding: EdgeInsets.symmetric(
-                  horizontal: 2.w),
+              padding: EdgeInsets.symmetric(horizontal: 2.w),
               child: Row(
                 children: [
                   SizedBox(
@@ -83,8 +92,7 @@ String? selectedPage = 'Product';
                         fontSize: 11.sp,
                         color: Colors.black,
                         height: 0.16.h,
-                        fontWeight:
-                        FontWeight.w500),
+                        fontWeight: FontWeight.w500),
                   ),
                 ],
               ),
@@ -111,7 +119,7 @@ String? selectedPage = 'Product';
     update_state();
   }
 
-  Future update_price_product_data({Map<String,dynamic>? map}) async {
+  Future update_price_product_data({Map<String, dynamic>? map}) async {
     loading = true;
     update_state();
     var data = await DataProvider().updateProductPriceApi(map: map);
@@ -123,7 +131,7 @@ String? selectedPage = 'Product';
     update_state();
   }
 
-  Future update_SEO_product_data({Map<String,dynamic>? map}) async {
+  Future update_SEO_product_data({Map<String, dynamic>? map}) async {
     loading = true;
     update_state();
     var data = await DataProvider().updateProductSEOApi(map: map);
@@ -134,7 +142,8 @@ String? selectedPage = 'Product';
     loading = false;
     update_state();
   }
-  Future update_Inventory_ProductApi({Map<String,dynamic>? map}) async {
+
+  Future update_Inventory_ProductApi({Map<String, dynamic>? map}) async {
     loading = true;
     update_state();
     var data = await DataProvider().updateInventoryProductApi(map: map);

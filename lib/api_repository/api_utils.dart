@@ -1,6 +1,8 @@
 import 'dart:convert';
 import 'dart:developer';
 
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:dio/dio.dart' as dio;
@@ -28,13 +30,58 @@ import 'base_path.dart';
 
 class DataProvider {
   var headers = {'csrf': '5574499YmRzanYyZzExa2J3Y3N1b2Y='};
-  Future loginFunction({Map<String, dynamic>? map}) async {
+  Future loginFunction(
+      {Map<String, dynamic>? map, BuildContext? context}) async {
     final response = await http.post(Uri.parse('$baseURL$userLogin'),
         body: map, headers: headers);
     print('objectnamwb${response.body} ');
     var data = jsonDecode(response.body);
     if (data['result'] == 'success') {
       user_model = LoginModel.fromJson(data);
+      if (user_model.data!.accountStatus == 2) {
+        showDialog(
+            context: context!,
+            builder: (BuildContext context) => CupertinoAlertDialog(
+                  title: const Text("Account Suspend"),
+                  content: const Text(
+                    "Account Suspend please contact us \n support@dialoxx.com",
+                    style: TextStyle(),
+                    textAlign: TextAlign.center,
+                  ),
+                  actions: <Widget>[
+                    CupertinoDialogAction(
+                      child: Text("Contact US"),
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                    ),
+                  ],
+                ));
+        return null;
+      }
+
+      if (user_model.data!.accountStatus == 3) {
+        showDialog(
+            context: context!,
+            builder: (BuildContext context) => CupertinoAlertDialog(
+                  title: const Text("Account in pending mode"),
+                  content: const Text(
+                    "Mode And Also Disabled All Functionality If You Are Not Complete Your Payment Please Complete Your Payment From",
+                    style: TextStyle(),
+                    textAlign: TextAlign.center,
+                  ),
+                  actions: <Widget>[
+                    CupertinoDialogAction(
+                      child: Text("OK"),
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                    ),
+                  ],
+                ));
+        return null;
+      }
+
       log("loginFunction code is = ${response.statusCode}");
       storage.write('userData', user_model.toJson());
       print('objectnamw${user_model.data!.userId} ');
@@ -197,11 +244,14 @@ class DataProvider {
       return null;
     }
   }
+
   Future updateInventoryProductApi({Map<String, dynamic>? map}) async {
     print('map is === $map');
     UpdateInventoryProduct? updateInventoryProduct;
-    final response = await http.post(Uri.parse('$baseURL$updateInventoryProductInfoUrl'),
-        body: map, headers: headers);
+    final response = await http.post(
+        Uri.parse('$baseURL$updateInventoryProductInfoUrl'),
+        body: map,
+        headers: headers);
     var data = jsonDecode(response.body);
     if (data['result'] == 'success') {
       log("loginFunction code is = ${response.statusCode}");
@@ -279,9 +329,9 @@ class DataProvider {
     final response = await http.post(Uri.parse('$baseURL$addProductScreenUrl'),
         body: map, headers: headers);
     var data = jsonDecode(response.body);
+    log("loginFunction code is = ${data}");
     if (data['result'] == 'success') {
       log("loginFunction code is = ${response.statusCode}");
-
       Get.snackbar('Success', '${data['message']}');
       return true;
     } else {
@@ -305,10 +355,13 @@ class DataProvider {
       return false;
     }
   }
+
   Future getUpdateOrderApi({Map<String, dynamic>? map}) async {
     print('map is ===ghj $map');
-    final response = await http.post(Uri.parse('$baseURL$getupdateOrderInfoUrl'),
-        body: map, headers: headers);
+    final response = await http.post(
+        Uri.parse('$baseURL$getupdateOrderInfoUrl'),
+        body: map,
+        headers: headers);
     var data = jsonDecode(response.body);
     if (data['result'] == 'success') {
       log("loginFunction code is = ${response.statusCode}");
@@ -488,6 +541,21 @@ class DataProvider {
     }
     if (data['result'] == 'success') {
       Get.snackbar('Alert', '${data['message']}\n${data['data']}');
+    }
+  }
+
+  Future add_paymentgatewayApi({Map<String, dynamic>? map}) async {
+    print('map is === $map');
+    final response = await http.post(Uri.parse('$baseURL$add_paymentgateway'),
+        body: map, headers: headers);
+    var data = jsonDecode(response.body);
+    log("add_paymentgatewayApi code is = $data");
+    if (data['result'] == 'Failed') {
+      Get.snackbar('Alert', '${data['message']}');
+    }
+    if (data['result'] == 'success') {
+      Get.snackbar('Alert', '${data['message']}\n${data['data']}');
+      return true;
     }
   }
 }

@@ -104,11 +104,11 @@ class SignUpProvider extends ChangeNotifier {
       loading = false;
       updateState();
       if (result == true) {
-        await DataProvider().loginFunction(map: {
-          'email': emailController.text,
-          'password': passwordController.text,
-        });
-        Get.offAll(BottomSheetScreen());
+        // await DataProvider().loginFunction(map: {
+        //   'email': emailController.text,
+        //   'password': passwordController.text,
+        // });
+        Get.offAll(LoginScreen());
       }
     } catch (e) {
       loading = false;

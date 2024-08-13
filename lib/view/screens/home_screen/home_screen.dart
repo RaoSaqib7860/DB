@@ -485,7 +485,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                         MainAxisAlignment.spaceBetween,
                                     children: [
                                       Text(
-                                        'Total Earnings - ${provider.dashboardModel!.data!.orders?.first.year}',
+                                        'Total Earnings - ${provider.dashboardModel?.data?.orders?.isEmpty ?? true ? '' : provider.dashboardModel?.data?.orders?.first.year}',
                                         style: TextStyle(
                                           fontSize: 9.sp,
                                           color: Colors.black,

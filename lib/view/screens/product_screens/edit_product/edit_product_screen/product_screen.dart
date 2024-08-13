@@ -424,32 +424,34 @@ class _ProductScreenState extends State<ProductScreen> {
                             crossAxisAlignment: CrossAxisAlignment.end,
                             children: [
                               GestureDetector(
-                                onTap: () async{
+                                onTap: () async {
                                   print('$selectCategoriesIds');
                                   int? brand_id;
-                                  provider
-                                      .allBrandsModel!
-                                      .data!
-                                      .categories!.forEach((element) {
-                                        if(selectCategoriesIds!.contains(element.id)){
-                                          brand_id=element.id;
-                                          selectCategoriesIds!.remove(element.id);
-                                        }
+                                  provider.allBrandsModel!.data!.categories!
+                                      .forEach((element) {
+                                    if (selectCategoriesIds!
+                                        .contains(element.id)) {
+                                      brand_id = element.id;
+                                      selectCategoriesIds!.remove(element.id);
+                                    }
                                   });
-                                  print('selectCategoriesIds..${selectCategoriesIds!.join(',')}');
+                                  print(
+                                      'selectCategoriesIds..${selectCategoriesIds!.join(',')}');
                                   print('brand_id...$brand_id');
-                                  provider.get_update_product_data(context: context,map: {
-                                    'user_id' : '${user_model.data!.userId}',
-                                    'product_id' : '${widget.productId}',
-                                    'title' : '${nameControllerT.text}',
-                                    'slug' : '${slugController.text}',
-                                    'excerpt' : '${desController.text}',
-                                    //'content' : '${contentController}',
-                                    'featured' : '${selectFeature}',
-                                    'cats[]' : '${selectCategoriesIds!.join(',')}',
-                                    'brand' : '${brand_id}',
-                                  });
-
+                                  provider.get_update_product_data(
+                                      context: context,
+                                      map: {
+                                        'user_id': '${user_model.data!.userId}',
+                                        'product_id': '${widget.productId}',
+                                        'title': '${nameControllerT.text}',
+                                        'slug': '${slugController.text}',
+                                        'excerpt': '${desController.text}',
+                                        //'content' : '${contentController}',
+                                        'featured': '${selectFeature}',
+                                        'cats[]':
+                                            '${selectCategoriesIds!.join(',')}',
+                                        'brand': '${brand_id}',
+                                      });
                                 },
                                 child: Container(
                                   decoration: BoxDecoration(

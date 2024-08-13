@@ -29,3 +29,4 @@ const tcs_info = 'tcs-info';
 const tcs_delivery = 'tcs-delivery';
 const tcs_remove_orders = 'tcs-remove-orders';
 const getstore_info = 'getstore-info';
+const add_paymentgateway = 'add-paymentgateway';
