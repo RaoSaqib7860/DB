@@ -14,6 +14,7 @@ const addProductScreenUrl = 'add-product';
 const orderInfoUrl = 'order-info';
 const updateOrderInfoUrl = 'order-customer-update';
 const getupdateOrderInfoUrl = 'edit-product';
+const getStoreInfoUrl = 'getstore-info';
 const updateProductInfoUrl = 'get-edit-product';
 const updateInventoryProductInfoUrl = 'stock-product';
 const updateProductPriceInfoUrl = 'edit-price-product';

@@ -2,6 +2,7 @@ import 'package:db_2_0/view/screens/account_screen/store_setting_screen/social_l
 import 'package:db_2_0/view/screens/account_screen/store_setting_screen/store_information.dart';
 import 'package:db_2_0/view/screens/account_screen/store_setting_screen/store_location.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../../../custom_widgets/app_colors.dart';
@@ -26,13 +27,26 @@ class _StoreSettingScreenState extends State<StoreSettingScreen> {
             width: 100.w,
             color: blueColor,
             child: Center(
-              child: Text(
-                'Store Setting',
-                style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 13.sp,
-                    fontWeight: FontWeight.bold
-                ),
+              child: Row(
+                children: [
+                  // SizedBox(width: 2.w,),
+                  GestureDetector(
+                      onTap: () {
+                        Navigator.pop(context);
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 8.0),
+                        child: SvgPicture.asset('assets/svgs/back_arrow.svg',height: 2.h,),
+                      )),
+                  SizedBox(width: 34.w,),
+                  Text('Store Setting',
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 12.sp,
+                        fontWeight: FontWeight.bold
+                    ),
+                  ),
+                ],
               ),
             ),
           ),

@@ -38,13 +38,16 @@ class _PickupLocationState extends State<PickupLocation> {
                   child: Center(
                     child: Row(
                       children: [
-                        SizedBox(width: 2.w,),
+                       // SizedBox(width: 2.w,),
                         GestureDetector(
                             onTap: () {
                               Navigator.pop(context);
                             },
-                            child: SvgPicture.asset('assets/svgs/back_arrow.svg',height: 2.h,)),
-                        SizedBox(width: 40.w,),
+                            child: Padding(
+                              padding: const EdgeInsets.only(left: 8.0),
+                              child: SvgPicture.asset('assets/svgs/back_arrow.svg',height: 2.h,),
+                            )),
+                        SizedBox(width: 34.w,),
                         Text('Store Setting',
                           style: TextStyle(
                               color: Colors.white,
