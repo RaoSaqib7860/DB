@@ -28,6 +28,34 @@
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
+    <key>NSAppleMusicUsageDescription</key>
+    <string>Your Music Library is used to update Alerts.</string>
+    <key>NSBluetoothAlwaysUsageDescription</key>
+    <string>Your bluetooth is used for directions.</string>
+    <key>NSBluetoothPeripheralUsageDescription</key>
+    <string>Your bluetooth is used for directions.</string>
+    <key>NSCalendarsUsageDescription</key>
+    <string>Your calendar is used to give precise date for messages.</string>
+    <key>NSCameraUsageDescription</key>
+    <string> Allow camera access to update profile picture and to add product images into itinerary and list creation.</string>
+    <key>NSContactsUsageDescription</key>
+    <string>Allow contact list to find other users on Yellow Line app to connect and add as your friends in realtime. Your contact list will not upload on Yellow Line app</string>
+    <key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+    <string> Allow your location is used to provide directions to the places to visit and search for destinations..</string>
+    <key>NSLocationAlwaysUsageDescription</key>
+    <string> Allow your location is used to provide directions to the places to visit and search for destinations.</string>
+    <key>NSLocationWhenInUseUsageDescription</key>
+    <string> Allow your location is used to provide directions to the places to visit and search for destinations..</string>
+    <key>NSMicrophoneUsageDescription</key>
+    <string> Yellow Line needs to access your device microphone to send audio messages.</string>
+    <key>NSMotionUsageDescription</key>
+    <string>Yellow Line would like to access your motion.</string>
+    <key>NSPhotoLibraryUsageDescription</key>
+    <string>Allow photo access to update profile picture and to add product images into itinerary and list creation.</string>
+    <key>NSSpeechRecognitionUsageDescription</key>
+    <string>The app uses speech recognition for dictating messages.</string>
+    <key>UIApplicationSupportsIndirectInputEvents</key>
+    <true/>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>

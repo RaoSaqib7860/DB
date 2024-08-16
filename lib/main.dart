@@ -25,7 +25,6 @@ void main() async {
         ChangeNotifierProvider(create: (_) => AllOrderProvider()),
         ChangeNotifierProvider(create: (_) => AddProductProvider()),
         ChangeNotifierProvider(create: (_) => DeliveryProvider()),
-        ChangeNotifierProvider(create: (_) => UpdateStoreProvider()),
       ],
       child: const MyApp(),
     ),

@@ -1,8 +1,7 @@
 import 'package:db_2_0/custom_widgets/data_loading.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 
@@ -21,8 +20,8 @@ class _PickupLocationState extends State<PickupLocation> {
   @override
   Widget build(BuildContext context) {
     final UpdateStoreProvider provider =
-    Provider.of<UpdateStoreProvider>(context);
-    return  DataLoading(
+        Provider.of<UpdateStoreProvider>(context);
+    return DataLoading(
       isLoading: provider.storeLocationLoading,
       child: Scaffold(
         body: Container(
@@ -38,74 +37,87 @@ class _PickupLocationState extends State<PickupLocation> {
                   child: Center(
                     child: Row(
                       children: [
-                        SizedBox(width: 2.w,),
+                        SizedBox(
+                          width: 2.w,
+                        ),
                         GestureDetector(
                             onTap: () {
                               Navigator.pop(context);
                             },
-                            child: SvgPicture.asset('assets/svgs/back_arrow.svg',height: 2.h,)),
-                        SizedBox(width: 40.w,),
-                        Text('Store Setting',
+                            child: SvgPicture.asset(
+                              'assets/svgs/back_arrow.svg',
+                              height: 2.h,
+                            )),
+                        SizedBox(
+                          width: 30.w,
+                        ),
+                        Text(
+                          'Store Setting',
                           style: TextStyle(
                               color: Colors.white,
                               fontSize: 12.sp,
-                              fontWeight: FontWeight.bold
-                          ),
+                              fontWeight: FontWeight.bold),
                         ),
                       ],
                     ),
                   ),
                 ),
-                SizedBox(height: 2.h,),
+                SizedBox(
+                  height: 2.h,
+                ),
                 CustomLineTextField(
                     name: 'Company',
                     hint: 'company',
-                    controller: provider.companyNameController
+                    controller: provider.companyNameController),
+                SizedBox(
+                  height: 2.h,
                 ),
-                SizedBox(height: 2.h,),
                 CustomLineTextField(
-                  name: 'Address',
-                  hint: 'address',
-                    controller: provider.addressController
+                    name: 'Address',
+                    hint: 'address',
+                    controller: provider.addressController),
+                SizedBox(
+                  height: 2.h,
                 ),
-                SizedBox(height: 2.h,),
                 CustomLineTextField(
-                  name: 'City',
-                  hint: 'city',
-                     controller: provider.cityController
+                    name: 'City',
+                    hint: 'city',
+                    controller: provider.cityController),
+                SizedBox(
+                  height: 2.h,
                 ),
-                SizedBox(height: 2.h,),
                 CustomLineTextField(
-                  name: 'State',
-                  hint: 'state',
-                     controller: provider.stateController
+                    name: 'State',
+                    hint: 'state',
+                    controller: provider.stateController),
+                SizedBox(
+                  height: 2.h,
                 ),
-                SizedBox(height: 2.h,),
                 CustomLineTextField(
-                  name: 'Postal/Zip code',
-                  hint: 'Postal code',
-                     controller: provider.zipCodeController
+                    name: 'Postal/Zip code',
+                    hint: 'Postal code',
+                    controller: provider.zipCodeController),
+                SizedBox(
+                  height: 2.h,
                 ),
-                SizedBox(height: 2.h,),
                 CustomLineTextField(
-                  name: 'Email',
-                  hint: ' Enter Email',
-                     controller: provider.emailController
+                    name: 'Email',
+                    hint: ' Enter Email',
+                    controller: provider.emailController),
+                SizedBox(
+                  height: 2.h,
                 ),
-                SizedBox(height: 2.h,),
                 CustomLineTextField(
-                  name: 'Phone',
-                  hint: 'Enter Phone',
-                     controller: provider.phoneController
-                ),
+                    name: 'Phone',
+                    hint: 'Enter Phone',
+                    controller: provider.phoneController),
                 Align(
                   alignment: Alignment.topLeft,
                   child: Padding(
                     padding: EdgeInsets.only(left: 4.w, right: 4.w),
                     child: Text(
                       'Invoice Discription',
-                      style:
-                      TextStyle(color: Colors.black, fontSize: 11.sp),
+                      style: TextStyle(color: Colors.black, fontSize: 11.sp),
                     ),
                   ),
                 ),
@@ -128,11 +140,11 @@ class _PickupLocationState extends State<PickupLocation> {
                       decoration: InputDecoration(
                         border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(0)),
-                        labelStyle: TextStyle(
-                            fontSize: 10.sp, color: Colors.grey),
+                        labelStyle:
+                            TextStyle(fontSize: 10.sp, color: Colors.grey),
                         hintStyle: TextStyle(fontSize: 10.sp),
-                        contentPadding: EdgeInsets.only(
-                            top: 1.h, left: 2.w, right: 2.w),
+                        contentPadding:
+                            EdgeInsets.only(top: 1.h, left: 2.w, right: 2.w),
                       ),
                     ),
                   ),
@@ -141,9 +153,30 @@ class _PickupLocationState extends State<PickupLocation> {
                   height: 2.h,
                 ),
                 GestureDetector(
-                  onTap: () async{
-                    await provider.storeLocationApi();
-                    Navigator.pop(context);
+                  onTap: () async {
+                    // 'user_id': '${user_model.data!.userId}',
+                    // 'company_name': '${companyNameController.text}',
+                    // 'address': '${addressController.text}',
+                    // 'city': '${cityController.text}',
+                    // 'state': '${stateController.text}',
+                    // 'zip_code': '${zipCodeController.text}',
+                    // 'email': '${emailController.text}',
+                    // 'phone': '${phoneController.text}',
+                    // 'invoice_description': '${invoiceController.text}',
+                    if (provider.companyNameController.text.isNotEmpty &&
+                        provider.addressController.text.isNotEmpty &&
+                        provider.cityController.text.isNotEmpty &&
+                        provider.stateController.text.isNotEmpty &&
+                        provider.zipCodeController.text.isNotEmpty &&
+                        provider.emailController.text.isNotEmpty &&
+                        provider.phoneController.text.isNotEmpty &&
+                        provider.invoiceController.text.isNotEmpty) {
+                      await provider.storeLocationApi();
+                      Navigator.of(context).pop();
+                    } else {
+                      Get.snackbar('Alert',
+                          'Some fields is missing .Kindly Fill up all fields.');
+                    }
                   },
                   child: Align(
                     alignment: Alignment.center,

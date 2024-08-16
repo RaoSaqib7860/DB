@@ -1,7 +1,7 @@
 import 'package:db_2_0/custom_widgets/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
+import 'package:persistent_bottom_nav_bar/persistent_bottom_nav_bar.dart';
 import 'package:sizer/sizer.dart';
 import '../account_screen/account_scrreen.dart';
 import '../delivery_screens/delivery_main_screen.dart';
@@ -102,19 +102,11 @@ class _BottomSheetScreenState extends State<BottomSheetScreen> {
             controller: persistentcontroller,
             selectedTabScreenContext: (context) {},
             screens: _buildScreens(),
-            confineInSafeArea: true,
-            //bottomScreenMargin: 0,
-            //backgroundColor: Colors.transparent,
             onWillPop: (v) async {
               return true;
             },
             handleAndroidBackButtonPress: true,
             stateManagement: true,
-            hideNavigationBarWhenKeyboardShows: true,
-            screenTransitionAnimation: ScreenTransitionAnimation(
-              animateTabTransition: true,
-              duration: Duration(milliseconds: 200),
-            ),
             customWidget: Padding(
               padding: EdgeInsets.symmetric(horizontal: 5.w),
               child: CustomNavBarWidget(
@@ -256,13 +248,23 @@ class _BottomSheetScreenState extends State<BottomSheetScreen> {
     );
   }
 
-  List<Widget> _buildScreens() {
+  List<CustomNavBarScreen> _buildScreens() {
     return [
-      HomeScreen(),
-      AllOrdersScreen(),
-      ProductScreen(),
-      DeliveryMainScreen(),
-      AccountScreen(),
+      CustomNavBarScreen(
+        screen: HomeScreen(),
+      ),
+      CustomNavBarScreen(
+        screen: AllOrdersScreen(),
+      ),
+      CustomNavBarScreen(
+        screen: ProductScreen(),
+      ),
+      CustomNavBarScreen(
+        screen: DeliveryMainScreen(),
+      ),
+      CustomNavBarScreen(
+        screen: AccountScreen(),
+      ),
     ];
   }
 

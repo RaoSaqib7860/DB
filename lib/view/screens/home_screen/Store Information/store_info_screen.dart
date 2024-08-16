@@ -1,10 +1,13 @@
+import 'package:db_2_0/custom_widgets/data_loading.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../../../custom_widgets/app_colors.dart';
 import '../../../../custom_widgets/custom_line_textfield.dart';
+import '../../auth_screens/login_screen/Login Provider/login_model_globle.dart';
 import '../Update Store Setup/update_store_provider.dart';
 
 class StoreInformation extends StatefulWidget {
@@ -33,106 +36,126 @@ class _StoreInformationState extends State<StoreInformation> {
   ];
 
   @override
+  void initState() {
+    final UpdateStoreProvider provider =
+        Provider.of<UpdateStoreProvider>(context, listen: false);
+    provider.currencyNameController.text = 'PK';
+    provider.currencyIconController.text = 'Rs.';
+    provider.storeNameController.text = '${user_model.data!.name}';
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final UpdateStoreProvider provider =
-    Provider.of<UpdateStoreProvider>(context);
+        Provider.of<UpdateStoreProvider>(context);
     return Scaffold(
-      body: Container(
-        height: 100.h,
-        width: 100.w,
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                height: 7.h,
-                width: 100.w,
-                color: blueColor,
-                child: Center(
+      body: DataLoading(
+        isLoading: provider.storeInfoLoading,
+        child: Container(
+          height: 100.h,
+          width: 100.w,
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  height: 7.h,
+                  width: 100.w,
+                  color: blueColor,
                   child: Row(
                     children: [
-                      SizedBox(width: 2.w,),
+                      SizedBox(
+                        width: 2.w,
+                      ),
                       GestureDetector(
                           onTap: () {
                             Navigator.pop(context);
                           },
-                          child: SvgPicture.asset('assets/svgs/back_arrow.svg',height: 2.h,)),
-                      SizedBox(width: 40.w,),
-                      Text('Store Setting',
+                          child: SvgPicture.asset(
+                            'assets/svgs/back_arrow.svg',
+                            height: 2.h,
+                          )),
+                      SizedBox(
+                        width: 30.w,
+                      ),
+                      Text(
+                        'Store Setting',
                         style: TextStyle(
                             color: Colors.white,
                             fontSize: 12.sp,
-                            fontWeight: FontWeight.bold
-                        ),
+                            fontWeight: FontWeight.bold),
                       ),
                     ],
                   ),
                 ),
-              ),
-              SizedBox(height: 2.h,),
-              CustomLineTextField(
-                  name: 'Store Name',
-                  hint: 'store name',
-                  controller: provider.storeNameController
-              ),
-              Padding(
-                padding: EdgeInsets.only(left: 4.w, right: 4.w),
-                child: Text(
-                  'Store Discription',
-                  style:
-                  TextStyle(color: Colors.black, fontSize: 11.sp),
+                SizedBox(
+                  height: 2.h,
                 ),
-              ),
-              SizedBox(
-                height: 0.5.h,
-              ),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 4.w),
-                child: Container(
-                  height: 11.h,
-                  width: 88.w,
-                  child: TextField(
-                    keyboardType: TextInputType.multiline,
-                    textAlign: TextAlign.left,
-                    maxLines: null,
-                    expands: true,
-                    textAlignVertical: TextAlignVertical.top,
-                    style: TextStyle(fontSize: 12.sp),
-                    controller: provider.storeDiscriptionController,
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(0)),
-                      labelStyle: TextStyle(
-                          fontSize: 10.sp, color: Colors.grey),
-                      hintStyle: TextStyle(fontSize: 10.sp),
-                      contentPadding: EdgeInsets.only(
-                          top: 1.h, left: 2.w, right: 2.w),
+                CustomLineTextField(
+                    name: 'Store Name',
+                    hint: 'store name',
+                    enable: false,
+                    controller: provider.storeNameController),
+                Padding(
+                  padding: EdgeInsets.only(left: 4.w, right: 4.w),
+                  child: Text(
+                    'Store Description',
+                    style: TextStyle(color: Colors.black, fontSize: 11.sp),
+                  ),
+                ),
+                SizedBox(
+                  height: 0.5.h,
+                ),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 4.w),
+                  child: Container(
+                    height: 11.h,
+                    width: 88.w,
+                    child: TextField(
+                      keyboardType: TextInputType.multiline,
+                      textAlign: TextAlign.left,
+                      maxLines: null,
+                      expands: true,
+                      textAlignVertical: TextAlignVertical.top,
+                      style: TextStyle(fontSize: 12.sp),
+                      controller: provider.storeDiscriptionController,
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(0)),
+                        labelStyle:
+                            TextStyle(fontSize: 10.sp, color: Colors.grey),
+                        hintStyle: TextStyle(fontSize: 10.sp),
+                        contentPadding:
+                            EdgeInsets.only(top: 1.h, left: 2.w, right: 2.w),
+                      ),
                     ),
                   ),
                 ),
-              ),
-              SizedBox(
-                height: 2.h,
-              ),
-              SizedBox(height: 2.h,),
-              CustomLineTextField(
-                name: 'Notification & Reply-to-Email',
-                hint: 'info@',
-                 controller: provider.notificationController
-              ),
-              SizedBox(height: 2.h,),
-              CustomLineTextField(
-                name: 'Order Id Format',
-                hint: '#Lamp',
-                 controller: provider.orderIdController
-              ),
-              Padding(
-                padding: EdgeInsets.only(left: 4.w, right: 4.w),
-                child: Text(
-                  'Currency Position',
-                  style: TextStyle(color: Colors.black),
+                SizedBox(
+                  height: 2.h,
                 ),
-              ),
+                SizedBox(
+                  height: 2.h,
+                ),
+                CustomLineTextField(
+                    name: 'Notification & Reply-to-Email',
+                    hint: 'info@',
+                    controller: provider.notificationController),
+                SizedBox(
+                  height: 2.h,
+                ),
+                CustomLineTextField(
+                    name: 'Order Id Format',
+                    hint: '#Lamp',
+                    controller: provider.orderIdController),
+                Padding(
+                  padding: EdgeInsets.only(left: 4.w, right: 4.w),
+                  child: const Text(
+                    'Currency Position',
+                    style: TextStyle(color: Colors.black),
+                  ),
+                ),
 
                 Padding(
                   padding: EdgeInsets.only(left: 4.w, right: 4.w),
@@ -151,8 +174,7 @@ class _StoreInformationState extends State<StoreInformation> {
                         color: Colors.grey,
                       ),
                     ),
-                    items: currencyName
-                        .map((e) {
+                    items: currencyName.map((e) {
                       return DropdownMenuItem(
                         value: e,
                         child: Text(
@@ -164,284 +186,227 @@ class _StoreInformationState extends State<StoreInformation> {
                     onChanged: (dynamic newValue) {
                       setState(() {
                         provider.selectedCurrencyName = newValue!;
-                        // int id = provider
-                        //     .allBrandsModel!
-                        //     .data!
-                        //     .categories![provider
-                        //     .allBrandsModel!.data!.categories!
-                        //     .indexWhere((element) =>
-                        // element.name == newValue)]
-                        //     .id!;
-                        // provider.allBrandsModel!.data!.categories!
-                        //     .forEach((element) {
-                        //   if (selectCategoriesIds!
-                        //       .contains(element.id!)) {
-                        //     selectCategoriesIds!.remove(element.id!);
-                        //   }
-                        // });
-                        // selectCategoriesIds!.add(id);
                       });
                     },
-                    hint: Text(
+                    hint: const Text(
                       "Select Currency Position",
-                      style: TextStyle(
-                          fontSize: 12, color: Colors.black),
+                      style: TextStyle(fontSize: 12, color: Colors.black),
                     ),
                   ),
                 ),
-              SizedBox(
-                height: 2.h,
-              ),
-              CustomLineTextField(
-                name: 'Currency Name',
-                hint: 'Rs.',
-                 controller: provider.currencyNameController
-              ),
-              SizedBox(
-                height: 2.h,
-              ),
-              CustomLineTextField(
-                name: 'Currency Icon',
-                hint: 'Rs.',
-                 controller: provider.currencyIconController
-              ),
-              SizedBox(
-                height: 2.h,
-              ),
-              CustomLineTextField(
-                name: 'Tax',
-                hint: 'taxis',
-                 controller: provider.taxController
-              ),
-              Padding(
-                padding: EdgeInsets.only(left: 4.w, right: 4.w),
-                child: Text(
-                  'Shop Type',
-                  style: TextStyle(color: Colors.black),
+                SizedBox(
+                  height: 2.h,
                 ),
-              ),
-             // SizedBox(height: 1.h,),
-              Padding(
-                padding: EdgeInsets.only(left: 4.w, right: 4.w),
-                child: DropdownButton(
-                  isExpanded: true,
-                  value: provider.shopValue,
-                  icon: Icon(
-                    Icons.keyboard_arrow_down_outlined,
-                    color: Colors.black,
-                    size: 3.h,
+                CustomLineTextField(
+                    name: 'Currency Name',
+                    hint: 'Rs.',
+                    enable: false,
+                    controller: provider.currencyNameController),
+                SizedBox(
+                  height: 2.h,
+                ),
+                CustomLineTextField(
+                    name: 'Currency Icon',
+                    hint: 'Rs.',
+                    enable: false,
+                    controller: provider.currencyIconController),
+                SizedBox(
+                  height: 2.h,
+                ),
+                CustomLineTextField(
+                    name: 'Tax',
+                    hint: 'taxis',
+                    controller: provider.taxController),
+                Padding(
+                  padding: EdgeInsets.only(left: 4.w, right: 4.w),
+                  child: const Text(
+                    'Shop Type',
+                    style: TextStyle(color: Colors.black),
                   ),
-                  underline: Padding(
-                    padding: EdgeInsets.only(top: 1.h),
-                    child: const Divider(
-                      thickness: 1,
-                      color: Colors.grey,
+                ),
+                // SizedBox(height: 1.h,),
+                Padding(
+                  padding: EdgeInsets.only(left: 4.w, right: 4.w),
+                  child: DropdownButton(
+                    isExpanded: true,
+                    value: provider.shopValue,
+                    icon: Icon(
+                      Icons.keyboard_arrow_down_outlined,
+                      color: Colors.black,
+                      size: 3.h,
                     ),
-                  ),
-                  items: shopType
-                      .map((e) {
-                    return DropdownMenuItem(
-                      value: e,
-                      child: Text(
-                        '${e}',
-                        style: TextStyle(color: Colors.black54),
+                    underline: Padding(
+                      padding: EdgeInsets.only(top: 1.h),
+                      child: const Divider(
+                        thickness: 1,
+                        color: Colors.grey,
                       ),
-                    );
-                  }).toList(),
-                  onChanged: (dynamic newValue) {
-                    setState(() {
-                      provider.shopValue = newValue!;
-                      provider.shopValueIndex = shopType.indexOf(newValue);
-                      print('objectof id ${provider.shopValueIndex}');
-                      // int id = provider
-                      //     .allBrandsModel!
-                      //     .data!
-                      //     .categories![provider
-                      //     .allBrandsModel!.data!.categories!
-                      //     .indexWhere((element) =>
-                      // element.name == newValue)]
-                      //     .id!;
-                      // provider.allBrandsModel!.data!.categories!
-                      //     .forEach((element) {
-                      //   if (selectCategoriesIds!
-                      //       .contains(element.id!)) {
-                      //     selectCategoriesIds!.remove(element.id!);
-                      //   }
-                      // });
-                      // selectCategoriesIds!.add(id);
-                    });
+                    ),
+                    items: shopType.map((e) {
+                      return DropdownMenuItem(
+                        value: e,
+                        child: Text(
+                          '${e}',
+                          style: TextStyle(color: Colors.black54),
+                        ),
+                      );
+                    }).toList(),
+                    onChanged: (dynamic newValue) {
+                      setState(() {
+                        provider.shopValue = newValue!;
+                        provider.shopValueIndex = shopType.indexOf(newValue);
+                        print('objectof id ${provider.shopValueIndex}');
+                      });
+                    },
+                    hint: const Text(
+                      "Select Shop Type",
+                      style: TextStyle(fontSize: 12, color: Colors.black),
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 2.h,
+                ),
+                Padding(
+                  padding: EdgeInsets.only(left: 4.w, right: 4.w),
+                  child: const Text(
+                    'Order Received payment',
+                    style: TextStyle(color: Colors.black),
+                  ),
+                ),
+                // SizedBox(height: 1.h,),
+                Padding(
+                  padding: EdgeInsets.only(left: 4.w, right: 4.w),
+                  child: DropdownButton(
+                    isExpanded: true,
+                    value: provider.payment,
+                    icon: Icon(
+                      Icons.keyboard_arrow_down_outlined,
+                      color: Colors.black,
+                      size: 3.h,
+                    ),
+                    underline: Padding(
+                      padding: EdgeInsets.only(top: 1.h),
+                      child: const Divider(
+                        thickness: 1,
+                        color: Colors.grey,
+                      ),
+                    ),
+                    items: receivingMethod.map((e) {
+                      return DropdownMenuItem(
+                        value: e,
+                        child: Text(
+                          '${e}',
+                          style: const TextStyle(color: Colors.black54),
+                        ),
+                      );
+                    }).toList(),
+                    onChanged: (dynamic newValue) {
+                      setState(() {
+                        provider.payment = newValue!;
+                      });
+                    },
+                    hint: const Text(
+                      "Select Shop Type",
+                      style: TextStyle(fontSize: 12, color: Colors.black),
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 2.h,
+                ),
+                Padding(
+                  padding: EdgeInsets.only(left: 4.w, right: 4.w),
+                  child: const Text(
+                    'Language',
+                    style: TextStyle(color: Colors.black),
+                  ),
+                ),
+                // SizedBox(height: 1.h,),
+                Padding(
+                  padding: EdgeInsets.only(left: 4.w, right: 4.w),
+                  child: DropdownButton(
+                    isExpanded: true,
+                    value: provider.selectLang,
+                    icon: Icon(
+                      Icons.keyboard_arrow_down_outlined,
+                      color: Colors.black,
+                      size: 3.h,
+                    ),
+                    underline: Padding(
+                      padding: EdgeInsets.only(top: 1.h),
+                      child: const Divider(
+                        thickness: 1,
+                        color: Colors.grey,
+                      ),
+                    ),
+                    items: lang.map((e) {
+                      return DropdownMenuItem(
+                        value: e,
+                        child: Text(
+                          '${e}',
+                          style: const TextStyle(color: Colors.black54),
+                        ),
+                      );
+                    }).toList(),
+                    onChanged: (dynamic newValue) {
+                      setState(() {
+                        provider.selectLang = newValue!;
+                      });
+                    },
+                    hint: const Text(
+                      "Select Language",
+                      style: TextStyle(fontSize: 12, color: Colors.black),
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 2.h,
+                ),
+                GestureDetector(
+                  onTap: () async {
+                    if (provider.storeNameController.text.isNotEmpty &&
+                        provider.storeDiscriptionController.text.isNotEmpty &&
+                        provider.notificationController.text.isNotEmpty &&
+                        provider.orderIdController.text.isNotEmpty &&
+                        provider.selectedCurrencyName != null &&
+                        provider.currencyNameController.text.isNotEmpty &&
+                        provider.shopValueIndex != null &&
+                        provider.taxController.text.isNotEmpty &&
+                        provider.payment != null) {
+                      await provider.storeInfoApi();
+                      Navigator.of(context).pop();
+                    } else {
+                      Get.snackbar('Alert',
+                          'Some fields is missing .Kindly Fill up all fields.');
+                    }
                   },
-                  hint: const Text(
-                    "Select Shop Type",
-                    style: TextStyle(
-                        fontSize: 12, color: Colors.black),
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: 2.h,
-              ),
-              Padding(
-                padding: EdgeInsets.only(left: 4.w, right: 4.w),
-                child: const Text(
-                  'Order Received payment',
-                  style: TextStyle(color: Colors.black),
-                ),
-              ),
-              // SizedBox(height: 1.h,),
-              Padding(
-                padding: EdgeInsets.only(left: 4.w, right: 4.w),
-                child: DropdownButton(
-                  isExpanded: true,
-                  value: provider.payment,
-                  icon: Icon(
-                    Icons.keyboard_arrow_down_outlined,
-                    color: Colors.black,
-                    size: 3.h,
-                  ),
-                  underline: Padding(
-                    padding: EdgeInsets.only(top: 1.h),
-                    child: const Divider(
-                      thickness: 1,
-                      color: Colors.grey,
-                    ),
-                  ),
-                  items: receivingMethod
-                      .map((e) {
-                    return DropdownMenuItem(
-                      value: e,
-                      child: Text(
-                        '${e}',
-                        style: const TextStyle(color: Colors.black54),
+                  child: Align(
+                    alignment: Alignment.center,
+                    child: Container(
+                      height: 5.5.h,
+                      width: 90.w,
+                      decoration: BoxDecoration(
+                        color: Color(0xff005493),
+                        borderRadius: BorderRadius.circular(5),
                       ),
-                    );
-                  }).toList(),
-                  onChanged: (dynamic newValue) {
-                    setState(() {
-                      provider.payment = newValue!;
-                      // int id = provider
-                      //     .allBrandsModel!
-                      //     .data!
-                      //     .categories![provider
-                      //     .allBrandsModel!.data!.categories!
-                      //     .indexWhere((element) =>
-                      // element.name == newValue)]
-                      //     .id!;
-                      // provider.allBrandsModel!.data!.categories!
-                      //     .forEach((element) {
-                      //   if (selectCategoriesIds!
-                      //       .contains(element.id!)) {
-                      //     selectCategoriesIds!.remove(element.id!);
-                      //   }
-                      // });
-                      // selectCategoriesIds!.add(id);
-                    });
-                  },
-                  hint: const Text(
-                    "Select Shop Type",
-                    style: TextStyle(
-                        fontSize: 12, color: Colors.black),
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: 2.h,
-              ),
-              Padding(
-                padding: EdgeInsets.only(left: 4.w, right: 4.w),
-                child: const Text(
-                  'Order Received payment',
-                  style: TextStyle(color: Colors.black),
-                ),
-              ),
-              // SizedBox(height: 1.h,),
-              Padding(
-                padding: EdgeInsets.only(left: 4.w, right: 4.w),
-                child: DropdownButton(
-                  isExpanded: true,
-                  value: provider.selectLang,
-                  icon: Icon(
-                    Icons.keyboard_arrow_down_outlined,
-                    color: Colors.black,
-                    size: 3.h,
-                  ),
-                  underline: Padding(
-                    padding: EdgeInsets.only(top: 1.h),
-                    child: const Divider(
-                      thickness: 1,
-                      color: Colors.grey,
-                    ),
-                  ),
-                  items: lang
-                      .map((e) {
-                    return DropdownMenuItem(
-                      value: e,
-                      child: Text(
-                        '${e}',
-                        style: const TextStyle(color: Colors.black54),
-                      ),
-                    );
-                  }).toList(),
-                  onChanged: (dynamic newValue) {
-                    setState(() {
-                      provider.selectLang = newValue!;
-                      // int id = provider
-                      //     .allBrandsModel!
-                      //     .data!
-                      //     .categories![provider
-                      //     .allBrandsModel!.data!.categories!
-                      //     .indexWhere((element) =>
-                      // element.name == newValue)]
-                      //     .id!;
-                      // provider.allBrandsModel!.data!.categories!
-                      //     .forEach((element) {
-                      //   if (selectCategoriesIds!
-                      //       .contains(element.id!)) {
-                      //     selectCategoriesIds!.remove(element.id!);
-                      //   }
-                      // });
-                      // selectCategoriesIds!.add(id);
-                    });
-                  },
-                  hint: const Text(
-                    "Select Language",
-                    style: TextStyle(
-                        fontSize: 12, color: Colors.black),
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: 2.h,
-              ),
-              GestureDetector(
-                onTap: () async{
-                  await provider.storeInfoApi();
-                },
-                child: Align(
-                  alignment: Alignment.center,
-                  child: Container(
-                    height: 5.5.h,
-                    width: 90.w,
-                    decoration: BoxDecoration(
-                      color: Color(0xff005493),
-                      borderRadius: BorderRadius.circular(5),
-                    ),
-                    child: Center(
-                      child: Text(
-                        'Save',
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 13.sp,
-                            fontWeight: FontWeight.bold),
+                      child: Center(
+                        child: Text(
+                          'Save',
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 13.sp,
+                              fontWeight: FontWeight.bold),
+                        ),
                       ),
                     ),
                   ),
                 ),
-              ),
-              SizedBox(
-                height: 2.h,
-              ),
-            ],
+                SizedBox(
+                  height: 2.h,
+                ),
+              ],
+            ),
           ),
         ),
       ),

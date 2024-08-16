@@ -1,18 +1,13 @@
 import 'package:db_2_0/custom_widgets/app_colors.dart';
 import 'package:db_2_0/custom_widgets/data_loading.dart';
-import 'package:db_2_0/view/screens/bottom_sheet/bottom_sheet.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:html_editor_enhanced/html_editor.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
-import 'package:flutter_switch/flutter_switch.dart';
 import '../../../../../custom_widgets/custom_line_textfield.dart';
-import '../../../../../custom_widgets/custom_toast.dart';
-import 'package:get/get.dart';
 import '../../../Brands/Brands Model/brand_model.dart';
 import '../../../auth_screens/login_screen/Login Provider/login_model_globle.dart';
-import '../../Models/category_product_model.dart' as category_product;
 import '../../Provider/add_product_provider.dart';
 
 class ProductScreen extends StatefulWidget {
@@ -31,7 +26,7 @@ class _ProductScreenState extends State<ProductScreen> {
   TextEditingController featuresController = TextEditingController();
   TextEditingController desController = TextEditingController();
   HtmlEditorController contentController = HtmlEditorController();
-  bool _value = false;
+  bool publish = false;
   var items = [
     'Item 1',
     'Item 2',
@@ -40,7 +35,6 @@ class _ProductScreenState extends State<ProductScreen> {
     'Item 5',
   ];
   var featureList = [
-    'None',
     'Trending products',
     'Best selling product',
   ];
@@ -63,14 +57,15 @@ class _ProductScreenState extends State<ProductScreen> {
     await provider.update_product_data(productId: widget.productId);
     await provider.get_brands_data();
     await provider.get_categories_data();
+    print('updateProductModel...${provider.updateProductModel!.toJson()}');
     if (provider.updateProductModel?.data?.product?.featured == 1) {
       selectFeature = 'Trending products';
     } else if (provider.updateProductModel?.data?.product?.featured == 2) {
       selectFeature = 'Best selling product';
-    } else {
-      selectFeature = 'None';
     }
     selectCategoriesIds = provider.updateProductModel?.data?.categoryIds ?? [];
+    publish =
+        provider.updateProductModel?.data?.product?.status == 1 ? true : false;
     contentController
         .insertHtml(provider.updateProductModel?.data?.content?.content ?? '');
     nameControllerT.text =
@@ -106,24 +101,16 @@ class _ProductScreenState extends State<ProductScreen> {
                               horizontal: 4.w, vertical: 1.h),
                           child: Row(
                             children: [
-                              FlutterSwitch(
-                                width: 9.w,
-                                height: 2.4.h,
-                                valueFontSize: 25.0,
-                                toggleSize: 16,
-                                value: _value,
-                                borderRadius: 30.0,
-                                padding: 1,
-                                showOnOff: false,
-                                inactiveColor: Color(0xff505050),
-                                onToggle: (val) {
+                              CupertinoSwitch(
+                                value: publish,
+                                onChanged: (val) {
                                   setState(() {
-                                    _value = val;
+                                    publish = val;
                                   });
                                 },
                               ),
                               SizedBox(
-                                width: 5.w,
+                                width: 3.w,
                               ),
                               Text(
                                 'Published',
@@ -272,23 +259,24 @@ class _ProductScreenState extends State<ProductScreen> {
                               ),
                             ),
                           ),
-                        Wrap(
-                          children: provider.allBrandsModel!.data!.categories!
-                              .map((e) {
-                            return selectCategoriesIds!.contains(e.id)
-                                ? Padding(
-                                    padding: const EdgeInsets.only(left: 4.0),
-                                    child: Chip(
-                                      label: Text('${e.name}'),
-                                      onDeleted: () {
-                                        selectCategoriesIds!.remove(e.id);
-                                        setState(() {});
-                                      },
-                                    ),
-                                  )
-                                : SizedBox();
-                          }).toList(),
-                        ),
+                        if (provider.allBrandsModel != null)
+                          Wrap(
+                            children: provider.allBrandsModel!.data!.categories!
+                                .map((e) {
+                              return selectCategoriesIds!.contains(e.id)
+                                  ? Padding(
+                                      padding: const EdgeInsets.only(left: 4.0),
+                                      child: Chip(
+                                        label: Text('${e.name}'),
+                                        onDeleted: () {
+                                          selectCategoriesIds!.remove(e.id);
+                                          setState(() {});
+                                        },
+                                      ),
+                                    )
+                                  : SizedBox();
+                            }).toList(),
+                          ),
                         SizedBox(
                           height: 2.h,
                         ),
@@ -353,24 +341,25 @@ class _ProductScreenState extends State<ProductScreen> {
                               ),
                             ),
                           ),
-                        Wrap(
-                          children: provider
-                              .cateoryProductModel!.data!.categories!
-                              .map((e) {
-                            return selectCategoriesIds!.contains(e.id)
-                                ? Padding(
-                                    padding: const EdgeInsets.only(left: 4.0),
-                                    child: Chip(
-                                      label: Text('${e.name}'),
-                                      onDeleted: () {
-                                        selectCategoriesIds!.remove(e.id);
-                                        setState(() {});
-                                      },
-                                    ),
-                                  )
-                                : SizedBox();
-                          }).toList(),
-                        ),
+                        if (provider.cateoryProductModel != null)
+                          Wrap(
+                            children: provider
+                                .cateoryProductModel!.data!.categories!
+                                .map((e) {
+                              return selectCategoriesIds!.contains(e.id)
+                                  ? Padding(
+                                      padding: const EdgeInsets.only(left: 4.0),
+                                      child: Chip(
+                                        label: Text('${e.name}'),
+                                        onDeleted: () {
+                                          selectCategoriesIds!.remove(e.id);
+                                          setState(() {});
+                                        },
+                                      ),
+                                    )
+                                  : SizedBox();
+                            }).toList(),
+                          ),
                         Padding(
                           padding: EdgeInsets.only(left: 4.w, right: 4.w),
                           child: DropdownButton(
@@ -425,7 +414,7 @@ class _ProductScreenState extends State<ProductScreen> {
                             children: [
                               GestureDetector(
                                 onTap: () async {
-                                  print('$selectCategoriesIds');
+                                  print('${selectCategoriesIds}');
                                   int? brand_id;
                                   provider.allBrandsModel!.data!.categories!
                                       .forEach((element) {
@@ -438,20 +427,30 @@ class _ProductScreenState extends State<ProductScreen> {
                                   print(
                                       'selectCategoriesIds..${selectCategoriesIds!.join(',')}');
                                   print('brand_id...$brand_id');
+                                  Map<String, dynamic>? map = {
+                                    'user_id': '${user_model.data!.userId}',
+                                    'product_id': '${widget.productId}',
+                                    'title': '${nameControllerT.text}',
+                                    'slug': '${slugController.text}',
+                                    'excerpt': '${desController.text}',
+                                    'content':
+                                        await contentController.getText(),
+                                    'status': publish ? '1' : '2',
+                                    'featured': selectFeature == null
+                                        ? null
+                                        : selectFeature == 'Trending products'
+                                            ? '1'
+                                            : '2',
+                                    'cats[]': selectCategoriesIds!.isEmpty
+                                        ? null
+                                        : '${selectCategoriesIds!.join(',')}',
+                                    'brand':
+                                        brand_id == null ? null : '${brand_id}',
+                                  };
+                                  map.removeWhere(
+                                      (key, value) => value == null);
                                   provider.get_update_product_data(
-                                      context: context,
-                                      map: {
-                                        'user_id': '${user_model.data!.userId}',
-                                        'product_id': '${widget.productId}',
-                                        'title': '${nameControllerT.text}',
-                                        'slug': '${slugController.text}',
-                                        'excerpt': '${desController.text}',
-                                        //'content' : '${contentController}',
-                                        'featured': '${selectFeature}',
-                                        'cats[]':
-                                            '${selectCategoriesIds!.join(',')}',
-                                        'brand': '${brand_id}',
-                                      });
+                                      context: context, map: map);
                                 },
                                 child: Container(
                                   decoration: BoxDecoration(
