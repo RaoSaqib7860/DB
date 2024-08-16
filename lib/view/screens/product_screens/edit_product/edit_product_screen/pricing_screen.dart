@@ -14,11 +14,10 @@ import 'package:get/get.dart';
 
 import '../../Provider/add_product_provider.dart';
 
-
 class PricingScreen extends StatefulWidget {
   final int? index;
   final String? productId;
-  const PricingScreen({this.index,Key? key,this.productId}) : super(key: key);
+  const PricingScreen({this.index, Key? key, this.productId}) : super(key: key);
 
   @override
   State<PricingScreen> createState() => _PricingScreenState();
@@ -45,229 +44,242 @@ class _PricingScreenState extends State<PricingScreen> {
     api_call();
     super.initState();
   }
-  String? inDate;
-  api_call()async{
-    final AddProductProvider provider =
-    Provider.of<AddProductProvider>(context, listen: false);
-   await provider.update_price_product_data(map: {
-     'user_id': '${user_model.data!.userId}',
-     'product_id': '${widget.productId}',
-   });
-    //final String htmlContent = """${provider.updateProductModel!.data!.product!.content!.value!}""";
-    priceController.text = provider.updateProductPriceModel!.data!.price!.price.toString();
-    regPriceController.text = provider.updateProductPriceModel!.data!.price!.regularPrice.toString();
-    sDateController.text = provider.updateProductPriceModel!.data!.price!.startingDate!;
-    endDateController.text = provider.updateProductPriceModel!.data!.price!.endingDate!;
-    discountController.text = provider.updateProductPriceModel!.data!.price!.specialPrice!.toString();
-    setState(() {
 
+  String? inDate;
+  api_call() async {
+    final AddProductProvider provider =
+        Provider.of<AddProductProvider>(context, listen: false);
+    await provider.update_price_product_data(map: {
+      'user_id': '${user_model.data!.userId}',
+      'product_id': '${widget.productId}',
     });
+    priceController.text =
+        provider.updateProductPriceModel?.data?.price?.price.toString() ?? '0';
+    regPriceController.text = provider
+            .updateProductPriceModel?.data?.price?.regularPrice
+            .toString() ??
+        '0';
+    sDateController.text =
+        provider.updateProductPriceModel?.data?.price?.startingDate ?? '';
+    endDateController.text =
+        provider.updateProductPriceModel?.data?.price?.endingDate ?? '';
+    discountController.text = provider
+            .updateProductPriceModel?.data!.price?.specialPrice
+            ?.toString() ??
+        '0';
+    setState(() {});
   }
 
   @override
   Widget build(BuildContext context) {
-    final AddProductProvider provider = Provider.of<AddProductProvider>(context);
+    final AddProductProvider provider =
+        Provider.of<AddProductProvider>(context);
 
     return DataLoading(
-      isLoading: provider.loading,
+      isLoading: provider.pricing_loading,
       child: Scaffold(
         body: SingleChildScrollView(
-          child:provider.updateProductPriceModel == null? SizedBox(): Container(
-            child: Padding(
-              padding:  EdgeInsets.symmetric(horizontal: 2.w),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  CustomLineTextField(name: 'Current Price',hint: '3500',controller: priceController),
-                  CustomLineTextField(name: 'Regular Price',hint: '4000',controller: regPriceController),
-                  //SizedBox(height: 2.h,),
-                  // Padding(
-                  //   padding:  EdgeInsets.only(left: 4.w,right: 4.w),
-                  //   child: Text(
-                  //     'Discount Type',
-                  //     style: TextStyle(color: Colors.black,fontSize: 10.sp),
-                  //   ),
-                  // ),
-                  CustomLineTextField(name: 'Discounted Type',hint: '$discountType',),
-                  // Padding(
-                  //   padding:  EdgeInsets.only(left: 4.w,right: 4.w),
-                  //   child: DropdownButton(
-                  //     isExpanded: true,
-                  //     value: dropdownvalue,
-                  //     icon: Icon(Icons.keyboard_arrow_down_outlined,color: Colors.black,size: 3.h,),
-                  //     underline: Padding(
-                  //       padding:  EdgeInsets.only(top: 1.h),
-                  //       child: Divider(
-                  //         thickness: 1,
-                  //         color: Colors.grey,
-                  //       ),
-                  //     ),
-                  //     items: items.map((String items) {
-                  //       return DropdownMenuItem(
-                  //         value: items,
-                  //         child: Text(items,style: TextStyle(color: Colors.black54),),
-                  //       );
-                  //     }).toList(),
-                  //     onChanged: (String? newValue) {
-                  //       setState(() {
-                  //         dropdownvalue = newValue!;
-                  //       });
-                  //     },
-                  //     hint:  Text(
-                  //       "Font Family",
-                  //       style: TextStyle(fontWeight: FontWeight.bold,color: Colors.black),
-                  //     ),
-                  //   ),
-                  // ),
-                  SizedBox(height: 2.h,),
-                  CustomLineTextField(name: 'Discounted Price',hint: '500',controller: discountController),
-                  CustomLineTextField(
-                    onClick: (){
-                      _showDialog(
-                        CupertinoDatePicker(
-                          //initialDateTime: sDateController,
-                          mode: CupertinoDatePickerMode.date,
-                          use24hFormat: true,
-                          onDateTimeChanged: (DateTime newDate) {
-                            String d = newDate.toString();
-                            var splitDate = d.split(" ");
-                            sDateController.text =
-                            splitDate[0];
-                            //error_date = false;
-                            setState(() {});
-                          },
-                        ),
-                      );
-                    },
-                    readOnly: true,
-                      name: 'Special Price Start',
-                      hint: 'Date',
-                      controller: sDateController),
-                  CustomLineTextField(onClick: (){
-                    _showDialog(
-                      CupertinoDatePicker(
-                        //initialDateTime: sDateController,
-                        mode: CupertinoDatePickerMode.date,
-                        use24hFormat: true,
-                        onDateTimeChanged: (DateTime newDate) {
-                          String d = newDate.toString();
-                          var splitDate = d.split(" ");
-                          endDateController.text =
-                          splitDate[0];
-                          //error_date = false;
-                          setState(() {});
-                        },
-                      ),
-                    );
-                  },
-                      readOnly: true,name: 'Special Price End',hint: 'Date',controller: endDateController),
-                  SizedBox(height: 2.h,),
-                  Padding(
-                    padding:  EdgeInsets.symmetric(horizontal: 4.w),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      crossAxisAlignment: CrossAxisAlignment.end,
+          child: provider.updateProductPriceModel == null
+              ? SizedBox()
+              : Container(
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 2.w),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        GestureDetector(
-                          onTap: () async{
-                            await provider.update_price_product_data(map: {
-                              'user_id': '${user_model.data!.userId}',
-                              'product_id': '${widget.productId}',
-                              'price': '${priceController.text}',
-                              'special_price': '${regPriceController.text}',
-                              'pstatus': '${discountController.text}',
-                              'price_type': '1',
-                              'special_price_start': '${sDateController.text}',
-                              'special_price_end': '${endDateController.text}',
-                             // 'special_id': '${widget.productId}',
-                            });
-                            CustomToastManager.showToast(
-                                context: context,
-                                height: 8.h,
-                                width: 60.w,
-                                message: Center(
-                                  child: Padding(
-                                    padding:  EdgeInsets.symmetric(horizontal: 2.w),
-                                    child: Row(
-                                      children: [
-                                        SizedBox(width: 5.w,),
-                                        SvgPicture.asset('assets/svgs/pro_toast.svg',height: 3.h,),
-                                        SizedBox(width: 5.w,),
-                                        Text(
-                                          'Changes saved\nsuccessfully',
-                                          style: TextStyle(
-                                              fontSize: 11.sp,
-                                              color: Colors.black,
-                                              height: 0.16.h,
-                                              fontWeight: FontWeight.w500
+                        CustomLineTextField(
+                            name: 'Current Price',
+                            hint: '3500',
+                            enable: false,
+                            controller: priceController),
+                        CustomLineTextField(
+                            name: 'Regular Price',
+                            hint: '4000',
+                            controller: regPriceController),
+                        CustomLineTextField(
+                          name: 'Discounted Type',
+                          hint: '$discountType',
+                          enable: false,
+                        ),
+                        SizedBox(
+                          height: 2.h,
+                        ),
+                        CustomLineTextField(
+                            name: 'Discounted Amount',
+                            hint: '500',
+                            controller: discountController),
+                        CustomLineTextField(
+                            onClick: () {
+                              _showDialog(
+                                CupertinoDatePicker(
+                                  //initialDateTime: sDateController,
+                                  mode: CupertinoDatePickerMode.date,
+                                  use24hFormat: true,
+                                  onDateTimeChanged: (DateTime newDate) {
+                                    String d = newDate.toString();
+                                    var splitDate = d.split(" ");
+                                    sDateController.text = splitDate[0];
+                                    //error_date = false;
+                                    setState(() {});
+                                  },
+                                ),
+                              );
+                            },
+                            readOnly: true,
+                            name: 'Special Price Start',
+                            hint: 'Date',
+                            controller: sDateController),
+                        CustomLineTextField(
+                            onClick: () {
+                              _showDialog(
+                                CupertinoDatePicker(
+                                  //initialDateTime: sDateController,
+                                  mode: CupertinoDatePickerMode.date,
+                                  use24hFormat: true,
+                                  onDateTimeChanged: (DateTime newDate) {
+                                    String d = newDate.toString();
+                                    var splitDate = d.split(" ");
+                                    endDateController.text = splitDate[0];
+                                    //error_date = false;
+                                    setState(() {});
+                                  },
+                                ),
+                              );
+                            },
+                            readOnly: true,
+                            name: 'Special Price End',
+                            hint: 'Date',
+                            controller: endDateController),
+                        SizedBox(
+                          height: 2.h,
+                        ),
+                        Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 4.w),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: [
+                              GestureDetector(
+                                onTap: () async {
+                                  await provider
+                                      .update_price_product_data(map: {
+                                    'user_id': '${user_model.data!.userId}',
+                                    'product_id': '${widget.productId}',
+                                    'price': '${regPriceController.text}',
+                                    'update': '1',
+                                    'special_price':
+                                        '${discountController.text}',
+                                    'pstatus': '1',
+                                    'price_type': '1',
+                                    'special_price_start':
+                                        '${sDateController.text}',
+                                    'special_price_end':
+                                        '${endDateController.text}',
+                                    'special_id':
+                                        '${provider.updateProductPriceModel!.data!.price!.id}',
+                                  });
+                                  CustomToastManager.showToast(
+                                      context: context,
+                                      height: 8.h,
+                                      width: 60.w,
+                                      message: Center(
+                                        child: Padding(
+                                          padding: EdgeInsets.symmetric(
+                                              horizontal: 2.w),
+                                          child: Row(
+                                            children: [
+                                              SizedBox(
+                                                width: 5.w,
+                                              ),
+                                              SvgPicture.asset(
+                                                'assets/svgs/pro_toast.svg',
+                                                height: 3.h,
+                                              ),
+                                              SizedBox(
+                                                width: 5.w,
+                                              ),
+                                              Text(
+                                                'Changes saved\nsuccessfully',
+                                                style: TextStyle(
+                                                    fontSize: 11.sp,
+                                                    color: Colors.black,
+                                                    height: 0.16.h,
+                                                    fontWeight:
+                                                        FontWeight.w500),
+                                              ),
+                                            ],
                                           ),
                                         ),
-                                      ],
+                                      ));
+                                },
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    color: redColor,
+                                    borderRadius: BorderRadius.circular(5),
+                                  ),
+                                  child: Padding(
+                                    padding: EdgeInsets.symmetric(
+                                        horizontal: 2.7.w, vertical: 0.8.h),
+                                    child: Text(
+                                      'Save Changes',
+                                      style: TextStyle(
+                                          color: Colors.white, fontSize: 10.sp),
                                     ),
                                   ),
-                                )
-                            );
-
-                          },
-                          child: Container(
-                            decoration: BoxDecoration(
-                              color: redColor,
-                              borderRadius: BorderRadius.circular(5),
-                            ),
-                            child: Padding(
-                              padding:  EdgeInsets.symmetric(horizontal: 2.7.w,vertical: 0.8.h),
-                              child: Text(
-                                'Save Changes',
-                                style: TextStyle(color: Colors.white,fontSize: 10.sp),
+                                ),
                               ),
-                            ),
+                              SizedBox(
+                                width: 3.w,
+                              ),
+                              Container(
+                                decoration: BoxDecoration(
+                                  color: blueColor,
+                                  borderRadius: BorderRadius.circular(5),
+                                ),
+                                child: Padding(
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: 7.w, vertical: 0.8.h),
+                                  child: Text(
+                                    'Next',
+                                    style: TextStyle(
+                                        color: Colors.white, fontSize: 10.sp),
+                                  ),
+                                ),
+                              )
+                            ],
                           ),
                         ),
-                        SizedBox(width: 3.w,),
-                        Container(
-                          decoration: BoxDecoration(
-                            color: blueColor,
-                            borderRadius: BorderRadius.circular(5),
-                          ),
-                          child: Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 7.w,vertical: 0.8.h),
-                            child: Text(
-                              'Next',
-                              style: TextStyle(color: Colors.white,fontSize: 10.sp),
-                            ),
-                          ),
+                        SizedBox(
+                          height: 4.h,
                         )
+                        //SizedBox(height: 4.h,)
                       ],
                     ),
                   ),
-                  SizedBox(height: 4.h,)
-                  //SizedBox(height: 4.h,)
-                ],
-              ),
-            ),
-          ),
+                ),
         ),
       ),
     );
   }
+
   void _showDialog(Widget child) {
     showCupertinoModalPopup<void>(
         context: context,
         builder: (BuildContext context) => Container(
-          height: 316,
-          padding: const EdgeInsets.only(top: 6.0),
-          // The Bottom margin is provided to align the popup above the system
-          // navigation bar.
-          margin: EdgeInsets.only(
-            bottom: MediaQuery.of(context).viewInsets.bottom,
-          ),
-          // Provide a background color for the popup.
-          color: CupertinoColors.systemBackground.resolveFrom(context),
-          // Use a SafeArea widget to avoid system overlaps.
-          child: SafeArea(
-            top: false,
-            child: child,
-          ),
-        ));
+              height: 316,
+              padding: const EdgeInsets.only(top: 6.0),
+              // The Bottom margin is provided to align the popup above the system
+              // navigation bar.
+              margin: EdgeInsets.only(
+                bottom: MediaQuery.of(context).viewInsets.bottom,
+              ),
+              // Provide a background color for the popup.
+              color: CupertinoColors.systemBackground.resolveFrom(context),
+              // Use a SafeArea widget to avoid system overlaps.
+              child: SafeArea(
+                top: false,
+                child: child,
+              ),
+            ));
   }
 }

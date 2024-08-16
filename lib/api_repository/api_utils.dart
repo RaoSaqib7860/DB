@@ -17,6 +17,7 @@ import '../view/screens/delivery_screens/models/delivery_order_model.dart';
 import '../view/screens/delivery_screens/models/store_info_model.dart';
 import '../view/screens/delivery_screens/models/tcs_information_model.dart';
 import '../view/screens/home_screen/Models/dashboard_model.dart';
+import '../view/screens/home_screen/Models/store_status_model.dart';
 import '../view/screens/order_screens/Models/all_order_model.dart';
 import '../view/screens/order_screens/Models/order_info_model.dart';
 import '../view/screens/product_screens/Models/all_product_model.dart';
@@ -182,7 +183,6 @@ class DataProvider {
     }
   }
 
-
   Future allProductModelApi({Map<String, dynamic>? map}) async {
     print('map is === $map');
     AllProductModel? allProductModel;
@@ -255,6 +255,7 @@ class DataProvider {
         body: map,
         headers: headers);
     var data = jsonDecode(response.body);
+    log("loginFunction code is = ${data}");
     if (data['result'] == 'success') {
       log("loginFunction code is = ${response.statusCode}");
       updateInventoryProduct = UpdateInventoryProduct.fromJson(data);
@@ -272,9 +273,9 @@ class DataProvider {
         Uri.parse('$baseURL$updateProductPriceInfoUrl'),
         body: map,
         headers: headers);
+    log("updateProductPriceApi...... ${response.body}");
     var data = jsonDecode(response.body);
     if (data['result'] == 'success') {
-      log("loginFunction code is = ${response.statusCode}");
       updateProductPriceModel = UpdateProductPriceModel.fromJson(data);
       return updateProductPriceModel;
     } else {
@@ -283,21 +284,23 @@ class DataProvider {
     }
   }
 
-  Future updateProductSEOApi({Map<String, dynamic>? map}) async {
+  Future updateProductSEOApi({Map<String, dynamic>? map,bool? update=false}) async {
     print('map is === $map');
     UpdateProductSEOModel? updateProductSEOModel;
     final response = await http.post(
         Uri.parse('$baseURL$updateProductSEOInfoUrl'),
         body: map,
         headers: headers);
-    var data = jsonDecode(response.body);
-    if (data['result'] == 'success') {
-      log("loginFunction code is = ${response.statusCode}");
-      updateProductSEOModel = UpdateProductSEOModel.fromJson(data);
-      return updateProductSEOModel;
-    } else {
-      Get.snackbar('Alert', '${data['message']}');
-      return null;
+    if(update==false){
+      var data = jsonDecode(response.body);
+      if (data['result'] == 'success') {
+        log("loginFunction code is = ${response.statusCode}");
+        updateProductSEOModel = UpdateProductSEOModel.fromJson(data);
+        return updateProductSEOModel;
+      } else {
+        Get.snackbar('Alert', '${data['message']}');
+        return null;
+      }
     }
   }
   Future GetStoreInfoApi({Map<String, dynamic>? map}) async {
@@ -319,21 +322,31 @@ class DataProvider {
   }
 
   Future update_Image_api({dio.FormData? uploadMedia}) async {
-    print('objectmapis${uploadMedia}');
-    UpdateProductImageModel? updateProductImageModel;
-    final response = await dio.Dio().post('$baseURL$updateProductImageInfoUrl',
-        data: uploadMedia, options: dio.Options(headers: headers));
-    var data = response.data;
-    updateProductImageModel = UpdateProductImageModel.fromJson(data);
-    print('Add Product result data =$data');
-    return updateProductImageModel;
+    try {
+      print('objectmapis${uploadMedia}');
+      UpdateProductImageModel? updateProductImageModel;
+      final response = await dio.Dio().post(
+          '$baseURL$updateProductImageInfoUrl',
+          data: uploadMedia,
+          options: dio.Options(headers: headers));
+      var data = response.data;
+      updateProductImageModel = UpdateProductImageModel.fromJson(data);
+      print('Add Product result data =$data');
+      return updateProductImageModel;
+    } catch (e) {
+      print('exceptionn..${e}');
+    }
   }
+
   Future updateStoreLogoApi({dio.FormData? uploadMedia}) async {
     print('objectmapis${uploadMedia}');
     final response = await dio.Dio().post('$baseURL$storeLogoUrl',
         data: uploadMedia, options: dio.Options(headers: headers));
     var data = response.data;
     print('Add LOOOO$data');
+    if (data['result'] == 'success') {
+      Get.snackbar('Success', '${data['message']}');
+    }
     return data;
   }
 
@@ -350,10 +363,12 @@ class DataProvider {
       Get.snackbar('Alert', '${data['message']}');
     }
   }
+
   Future stor_info_api({Map<String, dynamic>? map}) async {
     print('map is === $map');
     final response = await http.post(Uri.parse('$baseURL$store_info'),
         body: map, headers: headers);
+    print('${response.body}');
     var data = jsonDecode(response.body);
     print('$data');
     if (data['result'] == 'success') {
@@ -363,6 +378,7 @@ class DataProvider {
       Get.snackbar('Alert', '${data['message']}');
     }
   }
+
   Future stor_location_api({Map<String, dynamic>? map}) async {
     print('map is === $map');
     final response = await http.post(Uri.parse('$baseURL$store_location'),
@@ -523,6 +539,17 @@ class DataProvider {
     }
   }
 
+  Future check_logoApi({Map<String, dynamic>? map}) async {
+    print('map is === $map');
+    StoreStatusModel? storeStatusModel;
+    final response = await http.post(Uri.parse('$baseURL$check_logo'),
+        body: map, headers: headers);
+    var data = jsonDecode(response.body);
+    log("check_logoApi code is = ${data}");
+    storeStatusModel = StoreStatusModel.fromJson(data);
+    return storeStatusModel;
+  }
+
   Future delivery_costApi({Map<String, dynamic>? map}) async {
     print('map is === $map');
     DeliveryCostModel? deliveryLocationModel;
@@ -595,6 +622,12 @@ class DataProvider {
     if (data['result'] == 'success') {
       Get.snackbar('Alert', '${data['message']}\n${data['data']}');
     }
+  }
+
+  Future remove_images_productApi({Map<String, dynamic>? map}) async {
+    print('map is === $map');
+    await http.post(Uri.parse('$baseURL$remove_images_product'),
+        body: map, headers: headers);
   }
 
   Future add_paymentgatewayApi({Map<String, dynamic>? map}) async {

@@ -4,6 +4,7 @@ import 'package:db_2_0/custom_widgets/data_loading.dart';
 import 'package:db_2_0/view/screens/product_screens/add_product_screen/add_product_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 import 'package:timeago/timeago.dart' as timeago;

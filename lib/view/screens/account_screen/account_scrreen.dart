@@ -6,6 +6,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 import 'package:db_2_0/utils_services/storage_util.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../../../custom_widgets/app_colors.dart';
 import '../../../custom_widgets/custom_bottomsheet.dart';
 import '../../../custom_widgets/custom_fill_container.dart';
@@ -232,12 +233,17 @@ class _AccountScreenState extends State<AccountScreen> {
                 child: customRow(image: 'subb', text: 'Subscriptions Plans')),
             customRow(image: 'tutorial', text: 'Tutorials'),
             GestureDetector(
-                onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => FAQScreen(),
-                      ));
+                onTap: () async{
+                  // Navigator.push(
+                  //     context,
+                  //     MaterialPageRoute(
+                  //       builder: (context) => FAQScreen(),
+                  //     ));
+                  if (!await launchUrl(Uri.parse(
+                  'https://dialboxx.com/page/refund-policy-faqs'))) {
+                  throw Exception(
+                  'Could not launch');
+                  }
                 },
                 child: customRow(image: 'faqs', text: 'FAQ’s')),
             GestureDetector(

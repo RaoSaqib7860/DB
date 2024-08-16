@@ -1,9 +1,9 @@
 import 'dart:io';
 import 'package:db_2_0/view/screens/Brands/Brands%20Model/brand_model.dart';
 import 'package:dio/dio.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart' as Gett;
 import 'package:image_picker/image_picker.dart';
 import 'package:sizer/sizer.dart';
 import '../../../../api_repository/api_utils.dart';
@@ -24,6 +24,10 @@ class AddProductProvider extends ChangeNotifier {
   TextEditingController quantityController = TextEditingController();
   bool value = false;
   bool loading = false;
+  bool pricing_loading = false;
+  bool image_loading = false;
+  bool seo_loading = false;
+  bool inentory_loading = false;
   UpdateProductModel? updateProductModel;
   UpdateProductPriceModel? updateProductPriceModel;
   UpdateProductImageModel? updateProductImageModel;
@@ -31,12 +35,20 @@ class AddProductProvider extends ChangeNotifier {
   AllBrandsModel? allBrandsModel;
   CateoryProductModel? cateoryProductModel;
   UpdateInventoryProduct? updateInventoryProduct;
-  File? profileImage;
+  List<File> profileImage = [];
   ImagePicker picker = ImagePicker();
   Future upload_Image() async {
-    final XFile? result = await picker.pickImage(source: ImageSource.gallery);
-    if (result != null) {
-      profileImage = File(result.path);
+    List<XFile> result = await picker.pickMultiImage();
+    int total =
+        profileImage.length + updateProductImageModel!.data!.medias!.length;
+    if (result.isNotEmpty) {
+      if (total + result.length <= 7) {
+        for (var i in result) {
+          profileImage.add(File(i.path));
+        }
+      } else {
+        Gett.Get.snackbar('Alert', 'Kindly select less than 5 images');
+      }
       update_state();
     }
   }
@@ -66,39 +78,38 @@ class AddProductProvider extends ChangeNotifier {
       {Map<String, dynamic>? map, BuildContext? context}) async {
     loading = true;
     update_state();
-    var data = await DataProvider().getUpdateOrderApi(map: map).then((value) {
-      CustomToastManager.showToast(
-          context: context,
-          height: 8.h,
-          width: 60.w,
-          message: Center(
-            child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 2.w),
-              child: Row(
-                children: [
-                  SizedBox(
-                    width: 5.w,
-                  ),
-                  SvgPicture.asset(
-                    'assets/svgs/pro_toast.svg',
-                    height: 3.h,
-                  ),
-                  SizedBox(
-                    width: 5.w,
-                  ),
-                  Text(
-                    'Changes saved\nsuccessfully',
-                    style: TextStyle(
-                        fontSize: 11.sp,
-                        color: Colors.black,
-                        height: 0.16.h,
-                        fontWeight: FontWeight.w500),
-                  ),
-                ],
-              ),
+    await DataProvider().getUpdateOrderApi(map: map);
+    CustomToastManager.showToast(
+        context: context,
+        height: 8.h,
+        width: 60.w,
+        message: Center(
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 2.w),
+            child: Row(
+              children: [
+                SizedBox(
+                  width: 5.w,
+                ),
+                SvgPicture.asset(
+                  'assets/svgs/pro_toast.svg',
+                  height: 3.h,
+                ),
+                SizedBox(
+                  width: 5.w,
+                ),
+                Text(
+                  'Changes saved\nsuccessfully',
+                  style: TextStyle(
+                      fontSize: 11.sp,
+                      color: Colors.black,
+                      height: 0.16.h,
+                      fontWeight: FontWeight.w500),
+                ),
+              ],
             ),
-          ));
-    });
+          ),
+        ));
     loading = false;
     update_state();
   }
@@ -120,55 +131,66 @@ class AddProductProvider extends ChangeNotifier {
   }
 
   Future update_price_product_data({Map<String, dynamic>? map}) async {
-    loading = true;
+    pricing_loading = true;
     update_state();
     var data = await DataProvider().updateProductPriceApi(map: map);
     updateProductPriceModel = data;
-    print('objectismodel${updateProductPriceModel!.toJson()}');
+    //print('objectismodel${updateProductPriceModel!.toJson()}');
     update_state();
     print('objectis${user_model.data!.userId}');
-    loading = false;
+    pricing_loading = false;
     update_state();
   }
 
-  Future update_SEO_product_data({Map<String, dynamic>? map}) async {
-    loading = true;
+  Future update_SEO_product_data({Map<String, dynamic>? map,bool? update=false}) async {
+    seo_loading = true;
     update_state();
-    var data = await DataProvider().updateProductSEOApi(map: map);
-    updateProductSEOModel = data;
-    print('objectismodel${updateProductSEOModel!.toJson()}');
+    var data = await DataProvider().updateProductSEOApi(map: map,update: update);
+    if(update==false){
+      updateProductSEOModel = data;
+    }
     update_state();
     print('objectis${user_model.data!.userId}');
-    loading = false;
+    seo_loading = false;
     update_state();
   }
 
   Future update_Inventory_ProductApi({Map<String, dynamic>? map}) async {
-    loading = true;
+    inentory_loading = true;
     update_state();
     var data = await DataProvider().updateInventoryProductApi(map: map);
     updateInventoryProduct = data;
-    print('objectismodel${updateInventoryProduct!.toJson()}');
     update_state();
     print('objectis${user_model.data!.userId}');
-    loading = false;
+    inentory_loading = false;
     update_state();
   }
 
-  Future update_Image_product_data({String? productId}) async {
-    loading = true;
+  Future update_Image_product_data(
+      {String? productId, bool? update = false}) async {
+    image_loading = true;
     update_state();
-    var data = await DataProvider().update_Image_api(
-        uploadMedia: FormData.fromMap({
+    FormData map_data = FormData.fromMap({
       'user_id': '${user_model.data!.userId}',
       'product_id': '${productId}',
-      //'media[]' : await MultipartFile.fromFile(profileImage!.path),
-    }));
-    updateProductImageModel = data;
-
+    });
+    if (update!) {
+      for (var file in profileImage) {
+        map_data.files.addAll([
+          MapEntry(
+              "media[]",
+              await MultipartFile.fromFile(file.path,
+                  filename: file.path.split('/').last)),
+        ]);
+      }
+    }
+    var data = await DataProvider().update_Image_api(uploadMedia: map_data);
+    if(update==false){
+      updateProductImageModel = data;
+    }
     update_state();
     print('objectis${user_model.data!.userId}');
-    loading = false;
+    image_loading = false;
     update_state();
   }
 

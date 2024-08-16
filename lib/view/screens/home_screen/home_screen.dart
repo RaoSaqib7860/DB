@@ -1,5 +1,6 @@
 import 'package:db_2_0/custom_widgets/app_colors.dart';
 import 'package:db_2_0/custom_widgets/data_loading.dart';
+import 'package:easy_stepper/easy_stepper.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -15,6 +16,7 @@ import '../auth_screens/login_screen/Model/login_model.dart';
 import 'DashBoard Provider/dashboard_provider.dart';
 import 'Store Information/Pickup_location/pickup_location.dart';
 import 'Store Information/store_info_screen.dart';
+import 'Update Store Setup/update_store_provider.dart';
 import 'home_chart.dart';
 import 'home_screens/logo_screen.dart';
 import 'home_screens/website_design_screen.dart';
@@ -41,6 +43,7 @@ class _HomeScreenState extends State<HomeScreen> {
     final HomePageProvider provider =
         Provider.of<HomePageProvider>(context, listen: false);
     provider.get_dashboard_data();
+    provider.check_store_status();
     get_storage();
   }
 
@@ -64,7 +67,7 @@ class _HomeScreenState extends State<HomeScreen> {
     final HomePageProvider provider = Provider.of<HomePageProvider>(context);
 
     return DataLoading(
-      isLoading: provider.loading,
+      isLoading: provider.loading || provider.outer_loading,
       child: Scaffold(
         backgroundColor: Colors.white,
         body: provider.loading
@@ -1015,142 +1018,252 @@ class _HomeScreenState extends State<HomeScreen> {
                       ],
                     ),
                   ),
-                  Positioned(
-                      bottom: 0,
-                      child: GestureDetector(
-                        onTap: () {
-                          showModalBottomSheet(
-                            context: context,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.vertical(
-                                  top: Radius.circular(20)),
-                            ),
-                            isScrollControlled: true,
-                            builder: (context) {
-                              return Padding(
-                                padding: MediaQuery.of(context).viewInsets,
-                                child: SingleChildScrollView(
-                                  child: Container(
-                                    // height: 33.h,
-                                    decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.only(
-                                            topRight: Radius.circular(20),
-                                            topLeft: Radius.circular(20))),
-                                    child: Padding(
-                                      padding:
-                                          EdgeInsets.symmetric(horizontal: 4.w),
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          SizedBox(
-                                            height: 0.8.h,
-                                          ),
-                                          Center(
-                                              child: SvgPicture.asset(
-                                            'assets/svgs/steppers.svg',
-                                            height: 1.h,
-                                          )),
-                                          Row(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.end,
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.end,
-                                            children: [
-                                              GestureDetector(
-                                                  onTap: () {
-                                                    Navigator.pop(context);
-                                                  },
-                                                  child: Icon(
-                                                    Icons.close,
-                                                    color: Colors.black,
-                                                    size: 3.h,
-                                                  )),
-                                            ],
-                                          ),
-                                          //SizedBox(height: 1.h,),
-                                          Text(
-                                            'Complete Your Store Setup',
-                                            style: TextStyle(
-                                                color: Colors.black,
-                                                fontSize: 14.sp),
-                                          ),
-                                          SizedBox(
-                                            height: 1.h,
-                                          ),
-                                          bottomContainer(
-                                            title: 'Add Store Logo',
-                                            subtitle:
-                                                'Online Stores with a logo get 5 times more Orders and 10 times more Store Views.',
-                                            ontap: () {
-                                              Navigator.pop(context);
-                                              Navigator.push(
-                                                  context,
-                                                  MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        LogoScreen(),
-                                                  ));
-                                            },
-                                          ),
-                                          bottomContainer(
-                                              title: 'Add Store Information',
+                  if (provider.storeStatusModel != null &&
+                      (provider.storeStatusModel!.location!.logo == false ||
+                          provider.storeStatusModel!.location!.phone == false ||
+                          provider.storeStatusModel!.location!.address ==
+                              false ||
+                          provider.storeStatusModel!.location!.shopName ==
+                              false))
+                    Positioned(
+                        bottom: 0,
+                        child: GestureDetector(
+                          onTap: () {
+                            showModalBottomSheet(
+                              context: context,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.vertical(
+                                    top: Radius.circular(20)),
+                              ),
+                              isScrollControlled: true,
+                              builder: (context) {
+                                return Padding(
+                                  padding: MediaQuery.of(context).viewInsets,
+                                  child: SingleChildScrollView(
+                                    child: Container(
+                                      // height: 33.h,
+                                      decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.only(
+                                              topRight: Radius.circular(20),
+                                              topLeft: Radius.circular(20))),
+                                      child: Padding(
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: 4.w),
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            SizedBox(
+                                              height: 0.8.h,
+                                            ),
+                                            EasyStepper(
+                                              activeStepTextColor: Colors.green,
+                                              finishedStepTextColor:
+                                                  Colors.green,
+                                              internalPadding: 0,
+                                              showLoadingAnimation: false,
+                                              stepRadius: 8,
+                                              showStepBorder: false,
+                                              steps: [
+                                                steper(
+                                                    complete: provider
+                                                                .storeStatusModel!
+                                                                .location!
+                                                                .logo ==
+                                                            false
+                                                        ? false
+                                                        : true),
+                                                steper(
+                                                    complete: provider
+                                                                .storeStatusModel!
+                                                                .location!
+                                                                .shopName ==
+                                                            false
+                                                        ? false
+                                                        : true),
+                                                steper(
+                                                    complete: provider
+                                                                    .storeStatusModel!
+                                                                    .location!
+                                                                    .address ==
+                                                                false ||
+                                                            provider
+                                                                    .storeStatusModel!
+                                                                    .location!
+                                                                    .phone ==
+                                                                false
+                                                        ? false
+                                                        : true),
+                                              ],
+                                              activeStep: 1,
+                                              showTitle: false,
+                                            ),
+                                            Row(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.end,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.end,
+                                              children: [
+                                                GestureDetector(
+                                                    onTap: () {
+                                                      Navigator.pop(context);
+                                                    },
+                                                    child: Icon(
+                                                      Icons.close,
+                                                      color: Colors.black,
+                                                      size: 3.h,
+                                                    )),
+                                              ],
+                                            ),
+                                            Text(
+                                              'Complete Your Store Setup',
+                                              style: TextStyle(
+                                                  color: Colors.black,
+                                                  fontSize: 14.sp),
+                                            ),
+                                            SizedBox(
+                                              height: 1.h,
+                                            ),
+                                            bottomContainer(
+                                              title: 'Add Store Logo',
+                                              complete: provider
+                                                          .storeStatusModel!
+                                                          .location!
+                                                          .logo ==
+                                                      false
+                                                  ? false
+                                                  : true,
                                               subtitle:
-                                                  'Online Stores with complete information increase customer trust by 70%',
-                                          ontap: (){
-                                            Navigator.pop(context);
-                                            Navigator.push(
-                                                context,
-                                                MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      StoreInformation(),
-                                                ));
-
-                                          }
-                                          ),
-                                          bottomContainer(
-                                              title: 'Add Pickup Location',
-                                              subtitle:
-                                                  'Make fulfilling orders easier by adding Pickup Location for your delivery.',
-                                               ontap: (){
-
-                                                 Navigator.pop(context);
-                                                 Navigator.push(
-                                                     context,
-                                                     MaterialPageRoute(
-                                                       builder: (context) =>
-                                                           PickupLocation(),
-                                                     ));
-                                               }
-                                           ),
-                                        ],
+                                                  'Online Stores with a logo get 5 times more Orders and 10 times more Store Views.',
+                                              ontap: () {
+                                                Navigator.pop(context);
+                                                Navigator.push(
+                                                    context,
+                                                    MaterialPageRoute(
+                                                        builder: (context) =>
+                                                            ChangeNotifierProvider(
+                                                              create: (_) =>
+                                                                  UpdateStoreProvider(),
+                                                              child:
+                                                                  LogoScreen(),
+                                                            ))).then(
+                                                    (value) async {
+                                                  provider.outer_loading = true;
+                                                  provider.update_state();
+                                                  await provider
+                                                      .check_store_status();
+                                                  provider.outer_loading =
+                                                      false;
+                                                  provider.update_state();
+                                                });
+                                              },
+                                            ),
+                                            bottomContainer(
+                                                title: 'Add Store Information',
+                                                complete: provider
+                                                            .storeStatusModel!
+                                                            .location!
+                                                            .shopName ==
+                                                        false
+                                                    ? false
+                                                    : true,
+                                                subtitle:
+                                                    'Online Stores with complete information increase customer trust by 70%',
+                                                ontap: () {
+                                                  Navigator.pop(context);
+                                                  Navigator.push(
+                                                      context,
+                                                      MaterialPageRoute(
+                                                        builder: (context) =>
+                                                            ChangeNotifierProvider(
+                                                          create: (_) =>
+                                                              UpdateStoreProvider(),
+                                                          child:
+                                                              StoreInformation(),
+                                                        ),
+                                                      )).then((value) async {
+                                                    provider.outer_loading =
+                                                        true;
+                                                    provider.update_state();
+                                                    await provider
+                                                        .check_store_status();
+                                                    provider.outer_loading =
+                                                        false;
+                                                    provider.update_state();
+                                                  });
+                                                }),
+                                            bottomContainer(
+                                                title: 'Add Pickup Location',
+                                                complete: provider
+                                                                .storeStatusModel!
+                                                                .location!
+                                                                .address ==
+                                                            false ||
+                                                        provider
+                                                                .storeStatusModel!
+                                                                .location!
+                                                                .phone ==
+                                                            false
+                                                    ? false
+                                                    : true,
+                                                subtitle:
+                                                    'Make fulfilling orders easier by adding Pickup Location for your delivery.',
+                                                ontap: () {
+                                                  Navigator.pop(context);
+                                                  Navigator.push(
+                                                      context,
+                                                      MaterialPageRoute(
+                                                        builder: (context) =>
+                                                            ChangeNotifierProvider(
+                                                          create: (_) =>
+                                                              UpdateStoreProvider(),
+                                                          child:
+                                                              PickupLocation(),
+                                                        ),
+                                                      )).then((value) async {
+                                                    provider.outer_loading =
+                                                        true;
+                                                    provider.update_state();
+                                                    await provider
+                                                        .check_store_status();
+                                                    provider.outer_loading =
+                                                        false;
+                                                    provider.update_state();
+                                                  });
+                                                }),
+                                          ],
+                                        ),
                                       ),
                                     ),
                                   ),
-                                ),
-                              );
-                            },
-                          );
-                        },
-                        child: Container(
-                          height: 4.h,
-                          width: 100.w,
-                          color: redColor,
-                          child: Center(
-                            child: Text(
-                              'Complete your Store Setup',
-                              style: TextStyle(
-                                  color: Colors.white, fontSize: 11.sp),
+                                );
+                              },
+                            );
+                          },
+                          child: Container(
+                            height: 4.h,
+                            width: 100.w,
+                            color: redColor,
+                            child: Center(
+                              child: Text(
+                                'Complete your Store Setup',
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 11.sp),
+                              ),
                             ),
                           ),
-                        ),
-                      ))
+                        ))
                 ],
               ),
       ),
     );
   }
 
-  Widget bottomContainer({String? title, String? subtitle, Function()? ontap}) {
+  Widget bottomContainer(
+      {String? title,
+      String? subtitle,
+      Function()? ontap,
+      bool? complete = false}) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -1166,14 +1279,22 @@ class _HomeScreenState extends State<HomeScreen> {
               child: Container(
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(2),
-                    border: Border.all(width: 1, color: Color(0xff6B6B6B))),
+                    border: complete!
+                        ? null
+                        : Border.all(width: 1, color: Color(0xff6B6B6B))),
                 child: Padding(
                   padding:
                       EdgeInsets.symmetric(horizontal: 4.w, vertical: 0.4.h),
-                  child: Text(
-                    'Add',
-                    style: TextStyle(color: Color(0xff6B6B6B), fontSize: 12.sp),
-                  ),
+                  child: complete!
+                      ? Image.asset(
+                          'assets/images/complete_icon.png',
+                          height: 2.h,
+                        )
+                      : Text(
+                          'Add',
+                          style: TextStyle(
+                              color: Color(0xff6B6B6B), fontSize: 12.sp),
+                        ),
                 ),
               ),
             )
@@ -1190,6 +1311,20 @@ class _HomeScreenState extends State<HomeScreen> {
           height: 1.5.h,
         )
       ],
+    );
+  }
+
+  EasyStep steper({bool? complete = false}) {
+    return EasyStep(
+      customStep: CircleAvatar(
+        radius: 8,
+        backgroundColor: Colors.white,
+        child: CircleAvatar(
+          radius: 7,
+          backgroundColor: complete! ? Colors.green : Colors.white,
+        ),
+      ),
+      title: 'waitongg',
     );
   }
 }
