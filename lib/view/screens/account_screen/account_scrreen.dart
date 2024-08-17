@@ -1,6 +1,7 @@
 import 'package:db_2_0/view/screens/account_screen/profile_setting_screen/profile_setting_screen.dart';
 import 'package:db_2_0/view/screens/account_screen/store_setting_screen/store_setting_screen.dart';
 import 'package:db_2_0/view/screens/account_screen/subsription_screens/subscription_screen.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -10,6 +11,7 @@ import 'package:url_launcher/url_launcher.dart';
 import '../../../custom_widgets/app_colors.dart';
 import '../../../custom_widgets/custom_bottomsheet.dart';
 import '../../../custom_widgets/custom_fill_container.dart';
+import '../../../custom_widgets/web_view.dart';
 import '../auth_screens/login_screen/login_screen.dart';
 import '../payment_screen/payment_screen.dart';
 import '../workthrough_screen/workthrough_screen.dart';
@@ -231,19 +233,27 @@ class _AccountScreenState extends State<AccountScreen> {
                       ));
                 },
                 child: customRow(image: 'subb', text: 'Subscriptions Plans')),
-            customRow(image: 'tutorial', text: 'Tutorials'),
             GestureDetector(
-                onTap: () async{
-                  // Navigator.push(
-                  //     context,
-                  //     MaterialPageRoute(
-                  //       builder: (context) => FAQScreen(),
-                  //     ));
-                  if (!await launchUrl(Uri.parse(
-                  'https://dialboxx.com/page/refund-policy-faqs'))) {
-                  throw Exception(
-                  'Could not launch');
-                  }
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => WebView(
+                          url:
+                              'https://youtu.be/dYCJgXQ7OtA?si=CQFL4DAZRTZ4qz7G',
+                        ),
+                      ));
+                },
+                child: customRow(image: 'tutorial', text: 'Tutorials')),
+            GestureDetector(
+                onTap: () async {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => WebView(
+                          url: 'https://dialboxx.com/page/refund-policy-faqs',
+                        ),
+                      ));
                 },
                 child: customRow(image: 'faqs', text: 'FAQ’s')),
             GestureDetector(
