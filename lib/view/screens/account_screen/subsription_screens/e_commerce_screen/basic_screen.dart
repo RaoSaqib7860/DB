@@ -1,13 +1,17 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../../../../custom_widgets/app_colors.dart';
 import '../../../../../custom_widgets/custom_list_tile.dart';
 import '../../../../../custom_widgets/custom_toast.dart';
+import '../Provider/subscription_history_plan+provider.dart';
 
 class BasicScreen extends StatefulWidget {
-  const BasicScreen({Key? key}) : super(key: key);
+  final String? name;
+  const BasicScreen({Key? key,this.name}) : super(key: key);
 
   @override
   State<BasicScreen> createState() => _BasicScreenState();
@@ -15,7 +19,22 @@ class BasicScreen extends StatefulWidget {
 
 class _BasicScreenState extends State<BasicScreen> {
   @override
+  void initState() {
+    getDataStore();
+    super.initState();
+  }
+  getDataStore() async {
+    final GetSubscriptionPlanProvider provider =
+    Provider.of<GetSubscriptionPlanProvider>(context, listen: false);
+    await provider.getOrderSubscriptionHistory();
+    setState(() {
+
+    });
+  }
+  @override
   Widget build(BuildContext context) {
+    final GetSubscriptionPlanProvider provider =
+    Provider.of<GetSubscriptionPlanProvider>(context);
     return Scaffold(
       body: SingleChildScrollView(
         child:Column(
@@ -79,40 +98,55 @@ class _BasicScreenState extends State<BasicScreen> {
                       children: [
                         SizedBox(height: 2.h,),
                         CustomListTie(
+                          text: 'Free Domain',
+                          widget:SvgPicture.asset('assets/svgs/Subtract.svg',height: 2.3.h,),
+                        ),
+                        CustomListTie(
                           text: 'Commission %',
-                          widget: Text(
-                            'ZERO',
-                            style: TextStyle(
-                                fontSize: 10.sp,
-                                color: Color(0xff535353),
-                                fontWeight: FontWeight.bold
-                            ),
-                          ),
+                          widget: SvgPicture.asset('assets/svgs/Subtract.svg',height: 2.3.h,),
+                        ),
+                        // CustomListTie(
+                        //   text: 'Free Deliveries',
+                        //   widget: Text(
+                        //     '3',
+                        //     style: TextStyle(
+                        //         fontSize: 10.sp,
+                        //         color: Color(0xff535353),
+                        //         fontWeight: FontWeight.bold
+                        //     ),
+                        //   ),
+                        // ),
+                        CustomListTie(
+                          text: 'Orders & Inventory Management',
+                          widget: SvgPicture.asset('assets/svgs/Subtract.svg',height: 2.3.h,),
                         ),
                         CustomListTie(
-                          text: 'Free Deliveries',
-                          widget: Text(
-                            '3',
-                            style: TextStyle(
-                                fontSize: 10.sp,
-                                color: Color(0xff535353),
-                                fontWeight: FontWeight.bold
-                            ),
-                          ),
+                          text: 'Customers Management',
+                          widget: SvgPicture.asset('assets/svgs/Subtract.svg',height: 2.3.h,),
                         ),
                         CustomListTie(
-                          text: 'Products Upload',
-                          widget: Text(
-                            '500',
-                            style: TextStyle(
-                                fontSize: 10.sp,
-                                color: Color(0xff535353),
-                                fontWeight: FontWeight.bold
-                            ),
-                          ),
+                          text: 'Products Bulk Upload',
+                          widget: SvgPicture.asset('assets/svgs/Subtract.svg',height: 2.3.h,),
                         ),
                         CustomListTie(
-                          text: 'Analytics',
+                          text: 'Connect your Domain Free',
+                          widget: SvgPicture.asset('assets/svgs/Subtract.svg',height: 2.3.h,),
+                        ),
+
+                        CustomListTie(
+                          text: 'Analytics & Reports',
+                          widget: SvgPicture.asset('assets/svgs/Subtract.svg',height: 2.3.h,),
+                        ),
+                        CustomListTie(
+                          text: 'Multiple Theme Layouts & Colors',
+                          widget: SvgPicture.asset('assets/svgs/Subtract.svg',height: 2.3.h,),
+                        ),
+                        CustomListTie(
+                          text: 'Whatsapp Integration & SEO tool',
+                          widget: SvgPicture.asset('assets/svgs/Subtract.svg',height: 2.3.h,),
+                        ),
+                        CustomListTie(
+                          text: 'Product Limit 500',
                           widget: Text(
                             'Standard',
                             style: TextStyle(
@@ -123,7 +157,7 @@ class _BasicScreenState extends State<BasicScreen> {
                           ),
                         ),
                         CustomListTie(
-                          text: 'Staff Accounts',
+                          text: 'Store Staff 1',
                           widget: Text(
                             '1',
                             style: TextStyle(
@@ -134,21 +168,14 @@ class _BasicScreenState extends State<BasicScreen> {
                           ),
                         ),
                         CustomListTie(
-                          text: 'Discount Codes',
+                          text: 'Custom Theme (upon request)',
                           widget: SvgPicture.asset('assets/svgs/Subtract.svg',height: 2.3.h,),
                         ),
                         CustomListTie(
-                          text: 'Marketing Tools',
+                          text: 'Store Setup Visit with Training',
                           widget: SvgPicture.asset('assets/svgs/Subtract.svg',height: 2.3.h,),
                         ),
-                        CustomListTie(
-                          text: 'TCS Delivery System',
-                          widget: SvgPicture.asset('assets/svgs/Subtract.svg',height: 2.3.h,),
-                        ),
-                        CustomListTie(
-                          text: 'Jazz Cash Payment Gateway',
-                          widget: SvgPicture.asset('assets/svgs/Subtract.svg',height: 2.3.h,),
-                        ),
+
                         CustomListTie(
                           text: '24/7 Support',
                           widget: SvgPicture.asset('assets/svgs/Subtract.svg',height: 2.3.h,),

@@ -1,4 +1,6 @@
+import 'package:db_2_0/view/screens/account_screen/analytic_screen/Provider/get_analytics_provider.dart';
 import 'package:db_2_0/view/screens/account_screen/store_setting_screen/Provider/get_store_info_provider.dart';
+import 'package:db_2_0/view/screens/account_screen/subsription_screens/Provider/subscription_history_plan+provider.dart';
 import 'package:db_2_0/view/screens/auth_screens/login_screen/Login%20Provider/login_provider.dart';
 import 'package:db_2_0/view/screens/auth_screens/signup_detail_screen/SignUp%20Provider/sign_up_provider.dart';
 import 'package:db_2_0/view/screens/home_screen/DashBoard%20Provider/dashboard_provider.dart';
@@ -28,6 +30,8 @@ void main() async {
         ChangeNotifierProvider(create: (_) => DeliveryProvider()),
         ChangeNotifierProvider(create: (_) => UpdateStoreProvider()),
         ChangeNotifierProvider(create: (_) => GetAndUpdateStoreProvider()),
+        ChangeNotifierProvider(create: (_) => GetAnalyticsProvider()),
+        ChangeNotifierProvider(create: (_) => GetSubscriptionPlanProvider()),
       ],
       child: const MyApp(),
     ),

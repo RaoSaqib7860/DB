@@ -21,7 +21,8 @@ class _StoreInnfoScreenState extends State<StoreInnfoScreen> {
     'right',
   ];
   List lang = [
-    'eng',
+    'en',
+    'ar',
     'ur',
   ];
   List shopType = [
@@ -55,9 +56,18 @@ class _StoreInnfoScreenState extends State<StoreInnfoScreen> {
     }else{
       provider.shopValue = 'I will sale physical products';
     }
-    // provider.shopValue = provider.getStoreInfoModel?.data?.activeTheme?.shopType.toString()?? '';
     provider.payment = provider.getStoreInfoModel?.data?.orderReceiveMethod?? '';
+    if(provider.getStoreInfoModel?.data?.languages == 'en'){
+      provider.selectLang = 'en';
+    }else if(provider.getStoreInfoModel?.data?.languages == 'ur'){
+      provider.selectLang = 'ur';
+    }else{
+      provider.selectLang = 'ar';
+    }
     //provider.selectLang = provider.getStoreInfoModel?.data?.languages?.?? '';
+    setState(() {
+
+    });
   }
 
   @override
@@ -65,7 +75,7 @@ class _StoreInnfoScreenState extends State<StoreInnfoScreen> {
     final GetAndUpdateStoreProvider provider =
     Provider.of<GetAndUpdateStoreProvider>(context);
     return DataLoading(
-      isLoading: provider.loading,
+      isLoading: provider.loading!,
       child: Scaffold(
         body: provider.getStoreInfoModel == null? SizedBox() : Container(
           height: 100.h,
@@ -420,7 +430,7 @@ class _StoreInnfoScreenState extends State<StoreInnfoScreen> {
                 ),
                 GestureDetector(
                   onTap: () async{
-                    await provider.storeInfoApi();
+                    await provider.updateStoreInfoApi();
                   },
                   child: Align(
                     alignment: Alignment.center,

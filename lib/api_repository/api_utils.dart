@@ -8,7 +8,12 @@ import 'package:http/http.dart' as http;
 import 'package:dio/dio.dart' as dio;
 import '../utils_services/storage_util.dart';
 import '../view/screens/Brands/Brands Model/brand_model.dart';
+import '../view/screens/account_screen/analytic_screen/Model/analytics_model.dart';
+import '../view/screens/account_screen/analytic_screen/Model/get_order_history_model.dart';
 import '../view/screens/account_screen/store_setting_screen/Models/get_store_info_model.dart';
+import '../view/screens/account_screen/store_setting_screen/Models/social_model.dart';
+import '../view/screens/account_screen/subsription_screens/Model/get_order_history_plan.dart';
+import '../view/screens/account_screen/subsription_screens/Model/subscription_plan_history.dart';
 import '../view/screens/auth_screens/login_screen/Login Provider/login_model_globle.dart';
 import '../view/screens/auth_screens/login_screen/Model/login_model.dart';
 import '../view/screens/delivery_screens/models/delivery_cost_model.dart';
@@ -260,6 +265,96 @@ class DataProvider {
       log("loginFunction code is = ${response.statusCode}");
       updateInventoryProduct = UpdateInventoryProduct.fromJson(data);
       return updateInventoryProduct;
+    } else {
+      Get.snackbar('Alert', '${data['message']}');
+      return null;
+    }
+  }
+  Future updateSocialLinkApi({Map<String, dynamic>? map}) async {
+    print('map is === $map');
+    GetSocialLinkModel? getSocialLinkModel;
+    final response = await http.post(
+        Uri.parse('$baseURL$updateAndGetSocialUrl'),
+        body: map,
+        headers: headers);
+    var data = jsonDecode(response.body);
+    log("loginFunction code is = ${data}");
+    if (data['result'] == 'success') {
+      log("loginFunction code is = ${response.statusCode}");
+      getSocialLinkModel = GetSocialLinkModel.fromJson(data);
+      return getSocialLinkModel;
+    } else {
+      Get.snackbar('Alert', '${data['message']}');
+      return null;
+    }
+  }
+  Future getAnalyticsApi({Map<String, dynamic>? map}) async {
+    print('map is === $map');
+    GetAnalyticsModel? getAnalyticsModel;
+    final response = await http.post(
+        Uri.parse('$baseURL$storeAnalyticsUrl'),
+        body: map,
+        headers: headers);
+    var data = jsonDecode(response.body);
+    log("loginFunction code is = ${data}");
+    if (data['result'] == 'success') {
+      log("loginFunction code is = ${response.statusCode}");
+      getAnalyticsModel = GetAnalyticsModel.fromJson(data);
+      return getAnalyticsModel;
+    } else {
+      Get.snackbar('Alert', '${data['message']}');
+      return null;
+    }
+  }
+  Future getOrderHistoryApi({Map<String, dynamic>? map}) async {
+    print('map is === $map');
+    GetOrserHistoryModel? getOrserHistoryModel;
+    final response = await http.post(
+        Uri.parse('$baseURL$getOrderHistoryUrl'),
+        body: map,
+        headers: headers);
+    var data = jsonDecode(response.body);
+    log("loginFunction code is = ${data}");
+    if (data['result'] == 'success') {
+      log("loginFunction code is = ${response.statusCode}");
+      getOrserHistoryModel = GetOrserHistoryModel.fromJson(data);
+      return getOrserHistoryModel;
+    } else {
+      Get.snackbar('Alert', '${data['message']}');
+      return null;
+    }
+  }
+  Future getSubscriptionHistoryApi({Map<String, dynamic>? map}) async {
+    print('map is === $map');
+    GetSubscriptionPlanHistoryModel? getSubscriptionPlanHistoryModel;
+    final response = await http.post(
+        Uri.parse('$baseURL$getSubscriptionHistoryUrl'),
+        body: map,
+        headers: headers);
+    var data = jsonDecode(response.body);
+    log("loginFunction code is = ${data}");
+    if (data['result'] == 'success') {
+      log("loginFunction code is = ${response.statusCode}");
+      getSubscriptionPlanHistoryModel = GetSubscriptionPlanHistoryModel.fromJson(data);
+      return getSubscriptionPlanHistoryModel;
+    } else {
+      Get.snackbar('Alert', '${data['message']}');
+      return null;
+    }
+  }
+  Future getOrderSubscriptionHistoryApi({Map<String, dynamic>? map}) async {
+    print('map is === $map');
+    GetSubscriptionOrderHistoryModel? getSubscriptionOrderHistoryModel;
+    final response = await http.post(
+        Uri.parse('$baseURL$getOrderSubscriptionHistoryUrl'),
+        body: map,
+        headers: headers);
+    var data = jsonDecode(response.body);
+    log("loginFunction code is = ${data}");
+    if (data['result'] == 'success') {
+      log("loginFunction code is = ${response.statusCode}");
+      getSubscriptionOrderHistoryModel = GetSubscriptionOrderHistoryModel.fromJson(data);
+      return getSubscriptionOrderHistoryModel;
     } else {
       Get.snackbar('Alert', '${data['message']}');
       return null;

@@ -154,15 +154,6 @@ class _PickupLocationState extends State<PickupLocation> {
                 ),
                 GestureDetector(
                   onTap: () async {
-                    // 'user_id': '${user_model.data!.userId}',
-                    // 'company_name': '${companyNameController.text}',
-                    // 'address': '${addressController.text}',
-                    // 'city': '${cityController.text}',
-                    // 'state': '${stateController.text}',
-                    // 'zip_code': '${zipCodeController.text}',
-                    // 'email': '${emailController.text}',
-                    // 'phone': '${phoneController.text}',
-                    // 'invoice_description': '${invoiceController.text}',
                     if (provider.companyNameController.text.isNotEmpty &&
                         provider.addressController.text.isNotEmpty &&
                         provider.cityController.text.isNotEmpty &&
