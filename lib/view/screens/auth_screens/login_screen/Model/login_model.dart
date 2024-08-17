@@ -39,6 +39,7 @@ class Data {
   String? createdAt;
   String? domain;
   int? userplanId;
+  String? storelogo;
   String? fullDomain;
   int? domainStatus;
   int? type;
@@ -77,6 +78,7 @@ class Data {
       this.businessIndustory,
       this.onOff,
       this.country,
+      this.storelogo,
       this.category});
 
   Data.fromJson(Map<String, dynamic> json) {
@@ -105,6 +107,7 @@ class Data {
     onOff = json['on_off'];
     country = json['country'];
     category = json['category'];
+    storelogo = json['storelogo'];
   }
 
   Map<String, dynamic> toJson() {
@@ -134,6 +137,7 @@ class Data {
     data['on_off'] = this.onOff;
     data['country'] = this.country;
     data['category'] = this.category;
+    data['storelogo'] = this.storelogo;
     return data;
   }
 }

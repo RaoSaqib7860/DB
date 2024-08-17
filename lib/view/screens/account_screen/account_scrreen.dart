@@ -1,6 +1,7 @@
 import 'package:db_2_0/view/screens/account_screen/profile_setting_screen/profile_setting_screen.dart';
 import 'package:db_2_0/view/screens/account_screen/store_setting_screen/store_setting_screen.dart';
 import 'package:db_2_0/view/screens/account_screen/subsription_screens/subscription_screen.dart';
+import 'package:db_2_0/view/screens/auth_screens/login_screen/Login%20Provider/login_model_globle.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -63,13 +64,7 @@ class _AccountScreenState extends State<AccountScreen> {
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(5),
                         border: Border.all(color: Colors.grey, width: 1)),
-                    child: Center(
-                      child: Icon(
-                        Icons.image,
-                        color: blueColor,
-                        size: 10.w,
-                      ),
-                    ),
+                    child: Image.network('${user_model.data?.storelogo}'),
                   ),
                   SizedBox(
                     width: 3.w,
@@ -78,7 +73,7 @@ class _AccountScreenState extends State<AccountScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Charlie Clothing',
+                        '${user_model.data?.name}',
                         style: TextStyle(color: Colors.black, fontSize: 14.sp),
                       ),
                       SizedBox(
