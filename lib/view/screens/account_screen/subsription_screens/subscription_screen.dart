@@ -108,7 +108,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                   purchaseText: 'Purchase',
                   purchaseIcon: Icons.arrow_forward,
                   ontap: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => BasicScreen(),));
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => BasicScreen(planId: provider.getSubscriptionPlanHistoryModel!.data![0].id,),));
                   },
                 ),
                 customContainer(
@@ -121,7 +121,8 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                     purchaseText: 'Purchase',
                     purchaseIcon: Icons.arrow_forward,
                   ontap: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => PlusScreen(),));
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => BasicScreen(planId: provider.getSubscriptionPlanHistoryModel!.data![1].id,),));
+                      //Navigator.push(context, MaterialPageRoute(builder: (context) => PlusScreen(),));
                   },
                 ),
                 customContainer(
@@ -134,7 +135,8 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                     purchaseText: 'Contact us',
                     purchaseIcon: Icons.phone_enabled,
                   ontap: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => EnterpriseScreen(),));
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => BasicScreen(planId: provider.getSubscriptionPlanHistoryModel!.data![2].id,),));
+                      //Navigator.push(context, MaterialPageRoute(builder: (context) => EnterpriseScreen(),));
                   },
                 ),
                 //SizedBox(height: 2.h,),

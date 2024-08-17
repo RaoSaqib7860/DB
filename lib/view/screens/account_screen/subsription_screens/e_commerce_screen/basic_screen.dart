@@ -10,8 +10,8 @@ import '../../../../../custom_widgets/custom_toast.dart';
 import '../Provider/subscription_history_plan+provider.dart';
 
 class BasicScreen extends StatefulWidget {
-  final String? name;
-  const BasicScreen({Key? key,this.name}) : super(key: key);
+  late   int? planId;
+   BasicScreen({Key? key,this.planId}) : super(key: key);
 
   @override
   State<BasicScreen> createState() => _BasicScreenState();
@@ -24,17 +24,33 @@ class _BasicScreenState extends State<BasicScreen> {
     super.initState();
   }
   getDataStore() async {
-    final GetSubscriptionPlanProvider provider =
-    Provider.of<GetSubscriptionPlanProvider>(context, listen: false);
-    await provider.getOrderSubscriptionHistory();
+    if(widget.planId == 8){
+      widget.planId = 8;
+      setState(() {
+
+      });
+    }else if(widget.planId == 4){
+      widget.planId = 4;
+      setState(() {
+
+      });
+    }else{
+      widget.planId = 3;
+      setState(() {
+
+      });
+    }
+    // final GetSubscriptionPlanProvider provider =
+    // Provider.of<GetSubscriptionPlanProvider>(context, listen: false);
+    // await provider.getOrderSubscriptionHistory();
     setState(() {
 
     });
   }
   @override
   Widget build(BuildContext context) {
-    final GetSubscriptionPlanProvider provider =
-    Provider.of<GetSubscriptionPlanProvider>(context);
+    // final GetSubscriptionPlanProvider provider =
+    // Provider.of<GetSubscriptionPlanProvider>(context);
     return Scaffold(
       body: SingleChildScrollView(
         child:Column(
@@ -146,40 +162,29 @@ class _BasicScreenState extends State<BasicScreen> {
                           widget: SvgPicture.asset('assets/svgs/Subtract.svg',height: 2.3.h,),
                         ),
                         CustomListTie(
-                          text: 'Product Limit 500',
-                          widget: Text(
-                            'Standard',
-                            style: TextStyle(
-                                fontSize: 10.sp,
-                                color: Color(0xff535353),
-                                fontWeight: FontWeight.bold
-                            ),
-                          ),
-                        ),
-                        CustomListTie(
-                          text: 'Store Staff 1',
-                          widget: Text(
-                            '1',
-                            style: TextStyle(
-                                fontSize: 10.sp,
-                                color: Color(0xff535353),
-                                fontWeight: FontWeight.bold
-                            ),
-                          ),
-                        ),
-                        CustomListTie(
-                          text: 'Custom Theme (upon request)',
+                          text:widget.planId == 8? 'Product Limit 500':widget.planId == 4? 'Product Limit 1500':'Product Unlimited',
                           widget: SvgPicture.asset('assets/svgs/Subtract.svg',height: 2.3.h,),
                         ),
                         CustomListTie(
-                          text: 'Store Setup Visit with Training',
+                          text:widget.planId == 8? 'Store Staff 1':widget.planId == 4? 'Store Staff 5':'Store Staff 10',
                           widget: SvgPicture.asset('assets/svgs/Subtract.svg',height: 2.3.h,),
                         ),
-
                         CustomListTie(
                           text: '24/7 Support',
                           widget: SvgPicture.asset('assets/svgs/Subtract.svg',height: 2.3.h,),
                         ),
+                        CustomListTie(
+                          text: 'Custom Theme (upon request)',
+                          widget: widget.planId == 8? Icon(CupertinoIcons.clear,color: Colors.red,size: 16,):
+                          SvgPicture.asset('assets/svgs/Subtract.svg',height: 2.3.h,),
+                        ),
+                        CustomListTie(
+                          text: 'Store Setup Visit with Training',
+                          widget: widget.planId == 8? Icon(CupertinoIcons.clear,color: Colors.red,size: 16,):
+                          SvgPicture.asset('assets/svgs/Subtract.svg',height: 2.3.h,),
+                        ),
+
+
                         SizedBox(height: 1.h,)
                       ],
                     ),
