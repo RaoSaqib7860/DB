@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 
 import 'cash_payment_screen.dart';
@@ -36,14 +37,14 @@ class _PaymentMainScreenState extends State<PaymentMainScreen> {
                 indicatorWeight: 0.6,
                 tabs: [
                   Text(
-                    'Cash payment',
+                    'Cash payment'.tr,
                     style: TextStyle(
                         fontSize: 12.sp,
                         color: Colors.black,
                         fontWeight: FontWeight.bold),
                   ),
                   Text(
-                    'Online payment',
+                    'Online payment'.tr,
                     style: TextStyle(
                         fontSize: 12.sp,
                         color: Colors.black,
@@ -54,13 +55,13 @@ class _PaymentMainScreenState extends State<PaymentMainScreen> {
             ),
           ),
         ),
-        body: const TabBarView(
+        body:  TabBarView(
           children: [
             CODAndOnline(
-              type: 'cod',
+              type: 'cod'.tr,
             ),
             CODAndOnline(
-              type: 'online',
+              type: 'online'.tr,
             ),
           ],
         ),

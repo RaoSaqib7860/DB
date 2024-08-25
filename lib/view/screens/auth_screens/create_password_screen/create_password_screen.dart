@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../../../custom_widgets/app_colors.dart';
@@ -27,7 +28,7 @@ class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
               Image(image: AssetImage('assets/images/app_logo.png'),height: 8.h,),
               SizedBox(height: 17.h,),
               Text(
-                'Create Password',
+                'Create Password'.tr,
                 style: TextStyle(
                     fontSize: 16.sp,
                     fontWeight: FontWeight.bold,
@@ -40,7 +41,7 @@ class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
                 child: Row(
                   children: [
                     Text(
-                      'Password',
+                      'Password'.tr,
                       style: TextStyle(
                           fontSize: 13.sp,
                           color: Colors.black
@@ -54,7 +55,7 @@ class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
                 padding: EdgeInsets.symmetric(horizontal: 14.w),
                 child: CustomTextField(
                   obsecureText: true,
-                  hintText: 'Enter Password',
+                  hintText: 'Enter Password'.tr,
                   controller: passwordController,
                 ),
               ),
@@ -64,7 +65,7 @@ class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
                 child: Row(
                   children: [
                     Text(
-                      'Confirm Password',
+                      'Confirm Password'.tr,
                       style: TextStyle(
                           fontSize: 13.sp,
                           color: Colors.black
@@ -78,7 +79,7 @@ class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
                 padding: EdgeInsets.symmetric(horizontal: 14.w),
                 child: CustomTextField(
                   obsecureText: true,
-                  hintText: 'Enter Confirm Password',
+                  hintText: 'Enter Confirm Password'.tr,
                   controller: cPasswordController,
                 ),
               ),
@@ -95,7 +96,7 @@ class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
                   child: Padding(
                     padding:  EdgeInsets.symmetric(vertical: 0.7.h,horizontal: 14.w),
                     child: Text(
-                      'Finish',
+                      'Finish'.tr,
                       style: TextStyle(
                           color: Colors.white,
                           fontSize: 13.sp

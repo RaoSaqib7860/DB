@@ -3,6 +3,7 @@ import 'package:db_2_0/view/screens/payment_screen/payment_screens/payment_main_
 import 'package:db_2_0/view/screens/payment_screen/payment_screens/payout_detail_screen.dart';
 import 'package:db_2_0/view/screens/payment_screen/payment_screens/transaction_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 
 class PaymentScreen extends StatefulWidget {
@@ -30,7 +31,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
               labelPadding: EdgeInsets.only(bottom: 0.5.h),
               tabs: [
                 Text(
-                  'Payment Method',
+                  'Payment Method'.tr,
                   style: TextStyle(
                       color: Colors.white,
                       fontSize: 15,

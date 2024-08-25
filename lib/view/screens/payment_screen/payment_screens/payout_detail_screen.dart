@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 
 class PayoutDetailScreen extends StatefulWidget {
@@ -139,7 +140,7 @@ class _PayoutDetailScreenState extends State<PayoutDetailScreen> {
                 ),
                 child: Center(
                   child: Text(
-                    'UPDATE',
+                    'UPDATE'.tr,
                     style: TextStyle(
                         color: Colors.white,
                         fontSize: 12.sp,

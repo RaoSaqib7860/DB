@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 
 class CustomFormField extends StatefulWidget {
@@ -23,7 +24,7 @@ class _CustomFormFieldState extends State<CustomFormField> {
         Padding(
           padding: EdgeInsets.symmetric(horizontal: 8.w),
           child: Text(
-            widget.name!,
+            widget.name!.tr,
             style: TextStyle(
                 fontWeight: FontWeight.bold,
                 color: Colors.black.withAlpha(170),
@@ -42,7 +43,7 @@ class _CustomFormFieldState extends State<CustomFormField> {
               enabled: widget.enable,
               style: TextStyle(fontSize: 10.sp, color: Colors.black),
               decoration: InputDecoration(
-                  hintText: widget.hint,
+                  hintText: widget.hint!.tr,
                   hintStyle: TextStyle(fontSize: 10.sp),
                   contentPadding: EdgeInsets.only(bottom: 1.6.h)),
             ),

@@ -1,6 +1,7 @@
 import 'package:db_2_0/api_repository/api_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../../../custom_widgets/app_colors.dart';
@@ -58,7 +59,7 @@ class _DomainSettingScreenState extends State<DomainSettingScreen> {
                       width: 29.w,
                     ),
                     Text(
-                      'Domain Settings',
+                      'Domain Settings'.tr,
                       style: TextStyle(
                           color: Colors.white,
                           fontSize: 12.sp,
@@ -96,7 +97,7 @@ class _DomainSettingScreenState extends State<DomainSettingScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Current Domain',
+                        'Current Domain'.tr,
                         style: TextStyle(
                             color: blueColor,
                             fontSize: 10.sp,
@@ -150,7 +151,7 @@ class _DomainSettingScreenState extends State<DomainSettingScreen> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            'Requested domain',
+                            'Requested domain'.tr,
                             style: TextStyle(
                                 color: blueColor,
                                 fontSize: 10.sp,
@@ -195,7 +196,7 @@ class _DomainSettingScreenState extends State<DomainSettingScreen> {
                                                           .spaceBetween,
                                                   children: [
                                                     Text(
-                                                      'Add existing domain',
+                                                      'Add existing domain'.tr,
                                                       style: TextStyle(
                                                           color: blueColor,
                                                           fontSize: 11.sp,
@@ -222,7 +223,7 @@ class _DomainSettingScreenState extends State<DomainSettingScreen> {
                                                   height: 1.h,
                                                 ),
                                                 Text(
-                                                  'Custom domain',
+                                                  'Custom domain'.tr,
                                                   style: TextStyle(
                                                       color: Colors.black,
                                                       fontSize: 10.sp),
@@ -236,7 +237,7 @@ class _DomainSettingScreenState extends State<DomainSettingScreen> {
                                                         fontSize: 10.sp,
                                                         color: Colors.black),
                                                     decoration: InputDecoration(
-                                                        hintText: 'Type here',
+                                                        hintText: 'Type here'.tr,
                                                         hintStyle: TextStyle(
                                                             fontSize: 10.sp),
                                                         contentPadding:
@@ -248,7 +249,7 @@ class _DomainSettingScreenState extends State<DomainSettingScreen> {
                                                   height: 1.h,
                                                 ),
                                                 Text(
-                                                  'Enter the domain you want to connect.',
+                                                  'Enter the domain you want to connect.'.tr,
                                                   style: TextStyle(
                                                       color: Color(0xff8D8D8D),
                                                       fontSize: 8.sp),
@@ -298,7 +299,7 @@ class _DomainSettingScreenState extends State<DomainSettingScreen> {
                                                   height: 2.h,
                                                 ),
                                                 Text(
-                                                  'Configure your DNS records',
+                                                  'Configure your DNS records'.tr,
                                                   style: TextStyle(
                                                       color: Colors.black,
                                                       fontSize: 9.sp),

@@ -3,6 +3,7 @@ import 'package:db_2_0/custom_widgets/data_loading.dart';
 import 'package:db_2_0/view/screens/auth_screens/login_screen/Login%20Provider/login_model_globle.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 import 'package:dio/dio.dart' as dio;
@@ -211,7 +212,7 @@ class _ImageScreenState extends State<ImageScreen> {
                           height: 1.h,
                         ),
                         Text(
-                          'Add Product Image (upto 7)',
+                          'Add Product Image (upto 7)'.tr,
                           style: TextStyle(color: Colors.grey, fontSize: 11.sp),
                         ),
                         SizedBox(
@@ -247,7 +248,7 @@ class _ImageScreenState extends State<ImageScreen> {
                                               width: 5.w,
                                             ),
                                             Text(
-                                              'Changes saved\nsuccessfully',
+                                              'Changes saved\nsuccessfully'.tr,
                                               style: TextStyle(
                                                   fontSize: 11.sp,
                                                   color: Colors.black,
@@ -268,7 +269,7 @@ class _ImageScreenState extends State<ImageScreen> {
                                   padding: EdgeInsets.symmetric(
                                       horizontal: 2.7.w, vertical: 0.8.h),
                                   child: Text(
-                                    'Save Changes',
+                                    'Save Changes'.tr,
                                     style: TextStyle(
                                         color: Colors.white, fontSize: 10.sp),
                                   ),
@@ -287,7 +288,7 @@ class _ImageScreenState extends State<ImageScreen> {
                                 padding: EdgeInsets.symmetric(
                                     horizontal: 7.w, vertical: 0.8.h),
                                 child: Text(
-                                  'Next',
+                                  'Next'.tr,
                                   style: TextStyle(
                                       color: Colors.white, fontSize: 10.sp),
                                 ),

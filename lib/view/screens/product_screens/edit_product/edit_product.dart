@@ -1,6 +1,7 @@
 import 'package:db_2_0/custom_widgets/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 import '../../../../custom_widgets/custom_bottomsheet.dart';
@@ -56,7 +57,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
                     width: 28.w,
                   ),
                   Text(
-                    'Edit Product',
+                    'Edit Product'.tr,
                     style: TextStyle(color: Colors.white, fontSize: 13.sp),
                   ),
                 ],
@@ -82,7 +83,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              'Select Page',
+                              'Select Page'.tr,
                               style: TextStyle(
                                   color: Colors.black,
                                   fontSize: 11.sp,
@@ -119,7 +120,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
                                 width: 2.w,
                               ),
                               Text(
-                                'Product',
+                                'Product'.tr,
                                 style: TextStyle(
                                   color: Colors.black,
                                   fontSize: 11.sp,
@@ -149,7 +150,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
                                 width: 2.w,
                               ),
                               Text(
-                                'Pricing',
+                                'Pricing'.tr,
                                 style: TextStyle(
                                   color: Colors.black,
                                   fontSize: 11.sp,
@@ -179,7 +180,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
                                 width: 2.w,
                               ),
                               Text(
-                                'Images',
+                                'Images'.tr,
                                 style: TextStyle(
                                   color: Colors.black,
                                   fontSize: 11.sp,
@@ -209,7 +210,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
                                 width: 2.w,
                               ),
                               Text(
-                                'Inventory',
+                                'Inventory'.tr,
                                 style: TextStyle(
                                   color: Colors.black,
                                   fontSize: 11.sp,
@@ -239,7 +240,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
                                 width: 2.w,
                               ),
                               Text(
-                                'SEO',
+                                'SEO'.tr,
                                 style: TextStyle(
                                   color: Colors.black,
                                   fontSize: 11.sp,

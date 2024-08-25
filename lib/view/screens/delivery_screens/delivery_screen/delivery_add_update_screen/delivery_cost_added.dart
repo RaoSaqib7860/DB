@@ -89,7 +89,7 @@ class _DeliveryCostAddedState extends State<DeliveryCostAdded> {
                       Padding(
                         padding: EdgeInsets.symmetric(horizontal: 5.w),
                         child: Text(
-                          'Create Shipping Method',
+                          'Create Shipping Method'.tr,
                           style: TextStyle(
                               fontWeight: FontWeight.bold,
                               color: blueColor,
@@ -102,7 +102,7 @@ class _DeliveryCostAddedState extends State<DeliveryCostAdded> {
                       Padding(
                         padding: EdgeInsets.symmetric(horizontal: 8.w),
                         child: Text(
-                          'Delivery Method',
+                          'Delivery Method'.tr,
                           style: TextStyle(
                               fontWeight: FontWeight.bold,
                               color: Colors.black.withAlpha(170),
@@ -118,7 +118,7 @@ class _DeliveryCostAddedState extends State<DeliveryCostAdded> {
                             style:
                                 TextStyle(fontSize: 10.sp, color: Colors.black),
                             decoration: InputDecoration(
-                                hintText: 'Type here',
+                                hintText: 'Type here'.tr,
                                 hintStyle: TextStyle(fontSize: 10.sp),
                                 contentPadding: EdgeInsets.only(bottom: 1.6.h)),
                           ),
@@ -130,7 +130,7 @@ class _DeliveryCostAddedState extends State<DeliveryCostAdded> {
                       Padding(
                         padding: EdgeInsets.symmetric(horizontal: 8.w),
                         child: Text(
-                          'Delivery Cost',
+                          'Delivery Cost'.tr,
                           style: TextStyle(
                               fontWeight: FontWeight.bold,
                               color: Colors.black.withAlpha(170),
@@ -158,7 +158,7 @@ class _DeliveryCostAddedState extends State<DeliveryCostAdded> {
                       Padding(
                         padding: EdgeInsets.symmetric(horizontal: 8.w),
                         child: Text(
-                          'Delivery Location',
+                          'Delivery Location'.tr,
                           style: TextStyle(
                               fontWeight: FontWeight.bold,
                               color: Colors.black.withAlpha(170),
@@ -209,7 +209,7 @@ class _DeliveryCostAddedState extends State<DeliveryCostAdded> {
                               setState(() {});
                             },
                             hint: Text(
-                              "Select Location",
+                              "Select Location".tr,
                               style:
                                   TextStyle(fontSize: 12, color: Colors.black),
                             ),
@@ -283,7 +283,7 @@ class _DeliveryCostAddedState extends State<DeliveryCostAdded> {
                           ),
                           child: Center(
                             child: Text(
-                              'Save',
+                              'Save'.tr,
                               style: TextStyle(
                                   color: Colors.white,
                                   fontSize: 12.sp,

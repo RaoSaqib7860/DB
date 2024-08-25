@@ -79,7 +79,7 @@ class _SEOScreenState extends State<SEOScreen> {
                                 padding: EdgeInsets.only(
                                     left: 4.w, right: 4.w, top: 1.h),
                                 child: Text(
-                                  'META TITLE',
+                                  'META TITLE'.tr,
                                   style: TextStyle(fontSize: 9.sp),
                                 ),
                               ),
@@ -95,8 +95,8 @@ class _SEOScreenState extends State<SEOScreen> {
                                       border: OutlineInputBorder(
                                           borderRadius:
                                               BorderRadius.circular(5)),
-                                      hintText: 'Title',
-                                      labelText: 'Title',
+                                      hintText: 'Title'.tr,
+                                      labelText: 'Title'.tr,
                                       labelStyle: TextStyle(
                                           fontSize: 10.sp, color: Colors.grey),
                                       hintStyle: TextStyle(fontSize: 10.sp),
@@ -111,7 +111,7 @@ class _SEOScreenState extends State<SEOScreen> {
                                 padding: EdgeInsets.only(
                                     left: 4.w, right: 4.w, top: 1.h),
                                 child: Text(
-                                  'META KEYWORD',
+                                  'META KEYWORD'.tr,
                                   style: TextStyle(fontSize: 9.sp),
                                 ),
                               ),
@@ -127,8 +127,8 @@ class _SEOScreenState extends State<SEOScreen> {
                                       border: OutlineInputBorder(
                                           borderRadius:
                                               BorderRadius.circular(5)),
-                                      hintText: 'Title',
-                                      labelText: 'Keyword',
+                                      hintText: 'Title'.tr,
+                                      labelText: 'Keyword'.tr,
                                       labelStyle: TextStyle(
                                           fontSize: 10.sp, color: Colors.grey),
                                       hintStyle: TextStyle(fontSize: 10.sp),
@@ -142,7 +142,7 @@ class _SEOScreenState extends State<SEOScreen> {
                                 padding: EdgeInsets.only(
                                     left: 4.w, right: 4.w, top: 1.h),
                                 child: Text(
-                                  'META DESCRIPTION',
+                                  'META DESCRIPTION'.tr,
                                   style: TextStyle(fontSize: 9.sp),
                                 ),
                               ),
@@ -165,7 +165,7 @@ class _SEOScreenState extends State<SEOScreen> {
                                           borderRadius:
                                               BorderRadius.circular(5)),
                                       //isDense: true,
-                                      hintText: 'Title',
+                                      hintText: 'Title'.tr,
                                       //  labelText: 'Title',
                                       labelStyle: TextStyle(
                                           fontSize: 10.sp, color: Colors.grey),
@@ -189,7 +189,7 @@ class _SEOScreenState extends State<SEOScreen> {
                       Padding(
                         padding: EdgeInsets.symmetric(horizontal: 6.w),
                         child: Text(
-                          'Search Engine Optimization',
+                          'Search Engine Optimization'.tr,
                           style: TextStyle(
                               color: Colors.black,
                               fontSize: 10.sp,
@@ -226,7 +226,7 @@ class _SEOScreenState extends State<SEOScreen> {
                                   height: 1.h,
                                 ),
                                 Text(
-                                  'Online Shopping',
+                                  'Online Shopping'.tr,
                                   style: TextStyle(
                                       color: Colors.black,
                                       fontSize: 12.sp,
@@ -299,7 +299,7 @@ class _SEOScreenState extends State<SEOScreen> {
                                               width: 5.w,
                                             ),
                                             Text(
-                                              'Changes saved\nsuccessfully',
+                                              'Changes saved\nsuccessfully'.tr,
                                               style: TextStyle(
                                                   fontSize: 11.sp,
                                                   color: Colors.black,
@@ -320,7 +320,7 @@ class _SEOScreenState extends State<SEOScreen> {
                                   padding: EdgeInsets.symmetric(
                                       horizontal: 2.7.w, vertical: 0.8.h),
                                   child: Text(
-                                    'Save Changes',
+                                    'Save Changes'.tr,
                                     style: TextStyle(
                                         color: Colors.white, fontSize: 10.sp),
                                   ),

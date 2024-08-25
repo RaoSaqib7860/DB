@@ -50,7 +50,7 @@ class _SignUpDetailScreenState extends State<SignUpDetailScreen> {
                     height: 3.h,
                   ),
                   Text(
-                    'Enter Business Details',
+                    'Enter Business Details'.tr,
                     style: TextStyle(
                         fontSize: 14.sp,
                         fontWeight: FontWeight.bold,
@@ -62,7 +62,7 @@ class _SignUpDetailScreenState extends State<SignUpDetailScreen> {
                   Row(
                     children: [
                       Text(
-                        'Email *',
+                        'Email *'.tr,
                         style: TextStyle(
                             fontSize: 12.sp,
                             color: Colors.black,
@@ -74,7 +74,7 @@ class _SignUpDetailScreenState extends State<SignUpDetailScreen> {
                     height: 0.5.h,
                   ),
                   CustomTextField(
-                    hintText: 'Enter Email',
+                    hintText: 'Enter Email'.tr,
                     controller: provider.emailController,
                   ),
                   SizedBox(
@@ -83,7 +83,7 @@ class _SignUpDetailScreenState extends State<SignUpDetailScreen> {
                   Row(
                     children: [
                       Text(
-                        'Business Name *',
+                        'Business Name *'.tr,
                         style: TextStyle(
                             fontSize: 12.sp,
                             color: Colors.black,
@@ -95,7 +95,7 @@ class _SignUpDetailScreenState extends State<SignUpDetailScreen> {
                     height: 0.5.h,
                   ),
                   CustomTextField(
-                    hintText: 'Enter Business Name',
+                    hintText: 'Enter Business Name'.tr,
                     controller: provider.businessNameController,
                   ),
                   SizedBox(
@@ -116,7 +116,7 @@ class _SignUpDetailScreenState extends State<SignUpDetailScreen> {
                     height: 0.5.h,
                   ),
                   CustomTextField(
-                    hintText: 'Enter mobile number',
+                    hintText: 'Enter mobile number'.tr,
                     controller: provider.mobileController,
                   ),
                   SizedBox(
@@ -125,7 +125,7 @@ class _SignUpDetailScreenState extends State<SignUpDetailScreen> {
                   Row(
                     children: [
                       Text(
-                        'Select Category *',
+                        'Select Category *'.tr,
                         style: TextStyle(
                             fontSize: 12.sp,
                             color: Colors.black,
@@ -170,7 +170,7 @@ class _SignUpDetailScreenState extends State<SignUpDetailScreen> {
                                           child: Column(
                                             children: [
                                               Text(
-                                                'Select Category',
+                                                'Select Category'.tr,
                                                 style: TextStyle(
                                                     color: blueColor,
                                                     fontSize: 14.sp,
@@ -193,7 +193,7 @@ class _SignUpDetailScreenState extends State<SignUpDetailScreen> {
                                                         ? selected_checkboxContainer(
                                                             text: '$e')
                                                         : checkboxContainer(
-                                                            text: '$e'),
+                                                            text: '$e'.tr),
                                                     onTap: () {
                                                       provider
                                                           .selected_categgory = e;
@@ -231,7 +231,7 @@ class _SignUpDetailScreenState extends State<SignUpDetailScreen> {
                                                   color: blueColor),
                                               child: Center(
                                                 child: Text(
-                                                  'Save',
+                                                  'Save'.tr,
                                                   style: TextStyle(
                                                       color: Colors.white,
                                                       fontSize: 12.sp,
@@ -270,7 +270,7 @@ class _SignUpDetailScreenState extends State<SignUpDetailScreen> {
                                     child: Text(
                                         provider.selected_categgory != null
                                             ? provider.selected_categgory!
-                                            : 'Select business industry',
+                                            : 'Select business industry'.tr,
                                         style: TextStyle(
                                             color: Colors.black54,
                                             fontSize: 11.sp)),
@@ -292,7 +292,7 @@ class _SignUpDetailScreenState extends State<SignUpDetailScreen> {
                   Row(
                     children: [
                       Text(
-                        'Select Subscription *',
+                        'Select Subscription *'.tr,
                         style: TextStyle(
                             fontSize: 12.sp,
                             color: Colors.black,
@@ -314,7 +314,7 @@ class _SignUpDetailScreenState extends State<SignUpDetailScreen> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text('E-commerce',
+                            Text('E-commerce'.tr,
                                 style: TextStyle(
                                     color: Colors.black54, fontSize: 11.sp)),
                             // Icon(
@@ -331,7 +331,7 @@ class _SignUpDetailScreenState extends State<SignUpDetailScreen> {
                   Row(
                     children: [
                       Text(
-                        'Create Domain *',
+                        'Create Domain *'.tr,
                         style: TextStyle(
                             fontSize: 12.sp,
                             color: Colors.black,
@@ -361,7 +361,7 @@ class _SignUpDetailScreenState extends State<SignUpDetailScreen> {
                               border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(0),
                                   borderSide: BorderSide.none),
-                              hintText: 'business name',
+                              hintText: 'business name'.tr,
                               hintStyle: TextStyle(
                                   fontSize: 11.sp, color: Colors.grey),
                               contentPadding: EdgeInsets.only(
@@ -396,7 +396,7 @@ class _SignUpDetailScreenState extends State<SignUpDetailScreen> {
                   Row(
                     children: [
                       Text(
-                        'Password *',
+                        'Password *'.tr,
                         style: TextStyle(
                             fontSize: 12.sp,
                             color: Colors.black,
@@ -409,7 +409,7 @@ class _SignUpDetailScreenState extends State<SignUpDetailScreen> {
                   ),
                   CustomTextField(
                     obsecureText: true,
-                    hintText: 'Enter Password',
+                    hintText: 'Enter Password'.tr,
                     controller: provider.passwordController,
                   ),
                   SizedBox(
@@ -418,7 +418,7 @@ class _SignUpDetailScreenState extends State<SignUpDetailScreen> {
                   Row(
                     children: [
                       Text(
-                        'Confirm Password *',
+                        'Confirm Password *'.tr,
                         style: TextStyle(
                             fontSize: 12.sp,
                             color: Colors.black,
@@ -431,7 +431,7 @@ class _SignUpDetailScreenState extends State<SignUpDetailScreen> {
                   ),
                   CustomTextField(
                     obsecureText: true,
-                    hintText: 'Enter Confirm Password',
+                    hintText: 'Enter Confirm Password'.tr,
                     controller: provider.cPasswordController,
                   ),
                   SizedBox(
@@ -460,25 +460,25 @@ class _SignUpDetailScreenState extends State<SignUpDetailScreen> {
                         RichText(
                             text: TextSpan(children: [
                           TextSpan(
-                              text: 'I agree with the  ',
+                              text: 'I agree with the  '.tr,
                               style: TextStyle(
                                   color: Colors.black, fontSize: 12.sp)),
                           TextSpan(
-                              text: 'term ',
+                              text: 'term '.tr,
                               style: TextStyle(
                                 color: blueColor,
                                 fontSize: 12.sp,
                                 //fontWeight: FontWeight.bold
                               )),
                           TextSpan(
-                              text: 'and ',
+                              text: 'and '.tr,
                               style: TextStyle(
                                 color: Colors.black,
                                 fontSize: 12.sp,
                                 //fontWeight: FontWeight.bold
                               )),
                           TextSpan(
-                              text: 'conditions',
+                              text: 'conditions'.tr,
                               style: TextStyle(
                                 color: blueColor,
                                 fontSize: 12.sp,
@@ -501,26 +501,26 @@ class _SignUpDetailScreenState extends State<SignUpDetailScreen> {
                                   if (provider.checkboxSelected == true) {
                                     provider.sign_up_api(context);
                                   } else {
-                                    Get.snackbar('Alert',
-                                        'You must accept the term and conditions to register an account.');
+                                    Get.snackbar('Alert'.tr,
+                                        'You must accept the term and conditions to register an account.'.tr);
                                   }
                                 } else {
-                                  Get.snackbar('Alert', 'Category is empty.');
+                                  Get.snackbar('Alert'.tr, 'Category is empty.'.tr);
                                 }
                               } else {
-                                Get.snackbar('Alert', 'Password is empty.');
+                                Get.snackbar('Alert'.tr, 'Password is empty.'.tr);
                               }
                             } else {
-                              Get.snackbar('Alert', 'Mobile number is empty.');
+                              Get.snackbar('Alert'.tr, 'Mobile number is empty.'.tr);
                             }
                           } else {
-                            Get.snackbar('Alert', 'Domain is empty.');
+                            Get.snackbar('Alert'.tr, 'Domain is empty.'.tr);
                           }
                         } else {
-                          Get.snackbar('Alert', 'Business Name is empty.');
+                          Get.snackbar('Alert'.tr, 'Business Name is empty.'.tr);
                         }
                       } else {
-                        Get.snackbar('Alert', 'Email is empty.');
+                        Get.snackbar('Alert'.tr, 'Email is empty.'.tr);
                       }
                     },
                     child: Container(

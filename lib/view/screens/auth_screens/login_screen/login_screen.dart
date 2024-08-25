@@ -70,7 +70,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               padding: EdgeInsets.symmetric(
                                   vertical: 1.2.h, horizontal: 5.w),
                               child: Text(
-                                'Email',
+                                'Email'.tr,
                                 style: TextStyle(
                                   fontSize: 12.sp,
                                   color:
@@ -95,7 +95,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               padding: EdgeInsets.symmetric(
                                   vertical: 1.2.h, horizontal: 3.w),
                               child: Text(
-                                'Mobile Number',
+                                'Mobile Number'.tr,
                                 style: TextStyle(
                                   fontSize: 12.sp,
                                   color:
@@ -115,7 +115,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: 14.w),
                       child: CustomTextField(
-                        hintText: 'Enter email',
+                        hintText: 'Enter email'.tr,
                         controller: provider.emailController,
                       ),
                     ),
@@ -123,7 +123,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: 14.w),
                       child: CustomTextField(
-                        hintText: 'Enter mobile number',
+                        hintText: 'Enter mobile number'.tr,
                         controller: provider.phoneController,
                       ),
                     ),
@@ -133,7 +133,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: 14.w),
                     child: CustomTextField(
-                      hintText: 'Enter Password',
+                      hintText: 'Enter Password'.tr,
                       controller: provider.passwordController,
                     ),
                   ),
@@ -155,7 +155,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 ));
                           },
                           child: Text(
-                            'Forget Password',
+                            'Forget Password'.tr,
                             style: TextStyle(fontSize: 12.sp, color: redColor),
                           ),
                         )
@@ -179,7 +179,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         padding: EdgeInsets.symmetric(
                             vertical: 0.7.h, horizontal: 14.w),
                         child: Text(
-                          'Log In',
+                          'Log In'.tr,
                           style:
                               TextStyle(color: Colors.white, fontSize: 13.sp),
                         ),
@@ -202,7 +202,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   RichText(
                       text: TextSpan(children: [
                     TextSpan(
-                        text: 'For Registration? ',
+                        text: 'For Registration? '.tr,
                         style: TextStyle(color: Colors.black, fontSize: 15.sp)),
                     TextSpan(
                         recognizer: new TapGestureRecognizer()
@@ -212,7 +212,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               child: SignUpDetailScreen(),
                             ));
                           },
-                        text: 'Sign Up',
+                        text: 'Sign Up'.tr,
                         style: TextStyle(
                           color: Color(0xffAD172A),
                           fontSize: 15.sp,

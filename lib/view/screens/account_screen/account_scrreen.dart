@@ -6,6 +6,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 import 'package:db_2_0/utils_services/storage_util.dart';
+import 'package:toggle_switch/toggle_switch.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../../custom_widgets/app_colors.dart';
 import '../../../custom_widgets/custom_bottomsheet.dart';
@@ -40,7 +41,7 @@ class _AccountScreenState extends State<AccountScreen> {
               color: blueColor,
               child: Center(
                 child: Text(
-                  'Account',
+                  'Account'.tr,
                   style: TextStyle(
                       color: Colors.white,
                       fontSize: 13.sp,
@@ -76,7 +77,7 @@ class _AccountScreenState extends State<AccountScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Charlie Clothing',
+                        'Charlie Clothing'.tr,
                         style: TextStyle(color: Colors.black, fontSize: 14.sp),
                       ),
                       SizedBox(
@@ -91,7 +92,7 @@ class _AccountScreenState extends State<AccountScreen> {
                               ));
                         },
                         child: Text(
-                          'Edit business details',
+                          'Edit business details'.tr,
                           style: TextStyle(
                               color: blueColor,
                               fontSize: 11.sp,
@@ -135,7 +136,7 @@ class _AccountScreenState extends State<AccountScreen> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            'Free Trial validation',
+                            'Free Trial validation'.tr,
                             style:
                                 TextStyle(color: Colors.black, fontSize: 10.sp),
                           ),
@@ -148,7 +149,7 @@ class _AccountScreenState extends State<AccountScreen> {
                               setState(() {});
                             },
                             child: Text(
-                              isSelected == true ? 'Over' : '6 Days',
+                              isSelected == true ? 'Over'.tr : '6 Days'.tr,
                               style: TextStyle(
                                   color: redColor,
                                   fontSize: 13.sp,
@@ -169,7 +170,7 @@ class _AccountScreenState extends State<AccountScreen> {
                             padding: EdgeInsets.symmetric(
                                 horizontal: 7.w, vertical: 1.1.h),
                             child: Text(
-                              isSelected == true ? 'Update' : 'See packages',
+                              isSelected == true ? 'Update'.tr : 'See packages'.tr,
                               style: TextStyle(
                                   color: Colors.white, fontSize: 11.sp),
                             ),
@@ -193,7 +194,7 @@ class _AccountScreenState extends State<AccountScreen> {
                           builder: (context) => ProfileSettingScreen(),
                         ));
                   },
-                  child: customRow(image: 'my_acc', text: 'My Account')),
+                  child: customRow(image: 'my_acc', text: 'My Account'.tr)),
             if (isSelected == false)
               GestureDetector(
                   onTap: () {
@@ -242,7 +243,7 @@ class _AccountScreenState extends State<AccountScreen> {
                   if (!await launchUrl(Uri.parse(
                   'https://dialboxx.com/page/refund-policy-faqs'))) {
                   throw Exception(
-                  'Could not launch');
+                  'Could not launch'.tr);
                   }
                 },
                 child: customRow(image: 'faqs', text: 'FAQ’s')),
@@ -261,7 +262,7 @@ class _AccountScreenState extends State<AccountScreen> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                'Select Your Languages',
+                                'Select Your Languages'.tr,
                                 style: TextStyle(
                                     color: Colors.black,
                                     fontSize: 11.sp,
@@ -283,6 +284,8 @@ class _AccountScreenState extends State<AccountScreen> {
                           GestureDetector(
                             onTap: () {
                               ind = 0;
+                              var locale = Locale('en', 'US');
+                              Get.updateLocale(locale);
                               setState(() {});
                               Navigator.pop(context);
                             },
@@ -298,7 +301,7 @@ class _AccountScreenState extends State<AccountScreen> {
                                   width: 2.w,
                                 ),
                                 Text(
-                                  'English',
+                                  'English'.tr,
                                   style: TextStyle(
                                     color: Colors.black,
                                     fontSize: 11.sp,
@@ -313,6 +316,8 @@ class _AccountScreenState extends State<AccountScreen> {
                           GestureDetector(
                             onTap: () {
                               ind = 1;
+                              var locale = Locale('ur', '');
+                              Get.updateLocale(locale);
                               setState(() {});
                               Navigator.pop(context);
                             },
@@ -343,13 +348,51 @@ class _AccountScreenState extends State<AccountScreen> {
                         ],
                       ));
                 },
-                child: customRow(image: 'lang', text: 'Languages  v')),
+                child: customRow(image: 'lang', text: 'Languages')),
             GestureDetector(
                 onTap: () {
                   storage.erase();
                   Get.offAll(LoginScreen());
                 },
                 child: customRow(image: 'logoutt', text: 'Log out')),
+
+            // ToggleSwitch(
+            //   minHeight: 3.h,
+            //   minWidth: 12.w,
+            //   initialLabelIndex: 0,
+            //   cornerRadius: 4,
+            //   totalSwitches: 2,
+            //   labels: [
+            //     'ENG',
+            //     'اردو',
+            //   ],
+            //   //activeBgColor: Colors.grey,
+            //   inactiveBgColor: Colors.grey.withOpacity(0.7),
+            //   customTextStyles: [
+            //     TextStyle(
+            //       color: Colors.white,
+            //       fontSize: 10,
+            //     ),
+            //     TextStyle(
+            //       color: Colors.white,
+            //       fontSize: 10,
+            //     )
+            //   ],
+            //   onToggle: (index) async {
+            //     print('switched to: $index');
+            //     if (index == 0) {
+            //       // await context.setLocale(Locale('en', 'US'));
+            //       var locale = Locale('en', 'US');
+            //       Get.updateLocale(locale);
+            //
+            //     } else {
+            //       // await context.setLocale(Locale('ar', 'IQ'));
+            //       var locale = Locale('ur', '');
+            //       Get.updateLocale(locale);
+            //     }
+            //   },
+            //
+            // ),
 
             ///logoutt
           ],
@@ -373,7 +416,7 @@ class _AccountScreenState extends State<AccountScreen> {
                 width: 3.w,
               ),
               Text(
-                text!,
+                text!.tr,
                 style: TextStyle(
                   color: Colors.black,
                   fontSize: 12.sp,

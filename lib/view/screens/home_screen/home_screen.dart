@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_switch/flutter_switch.dart';
+import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:sizer/sizer.dart';
@@ -91,7 +92,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(
-                                    'Welcome ${loginModel!.data!.name}',
+                                    'Welcome ${loginModel!.data!.name}'.tr,
                                     style: TextStyle(
                                         color: Colors.white,
                                         fontSize: 12.sp,
@@ -101,8 +102,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                     children: [
                                       Text(
                                         loginModel!.data!.onOff == 1
-                                            ? 'Online'
-                                            : 'Offline',
+                                            ? 'Online'.tr
+                                            : 'Offline'.tr,
                                         style: TextStyle(
                                           color: Colors.white,
                                           fontSize: 11.sp,
@@ -270,7 +271,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                         width: 2.w,
                                       ),
                                       Text(
-                                        'Share store link',
+                                        'Share store link'.tr,
                                         style: TextStyle(
                                             fontWeight: FontWeight.bold,
                                             fontSize: 12.sp,
@@ -282,7 +283,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     height: 1.h,
                                   ),
                                   Text(
-                                    'Customer can visit the following link and place their orders.',
+                                    'Customer can visit the following link and place their orders.'.tr,
                                     style: TextStyle(
                                         fontSize: 11.sp,
                                         color: Colors.black,
@@ -331,7 +332,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     },
                                     child: Row(
                                       children: [
-                                        Text('Share your Domain '),
+                                        Text('Share your Domain '.tr),
                                         Icon(
                                           CupertinoIcons.share,
                                           color: Color(0xff1568A8),
@@ -365,7 +366,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                 MainAxisAlignment.center,
                                             children: [
                                               Text(
-                                                'Get your custom domain',
+                                                'Get your custom domain'.tr,
                                                 style: TextStyle(
                                                     fontSize: 12.sp,
                                                     color: Colors.white),
@@ -417,7 +418,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    'Earnings performance',
+                                    'Earnings performance'.tr,
                                     style: TextStyle(
                                         color: Colors.black, fontSize: 9.sp),
                                   ),
@@ -444,7 +445,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
-                                'Overview',
+                                'Overview'.tr,
                                 style: TextStyle(
                                     color: Colors.black,
                                     fontSize: 13.sp,
@@ -490,7 +491,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                         MainAxisAlignment.spaceBetween,
                                     children: [
                                       Text(
-                                        'Total Earnings - ${provider.dashboardModel?.data?.orders?.isEmpty ?? true ? '' : provider.dashboardModel?.data?.orders?.first.year}',
+                                        'Total Earnings - ${provider.dashboardModel?.data?.orders?.isEmpty ?? true ? '' : provider.dashboardModel?.data?.orders?.first.year}'.tr,
                                         style: TextStyle(
                                           fontSize: 9.sp,
                                           color: Colors.black,
@@ -560,7 +561,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     height: 1.3.h,
                                   ),
                                   Text(
-                                    'Today\' total sales',
+                                    'Today\' total sales'.tr,
                                     style: TextStyle(
                                         fontSize: 12.sp,
                                         color: Colors.black,
@@ -581,7 +582,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     color: Colors.black,
                                   ),
                                   Text(
-                                    'Yesterday Sales',
+                                    'Yesterday Sales'.tr,
                                     style: TextStyle(
                                         fontSize: 12.sp,
                                         color: Colors.black,
@@ -602,7 +603,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     color: Colors.black,
                                   ),
                                   Text(
-                                    'Last 7 Days',
+                                    'Last 7 Days'.tr,
                                     style: TextStyle(
                                         fontSize: 12.sp,
                                         color: Colors.black,
@@ -623,7 +624,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     color: Colors.black,
                                   ),
                                   Text(
-                                    'This month',
+                                    'This month'.tr,
                                     style: TextStyle(
                                         fontSize: 12.sp,
                                         color: Colors.black,
@@ -651,7 +652,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           height: 2.h,
                         ),
                         Text(
-                          'How to upload store logo',
+                          'How to upload store logo'.tr,
                           style: TextStyle(
                               fontSize: 11.sp,
                               color: blueColor,
@@ -728,7 +729,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                             CrossAxisAlignment.start,
                                         children: [
                                           Text(
-                                            'Product Limit',
+                                            'Product Limit'.tr,
                                             style: TextStyle(
                                               color: blueColor,
                                               fontSize: 8.sp,
@@ -799,7 +800,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                             CrossAxisAlignment.start,
                                         children: [
                                           Text(
-                                            'Usage Storage',
+                                            'Usage Storage'.tr,
                                             style: TextStyle(
                                               color: blueColor,
                                               fontSize: 9.sp,
@@ -886,7 +887,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                         Column(
                                           children: [
                                             Text(
-                                              'Storage usage',
+                                              'Storage usage'.tr,
                                               style: TextStyle(
                                                 fontSize: 9.sp,
                                                 color: Colors.black,
@@ -907,7 +908,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                         Column(
                                           children: [
                                             Text(
-                                              'Products',
+                                              'Products'.tr,
                                               style: TextStyle(
                                                 fontSize: 9.sp,
                                                 color: Colors.black,
@@ -928,7 +929,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                         Column(
                                           children: [
                                             Text(
-                                              'Pages',
+                                              'Pages'.tr,
                                               style: TextStyle(
                                                 fontSize: 9.sp,
                                                 color: Colors.black,
@@ -1116,7 +1117,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                               ],
                                             ),
                                             Text(
-                                              'Complete Your Store Setup',
+                                              'Complete Your Store Setup'.tr,
                                               style: TextStyle(
                                                   color: Colors.black,
                                                   fontSize: 14.sp),
@@ -1125,7 +1126,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                               height: 1.h,
                                             ),
                                             bottomContainer(
-                                              title: 'Add Store Logo',
+                                              title: 'Add Store Logo'.tr,
                                               complete: provider
                                                           .storeStatusModel!
                                                           .location!
@@ -1134,7 +1135,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                   ? false
                                                   : true,
                                               subtitle:
-                                                  'Online Stores with a logo get 5 times more Orders and 10 times more Store Views.',
+                                                  'Online Stores with a logo get 5 times more Orders and 10 times more Store Views.'.tr,
                                               ontap: () {
                                                 Navigator.pop(context);
                                                 Navigator.push(
@@ -1159,7 +1160,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                               },
                                             ),
                                             bottomContainer(
-                                                title: 'Add Store Information',
+                                                title: 'Add Store Information'.tr,
                                                 complete: provider
                                                             .storeStatusModel!
                                                             .location!
@@ -1168,7 +1169,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                     ? false
                                                     : true,
                                                 subtitle:
-                                                    'Online Stores with complete information increase customer trust by 70%',
+                                                    'Online Stores with complete information increase customer trust by 70%'.tr,
                                                 ontap: () {
                                                   Navigator.pop(context);
                                                   Navigator.push(
@@ -1193,7 +1194,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                   });
                                                 }),
                                             bottomContainer(
-                                                title: 'Add Pickup Location',
+                                                title: 'Add Pickup Location'.tr,
                                                 complete: provider
                                                                 .storeStatusModel!
                                                                 .location!
@@ -1207,7 +1208,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                     ? false
                                                     : true,
                                                 subtitle:
-                                                    'Make fulfilling orders easier by adding Pickup Location for your delivery.',
+                                                    'Make fulfilling orders easier by adding Pickup Location for your delivery.'.tr,
                                                 ontap: () {
                                                   Navigator.pop(context);
                                                   Navigator.push(
@@ -1246,7 +1247,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             color: redColor,
                             child: Center(
                               child: Text(
-                                'Complete your Store Setup',
+                                'Complete your Store Setup'.tr,
                                 style: TextStyle(
                                     color: Colors.white, fontSize: 11.sp),
                               ),
@@ -1291,7 +1292,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           height: 2.h,
                         )
                       : Text(
-                          'Add',
+                          'Add'.tr,
                           style: TextStyle(
                               color: Color(0xff6B6B6B), fontSize: 12.sp),
                         ),

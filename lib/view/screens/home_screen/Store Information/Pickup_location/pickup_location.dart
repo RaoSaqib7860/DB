@@ -52,7 +52,7 @@ class _PickupLocationState extends State<PickupLocation> {
                           width: 30.w,
                         ),
                         Text(
-                          'Store Setting',
+                          'Store Setting'.tr,
                           style: TextStyle(
                               color: Colors.white,
                               fontSize: 12.sp,
@@ -66,49 +66,49 @@ class _PickupLocationState extends State<PickupLocation> {
                   height: 2.h,
                 ),
                 CustomLineTextField(
-                    name: 'Company',
-                    hint: 'company',
+                    name: 'Company'.tr,
+                    hint: 'company'.tr,
                     controller: provider.companyNameController),
                 SizedBox(
                   height: 2.h,
                 ),
                 CustomLineTextField(
-                    name: 'Address',
+                    name: 'Address'.tr,
                     hint: 'address',
                     controller: provider.addressController),
                 SizedBox(
                   height: 2.h,
                 ),
                 CustomLineTextField(
-                    name: 'City',
+                    name: 'City'.tr,
                     hint: 'city',
                     controller: provider.cityController),
                 SizedBox(
                   height: 2.h,
                 ),
                 CustomLineTextField(
-                    name: 'State',
+                    name: 'State'.tr,
                     hint: 'state',
                     controller: provider.stateController),
                 SizedBox(
                   height: 2.h,
                 ),
                 CustomLineTextField(
-                    name: 'Postal/Zip code',
+                    name: 'Postal/Zip code'.tr,
                     hint: 'Postal code',
                     controller: provider.zipCodeController),
                 SizedBox(
                   height: 2.h,
                 ),
                 CustomLineTextField(
-                    name: 'Email',
+                    name: 'Email'.tr,
                     hint: ' Enter Email',
                     controller: provider.emailController),
                 SizedBox(
                   height: 2.h,
                 ),
                 CustomLineTextField(
-                    name: 'Phone',
+                    name: 'Phone'.tr,
                     hint: 'Enter Phone',
                     controller: provider.phoneController),
                 Align(
@@ -116,7 +116,7 @@ class _PickupLocationState extends State<PickupLocation> {
                   child: Padding(
                     padding: EdgeInsets.only(left: 4.w, right: 4.w),
                     child: Text(
-                      'Invoice Discription',
+                      'Invoice Discription'.tr,
                       style: TextStyle(color: Colors.black, fontSize: 11.sp),
                     ),
                   ),
@@ -180,7 +180,7 @@ class _PickupLocationState extends State<PickupLocation> {
                       ),
                       child: Center(
                         child: Text(
-                          'Save',
+                          'Save'.tr,
                           style: TextStyle(
                               color: Colors.white,
                               fontSize: 13.sp,

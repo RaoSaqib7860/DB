@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../../../custom_widgets/app_colors.dart';
@@ -36,7 +37,7 @@ class _ProfileSettingScreenState extends State<ProfileSettingScreen> {
                         child: SvgPicture.asset('assets/svgs/back_arrow.svg',height: 2.h,)),
                     SizedBox(width: 30.w,),
                     Text(
-                      'Profile Settings',
+                      'Profile Settings'.tr,
                       style: TextStyle(
                           color: Colors.white,
                           fontSize: 12.sp,
@@ -50,7 +51,7 @@ class _ProfileSettingScreenState extends State<ProfileSettingScreen> {
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 6.w),
               child: Text(
-                'Edit General Settings',
+                'Edit General Settings'.tr,
                 style: TextStyle(
                   color: blueColor,
                   fontSize: 11.5.sp,
@@ -59,8 +60,8 @@ class _ProfileSettingScreenState extends State<ProfileSettingScreen> {
               ),
             ),
             SizedBox(height: 2.h,),
-            CustomFormField(name: 'Name', hint: 'Type here',),
-            CustomFormField(name: 'Email', hint: 'Type here',),
+            CustomFormField(name: 'Name'.tr, hint: 'Type here',),
+            CustomFormField(name: 'Email'.tr, hint: 'Type here',),
             GestureDetector(
               onTap: () {
                 CustomToastManager.showToast(
@@ -73,7 +74,7 @@ class _ProfileSettingScreenState extends State<ProfileSettingScreen> {
                       SvgPicture.asset('assets/svgs/set_update.svg',height: 6.h,),
                       SizedBox(height: 1.5.h,),
                       Text(
-                        'Settings Updated',
+                        'Settings Updated'.tr,
                         style: TextStyle(
                           fontSize: 10.sp,
                           color: Colors.black
@@ -94,7 +95,7 @@ class _ProfileSettingScreenState extends State<ProfileSettingScreen> {
                   ),
                   child: Center(
                     child: Text(
-                      'Update',
+                      'Update'.tr,
                       style: TextStyle(
                           color: Colors.white,
                           fontSize: 12.sp,
@@ -132,7 +133,7 @@ class _ProfileSettingScreenState extends State<ProfileSettingScreen> {
                         SvgPicture.asset('assets/svgs/pass_update.svg',height: 4.h,),
                         SizedBox(height: 1.5.h,),
                         Text(
-                          'Password Updated',
+                          'Password Updated'.tr,
                           style: TextStyle(
                               fontSize: 10.sp,
                               color: Colors.black
@@ -153,7 +154,7 @@ class _ProfileSettingScreenState extends State<ProfileSettingScreen> {
                   ),
                   child: Center(
                     child: Text(
-                      'Change',
+                      'Change'.tr,
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 12.sp,

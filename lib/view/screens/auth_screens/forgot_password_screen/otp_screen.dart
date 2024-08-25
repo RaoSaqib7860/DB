@@ -102,7 +102,7 @@ class _OtpScreensState extends State<OtpScreens> {
                       ),
                       Center(
                           child: Text(
-                        'Verify Code',
+                        'Verify Code'.tr,
                         style: TextStyle(
                             fontSize: 19,
                             letterSpacing: 0.5,
@@ -117,7 +117,7 @@ class _OtpScreensState extends State<OtpScreens> {
                           child: Column(
                             children: [
                               Text(
-                                'Please check your messages or email & enter the verification code we just sent you to',
+                                'Please check your messages or email & enter the verification code we just sent you to'.tr,
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                     fontSize: 15,
@@ -205,7 +205,7 @@ class _OtpScreensState extends State<OtpScreens> {
                         padding: const EdgeInsets.symmetric(horizontal: 30.0),
                         child: Text(
                           hasError
-                              ? "Please fill up all the cells properly"
+                              ? "Please fill up all the cells properly".tr
                               : "",
                           style: TextStyle(
                               color: Theme.of(context).brightness ==
@@ -241,7 +241,7 @@ class _OtpScreensState extends State<OtpScreens> {
                       Row(
                         children: <Widget>[
                           Text(
-                            'Didn\'t receive the code? ',
+                            'Didn\'t receive the code? '.tr,
                             style: TextStyle(
                                 color: Theme.of(context).brightness ==
                                         Brightness.dark
@@ -263,8 +263,8 @@ class _OtpScreensState extends State<OtpScreens> {
                             // },
                             child: Text(
                                 isotp == false
-                                    ? 'RESEND'
-                                    : 'Wait 30 seconds = ',
+                                    ? 'RESEND'.tr
+                                    : 'Wait 30 seconds = '.tr,
                                 style: TextStyle(
                                     color: isotp == false
                                         ? Theme.of(context).brightness ==

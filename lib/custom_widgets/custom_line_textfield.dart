@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 
 class CustomLineTextField extends StatefulWidget {
@@ -34,7 +35,7 @@ class _CustomLineTextFieldState extends State<CustomLineTextField> {
           child: Row(
             children: [
               Text(
-                widget.name!,
+                widget.name!.tr,
                 style: TextStyle(color: Colors.black, fontSize: 10.sp),
               ),
             ],
@@ -54,7 +55,7 @@ class _CustomLineTextFieldState extends State<CustomLineTextField> {
               onChanged: widget.onChanged,
               style: TextStyle(fontSize: 10.sp, color: Colors.black),
               decoration: InputDecoration(
-                  hintText: widget.hint,
+                  hintText: widget.hint!.tr,
                   hintStyle: TextStyle(fontSize: 9.sp),
                   contentPadding: EdgeInsets.only(bottom: 1.6.h)),
             ),

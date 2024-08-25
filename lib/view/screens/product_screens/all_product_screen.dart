@@ -1,5 +1,6 @@
 import 'package:db_2_0/view/screens/product_screens/publish_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 
@@ -51,7 +52,7 @@ class _AllProductScreenState extends State<AllProductScreen> {
                       padding: EdgeInsets.symmetric(
                           horizontal: 2.w, vertical: 0.6.h),
                       child: Text(
-                        'Publish (${provider.allProductModel?.data?.actives ?? ''})',
+                        'Publish '.tr + '(${provider.allProductModel?.data?.actives ?? ''})',
                         style: TextStyle(
                             color: provider.index == 1
                                 ? Colors.white
@@ -86,7 +87,7 @@ class _AllProductScreenState extends State<AllProductScreen> {
                       padding: EdgeInsets.symmetric(
                           horizontal: 2.w, vertical: 0.6.h),
                       child: Text(
-                        'Draft (${provider.allProductModel?.data?.drafts ?? ''})',
+                        'Draft '.tr + '(${provider.allProductModel?.data?.drafts ?? ''})',
                         style: TextStyle(
                           color:
                               provider.index == 2 ? Colors.white : Colors.black,
@@ -121,7 +122,7 @@ class _AllProductScreenState extends State<AllProductScreen> {
                       padding: EdgeInsets.symmetric(
                           horizontal: 2.w, vertical: 0.6.h),
                       child: Text(
-                        'Incomplete (${provider.allProductModel?.data?.incomplete ?? ''})',
+                        'Incomplete '.tr + '(${provider.allProductModel?.data?.incomplete ?? ''})',
                         style: TextStyle(
                             color: provider.index == 3
                                 ? Colors.white
@@ -156,7 +157,7 @@ class _AllProductScreenState extends State<AllProductScreen> {
                       padding: EdgeInsets.symmetric(
                           horizontal: 2.w, vertical: 0.6.h),
                       child: Text(
-                        'Trash (${provider.allProductModel?.data?.trash ?? ''})',
+                        'Trash '.tr + '(${provider.allProductModel?.data?.trash ?? ''})',
                         style: TextStyle(
                             color: provider.index == 4
                                 ? Colors.white

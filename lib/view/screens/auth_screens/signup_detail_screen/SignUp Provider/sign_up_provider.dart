@@ -23,25 +23,25 @@ class SignUpProvider extends ChangeNotifier {
   TextEditingController cPasswordController = TextEditingController();
 
   List list_of_category = [
-    'Fashion Apparels, Garments & Clothing Accessories',
-    'Restaurant, Bakery & Coffee Shops',
-    'Mobile, Computers & Electronics',
-    'Books & Stationary Goods',
-    'Jewellery, Gold & Accessories',
-    'Home Decoration & Electronic Appliances',
-    'Fruits, Vegetables & Agriculture Products',
-    'Hardware & Construction Tools',
-    'Local & Online Services',
-    'Kiryana Store, FMCG & Grocery',
-    'Pharmacy & Medical Care',
-    'Transportation, Car Rental, Travel & Tourism',
-    'Insurance & Financial Services',
-    'Car, Bike, Tractor & Vehicle Accessories',
-    'Real Estate Services',
-    'Pet Accessories & Services',
-    'Toys & Kids Accessories',
-    'Wholesalers & Manufactures',
-    'Beauty Cosmetic & Personal Care'
+    'Fashion Apparels, Garments & Clothing Accessories'.tr,
+    'Restaurant, Bakery & Coffee Shops'.tr,
+    'Mobile, Computers & Electronics'.tr,
+    'Books & Stationary Goods'.tr,
+    'Jewellery, Gold & Accessories'.tr,
+    'Home Decoration & Electronic Appliances'.tr,
+    'Fruits, Vegetables & Agriculture Products'.tr,
+    'Hardware & Construction Tools'.tr,
+    'Local & Online Services'.tr,
+    'Kiryana Store, FMCG & Grocery'.tr,
+    'Pharmacy & Medical Care'.tr,
+    'Transportation, Car Rental, Travel & Tourism'.tr,
+    'Insurance & Financial Services'.tr,
+    'Car, Bike, Tractor & Vehicle Accessories'.tr,
+    'Real Estate Services'.tr,
+    'Pet Accessories & Services'.tr,
+    'Toys & Kids Accessories'.tr,
+    'Wholesalers & Manufactures'.tr,
+    'Beauty Cosmetic & Personal Care'.tr
   ];
 
   // List list_of_images = [
@@ -68,7 +68,7 @@ class SignUpProvider extends ChangeNotifier {
   String? selected_categgory;
   bool? checkboxSelected = false;
 
-  String dropdownvalue = 'Select business industry';
+  String dropdownvalue = 'Select business industry'.tr;
 
   bool? validate_email_phone(String? value) {
     bool emailValid = RegExp(
@@ -79,7 +79,7 @@ class SignUpProvider extends ChangeNotifier {
 
   String? validate_password(String? value) {
     if (value!.length < 10) {
-      return 'Password must be more than 8 character';
+      return 'Password must be more than 8 character'.tr;
     } else {
       return null;
     }

@@ -2,6 +2,7 @@ import 'package:db_2_0/custom_widgets/app_colors.dart';
 import 'package:db_2_0/custom_widgets/data_loading.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 
@@ -82,7 +83,7 @@ class _SocialLinksScreenState extends State<SocialLinksScreen> {
                   ),
                   child: Center(
                     child: Text(
-                      'Save',
+                      'Save'.tr,
                       style: TextStyle(fontSize: 13.sp,fontWeight: FontWeight.bold,color: Colors.white),
                     ),
                   ),
@@ -103,7 +104,7 @@ class _SocialLinksScreenState extends State<SocialLinksScreen> {
             SvgPicture.asset('assets/svgs/$image.svg',height: 3.h,),
             SizedBox(width: 2.w,),
             Text(
-              text!,
+              text!.tr,
               style: TextStyle(
                   color: Color(0xff313131),
                   fontSize: 12.sp

@@ -3,6 +3,7 @@ import 'package:db_2_0/custom_widgets/data_loading.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 
@@ -91,7 +92,7 @@ class _ProductBrandScreenState extends State<ProductBrandScreen> {
                                 });
                               },
                               hint: Text(
-                                'Select Action',
+                                'Select Action'.tr,
                                 style: TextStyle(
                                     fontWeight: FontWeight.bold,
                                     fontSize: 10,
@@ -111,7 +112,7 @@ class _ProductBrandScreenState extends State<ProductBrandScreen> {
                         ),
                         child: Center(
                           child: Text(
-                            'Submit',
+                            'Submit'.tr,
                             style:
                                 TextStyle(fontSize: 9.sp, color: Colors.white),
                           ),
@@ -137,7 +138,7 @@ class _ProductBrandScreenState extends State<ProductBrandScreen> {
                     ),
                     child: Center(
                       child: Text(
-                        'Create Brand',
+                        'Create Brand'.tr,
                         style: TextStyle(color: Colors.white, fontSize: 9.sp),
                       ),
                     ),
@@ -293,7 +294,7 @@ class _ProductBrandScreenState extends State<ProductBrandScreen> {
                                                     width: 2.w,
                                                   ),
                                                   Text(
-                                                    'Action',
+                                                    'Action'.tr,
                                                     overflow:
                                                         TextOverflow.ellipsis,
                                                     style: TextStyle(
@@ -309,7 +310,7 @@ class _ProductBrandScreenState extends State<ProductBrandScreen> {
                                             Row(
                                               children: [
                                                 Text(
-                                                  'Featured:',
+                                                  'Featured:'.tr,
                                                   overflow:
                                                       TextOverflow.ellipsis,
                                                   style: TextStyle(
@@ -334,7 +335,7 @@ class _ProductBrandScreenState extends State<ProductBrandScreen> {
                                                             horizontal: 2.5.w,
                                                             vertical: 0.4.h),
                                                     child: Text(
-                                                      'Yes',
+                                                      'Yes'.tr,
                                                       style: TextStyle(
                                                           color: Colors.white,
                                                           fontSize: 9.sp),
@@ -348,7 +349,7 @@ class _ProductBrandScreenState extends State<ProductBrandScreen> {
                                                   CrossAxisAlignment.start,
                                               children: [
                                                 Text(
-                                                  'Created at',
+                                                  'Created at'.tr,
                                                   overflow:
                                                       TextOverflow.ellipsis,
                                                   style: TextStyle(
@@ -362,7 +363,7 @@ class _ProductBrandScreenState extends State<ProductBrandScreen> {
                                                   height: 0.3.h,
                                                 ),
                                                 Text(
-                                                  '1 month ago',
+                                                  '1 month ago'.tr,
                                                   overflow:
                                                       TextOverflow.ellipsis,
                                                   style: TextStyle(

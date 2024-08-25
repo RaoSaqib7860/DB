@@ -75,14 +75,14 @@ class _StoreSetupScreenState extends State<StoreSetupScreen> {
                       height: 2.h,
                     ),
                     Text(
-                      'Store setup is Complete',
+                      'Store setup is Complete'.tr,
                       style: TextStyle(color: Colors.white, fontSize: 13.sp),
                     ),
                     SizedBox(
                       height: 1.h,
                     ),
                     Text(
-                      'Finish following steps to unlock features ',
+                      'Finish following steps to unlock features '.tr,
                       style: TextStyle(color: Colors.white, fontSize: 13.sp),
                     )
                   ],
@@ -144,7 +144,7 @@ class _StoreSetupScreenState extends State<StoreSetupScreen> {
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
                               Text(
-                                'Created Online Store',
+                                'Created Online Store'.tr,
                                 style: TextStyle(
                                     fontSize: 12.sp,
                                     color: Colors.black,
@@ -154,7 +154,7 @@ class _StoreSetupScreenState extends State<StoreSetupScreen> {
                                 height: 0.4.h,
                               ),
                               Text(
-                                'Congratulations on Opening your\nnew online store!',
+                                'Congratulations on Opening your\nnew online store!'.tr,
                                 maxLines: 3,
                                 style: TextStyle(
                                   fontSize: 11.sp,
@@ -166,7 +166,7 @@ class _StoreSetupScreenState extends State<StoreSetupScreen> {
                                 height: 0.4.h,
                               ),
                               Text(
-                                'Visit Store.',
+                                'Visit Store.'.tr,
                                 style: TextStyle(
                                     fontSize: 11.sp,
                                     color: blueColor,
@@ -233,7 +233,7 @@ class _StoreSetupScreenState extends State<StoreSetupScreen> {
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
                               Text(
-                                'Add Product',
+                                'Add Product'.tr,
                                 style: TextStyle(
                                     fontSize: 12.sp,
                                     color: blueColor,
@@ -243,7 +243,7 @@ class _StoreSetupScreenState extends State<StoreSetupScreen> {
                                 height: 0.4.h,
                               ),
                               Text(
-                                'Set up your first product by adding\nthe product name and image.',
+                                'Set up your first product by adding\nthe product name and image.'.tr,
                                 maxLines: 3,
                                 style: TextStyle(
                                   fontSize: 11.sp,
@@ -272,7 +272,7 @@ class _StoreSetupScreenState extends State<StoreSetupScreen> {
                                     padding: EdgeInsets.symmetric(
                                         horizontal: 2.w, vertical: 0.5.h),
                                     child: Text(
-                                      'Add Product',
+                                      'Add Product'.tr,
                                       maxLines: 3,
                                       style: TextStyle(
                                         fontSize: 10.sp,
@@ -337,7 +337,7 @@ class _StoreSetupScreenState extends State<StoreSetupScreen> {
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
                               Text(
-                                'Setup Payment Method',
+                                'Setup Payment Method'.tr,
                                 style: TextStyle(
                                     fontSize: 12.sp,
                                     color: blueColor,
@@ -347,7 +347,7 @@ class _StoreSetupScreenState extends State<StoreSetupScreen> {
                                 height: 0.4.h,
                               ),
                               Text(
-                                'Choose how you would like to\nreceive payment for your orders.',
+                                'Choose how you would like to\nreceive payment for your orders.'.tr,
                                 maxLines: 3,
                                 style: TextStyle(
                                   fontSize: 11.sp,
@@ -374,7 +374,7 @@ class _StoreSetupScreenState extends State<StoreSetupScreen> {
                                     padding: EdgeInsets.symmetric(
                                         horizontal: 2.w, vertical: 0.5.h),
                                     child: Text(
-                                      'Setup Now',
+                                      'Setup Now'.tr,
                                       maxLines: 3,
                                       style: TextStyle(
                                         fontSize: 10.sp,
@@ -403,7 +403,7 @@ class _StoreSetupScreenState extends State<StoreSetupScreen> {
                     if (is_payment == 1 && is_product == 1) {
                       Get.offAll(BottomSheetScreen());
                     } else {
-                      Get.snackbar('Alert', 'Please complete all steps.');
+                      Get.snackbar('Alert'.tr, 'Please complete all steps.'.tr);
                     }
                   },
                   child: Container(
@@ -415,7 +415,7 @@ class _StoreSetupScreenState extends State<StoreSetupScreen> {
                     ),
                     child: Center(
                       child: Text(
-                        'Complete your Store Setup',
+                        'Complete your Store Setup'.tr,
                         style: TextStyle(color: Colors.white, fontSize: 12.sp),
                       ),
                     ),
