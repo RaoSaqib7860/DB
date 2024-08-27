@@ -1,6 +1,7 @@
 import 'package:db_2_0/custom_widgets/data_loading.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 
@@ -17,8 +18,8 @@ class StoreInnfoScreen extends StatefulWidget {
 
 class _StoreInnfoScreenState extends State<StoreInnfoScreen> {
   List currencyName = [
-    'left',
-    'right',
+    'left'.tr,
+    'right'.tr,
   ];
   List lang = [
     'en',
@@ -26,12 +27,12 @@ class _StoreInnfoScreenState extends State<StoreInnfoScreen> {
     'ur',
   ];
   List shopType = [
-    'I will sale digital products',
-    'I will sale physical products',
+    'I will sale digital products'.tr,
+    'I will sale physical products'.tr,
   ];
   List receivingMethod = [
-    'whatsapp',
-    'email',
+    'whatsapp'.tr,
+    'email'.tr,
   ];
   @override
   void initState() {
@@ -52,9 +53,9 @@ class _StoreInnfoScreenState extends State<StoreInnfoScreen> {
     provider.currencyIconController.text =  'RS.';
     provider.taxController.text = provider.getStoreInfoModel?.data?.tax?? '';
     if(provider.getStoreInfoModel?.data?.activeTheme?.shopType == 0){
-      provider.shopValue = 'I will sale digital products';
+      provider.shopValue = 'I will sale digital products'.tr;
     }else{
-      provider.shopValue = 'I will sale physical products';
+      provider.shopValue = 'I will sale physical products'.tr;
     }
     provider.payment = provider.getStoreInfoModel?.data?.orderReceiveMethod?? '';
     if(provider.getStoreInfoModel?.data?.languages == 'en'){
@@ -86,14 +87,14 @@ class _StoreInnfoScreenState extends State<StoreInnfoScreen> {
               children: [
                 SizedBox(height: 2.h,),
                 CustomLineTextField(
-                    name: 'Store Name',
-                    hint: 'store name',
+                    name: 'Store Name'.tr,
+                    hint: 'store name'.tr,
                     controller: provider.storeNameController
                 ),
                 Padding(
                   padding: EdgeInsets.only(left: 4.w, right: 4.w),
                   child: Text(
-                    'Store Discription',
+                    'Store Discription'.tr,
                     style:
                     TextStyle(color: Colors.black, fontSize: 11.sp),
                   ),
@@ -131,20 +132,20 @@ class _StoreInnfoScreenState extends State<StoreInnfoScreen> {
                 ),
                 SizedBox(height: 2.h,),
                 CustomLineTextField(
-                    name: 'Notification & Reply-to-Email',
+                    name: 'Notification & Reply-to-Email'.tr,
                     hint: 'info@',
                     controller: provider.notificationController
                 ),
                 SizedBox(height: 2.h,),
                 CustomLineTextField(
-                    name: 'Order Id Format',
+                    name: 'Order Id Format'.tr,
                     hint: '#Lamp',
                     controller: provider.orderIdController
                 ),
                 Padding(
                   padding: EdgeInsets.only(left: 4.w, right: 4.w),
                   child: Text(
-                    'Currency Position',
+                    'Currency Position'.tr,
                     style: TextStyle(color: Colors.black),
                   ),
                 ),
@@ -197,8 +198,8 @@ class _StoreInnfoScreenState extends State<StoreInnfoScreen> {
                         // selectCategoriesIds!.add(id);
                       });
                     },
-                    hint: const Text(
-                      "Select Currency Position",
+                    hint:  Text(
+                      "Select Currency Position".tr,
                       style: TextStyle(
                           fontSize: 12, color: Colors.black),
                     ),
@@ -208,7 +209,7 @@ class _StoreInnfoScreenState extends State<StoreInnfoScreen> {
                   height: 2.h,
                 ),
                 CustomLineTextField(
-                    name: 'Currency Name',
+                    name: 'Currency Name'.tr,
                     hint: 'Rs.',
                     controller: provider.currencyNameController
                 ),
@@ -216,7 +217,7 @@ class _StoreInnfoScreenState extends State<StoreInnfoScreen> {
                   height: 2.h,
                 ),
                 CustomLineTextField(
-                    name: 'Currency Icon',
+                    name: 'Currency Icon'.tr,
                     hint: 'Rs.',
                     controller: provider.currencyIconController
                 ),
@@ -224,14 +225,14 @@ class _StoreInnfoScreenState extends State<StoreInnfoScreen> {
                   height: 2.h,
                 ),
                 CustomLineTextField(
-                    name: 'Tax',
+                    name: 'Tax'.tr,
                     hint: 'taxis',
                     controller: provider.taxController
                 ),
                 Padding(
                   padding: EdgeInsets.only(left: 4.w, right: 4.w),
-                  child: const Text(
-                    'Shop Type',
+                  child:  Text(
+                    'Shop Type'.tr,
                     style: TextStyle(color: Colors.black),
                   ),
                 ),
@@ -286,8 +287,8 @@ class _StoreInnfoScreenState extends State<StoreInnfoScreen> {
                         // selectCategoriesIds!.add(id);
                       });
                     },
-                    hint: const Text(
-                      "Select Shop Type",
+                    hint:  Text(
+                      "Select Shop Type".tr,
                       style: TextStyle(
                           fontSize: 12, color: Colors.black),
                     ),
@@ -352,8 +353,8 @@ class _StoreInnfoScreenState extends State<StoreInnfoScreen> {
                         // selectCategoriesIds!.add(id);
                       });
                     },
-                    hint: const Text(
-                      "Select Shop Type",
+                    hint:  Text(
+                      "Select Shop Type".tr,
                       style: TextStyle(
                           fontSize: 12, color: Colors.black),
                     ),

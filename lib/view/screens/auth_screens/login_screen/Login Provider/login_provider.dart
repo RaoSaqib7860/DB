@@ -24,7 +24,7 @@ class LoginProvider extends ChangeNotifier {
 
   String? validate_password(String? value) {
     if (value!.length < 10) {
-      return 'Password must be more than 8 character';
+      return 'Password must be more than 8 character'.tr;
     } else {
       return null;
     }

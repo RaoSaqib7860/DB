@@ -1,6 +1,7 @@
 import 'package:db_2_0/custom_widgets/data_loading.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 
@@ -32,11 +33,11 @@ class _EditShippingAddressScreenState extends State<EditShippingAddressScreen> {
   sent_data(){
     final AllOrderProvider provider =
     Provider.of<AllOrderProvider>(context, listen: false);
-    provider.nameController.text = widget.name!;
-    provider.emailController.text = widget.email!;
-    provider.phoneController.text = widget.phone!;
-    provider.zipController.text = widget.zipCode!;
-    provider.addressController.text = widget.address!;
+    provider.nameController.text = widget.name ?? '';
+    provider.emailController.text = widget.email ?? '';
+    provider.phoneController.text = widget.phone ?? '';
+    provider.zipController.text = widget.zipCode ?? '';
+    provider.addressController.text = widget.address ?? '';
     setState(() {
 
     });
@@ -67,7 +68,7 @@ class _EditShippingAddressScreenState extends State<EditShippingAddressScreen> {
                           child: SvgPicture.asset('assets/svgs/back_arrow.svg',height: 2.h,)),
                       SizedBox(width: 2.w,),
                       Text(
-                        'Edit Shippng Address for Order No: ${widget.orderId}',
+                        'Edit Shippng Address for Order No: ' + '${widget.orderId}',
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: 10.sp,
@@ -83,12 +84,12 @@ class _EditShippingAddressScreenState extends State<EditShippingAddressScreen> {
                 padding: EdgeInsets.symmetric(horizontal: 2.w),
                 child: Column(
                   children: [
-                    CustomLineTextField(name: 'Customer Name', hint: 'Hamza',controller: provider.nameController,),
-                    CustomLineTextField(name: 'Customer Email', hint: 'hamza@hotmail.com',controller: provider.emailController,),
-                    CustomLineTextField(name: 'Customer Phone',controller: provider.phoneController,),
-                    CustomLineTextField(name: 'Zip Code',controller: provider.zipController,),
-                    CustomLineTextField(name: 'Address',controller: provider.addressController,),
-                    CustomLineTextField(name: 'Shipping Method',),
+                    CustomLineTextField(name: 'Customer Name'.tr, hint: 'Hamza'.tr,controller: provider.nameController,),
+                    CustomLineTextField(name: 'Customer Email'.tr, hint: 'hamza@hotmail.com',controller: provider.emailController,),
+                    CustomLineTextField(name: 'Customer Phone'.tr,controller: provider.phoneController,),
+                    CustomLineTextField(name: 'Zip Code'.tr,controller: provider.zipController,),
+                    CustomLineTextField(name: 'Address'.tr,controller: provider.addressController,),
+                    //CustomLineTextField(name: 'Shipping Method'.tr,),
                     SizedBox(height: 10.h,),
                     GestureDetector(
                       onTap: () {
@@ -105,7 +106,7 @@ class _EditShippingAddressScreenState extends State<EditShippingAddressScreen> {
                           ),
                           child: Center(
                             child: Text(
-                              'Save',
+                              'Save'.tr,
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 color: Colors.white,

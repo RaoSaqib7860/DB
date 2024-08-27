@@ -57,7 +57,7 @@ class _ConfirmPasswordScreenState extends State<ConfirmPasswordScreen> {
                       height: 12.h,
                     ),
                     Text(
-                      'Confirm Password',
+                      'Confirm Password'.tr,
                       style: TextStyle(
                           fontSize: 14.sp,
                           fontWeight: FontWeight.bold,
@@ -69,7 +69,7 @@ class _ConfirmPasswordScreenState extends State<ConfirmPasswordScreen> {
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: 8.w),
                       child: CustomTextField(
-                        hintText: 'New Password',
+                        hintText: 'New Password'.tr,
                         controller: passwordController,
                       ),
                     ),
@@ -79,7 +79,7 @@ class _ConfirmPasswordScreenState extends State<ConfirmPasswordScreen> {
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: 8.w),
                       child: CustomTextField(
-                        hintText: 'Re-enter Password',
+                        hintText: 'Re-enter Password'.tr,
                         controller: confirmPasswordController,
                       ),
                     ),
@@ -106,7 +106,7 @@ class _ConfirmPasswordScreenState extends State<ConfirmPasswordScreen> {
                             Get.offAll(LoginScreen());
                           }
                         } else {
-                          Get.snackbar('Alert', 'Password not matched.');
+                          Get.snackbar('Alert'.tr, 'Password not matched.'.tr);
                         }
                       },
                       child: Container(
@@ -117,7 +117,7 @@ class _ConfirmPasswordScreenState extends State<ConfirmPasswordScreen> {
                           padding: EdgeInsets.symmetric(
                               vertical: 0.7.h, horizontal: 14.w),
                           child: Text(
-                            'Submit',
+                            'Submit'.tr,
                             style:
                                 TextStyle(color: Colors.white, fontSize: 13.sp),
                           ),

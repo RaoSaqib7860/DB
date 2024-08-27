@@ -1,6 +1,7 @@
 import 'package:db_2_0/custom_widgets/data_loading.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
@@ -53,7 +54,7 @@ class _AllScreenState extends State<AllScreen> {
                 ? SizedBox()
                 : provider.allOrderModel!.data!.orders!.isEmpty
                     ? Center(
-                        child: Text('Order not found.'),
+                        child: Text('Order not found.'.tr),
                       )
                     : RefreshIndicator(
                         onRefresh: () async {
@@ -97,14 +98,14 @@ class _AllScreenState extends State<AllScreen> {
                                                 MainAxisAlignment.spaceBetween,
                                             children: [
                                               Text(
-                                                'Order ${provider.allOrderModel!.data!.orders![index].orderNo}',
+                                                'Order '.tr + '${provider.allOrderModel!.data!.orders![index].orderNo}'.tr,
                                                 style: TextStyle(
                                                   fontSize: 12.sp,
                                                   color: Colors.black,
                                                 ),
                                               ),
                                               Text(
-                                                'Items: ${provider.allOrderModel!.data!.orders![index].orderItemsCount}',
+                                                'Items: '.tr + '${provider.allOrderModel!.data!.orders![index].orderItemsCount}'.tr,
                                                 style: TextStyle(
                                                   fontSize: 9.sp,
                                                   color: Colors.black,
@@ -127,7 +128,7 @@ class _AllScreenState extends State<AllScreen> {
                                                 MainAxisAlignment.spaceBetween,
                                             children: [
                                               Text(
-                                                'Customer name:',
+                                                'Customer name:'.tr,
                                                 style: TextStyle(
                                                   fontSize: 10.sp,
                                                   color: Color(0xff5B5B5B),
@@ -169,7 +170,7 @@ class _AllScreenState extends State<AllScreen> {
                                               Row(
                                                 children: [
                                                   Text(
-                                                    'Fulfillment:',
+                                                    'Fulfillment:'.tr,
                                                     style: TextStyle(
                                                       fontSize: 9.sp,
                                                       color: Colors.black,
@@ -204,7 +205,7 @@ class _AllScreenState extends State<AllScreen> {
                                               Row(
                                                 children: [
                                                   Text(
-                                                    'Payment:',
+                                                    'Payment:'.tr,
                                                     style: TextStyle(
                                                       fontSize: 9.sp,
                                                       color: Colors.black,
@@ -251,7 +252,7 @@ class _AllScreenState extends State<AllScreen> {
                                                     CrossAxisAlignment.start,
                                                 children: [
                                                   Text(
-                                                    'Customer type',
+                                                    'Customer type'.tr,
                                                     style: TextStyle(
                                                       fontSize: 9.sp,
                                                       color: Color(0xff5B5B5B),
@@ -321,7 +322,7 @@ class _AllScreenState extends State<AllScreen> {
                                                     child: Row(
                                                       children: [
                                                         Text(
-                                                          'Details',
+                                                          'Details'.tr,
                                                           style: TextStyle(
                                                             color: Color(
                                                                 0xff858585),

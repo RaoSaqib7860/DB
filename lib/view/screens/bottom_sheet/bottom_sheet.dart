@@ -1,6 +1,7 @@
 import 'package:db_2_0/custom_widgets/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 import 'package:persistent_bottom_nav_bar/persistent_bottom_nav_bar.dart';
 import 'package:sizer/sizer.dart';
 import '../account_screen/account_scrreen.dart';
@@ -34,7 +35,7 @@ class _BottomSheetScreenState extends State<BottomSheetScreen> {
 
   var items = [
     'Eng',
-    'Urdu',
+    'Urdu'.tr,
   ];
   String dropdownvalue = 'Eng';
 
@@ -195,7 +196,7 @@ class _BottomSheetScreenState extends State<BottomSheetScreen> {
                                                       .spaceBetween,
                                               children: [
                                                 Text(
-                                                  'You have new order',
+                                                  'You have new order'.tr,
                                                   style: TextStyle(
                                                       color: Colors.black,
                                                       fontSize: 9.sp,
@@ -203,7 +204,7 @@ class _BottomSheetScreenState extends State<BottomSheetScreen> {
                                                           FontWeight.bold),
                                                 ),
                                                 Text(
-                                                  'Today',
+                                                  'Today'.tr,
                                                   style: TextStyle(
                                                     color: Colors.black,
                                                     fontSize: 9.sp,
@@ -215,7 +216,7 @@ class _BottomSheetScreenState extends State<BottomSheetScreen> {
                                               height: 0.5.h,
                                             ),
                                             Text(
-                                              'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
+                                              'Lorem Ipsum is simply dummy text of the printing and typesetting industry.'.tr,
                                               style: TextStyle(
                                                 color: Colors.black,
                                                 fontSize: 7.sp,

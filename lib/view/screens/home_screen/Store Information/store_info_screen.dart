@@ -19,20 +19,20 @@ class StoreInformation extends StatefulWidget {
 
 class _StoreInformationState extends State<StoreInformation> {
   List currencyName = [
-    'left',
-    'right',
+    'left'.tr,
+    'right'.tr,
   ];
   List lang = [
     'eng',
     'ur',
   ];
   List shopType = [
-    'I will sale digital products',
-    'I will sale physical products',
+    'I will sale digital products'.tr,
+    'I will sale physical products'.tr,
   ];
   List receivingMethod = [
-    'whatsapp',
-    'email',
+    'whatsapp'.tr,
+    'email'.tr,
   ];
 
   @override
@@ -80,7 +80,7 @@ class _StoreInformationState extends State<StoreInformation> {
                         width: 30.w,
                       ),
                       Text(
-                        'Store Setting',
+                        'Store Setting'.tr,
                         style: TextStyle(
                             color: Colors.white,
                             fontSize: 12.sp,
@@ -93,14 +93,14 @@ class _StoreInformationState extends State<StoreInformation> {
                   height: 2.h,
                 ),
                 CustomLineTextField(
-                    name: 'Store Name',
-                    hint: 'store name',
+                    name: 'Store Name'.tr,
+                    hint: 'store name'.tr,
                     enable: false,
                     controller: provider.storeNameController),
                 Padding(
                   padding: EdgeInsets.only(left: 4.w, right: 4.w),
                   child: Text(
-                    'Store Description',
+                    'Store Description'.tr,
                     style: TextStyle(color: Colors.black, fontSize: 11.sp),
                   ),
                 ),
@@ -139,20 +139,20 @@ class _StoreInformationState extends State<StoreInformation> {
                   height: 2.h,
                 ),
                 CustomLineTextField(
-                    name: 'Notification & Reply-to-Email',
+                    name: 'Notification & Reply-to-Email'.tr,
                     hint: 'info@',
                     controller: provider.notificationController),
                 SizedBox(
                   height: 2.h,
                 ),
                 CustomLineTextField(
-                    name: 'Order Id Format',
+                    name: 'Order Id Format'.tr,
                     hint: '#Lamp',
                     controller: provider.orderIdController),
                 Padding(
                   padding: EdgeInsets.only(left: 4.w, right: 4.w),
-                  child: const Text(
-                    'Currency Position',
+                  child:  Text(
+                    'Currency Position'.tr,
                     style: TextStyle(color: Colors.black),
                   ),
                 ),
@@ -188,8 +188,8 @@ class _StoreInformationState extends State<StoreInformation> {
                         provider.selectedCurrencyName = newValue!;
                       });
                     },
-                    hint: const Text(
-                      "Select Currency Position",
+                    hint:  Text(
+                      "Select Currency Position".tr,
                       style: TextStyle(fontSize: 12, color: Colors.black),
                     ),
                   ),
@@ -198,7 +198,7 @@ class _StoreInformationState extends State<StoreInformation> {
                   height: 2.h,
                 ),
                 CustomLineTextField(
-                    name: 'Currency Name',
+                    name: 'Currency Name'.tr,
                     hint: 'Rs.',
                     enable: false,
                     controller: provider.currencyNameController),
@@ -206,7 +206,7 @@ class _StoreInformationState extends State<StoreInformation> {
                   height: 2.h,
                 ),
                 CustomLineTextField(
-                    name: 'Currency Icon',
+                    name: 'Currency Icon'.tr,
                     hint: 'Rs.',
                     enable: false,
                     controller: provider.currencyIconController),
@@ -214,13 +214,13 @@ class _StoreInformationState extends State<StoreInformation> {
                   height: 2.h,
                 ),
                 CustomLineTextField(
-                    name: 'Tax',
+                    name: 'Tax'.tr,
                     hint: 'taxis',
                     controller: provider.taxController),
                 Padding(
                   padding: EdgeInsets.only(left: 4.w, right: 4.w),
-                  child: const Text(
-                    'Shop Type',
+                  child:  Text(
+                    'Shop Type'.tr,
                     style: TextStyle(color: Colors.black),
                   ),
                 ),
@@ -258,8 +258,8 @@ class _StoreInformationState extends State<StoreInformation> {
                         print('objectof id ${provider.shopValueIndex}');
                       });
                     },
-                    hint: const Text(
-                      "Select Shop Type",
+                    hint:  Text(
+                      "Select Shop Type".tr,
                       style: TextStyle(fontSize: 12, color: Colors.black),
                     ),
                   ),
@@ -269,8 +269,8 @@ class _StoreInformationState extends State<StoreInformation> {
                 ),
                 Padding(
                   padding: EdgeInsets.only(left: 4.w, right: 4.w),
-                  child: const Text(
-                    'Order Received payment',
+                  child:  Text(
+                    'Order Received payment'.tr,
                     style: TextStyle(color: Colors.black),
                   ),
                 ),
@@ -306,8 +306,8 @@ class _StoreInformationState extends State<StoreInformation> {
                         provider.payment = newValue!;
                       });
                     },
-                    hint: const Text(
-                      "Select Shop Type",
+                    hint:  Text(
+                      "Select Shop Type".tr,
                       style: TextStyle(fontSize: 12, color: Colors.black),
                     ),
                   ),
@@ -354,8 +354,8 @@ class _StoreInformationState extends State<StoreInformation> {
                         provider.selectLang = newValue!;
                       });
                     },
-                    hint: const Text(
-                      "Select Language",
+                    hint:  Text(
+                      "Select Language".tr,
                       style: TextStyle(fontSize: 12, color: Colors.black),
                     ),
                   ),
@@ -392,7 +392,7 @@ class _StoreInformationState extends State<StoreInformation> {
                       ),
                       child: Center(
                         child: Text(
-                          'Save',
+                          'Save'.tr,
                           style: TextStyle(
                               color: Colors.white,
                               fontSize: 13.sp,

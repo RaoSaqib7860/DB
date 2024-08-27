@@ -55,7 +55,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                       height: 12.h,
                     ),
                     Text(
-                      'Forgot Password',
+                      'Forgot Password'.tr,
                       style: TextStyle(
                           fontSize: 14.sp,
                           fontWeight: FontWeight.bold,
@@ -65,7 +65,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                       height: 2.h,
                     ),
                     Text(
-                      'Enter your Email or Number below and we will\n     send you a link to reset your Password.',
+                      'Enter your Email or Number below and we will\n     send you a link to reset your Password.'.tr,
                       style: TextStyle(fontSize: 11.sp),
                     ),
                     SizedBox(
@@ -74,7 +74,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: 8.w),
                       child: CustomTextField(
-                        hintText: 'Email or number',
+                        hintText: 'Email or number'.tr,
                         controller: email_controller,
                       ),
                     ),
@@ -105,7 +105,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                           padding: EdgeInsets.symmetric(
                               vertical: 0.7.h, horizontal: 14.w),
                           child: Text(
-                            'Submit',
+                            'Submit'.tr,
                             style:
                                 TextStyle(color: Colors.white, fontSize: 13.sp),
                           ),

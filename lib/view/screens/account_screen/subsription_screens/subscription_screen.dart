@@ -2,6 +2,7 @@ import 'package:db_2_0/custom_widgets/data_loading.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
@@ -69,7 +70,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                               },
                               child: SvgPicture.asset('assets/svgs/back_arrow.svg',height: 2.h,)),
                           Text(
-                            'Subscription Plan',
+                            'Subscription Plan'.tr,
                             style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 13.sp,
@@ -96,14 +97,14 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                 // ),
                 SizedBox(height: 2.h,),
                 customContainer(
-                  topText: 'Best Seller',
+                  topText: 'Best Seller'.tr,
                   subName: '${provider.getSubscriptionPlanHistoryModel!.data![0].name}',
                   description: '${provider.getSubscriptionPlanHistoryModel!.data![0].description}',
                   price: ' ${provider.getSubscriptionPlanHistoryModel!.data![0].price} ',
                   validText: '${provider.getSubscriptionPlanHistoryModel!.data![0].days}',
-                  commissionText: 'Zero % Commission',
+                  commissionText: 'Zero % Commission'.tr,
                   costText: monthlyPayment !=null?'${monthlyPayment!.toInt()}':'',
-                  purchaseText: 'Purchase',
+                  purchaseText: 'Purchase'.tr,
                   purchaseIcon: Icons.arrow_forward,
                   ontap: () {
                     Navigator.push(context, MaterialPageRoute(builder: (context) => BasicScreen(planId: provider.getSubscriptionPlanHistoryModel!.data![0].id,),));
@@ -114,9 +115,9 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                     description: '${provider.getSubscriptionPlanHistoryModel!.data![1].description}',
                     price: ' ${provider.getSubscriptionPlanHistoryModel!.data![1].price}',
                     validText: '${provider.getSubscriptionPlanHistoryModel!.data![1].days}',
-                    commissionText: 'Zero % Commission',
+                    commissionText: 'Zero % Commission'.tr,
                     costText: monthlyPaymentSecond != null? '${monthlyPaymentSecond!.toInt()}' :'',
-                    purchaseText: 'Purchase',
+                    purchaseText: 'Purchase'.tr,
                     purchaseIcon: Icons.arrow_forward,
                   ontap: () {
                     Navigator.push(context, MaterialPageRoute(builder: (context) => BasicScreen(planId: provider.getSubscriptionPlanHistoryModel!.data![1].id,),));
@@ -128,9 +129,9 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                     description: '${provider.getSubscriptionPlanHistoryModel!.data![2].description}',
                     price: ' ${provider.getSubscriptionPlanHistoryModel!.data![2].price} ',
                     validText: '${provider.getSubscriptionPlanHistoryModel!.data![2].days}',
-                    commissionText: 'Zero % Commission',
+                    commissionText: 'Zero % Commission'.tr,
                     //costText: '2,083',
-                    purchaseText: 'Contact us',
+                    purchaseText: 'Contact us'.tr,
                     purchaseIcon: Icons.phone_enabled,
                   ontap: () {
                     Navigator.push(context, MaterialPageRoute(builder: (context) => BasicScreen(planId: provider.getSubscriptionPlanHistoryModel!.data![2].id,),));
@@ -141,7 +142,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 4.w,),
                   child: Text(
-                    'Order History',
+                    'Order History'.tr,
                     style: TextStyle(
                         color: blueColor,
                         fontSize: 12.sp,
@@ -198,7 +199,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                                 Padding(
                                   padding:  EdgeInsets.only(top: 0.5.h),
                                   child: Text(
-                                    "E-commerce",
+                                    "E-commerce".tr,
                                     style: TextStyle(
                                         color: redColor,
                                         fontSize: 12.sp,
@@ -224,7 +225,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                             ),
                             SizedBox(height: 0.5.h,),
                             Text(
-                              "Basic",
+                              "Basic".tr,
                               style: TextStyle(
                                   color: redColor,
                                   fontSize: 12.sp,
@@ -238,7 +239,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                                 Row(
                                   children: [
                                     Text(
-                                      "Payment: ",
+                                      "Payment: ".tr,
                                       style: TextStyle(
                                         color: Colors.black,
                                         fontSize: 8.sp,
@@ -265,7 +266,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                                 Row(
                                   children: [
                                     Text(
-                                      "Status: ",
+                                      "Status: ".tr,
                                       style: TextStyle(
                                         color: Colors.black,
                                         fontSize: 8.sp,
@@ -308,7 +309,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                                       SvgPicture.asset('assets/svgs/action.svg',height: 3.h,),
                                       SizedBox(width: 2.w,),
                                       Text(
-                                        "Action",
+                                        "Action".tr,
                                         style: TextStyle(
                                             color: Colors.black,
                                             fontSize: 10  .sp
@@ -328,7 +329,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                                   crossAxisAlignment: CrossAxisAlignment.end,
                                   children: [
                                     Text(
-                                      "Account Status:",
+                                      "Account Status:".tr,
                                       style: TextStyle(
                                           color: Colors.black,
                                           fontSize: 9.sp
@@ -336,7 +337,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                                     ),
                                     SizedBox(height: 0.3.h,),
                                     Text(
-                                      "Approved",
+                                      "Approved".tr,
                                       style: TextStyle(
                                           color: blueColor,
                                           fontSize: 10.sp
@@ -438,7 +439,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                         text: TextSpan(
                             children: [
                               TextSpan(
-                                text: 'Pay ',
+                                text: 'Pay '.tr,
                                 style: TextStyle(
                                   color: Color(0xff2E3630),
                                   fontSize: 11.sp,
@@ -453,7 +454,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                                 ),
                               ),
                               TextSpan(
-                                text: '/ Yearly ',
+                                text: '/ Yearly '.tr,
                                 style: TextStyle(
                                   color: Color(0xff2E3630),
                                   fontSize: 11.sp,
@@ -494,7 +495,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                     SizedBox(height: 0.5.h,),
                     if(costText != null)
                     Text(
-                      'Cost Rs. $costText Per Month',
+                      'Cost Rs. $costText Per Month'.tr,
                       style: TextStyle(
                         color: Color(0xff2E3630),
                         fontSize: 10.sp,
@@ -518,7 +519,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                                     child: Row(
                                       children: [
                                         Text(
-                                          'View Features',
+                                          'View Features'.tr,
                                           style: TextStyle(
                                             color: Colors.black,
                                             fontSize: 11.sp,

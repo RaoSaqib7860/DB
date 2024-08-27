@@ -88,16 +88,16 @@ class _PricingScreenState extends State<PricingScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         CustomLineTextField(
-                            name: 'Current Price',
+                            name: 'Current Price'.tr,
                             hint: '3500',
                             enable: false,
                             controller: priceController),
                         CustomLineTextField(
-                            name: 'Regular Price',
+                            name: 'Regular Price'.tr,
                             hint: '4000',
                             controller: regPriceController),
                         CustomLineTextField(
-                          name: 'Discounted Type',
+                          name: 'Discounted Type'.tr,
                           hint: '$discountType',
                           enable: false,
                         ),
@@ -105,7 +105,7 @@ class _PricingScreenState extends State<PricingScreen> {
                           height: 2.h,
                         ),
                         CustomLineTextField(
-                            name: 'Discounted Amount',
+                            name: 'Discounted Amount'.tr,
                             hint: '500',
                             controller: discountController),
                         CustomLineTextField(
@@ -126,8 +126,8 @@ class _PricingScreenState extends State<PricingScreen> {
                               );
                             },
                             readOnly: true,
-                            name: 'Special Price Start',
-                            hint: 'Date',
+                            name: 'Special Price Start'.tr,
+                            hint: 'Date'.tr,
                             controller: sDateController),
                         CustomLineTextField(
                             onClick: () {
@@ -147,8 +147,8 @@ class _PricingScreenState extends State<PricingScreen> {
                               );
                             },
                             readOnly: true,
-                            name: 'Special Price End',
-                            hint: 'Date',
+                            name: 'Special Price End'.tr,
+                            hint: 'Date'.tr,
                             controller: endDateController),
                         SizedBox(
                           height: 2.h,
@@ -199,7 +199,7 @@ class _PricingScreenState extends State<PricingScreen> {
                                                 width: 5.w,
                                               ),
                                               Text(
-                                                'Changes saved\nsuccessfully',
+                                                'Changes saved\nsuccessfully'.tr,
                                                 style: TextStyle(
                                                     fontSize: 11.sp,
                                                     color: Colors.black,
@@ -221,7 +221,7 @@ class _PricingScreenState extends State<PricingScreen> {
                                     padding: EdgeInsets.symmetric(
                                         horizontal: 2.7.w, vertical: 0.8.h),
                                     child: Text(
-                                      'Save Changes',
+                                      'Save Changes'.tr,
                                       style: TextStyle(
                                           color: Colors.white, fontSize: 10.sp),
                                     ),
@@ -240,7 +240,7 @@ class _PricingScreenState extends State<PricingScreen> {
                                   padding: EdgeInsets.symmetric(
                                       horizontal: 7.w, vertical: 0.8.h),
                                   child: Text(
-                                    'Next',
+                                    'Next'.tr,
                                     style: TextStyle(
                                         color: Colors.white, fontSize: 10.sp),
                                   ),

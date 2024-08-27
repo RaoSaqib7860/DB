@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 import '../../../../api_repository/api_utils.dart';
 import '../../../../custom_widgets/custom_toast.dart';
@@ -25,26 +26,26 @@ class AllOrderProvider extends ChangeNotifier {
   Map<String, dynamic>? current_api_object = {};
 
   Map<String, String> payment_status = {
-    '1': 'Complete',
-    '2': 'Pending',
-    '3': 'Incomplete',
-    '4': 'Cancel'
+    '1': 'Complete'.tr,
+    '2': 'Pending'.tr,
+    '3': 'Incomplete'.tr,
+    '4': 'Cancel'.tr
   };
   Map<String, String> typeOrder = {
-    'All Orders': 'all',
-    'Awaiting Processing': 'pending',
-    'Processing': 'processing',
-    'Ready For Pickup': 'ready-for-pickup',
-    'Completed': 'completed',
-    'Archived': 'archived',
-    'Canceled': 'canceled',
+    'All Orders'.tr: 'all'.tr,
+    'Awaiting Processing'.tr: 'pending'.tr,
+    'Processing'.tr: 'processing'.tr,
+    'Ready For Pickup'.tr: 'ready-for-pickup'.tr,
+    'Completed'.tr: 'completed'.tr,
+    'Archived'.tr: 'archived'.tr,
+    'Canceled'.tr: 'canceled'.tr,
   };
 
   Map<String, String> payment_status_map = {
-    'Pending': '2',
-    'Complete': '1',
-    'Incomplete': '3',
-    'Cancel': '4'
+    'Pending'.tr: '2',
+    'Complete'.tr: '1',
+    'Incomplete'.tr: '3',
+    'Cancel'.tr: '4'
   };
 
   Map<String, String> full_fill_payment_status_map = {

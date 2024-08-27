@@ -4,6 +4,7 @@ import 'package:db_2_0/view/screens/product_screens/product_categories_screen/pr
 import 'package:db_2_0/view/screens/product_screens/publish_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 
@@ -23,11 +24,11 @@ class ProductScreen extends StatefulWidget {
 
 class _ProductScreenState extends State<ProductScreen> {
   var items = [
-    'All Products',
-    'Manage Inventory',
-    'Product Categories',
-    'Product Attribute',
-    'Product Brands',
+    'All Products'.tr,
+    'Manage Inventory'.tr,
+    'Product Categories'.tr,
+    'Product Attribute'.tr,
+    'Product Brands'.tr,
   ];
 
   @override
@@ -44,7 +45,7 @@ class _ProductScreenState extends State<ProductScreen> {
             color: blueColor,
             child: Center(
               child: Text(
-                'Products',
+                'Products'.tr,
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 14.sp,
@@ -71,7 +72,7 @@ class _ProductScreenState extends State<ProductScreen> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              'Select Page',
+                              'Select Page'.tr,
                               style: TextStyle(
                                   color: Colors.black,
                                   fontSize: 11.sp,
@@ -108,7 +109,7 @@ class _ProductScreenState extends State<ProductScreen> {
                                 width: 2.w,
                               ),
                               Text(
-                                'All Product',
+                                'All Product'.tr,
                                 style: TextStyle(
                                   color: Colors.black,
                                   fontSize: 11.sp,
@@ -138,7 +139,7 @@ class _ProductScreenState extends State<ProductScreen> {
                                 width: 2.w,
                               ),
                               Text(
-                                'Manage Inventory',
+                                'Manage Inventory'.tr,
                                 style: TextStyle(
                                   color: Colors.black,
                                   fontSize: 11.sp,
@@ -168,7 +169,7 @@ class _ProductScreenState extends State<ProductScreen> {
                                 width: 2.w,
                               ),
                               Text(
-                                'Product Categories',
+                                'Product Categories'.tr,
                                 style: TextStyle(
                                   color: Colors.black,
                                   fontSize: 11.sp,
@@ -198,7 +199,7 @@ class _ProductScreenState extends State<ProductScreen> {
                                 width: 2.w,
                               ),
                               Text(
-                                'Product Brands',
+                                'Product Brands'.tr,
                                 style: TextStyle(
                                   color: Colors.black,
                                   fontSize: 11.sp,

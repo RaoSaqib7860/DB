@@ -2,6 +2,7 @@
 import 'package:db_2_0/custom_widgets/app_colors.dart';
 import 'package:db_2_0/custom_widgets/data_loading.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 
@@ -64,7 +65,7 @@ class _StoreLocationScreenState extends State<StoreLocationScreen> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            'State',
+                            'State'.tr,
                             style: TextStyle(color: Colors.black,fontSize: 10.sp),
                           ),
                           SizedBox(height: 1.h,),
@@ -91,7 +92,7 @@ class _StoreLocationScreenState extends State<StoreLocationScreen> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            'Postal/Zip Code',
+                            'Postal/Zip Code'.tr,
                             style: TextStyle(color: Colors.black,fontSize: 10.sp),
                           ),
                           SizedBox(height: 01.h,),
@@ -122,7 +123,7 @@ class _StoreLocationScreenState extends State<StoreLocationScreen> {
                 child: Row(
                   children: [
                     Text(
-                      'Invoice Discription',
+                      'Invoice Discription'.tr,
                       style: TextStyle(color: Colors.black,fontSize: 10.sp),
                     ),
                   ],
@@ -165,7 +166,7 @@ class _StoreLocationScreenState extends State<StoreLocationScreen> {
                     ),
                     child: Center(
                       child: Text(
-                        'Save',
+                        'Save'.tr,
                         style: TextStyle(fontSize: 13.sp,fontWeight: FontWeight.bold,color: Colors.white),
                       ),
                     ),

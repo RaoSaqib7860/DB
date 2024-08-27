@@ -58,7 +58,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                             width: 25.w,
                           ),
                           Text(
-                            'Add Product',
+                            'Add Product'.tr,
                             style: TextStyle(
                                 color: Colors.white,
                                 fontWeight: FontWeight.bold,
@@ -73,18 +73,18 @@ class _AddProductScreenState extends State<AddProductScreen> {
                   height: 2.h,
                 ),
                 CustomLineTextField(
-                    name: 'Product Name*',
+                    name: 'Product Name*'.tr,
                     hint: 'Lamp',
                     controller: provider.nameController),
                 CustomLineTextField(
-                    name: 'Price*',
+                    name: 'Price*'.tr,
                     hint: 'Rs. Price*',
                     controller: provider.priceController),
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 4.w),
                   child: Row(
                     children: [
-                      Text('Manage Stoke'),
+                      Text('Manage Stoke'.tr),
                       Padding(
                         padding: EdgeInsets.only(left: 10.w),
                         child: FlutterSwitch(
@@ -113,8 +113,8 @@ class _AddProductScreenState extends State<AddProductScreen> {
                   height: 3.h,
                 ),
                 CustomLineTextField(
-                    name: 'Stock Quantity',
-                    hint: 'Quantity',
+                    name: 'Stock Quantity'.tr,
+                    hint: 'Quantity'.tr,
                     controller: provider.quantityController),
                 SizedBox(
                   height: 2.h,
@@ -137,7 +137,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                         onToggle: (val) {},
                       ),
                     ),
-                    Text('Pulished'),
+                    Text('Published'.tr),
                   ],
                 ),
                 SizedBox(
@@ -174,7 +174,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                                   width: 5.w,
                                 ),
                                 Text(
-                                  'Product created\nsuccessfully',
+                                  'Product created\nsuccessfully'.tr,
                                   style: TextStyle(
                                       fontSize: 11.sp,
                                       color: Colors.black,
@@ -198,7 +198,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                   ),
                   child: Center(
                     child: Text(
-                      'Save',
+                      'Save'.tr,
                       style: TextStyle(
                           fontSize: 15.sp,
                           fontWeight: FontWeight.bold,

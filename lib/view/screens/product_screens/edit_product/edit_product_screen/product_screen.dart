@@ -2,6 +2,7 @@ import 'package:db_2_0/custom_widgets/app_colors.dart';
 import 'package:db_2_0/custom_widgets/data_loading.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:html_editor_enhanced/html_editor.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
@@ -113,7 +114,7 @@ class _ProductScreenState extends State<ProductScreen> {
                                 width: 3.w,
                               ),
                               Text(
-                                'Published',
+                                'Published'.tr,
                                 style: TextStyle(
                                     fontSize: 12.sp, color: Color(0xff4C4C4C)),
                               ),
@@ -124,17 +125,17 @@ class _ProductScreenState extends State<ProductScreen> {
                           height: 1.h,
                         ),
                         CustomLineTextField(
-                            name: 'Product Name',
+                            name: 'Product Name'.tr,
                             hint: 'Lamp',
                             controller: nameControllerT),
                         CustomLineTextField(
-                            name: 'Slug',
+                            name: 'Slug'.tr,
                             hint: 'Lamp',
                             controller: slugController),
                         Padding(
                           padding: EdgeInsets.only(left: 4.w, right: 4.w),
                           child: Text(
-                            'Short Discription',
+                            'Short Discription'.tr,
                             style:
                                 TextStyle(color: Colors.black, fontSize: 11.sp),
                           ),
@@ -173,7 +174,7 @@ class _ProductScreenState extends State<ProductScreen> {
                         Padding(
                           padding: EdgeInsets.only(left: 4.w, right: 4.w),
                           child: Text(
-                            'Product Content',
+                            'Product Content'.tr,
                             style:
                                 TextStyle(color: Colors.black, fontSize: 11.sp),
                           ),
@@ -185,8 +186,8 @@ class _ProductScreenState extends State<ProductScreen> {
                           padding: EdgeInsets.only(left: 4.w, right: 4.w),
                           child: HtmlEditor(
                             controller: contentController, //required
-                            htmlEditorOptions: const HtmlEditorOptions(
-                              hint: "Write product content",
+                            htmlEditorOptions:  HtmlEditorOptions(
+                              hint: "Write product content".tr,
                             ),
                             otherOptions: OtherOptions(
                               height: 25.h,
@@ -199,7 +200,7 @@ class _ProductScreenState extends State<ProductScreen> {
                         Padding(
                           padding: EdgeInsets.only(left: 4.w, right: 4.w),
                           child: Text(
-                            'Brand',
+                            'Brand'.tr,
                             style: TextStyle(color: Colors.black),
                           ),
                         ),
@@ -253,7 +254,7 @@ class _ProductScreenState extends State<ProductScreen> {
                                 });
                               },
                               hint: Text(
-                                "Select Brand",
+                                "Select Brand".tr,
                                 style: TextStyle(
                                     fontSize: 12, color: Colors.black),
                               ),
@@ -283,7 +284,7 @@ class _ProductScreenState extends State<ProductScreen> {
                         Padding(
                           padding: EdgeInsets.only(left: 4.w, right: 4.w),
                           child: Text(
-                            'Category',
+                            'Category'.tr,
                             style: TextStyle(color: Colors.black),
                           ),
                         ),
@@ -335,7 +336,7 @@ class _ProductScreenState extends State<ProductScreen> {
                                 });
                               },
                               hint: Text(
-                                "Select Category",
+                                "Select Category".tr,
                                 style: TextStyle(
                                     fontSize: 12, color: Colors.black),
                               ),
@@ -381,7 +382,7 @@ class _ProductScreenState extends State<ProductScreen> {
                               return DropdownMenuItem(
                                 value: e,
                                 child: Text(
-                                  '${e}',
+                                  '${e}'.tr,
                                   style: TextStyle(color: Colors.black54),
                                 ),
                               );
@@ -393,7 +394,7 @@ class _ProductScreenState extends State<ProductScreen> {
                               });
                             },
                             hint: Text(
-                              "Select Feature",
+                              "Select Feature".tr,
                               style:
                                   TextStyle(fontSize: 12, color: Colors.black),
                             ),
@@ -461,7 +462,7 @@ class _ProductScreenState extends State<ProductScreen> {
                                     padding: EdgeInsets.symmetric(
                                         horizontal: 2.7.w, vertical: 0.8.h),
                                     child: Text(
-                                      'Save Changes',
+                                      'Save Changes'.tr,
                                       style: TextStyle(
                                           color: Colors.white, fontSize: 10.sp),
                                     ),
@@ -484,7 +485,7 @@ class _ProductScreenState extends State<ProductScreen> {
                                     padding: EdgeInsets.symmetric(
                                         horizontal: 7.w, vertical: 0.8.h),
                                     child: Text(
-                                      'Next',
+                                      'Next'.tr,
                                       style: TextStyle(
                                           color: Colors.white, fontSize: 10.sp),
                                     ),

@@ -97,7 +97,7 @@ class _InventoryScreenState extends State<InventoryScreen> {
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 6.w),
                   child: Text(
-                    'Stock',
+                    'Stock'.tr,
                     style: TextStyle(
                         color: Colors.black,
                         fontSize: 10.sp,
@@ -115,7 +115,7 @@ class _InventoryScreenState extends State<InventoryScreen> {
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 6.w),
                   child: Text(
-                    'Manage Stock',
+                    'Manage Stock'.tr,
                     style: TextStyle(color: Colors.black, fontSize: 10.sp),
                   ),
                 ),
@@ -145,7 +145,7 @@ class _InventoryScreenState extends State<InventoryScreen> {
                       });
                     },
                     hint: Text(
-                      "Select",
+                      "Select".tr,
                       style: TextStyle(
                           fontSize: 12,
                           fontWeight: FontWeight.bold,
@@ -191,17 +191,17 @@ class _InventoryScreenState extends State<InventoryScreen> {
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
-                                      'Name / Variant',
+                                      'Name / Variant'.tr,
                                       style: TextStyle(
                                           color: Colors.white, fontSize: 12.sp),
                                     ),
                                     Text(
-                                      'Images',
+                                      'Images'.tr,
                                       style: TextStyle(
                                           color: Colors.white, fontSize: 12.sp),
                                     ),
                                     Text(
-                                      'Quantity',
+                                      'Quantity'.tr,
                                       style: TextStyle(
                                           color: Colors.white, fontSize: 12.sp),
                                     ),
@@ -325,7 +325,7 @@ class _InventoryScreenState extends State<InventoryScreen> {
                                         width: 5.w,
                                       ),
                                       Text(
-                                        'Changes saved\nsuccessfully',
+                                        'Changes saved\nsuccessfully'.tr,
                                         style: TextStyle(
                                             fontSize: 11.sp,
                                             color: Colors.black,
@@ -346,7 +346,7 @@ class _InventoryScreenState extends State<InventoryScreen> {
                             padding: EdgeInsets.symmetric(
                                 horizontal: 2.7.w, vertical: 0.8.h),
                             child: Text(
-                              'Save Changes',
+                              'Save Changes'.tr,
                               style: TextStyle(
                                   color: Colors.white, fontSize: 10.sp),
                             ),
@@ -365,7 +365,7 @@ class _InventoryScreenState extends State<InventoryScreen> {
                           padding: EdgeInsets.symmetric(
                               horizontal: 7.w, vertical: 0.8.h),
                           child: Text(
-                            'Next',
+                            'Next'.tr,
                             style:
                                 TextStyle(color: Colors.white, fontSize: 10.sp),
                           ),

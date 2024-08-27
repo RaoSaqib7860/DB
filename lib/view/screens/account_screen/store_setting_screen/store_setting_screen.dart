@@ -3,6 +3,7 @@ import 'package:db_2_0/view/screens/account_screen/store_setting_screen/store_in
 import 'package:db_2_0/view/screens/account_screen/store_setting_screen/store_location.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../../../custom_widgets/app_colors.dart';
@@ -39,7 +40,7 @@ class _StoreSettingScreenState extends State<StoreSettingScreen> {
                         child: SvgPicture.asset('assets/svgs/back_arrow.svg',height: 2.h,),
                       )),
                   SizedBox(width: 34.w,),
-                  Text('Store Setting',
+                  Text('Store Setting'.tr,
                     style: TextStyle(
                         color: Colors.white,
                         fontSize: 12.sp,
@@ -74,7 +75,7 @@ class _StoreSettingScreenState extends State<StoreSettingScreen> {
                       child: Padding(
                         padding: EdgeInsets.symmetric(horizontal: 3.w,vertical: 0.5.h),
                         child: Text(
-                          'Store Information',
+                          'Store Information'.tr,
                           style: TextStyle(color: index == 1 ? Colors.white:Colors.grey,fontSize: 9.sp),
                         ),
                       ),
@@ -96,7 +97,7 @@ class _StoreSettingScreenState extends State<StoreSettingScreen> {
                       child: Padding(
                         padding: EdgeInsets.symmetric(horizontal: 4.w,vertical: 0.5.h),
                         child: Text(
-                          'Store Location',
+                          'Store Location'.tr,
                           style: TextStyle(color: index == 2 ? Colors.white:Colors.grey,fontSize: 9.sp),
                         ),
                       ),
@@ -118,7 +119,7 @@ class _StoreSettingScreenState extends State<StoreSettingScreen> {
                       child: Padding(
                         padding: EdgeInsets.symmetric(horizontal: 4.w,vertical: 0.5.h),
                         child: Text(
-                          'Social Links',
+                          'Social Links'.tr,
                           style: TextStyle(color: index == 3 ? Colors.white:Colors.grey,fontSize: 9.sp),
                         ),
                       ),

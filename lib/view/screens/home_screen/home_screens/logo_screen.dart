@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:db_2_0/custom_widgets/data_loading.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 
@@ -53,7 +54,7 @@ class _LogoScreenState extends State<LogoScreen> {
                             width: 40.w,
                           ),
                           Text(
-                            'Logo',
+                            'Logo'.tr,
                             style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 12.sp,
@@ -96,7 +97,7 @@ class _LogoScreenState extends State<LogoScreen> {
                                   height: 1.5.h,
                                 ),
                                 Text(
-                                  'Store Logo',
+                                  'Store Logo'.tr,
                                   style: TextStyle(
                                       fontSize: 11.sp, color: Colors.black),
                                 ),
@@ -132,7 +133,7 @@ class _LogoScreenState extends State<LogoScreen> {
                                     provider.upload_logo_Image();
                                   },
                                   child: Text(
-                                    'Update Store Logo',
+                                    'Update Store Logo'.tr,
                                     style: TextStyle(
                                         fontSize: 10.sp, color: blueColor),
                                   ),
@@ -183,7 +184,7 @@ class _LogoScreenState extends State<LogoScreen> {
                                   height: 1.5.h,
                                 ),
                                 Text(
-                                  'favIcons',
+                                  'favIcons'.tr,
                                   style: TextStyle(
                                       fontSize: 11.sp, color: Colors.black),
                                 ),
@@ -219,7 +220,7 @@ class _LogoScreenState extends State<LogoScreen> {
                                     provider.upload_fav_Image();
                                   },
                                   child: Text(
-                                    'Update favIcons',
+                                    'Update favIcons'.tr,
                                     style: TextStyle(
                                         fontSize: 10.sp, color: blueColor),
                                   ),
@@ -257,7 +258,7 @@ class _LogoScreenState extends State<LogoScreen> {
                             color: redColor),
                         child: Center(
                           child: Text(
-                            'Save',
+                            'Save'.tr,
                             style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 12.sp,

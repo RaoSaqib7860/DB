@@ -3,6 +3,7 @@ import 'package:db_2_0/custom_widgets/data_loading.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:flutter_switch/flutter_switch.dart';
+import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 
@@ -22,7 +23,7 @@ class ProductCategoriesScreen extends StatefulWidget {
 class _ProductCategoriesScreenState extends State<ProductCategoriesScreen> {
   bool _value = false;
   var items = [
-    'Delete Permanently',
+    'Delete Permanently'.tr,
   ];
   String? dropdownvalue;
 
@@ -92,7 +93,7 @@ class _ProductCategoriesScreenState extends State<ProductCategoriesScreen> {
                                 });
                               },
                               hint: Text(
-                                'Select Action',
+                                'Select Action'.tr,
                                 style: TextStyle(
                                     fontWeight: FontWeight.bold,
                                     fontSize: 10,
@@ -112,7 +113,7 @@ class _ProductCategoriesScreenState extends State<ProductCategoriesScreen> {
                         ),
                         child: Center(
                           child: Text(
-                            'Submit',
+                            'Submit'.tr,
                             style:
                                 TextStyle(fontSize: 9.sp, color: Colors.white),
                           ),
@@ -294,7 +295,7 @@ class _ProductCategoriesScreenState extends State<ProductCategoriesScreen> {
                                                     width: 2.w,
                                                   ),
                                                   Text(
-                                                    'Action',
+                                                    'Action'.tr,
                                                     overflow:
                                                         TextOverflow.ellipsis,
                                                     style: TextStyle(
@@ -310,7 +311,7 @@ class _ProductCategoriesScreenState extends State<ProductCategoriesScreen> {
                                             Row(
                                               children: [
                                                 Text(
-                                                  'Featured:',
+                                                  'Featured:'.tr,
                                                   overflow:
                                                       TextOverflow.ellipsis,
                                                   style: TextStyle(
@@ -342,8 +343,8 @@ class _ProductCategoriesScreenState extends State<ProductCategoriesScreen> {
                                                                       index]
                                                                   .featured ==
                                                               1
-                                                          ? 'Yes'
-                                                          : 'No',
+                                                          ? 'Yes'.tr
+                                                          : 'No'.tr,
                                                       style: TextStyle(
                                                           color: Colors.white,
                                                           fontSize: 9.sp),
@@ -357,7 +358,7 @@ class _ProductCategoriesScreenState extends State<ProductCategoriesScreen> {
                                                   CrossAxisAlignment.start,
                                               children: [
                                                 Text(
-                                                  'Created at',
+                                                  'Created at'.tr,
                                                   overflow:
                                                       TextOverflow.ellipsis,
                                                   style: TextStyle(
@@ -371,7 +372,7 @@ class _ProductCategoriesScreenState extends State<ProductCategoriesScreen> {
                                                   height: 0.3.h,
                                                 ),
                                                 Text(
-                                                  '1 month ago',
+                                                  '1 month ago'.tr,
                                                   overflow:
                                                       TextOverflow.ellipsis,
                                                   style: TextStyle(

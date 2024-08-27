@@ -2,6 +2,7 @@ import 'package:db_2_0/custom_widgets/data_loading.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
@@ -79,7 +80,7 @@ class _AnalyticScreenState extends State<AnalyticScreen> {
                                         height: 2.h,
                                       )),
                                   Text(
-                                    'Analytics',
+                                    'Analytics'.tr,
                                     style: TextStyle(
                                         color: Colors.white,
                                         fontSize: 12.sp,
@@ -99,7 +100,7 @@ class _AnalyticScreenState extends State<AnalyticScreen> {
                         Padding(
                           padding: EdgeInsets.symmetric(horizontal: 4.w),
                           child: Text(
-                            'Report',
+                            'Report'.tr,
                             style: TextStyle(
                                 color: Colors.black,
                                 fontSize: 14.sp,
@@ -116,7 +117,7 @@ class _AnalyticScreenState extends State<AnalyticScreen> {
                               Expanded(
                                   child: customContainer(
                                       image: 'bag',
-                                      title: 'Total Order',
+                                      title: 'Total Order'.tr,
                                       subTitle:
                                           '${provider.getOrserHistoryModel!.data!.total}',
                                       color: Color(0xff1568A8))),
@@ -126,7 +127,7 @@ class _AnalyticScreenState extends State<AnalyticScreen> {
                               Expanded(
                                   child: customContainer(
                                       image: 'cancel',
-                                      title: 'Order Cancelled',
+                                      title: 'Order Cancelled'.tr,
                                       subTitle:
                                           '${provider.getOrserHistoryModel!.data!.canceled}',
                                       color: Color(0xff9B001E)))
@@ -143,7 +144,7 @@ class _AnalyticScreenState extends State<AnalyticScreen> {
                               Expanded(
                                   child: customContainer(
                                       image: 'bag',
-                                      title: 'In Processing',
+                                      title: 'In Processing'.tr,
                                       subTitle:
                                           '${provider.getOrserHistoryModel!.data!.proccess}',
                                       color: Color(0xffD09611))),
@@ -153,7 +154,7 @@ class _AnalyticScreenState extends State<AnalyticScreen> {
                               Expanded(
                                   child: customContainer(
                                       image: 'alll',
-                                      title: 'Order Complete',
+                                      title: 'Order Complete'.tr,
                                       subTitle:
                                           '${provider.getOrserHistoryModel!.data!.completed}',
                                       color: Color(0xff0CA011),
@@ -168,7 +169,7 @@ class _AnalyticScreenState extends State<AnalyticScreen> {
                           padding: EdgeInsets.symmetric(horizontal: 4.w),
                           child: customContainer(
                               image: 'bag',
-                              title: 'Total Amount',
+                              title: 'Total Amount'.tr,
                               subTitle:
                                   '${provider.getOrserHistoryModel!.data!.amounts}',
                               color: Color(0xff1568A8)),
@@ -221,7 +222,7 @@ class _AnalyticScreenState extends State<AnalyticScreen> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
-                                'Order',
+                                'Order'.tr,
                                 style: TextStyle(
                                     color: Colors.black,
                                     fontSize: 14.sp,
@@ -250,7 +251,7 @@ class _AnalyticScreenState extends State<AnalyticScreen> {
                                                     CrossAxisAlignment.start,
                                                 children: [
                                                   Text(
-                                                    'Apply Filter',
+                                                    'Apply Filter'.tr,
                                                     style: TextStyle(
                                                         color: Colors.black,
                                                         fontSize: 11.sp,
@@ -271,7 +272,7 @@ class _AnalyticScreenState extends State<AnalyticScreen> {
                                                 height: 2.h,
                                               ),
                                               Text(
-                                                'Filter by date',
+                                                'Filter by date'.tr,
                                                 style: TextStyle(
                                                   color: Colors.black,
                                                   fontSize: 11.sp,
@@ -286,7 +287,7 @@ class _AnalyticScreenState extends State<AnalyticScreen> {
                                                         .spaceBetween,
                                                 children: [
                                                   Text(
-                                                    'Starting date',
+                                                    'Starting date'.tr,
                                                     style: TextStyle(
                                                       color: Colors.black,
                                                       fontSize: 11.sp,
@@ -357,7 +358,7 @@ class _AnalyticScreenState extends State<AnalyticScreen> {
                                                         .spaceBetween,
                                                 children: [
                                                   Text(
-                                                    'End date',
+                                                    'End date'.tr,
                                                     style: TextStyle(
                                                       color: Colors.black,
                                                       fontSize: 11.sp,
@@ -438,7 +439,7 @@ class _AnalyticScreenState extends State<AnalyticScreen> {
                                                           .spaceBetween,
                                                   children: [
                                                     Text(
-                                                      'Reset Filter',
+                                                      'Reset Filter'.tr,
                                                       style: TextStyle(
                                                           color: Colors.black,
                                                           fontSize: 11.sp,
@@ -525,7 +526,7 @@ class _AnalyticScreenState extends State<AnalyticScreen> {
                                                     CrossAxisAlignment.start,
                                                 children: [
                                                   Text(
-                                                    'Invoice No',
+                                                    'Invoice No'.tr,
                                                     style: TextStyle(
                                                         color: Colors.black,
                                                         fontWeight:
@@ -545,7 +546,7 @@ class _AnalyticScreenState extends State<AnalyticScreen> {
                                                     height: 0.8.h,
                                                   ),
                                                   Text(
-                                                    'Customer',
+                                                    'Customer'.tr,
                                                     style: TextStyle(
                                                         color: Colors.black,
                                                         fontWeight:
@@ -565,7 +566,7 @@ class _AnalyticScreenState extends State<AnalyticScreen> {
                                                     height: 0.8.h,
                                                   ),
                                                   Text(
-                                                    'Payment',
+                                                    'Payment'.tr,
                                                     style: TextStyle(
                                                         color: Colors.black,
                                                         fontWeight:
@@ -640,7 +641,7 @@ class _AnalyticScreenState extends State<AnalyticScreen> {
                                                     height: 0.8.h,
                                                   ),
                                                   Text(
-                                                    'Order total',
+                                                    'Order total'.tr,
                                                     style: TextStyle(
                                                         color: Colors.black,
                                                         fontWeight:
@@ -660,7 +661,7 @@ class _AnalyticScreenState extends State<AnalyticScreen> {
                                                     height: 0.8.h,
                                                   ),
                                                   Text(
-                                                    'Fulfillment',
+                                                    'Fulfillment'.tr,
                                                     style: TextStyle(
                                                         color: Colors.black,
                                                         fontWeight:
@@ -689,7 +690,7 @@ class _AnalyticScreenState extends State<AnalyticScreen> {
                                                     height: 0.8.h,
                                                   ),
                                                   Text(
-                                                    'Invoice',
+                                                    'Invoice'.tr,
                                                     style: TextStyle(
                                                         color: Colors.black,
                                                         fontWeight:
@@ -733,7 +734,7 @@ class _AnalyticScreenState extends State<AnalyticScreen> {
                         Padding(
                           padding: EdgeInsets.symmetric(horizontal: 4.w),
                           child: Text(
-                            'Traffic',
+                            'Traffic'.tr,
                             style: TextStyle(
                                 color: Colors.black,
                                 fontSize: 14.sp,
@@ -788,7 +789,7 @@ class _AnalyticScreenState extends State<AnalyticScreen> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    'Top Most Visit Pages',
+                                    'Top Most Visit Pages'.tr,
                                     style: TextStyle(
                                         color: Colors.black, fontSize: 11.sp),
                                   ),
@@ -815,7 +816,7 @@ class _AnalyticScreenState extends State<AnalyticScreen> {
                                               height: 1.h,
                                             ),
                                             Text(
-                                              'Chrome',
+                                              'Chrome'.tr,
                                               style: TextStyle(
                                                   color: Colors.black,
                                                   fontSize: 10.sp),
@@ -843,7 +844,7 @@ class _AnalyticScreenState extends State<AnalyticScreen> {
                                               height: 1.h,
                                             ),
                                             Text(
-                                              'Safari',
+                                              'Safari'.tr,
                                               style: TextStyle(
                                                   color: Colors.black,
                                                   fontSize: 10.sp),
@@ -871,7 +872,7 @@ class _AnalyticScreenState extends State<AnalyticScreen> {
                                               height: 1.h,
                                             ),
                                             Text(
-                                              'Firefox',
+                                              'Firefox'.tr,
                                               style: TextStyle(
                                                   color: Colors.black,
                                                   fontSize: 10.sp),
@@ -899,7 +900,7 @@ class _AnalyticScreenState extends State<AnalyticScreen> {
                                               height: 1.h,
                                             ),
                                             Text(
-                                              'Edge',
+                                              'Edge'.tr,
                                               style: TextStyle(
                                                   color: Colors.black,
                                                   fontSize: 10.sp),
@@ -952,7 +953,7 @@ class _AnalyticScreenState extends State<AnalyticScreen> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    'Visitors',
+                                    'Visitors'.tr,
                                     style: TextStyle(
                                         color: Colors.black, fontSize: 11.sp),
                                   ),
@@ -980,7 +981,7 @@ class _AnalyticScreenState extends State<AnalyticScreen> {
                                               height: 0.5.h,
                                             ),
                                             Text(
-                                              'Total Pages Visited',
+                                              'Total Pages Visited'.tr,
                                               style: TextStyle(
                                                   color: Colors.black,
                                                   fontSize: 9.sp),
@@ -1000,7 +1001,7 @@ class _AnalyticScreenState extends State<AnalyticScreen> {
                                               height: 0.5.h,
                                             ),
                                             Text(
-                                              'Unique Visitors',
+                                              'Unique Visitors'.tr,
                                               style: TextStyle(
                                                   color: Colors.black,
                                                   fontSize: 9.sp),
@@ -1020,7 +1021,7 @@ class _AnalyticScreenState extends State<AnalyticScreen> {
                                               height: 0.5.h,
                                             ),
                                             Text(
-                                              'Total Time Spent',
+                                              'Total Time Spent'.tr,
                                               style: TextStyle(
                                                   color: Colors.black,
                                                   fontSize: 9.sp),
@@ -1079,14 +1080,14 @@ class _AnalyticScreenState extends State<AnalyticScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  title!,
+                  title!.tr,
                   style: TextStyle(color: Colors.black, fontSize: 9.sp),
                 ),
                 SizedBox(
                   height: 1.h,
                 ),
                 Text(
-                  subTitle!,
+                  subTitle!.tr,
                   style: TextStyle(
                       color: Colors.black,
                       fontSize: 12.sp,

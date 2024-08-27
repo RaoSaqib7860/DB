@@ -26,19 +26,20 @@ class AllOrdersScreen extends StatefulWidget {
 class _AllOrdersScreenState extends State<AllOrdersScreen> {
   int? ind;
   List list = [
-    'All',
-    'Awaiting processing (0)',
-    'Processing (0)',
-    'Ready for pickup (0)',
-    'Completed (0)',
-    'Cancelled (0)',
-    'Archived (0)'
+    'All'.tr,
+    'Awaiting processing (0)'.tr,
+    'Processing (0)'.tr,
+    'Ready for pickup (0)'.tr,
+    'Completed (0)'.tr,
+    'Cancelled (0)'.tr,
+    'Archived (0).'.tr
   ];
   String dropdownvalue = 'All Orders';
 
   @override
   Widget build(BuildContext context) {
     final AllOrderProvider provider = Provider.of<AllOrderProvider>(context);
+    provider.typeOrder=provider.typeOrder;
     return GestureDetector(
       onTap: () {
         FocusManager.instance.primaryFocus?.unfocus();
@@ -52,7 +53,7 @@ class _AllOrdersScreenState extends State<AllOrdersScreen> {
               color: blueColor,
               child: Center(
                 child: Text(
-                  'Orders',
+                  'Orders'.tr,
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 14.sp,
@@ -137,7 +138,7 @@ class _AllOrdersScreenState extends State<AllOrdersScreen> {
                                                 CrossAxisAlignment.start,
                                             children: [
                                               Text(
-                                                'Apply Filter',
+                                                'Apply Filter'.tr,
                                                 style: TextStyle(
                                                     color: Colors.black,
                                                     fontSize: 11.sp,
@@ -158,7 +159,7 @@ class _AllOrdersScreenState extends State<AllOrdersScreen> {
                                             height: 2.h,
                                           ),
                                           Text(
-                                            'Filter by date',
+                                            'Filter by date'.tr,
                                             style: TextStyle(
                                               color: Colors.black,
                                               fontSize: 11.sp,
@@ -172,7 +173,7 @@ class _AllOrdersScreenState extends State<AllOrdersScreen> {
                                                 MainAxisAlignment.spaceBetween,
                                             children: [
                                               Text(
-                                                'Payment Status',
+                                                'Payment Status'.tr,
                                                 style: TextStyle(
                                                   color: Colors.black,
                                                   fontSize: 11.sp,
@@ -251,7 +252,7 @@ class _AllOrdersScreenState extends State<AllOrdersScreen> {
                                                 MainAxisAlignment.spaceBetween,
                                             children: [
                                               Text(
-                                                'Fulfillment Status',
+                                                'Fulfillment Status'.tr,
                                                 style: TextStyle(
                                                   color: Colors.black,
                                                   fontSize: 11.sp,
@@ -331,7 +332,7 @@ class _AllOrdersScreenState extends State<AllOrdersScreen> {
                                                 MainAxisAlignment.spaceBetween,
                                             children: [
                                               Text(
-                                                'Starting date',
+                                                'Starting date'.tr,
                                                 style: TextStyle(
                                                   color: Colors.black,
                                                   fontSize: 11.sp,
@@ -406,7 +407,7 @@ class _AllOrdersScreenState extends State<AllOrdersScreen> {
                                                                     12,
                                                                     10),
                                                             cancelText:
-                                                                'Cancel',
+                                                                'Cancel'.tr,
                                                             confirmText: 'OK',
                                                             pressType: PressType
                                                                 .singlePress,
@@ -442,7 +443,7 @@ class _AllOrdersScreenState extends State<AllOrdersScreen> {
                                                 MainAxisAlignment.spaceBetween,
                                             children: [
                                               Text(
-                                                'End date',
+                                                'End date'.tr,
                                                 style: TextStyle(
                                                   color: Colors.black,
                                                   fontSize: 11.sp,
@@ -516,8 +517,9 @@ class _AllOrdersScreenState extends State<AllOrdersScreen> {
                                                                     12,
                                                                     10),
                                                             cancelText:
-                                                                'Cancel',
-                                                            confirmText: 'OK',
+                                                                'Cancel'.tr,
+                                                            confirmText:
+                                                                'OK'.tr,
                                                             pressType: PressType
                                                                 .singlePress,
                                                             timeFormat:
@@ -573,7 +575,7 @@ class _AllOrdersScreenState extends State<AllOrdersScreen> {
                                                     Navigator.of(context).pop();
                                                   },
                                                   child: Text(
-                                                    'Reset Filter',
+                                                    'Reset Filter'.tr,
                                                     style: TextStyle(
                                                         color: Colors.black,
                                                         fontSize: 11.sp,
@@ -629,7 +631,7 @@ class _AllOrdersScreenState extends State<AllOrdersScreen> {
                                                               horizontal: 4.w,
                                                               vertical: 0.7.h),
                                                       child: Text(
-                                                        'View Results',
+                                                        'View Results'.tr,
                                                         style: TextStyle(
                                                           color: Colors.white,
                                                           fontSize: 11.sp,
@@ -726,7 +728,7 @@ class _AllOrdersScreenState extends State<AllOrdersScreen> {
                         ),
                         child: Center(
                           child: Text(
-                            'Submit',
+                            'Submit'.tr,
                             style:
                                 TextStyle(fontSize: 9.sp, color: Colors.white),
                           ),
@@ -746,7 +748,7 @@ class _AllOrdersScreenState extends State<AllOrdersScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      'All Orders',
+                      'All Orders'.tr,
                       style: TextStyle(
                           color: Colors.black,
                           fontSize: 13.sp,
@@ -756,13 +758,13 @@ class _AllOrdersScreenState extends State<AllOrdersScreen> {
                       onTap: () {
                         ind = null;
                         List typeOrder = [
-                          'all',
-                          'pending',
-                          'processing',
-                          'ready-for-pickup',
-                          'completed',
-                          'archived',
-                          'canceled',
+                          'all'.tr,
+                          'pending'.tr,
+                          'processing'.tr,
+                          'ready-for-pickup'.tr,
+                          'completed'.tr,
+                          'archived'.tr,
+                          'canceled'.tr,
                         ];
                         customBottomSheet(
                             context: context,
@@ -781,7 +783,7 @@ class _AllOrdersScreenState extends State<AllOrdersScreen> {
                                           CrossAxisAlignment.start,
                                       children: [
                                         Text(
-                                          'Apply Filter',
+                                          'Apply Filter'.tr,
                                           style: TextStyle(
                                               color: Colors.black,
                                               fontSize: 11.sp,
@@ -817,7 +819,7 @@ class _AllOrdersScreenState extends State<AllOrdersScreen> {
                                             width: 2.w,
                                           ),
                                           Text(
-                                            'All orders',
+                                            'All orders'.tr,
                                             style: TextStyle(
                                               color: Colors.black,
                                               fontSize: 11.sp,
@@ -846,7 +848,9 @@ class _AllOrdersScreenState extends State<AllOrdersScreen> {
                                             width: 2.w,
                                           ),
                                           Text(
-                                            'Awaiting processing (${provider.allOrderModel?.data?.orderCounts?.pending})',
+                                            'Awaiting processing '.tr +
+                                                '(${provider.allOrderModel?.data?.orderCounts?.pending})'
+                                                    .tr,
                                             style: TextStyle(
                                               color: Colors.black,
                                               fontSize: 11.sp,
@@ -875,7 +879,9 @@ class _AllOrdersScreenState extends State<AllOrdersScreen> {
                                             width: 2.w,
                                           ),
                                           Text(
-                                            'Processing (${provider.allOrderModel?.data?.orderCounts?.processing})',
+                                            'Processing '.tr +
+                                                '(${provider.allOrderModel?.data?.orderCounts?.processing})'
+                                                    .tr,
                                             style: TextStyle(
                                               color: Colors.black,
                                               fontSize: 11.sp,
@@ -904,7 +910,8 @@ class _AllOrdersScreenState extends State<AllOrdersScreen> {
                                             width: 2.w,
                                           ),
                                           Text(
-                                            'Ready for pickup (${provider.allOrderModel?.data?.orderCounts?.readyForPickup})',
+                                            'Ready for pickup '.tr +
+                                                '(${provider.allOrderModel?.data?.orderCounts?.readyForPickup})',
                                             style: TextStyle(
                                               color: Colors.black,
                                               fontSize: 11.sp,
@@ -933,7 +940,8 @@ class _AllOrdersScreenState extends State<AllOrdersScreen> {
                                             width: 2.w,
                                           ),
                                           Text(
-                                            'Completed (${provider.allOrderModel?.data?.orderCounts?.completed})',
+                                            'Completed '.tr +
+                                                '(${provider.allOrderModel?.data?.orderCounts?.completed})',
                                             style: TextStyle(
                                               color: Colors.black,
                                               fontSize: 11.sp,
@@ -962,7 +970,8 @@ class _AllOrdersScreenState extends State<AllOrdersScreen> {
                                             width: 2.w,
                                           ),
                                           Text(
-                                            'Archived (${provider.allOrderModel?.data?.orderCounts?.archived})',
+                                            'Archived '.tr +
+                                                '(${provider.allOrderModel?.data?.orderCounts?.archived})',
                                             style: TextStyle(
                                               color: Colors.black,
                                               fontSize: 11.sp,
@@ -991,7 +1000,8 @@ class _AllOrdersScreenState extends State<AllOrdersScreen> {
                                             width: 2.w,
                                           ),
                                           Text(
-                                            'Cancelled (${provider.allOrderModel?.data?.orderCounts?.canceled})',
+                                            'Cancelled '.tr +
+                                                '(${provider.allOrderModel?.data?.orderCounts?.canceled})',
                                             style: TextStyle(
                                               color: Colors.black,
                                               fontSize: 11.sp,
@@ -1027,7 +1037,7 @@ class _AllOrdersScreenState extends State<AllOrdersScreen> {
                                               Navigator.of(context).pop();
                                             },
                                             child: Text(
-                                              'Reset Filter',
+                                              'Reset Filter'.tr,
                                               style: TextStyle(
                                                   color: Colors.black,
                                                   fontSize: 11.sp,
@@ -1055,7 +1065,7 @@ class _AllOrdersScreenState extends State<AllOrdersScreen> {
                                                     horizontal: 4.w,
                                                     vertical: 0.7.h),
                                                 child: Text(
-                                                  'View Results',
+                                                  'View Results'.tr,
                                                   style: TextStyle(
                                                     color: Colors.white,
                                                     fontSize: 11.sp,
@@ -1083,7 +1093,7 @@ class _AllOrdersScreenState extends State<AllOrdersScreen> {
                           padding: EdgeInsets.symmetric(
                               horizontal: 4.w, vertical: 0.7.h),
                           child: Text(
-                            'Filter order list',
+                            'Filter order list'.tr,
                             style: TextStyle(
                               color: Colors.white,
                               fontSize: 11.sp,

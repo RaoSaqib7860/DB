@@ -24,10 +24,10 @@ class _PublishScreenState extends State<PublishScreen> {
   TextEditingController productController = TextEditingController();
   bool _value = false;
   var items = [
-    'Publish',
-    'Draft',
-    'Incomplete',
-    'Trash',
+    'Publish'.tr,
+    'Draft'.tr,
+    'Incomplete'.tr,
+    'Trash'.tr,
   ];
 
   @override
@@ -93,8 +93,8 @@ class _PublishScreenState extends State<PublishScreen> {
                                   dropdownvalue = newValue!;
                                 });
                               },
-                              hint: const Text(
-                                "Select Action",
+                              hint:  Text(
+                                "Select Action".tr,
                                 style: TextStyle(
                                     fontSize: 11, color: Colors.black),
                               ),
@@ -129,7 +129,7 @@ class _PublishScreenState extends State<PublishScreen> {
                           ),
                           child: Center(
                             child: Text(
-                              'Submit',
+                              'Submit'.tr,
                               style: TextStyle(
                                   fontSize: 9.sp, color: Colors.white),
                             ),
@@ -159,7 +159,7 @@ class _PublishScreenState extends State<PublishScreen> {
                     decoration: InputDecoration(
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(3)),
-                      hintText: 'Search Orders',
+                      hintText: 'Search Orders'.tr,
                       hintStyle: TextStyle(fontSize: 11.sp, color: Colors.grey),
                       contentPadding: EdgeInsets.only(
                         top: 0.5.h,
@@ -293,7 +293,7 @@ class _PublishScreenState extends State<PublishScreen> {
                                                                           10.sp),
                                                                 ),
                                                                 Text(
-                                                                  'Created at',
+                                                                  'Created at'.tr,
                                                                   style: TextStyle(
                                                                       color: Color(
                                                                           0xff0B7A3E),
@@ -356,7 +356,7 @@ class _PublishScreenState extends State<PublishScreen> {
                                                                         children: [
                                                                       TextSpan(
                                                                           text:
-                                                                              'Discount: ',
+                                                                              'Discount: '.tr,
                                                                           style: TextStyle(
                                                                               color: Color(0xff636363),
                                                                               fontSize: 9.sp)),
@@ -372,7 +372,7 @@ class _PublishScreenState extends State<PublishScreen> {
                                                                         children: [
                                                                       TextSpan(
                                                                           text:
-                                                                              'Regular price: ',
+                                                                              'Regular price: '.tr,
                                                                           style: TextStyle(
                                                                               color: Color(0xff636363),
                                                                               fontSize: 9.sp)),
@@ -444,7 +444,7 @@ class _PublishScreenState extends State<PublishScreen> {
                                                               width: 2.w,
                                                             ),
                                                             Text(
-                                                              'Sale: ${provider.allProductModel!.data!.posts![index].orderCount}',
+                                                              'Sale:'.tr + '${provider.allProductModel!.data!.posts![index].orderCount}',
                                                               style: TextStyle(
                                                                   color: Colors
                                                                       .black,
@@ -470,7 +470,7 @@ class _PublishScreenState extends State<PublishScreen> {
                                                                       vertical:
                                                                           0.3.h),
                                                               child: Text(
-                                                                'Active',
+                                                                'Active'.tr,
                                                                 style: TextStyle(
                                                                     color: Colors
                                                                         .white,
@@ -520,7 +520,7 @@ class _PublishScreenState extends State<PublishScreen> {
                   ),
                   child: Center(
                     child: Text(
-                      'Add New Product',
+                      'Add New Product'.tr,
                       style: TextStyle(
                           color: Colors.white,
                           fontSize: 13.sp,

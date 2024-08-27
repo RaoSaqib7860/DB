@@ -6,6 +6,7 @@ import 'package:db_2_0/view/screens/auth_screens/login_screen/Login%20Provider/l
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -119,7 +120,7 @@ class _AllOrderDetailScreenState extends State<AllOrderDetailScreen> {
                                             CrossAxisAlignment.start,
                                         children: [
                                           Text(
-                                            'Product',
+                                            'Product'.tr,
                                             style: TextStyle(
                                                 fontSize: 11.sp,
                                                 color: Colors.black),
@@ -152,7 +153,7 @@ class _AllOrderDetailScreenState extends State<AllOrderDetailScreen> {
                                             CrossAxisAlignment.end,
                                         children: [
                                           Text(
-                                            'Amount',
+                                            'Amount'.tr,
                                             style: TextStyle(
                                                 fontSize: 11.sp,
                                                 color: Colors.black),
@@ -163,12 +164,12 @@ class _AllOrderDetailScreenState extends State<AllOrderDetailScreen> {
                                           customText(
                                               text:
                                                   '${provider.orderInfoModel?.orderData?.orderItem!.first.amount} × ${provider.orderInfoModel?.orderData?.orderItem!.first.qty}'),
-                                          customText(text: 'Shipping Fee'),
-                                          customText(text: 'Tax'),
-                                          customText(text: 'Discount'),
-                                          customText(text: 'Subtotal'),
+                                          customText(text: 'Shipping Fee'.tr),
+                                          customText(text: 'Tax'.tr),
+                                          customText(text: 'Discount'.tr),
+                                          customText(text: 'Subtotal'.tr),
                                           Text(
-                                            'Total',
+                                            'Total'.tr,
                                             style: TextStyle(
                                                 fontSize: 9.sp,
                                                 color: Colors.black,
@@ -184,7 +185,7 @@ class _AllOrderDetailScreenState extends State<AllOrderDetailScreen> {
                                             CrossAxisAlignment.end,
                                         children: [
                                           Text(
-                                            'Total',
+                                            'Total'.tr,
                                             style: TextStyle(
                                                 fontSize: 11.sp,
                                                 color: Colors.black),
@@ -231,7 +232,7 @@ class _AllOrderDetailScreenState extends State<AllOrderDetailScreen> {
                                         width: 2.w,
                                       ),
                                       Text(
-                                        'Notify to customer',
+                                        'Notify to customer'.tr,
                                         style: TextStyle(
                                             color: Colors.black,
                                             fontSize: 9.sp),
@@ -274,7 +275,7 @@ class _AllOrderDetailScreenState extends State<AllOrderDetailScreen> {
                                                 return DropdownMenuItem(
                                                   value: items,
                                                   child: Text(
-                                                    items,
+                                                    items.tr,
                                                     style: TextStyle(
                                                         fontSize: 9.sp,
                                                         color: Colors.black),
@@ -318,7 +319,7 @@ class _AllOrderDetailScreenState extends State<AllOrderDetailScreen> {
                                                 provider.update_state();
                                               },
                                               hint: Text(
-                                                'Payment complete',
+                                                'Payment complete'.tr,
                                                 style: TextStyle(
                                                   color: Color(0xff686868),
                                                   fontSize: 9.sp,
@@ -371,9 +372,9 @@ class _AllOrderDetailScreenState extends State<AllOrderDetailScreen> {
                                                       .keys
                                                       .map((String items) {
                                                     return DropdownMenuItem(
-                                                      value: items,
+                                                      value: items.tr,
                                                       child: Text(
-                                                        items,
+                                                        items.tr,
                                                         style: TextStyle(
                                                             fontSize: 9.sp,
                                                             color:
@@ -442,7 +443,7 @@ class _AllOrderDetailScreenState extends State<AllOrderDetailScreen> {
                                                   horizontal: 5.w,
                                                   vertical: 0.9.h),
                                               child: Text(
-                                                'Print',
+                                                'Print'.tr,
                                                 style: TextStyle(
                                                     color: Colors.white,
                                                     fontSize: 10.sp,
@@ -478,7 +479,7 @@ class _AllOrderDetailScreenState extends State<AllOrderDetailScreen> {
                                                             width: 5.w,
                                                           ),
                                                           Text(
-                                                            'Order Updated',
+                                                            'Order Updated'.tr,
                                                             style: TextStyle(
                                                                 fontSize: 14.sp,
                                                                 color: Colors
@@ -502,7 +503,7 @@ class _AllOrderDetailScreenState extends State<AllOrderDetailScreen> {
                                                     horizontal: 5.w,
                                                     vertical: 0.9.h),
                                                 child: Text(
-                                                  'Save',
+                                                  'Save'.tr,
                                                   style: TextStyle(
                                                       color: Colors.white,
                                                       fontSize: 10.sp,
@@ -552,7 +553,7 @@ class _AllOrderDetailScreenState extends State<AllOrderDetailScreen> {
                                     height: 2.h,
                                   ),
                                   Text(
-                                    'Status',
+                                    'Status'.tr,
                                     style: TextStyle(
                                         color: blueColor,
                                         fontSize: 10.sp,
@@ -566,7 +567,7 @@ class _AllOrderDetailScreenState extends State<AllOrderDetailScreen> {
                                         MainAxisAlignment.spaceBetween,
                                     children: [
                                       Text(
-                                        'Payment Status',
+                                        'Payment Status'.tr,
                                         style: TextStyle(
                                           color: Colors.black,
                                           fontSize: 10.sp,
@@ -599,7 +600,7 @@ class _AllOrderDetailScreenState extends State<AllOrderDetailScreen> {
                                         MainAxisAlignment.spaceBetween,
                                     children: [
                                       Text(
-                                        'Order Status',
+                                        'Order Status'.tr,
                                         style: TextStyle(
                                           color: Colors.black,
                                           fontSize: 10.sp,
@@ -660,7 +661,7 @@ class _AllOrderDetailScreenState extends State<AllOrderDetailScreen> {
                                     height: 2.h,
                                   ),
                                   Text(
-                                    'Payment Mode',
+                                    'Payment Mode'.tr,
                                     style: TextStyle(
                                         color: blueColor,
                                         fontSize: 10.sp,
@@ -674,7 +675,7 @@ class _AllOrderDetailScreenState extends State<AllOrderDetailScreen> {
                                         MainAxisAlignment.spaceBetween,
                                     children: [
                                       Text(
-                                        'Transaction Method',
+                                        'Transaction Method'.tr,
                                         style: TextStyle(
                                           color: Colors.black,
                                           fontSize: 10.sp,
@@ -707,7 +708,7 @@ class _AllOrderDetailScreenState extends State<AllOrderDetailScreen> {
                                         MainAxisAlignment.spaceBetween,
                                     children: [
                                       Text(
-                                        'Transaction Id',
+                                        'Transaction Id'.tr,
                                         style: TextStyle(
                                           color: Colors.black,
                                           fontSize: 10.sp,
@@ -758,7 +759,7 @@ class _AllOrderDetailScreenState extends State<AllOrderDetailScreen> {
                                     height: 2.h,
                                   ),
                                   Text(
-                                    'Note',
+                                    'Note'.tr,
                                     style: TextStyle(
                                         color: blueColor,
                                         fontSize: 10.sp,
@@ -810,7 +811,7 @@ class _AllOrderDetailScreenState extends State<AllOrderDetailScreen> {
                                     height: 2.h,
                                   ),
                                   Text(
-                                    'Customer',
+                                    'Customer'.tr,
                                     style: TextStyle(
                                         color: blueColor,
                                         fontSize: 10.sp,
@@ -866,7 +867,7 @@ class _AllOrderDetailScreenState extends State<AllOrderDetailScreen> {
                                     height: 2.h,
                                   ),
                                   Text(
-                                    'Shipping detail',
+                                    'Shipping detail'.tr,
                                     style: TextStyle(
                                         color: blueColor,
                                         fontSize: 10.sp,
@@ -884,22 +885,22 @@ class _AllOrderDetailScreenState extends State<AllOrderDetailScreen> {
                                       children: [
                                         detailContainer(
                                             text:
-                                                'Customer Name: ${provider.orderInfoModel?.orderData?.orderContent?.value?.name}'),
+                                                'Customer Name: '.tr + '${provider.orderInfoModel?.orderData?.orderContent?.value?.name}'),
                                         detailContainer(
                                             text:
-                                                'Customer Email: ${provider.orderInfoModel?.orderData?.orderContent?.value?.email}'),
+                                                 'Customer Email: '.tr + '${provider.orderInfoModel?.orderData?.orderContent?.value?.email}'),
                                         detailContainer(
                                             text:
-                                                'Customer Phone: ${provider.orderInfoModel?.orderData?.orderContent?.value?.phone}'),
+                                                'Customer Phone: '.tr + '${provider.orderInfoModel?.orderData?.orderContent?.value?.phone}'),
                                         detailContainer(
                                             text:
-                                                'Location: ${provider.orderInfoModel?.orderData?.shippingInfo?.city?.name}'),
+                                                'Location: '.tr + '${provider.orderInfoModel?.orderData?.shippingInfo?.city?.name}'),
                                         detailContainer(
                                             text:
-                                                'Zip Code: ${provider.orderInfoModel?.orderData?.orderContent?.value?.zipCode}'),
+                                                 'Zip Code: '.tr + '${provider.orderInfoModel?.orderData?.orderContent?.value?.zipCode}'),
                                         detailContainer(
                                             text:
-                                                'Address: ${provider.orderInfoModel?.orderData?.orderContent?.value?.address}'),
+                                            'Address: '.tr + '${provider.orderInfoModel?.orderData?.orderContent?.value?.address}'),
                                         detailContainer(
                                             text:
                                                 '${provider.orderInfoModel?.orderData?.shippingInfo?.shippingMethod?.name}'),
@@ -935,7 +936,7 @@ class _AllOrderDetailScreenState extends State<AllOrderDetailScreen> {
                                                   horizontal: 2.w,
                                                   vertical: 0.6.h),
                                               child: Text(
-                                                'Update',
+                                                'Update'.tr,
                                                 style: TextStyle(
                                                   color: Colors.white,
                                                   fontSize: 9.sp,
@@ -985,37 +986,37 @@ class _AllOrderDetailScreenState extends State<AllOrderDetailScreen> {
                                     ),
                                     detailContainer(
                                         text:
-                                            'Code Center: ${provider.orderInfoModel?.tcsData?.costCenterCode}'),
+                                        'Code Center: '.tr + '${provider.orderInfoModel?.tcsData?.costCenterCode}'),
                                     detailContainer(
                                         text:
-                                            'Customer Name: ${provider.orderInfoModel?.tcsData?.consigneeName}'),
+                                        'Customer Name: '.tr + '${provider.orderInfoModel?.tcsData?.consigneeName}'),
                                     detailContainer(
                                         text:
-                                            'Address: ${provider.orderInfoModel?.tcsData?.consigneeAddress}'),
+                                        'Address: '.tr + '${provider.orderInfoModel?.tcsData?.consigneeAddress}'),
                                     detailContainer(
                                         text:
-                                            'Mobile #: ${provider.orderInfoModel?.tcsData?.consigneeMobNo}'),
+                                        'Mobile #: '.tr + '${provider.orderInfoModel?.tcsData?.consigneeMobNo}'),
                                     detailContainer(
                                         text:
-                                            'Email: ${provider.orderInfoModel?.tcsData?.consigneeEmail}'),
+                                        'Email: '.tr + '${provider.orderInfoModel?.tcsData?.consigneeEmail}'),
                                     detailContainer(
                                         text:
-                                            'Sending City: ${provider.orderInfoModel?.tcsData?.originCityName}'),
+                                        'Address: '.tr + '${provider.orderInfoModel?.tcsData?.originCityName}'),
                                     detailContainer(
                                         text:
-                                            'Destination Location: ${provider.orderInfoModel?.tcsData?.destinationCityName}'),
+                                        'Destination Location: '.tr + '${provider.orderInfoModel?.tcsData?.destinationCityName}'),
                                     detailContainer(
                                         text:
-                                            'Item weight: ${provider.orderInfoModel?.tcsData?.weight}/kg'),
+                                        'Item weight: '.tr + '${provider.orderInfoModel?.tcsData?.weight}/kg'),
                                     detailContainer(
                                         text:
-                                            'No of item: ${provider.orderInfoModel?.tcsData?.pieces}'),
+                                        'No of item: '.tr + '${provider.orderInfoModel?.tcsData?.pieces}'),
                                     detailContainer(
                                         text:
-                                            'COD charges: ${provider.orderInfoModel?.tcsData?.codAmount}'),
+                                        'COD charges: '.tr + '${provider.orderInfoModel?.tcsData?.codAmount}'),
                                     detailContainer(
                                         text:
-                                            'Customer Reference No: ${provider.orderInfoModel?.tcsData?.customerReferenceNo}'),
+                                        'Customer Reference No: '.tr + '${provider.orderInfoModel?.tcsData?.customerReferenceNo}'),
                                     detailContainer(
                                         text:
                                             '${provider.orderInfoModel?.tcsData?.result}'),
@@ -1038,7 +1039,7 @@ class _AllOrderDetailScreenState extends State<AllOrderDetailScreen> {
                                                 horizontal: 8.w,
                                                 vertical: 0.5.h),
                                             child: Text(
-                                              'Print Label',
+                                              'Print Label'.tr,
                                               style: TextStyle(
                                                 color: Colors.white,
                                                 fontSize: 8.sp,
