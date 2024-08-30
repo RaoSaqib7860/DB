@@ -17,6 +17,7 @@ class AllOrderProvider extends ChangeNotifier {
   TextEditingController phoneController = TextEditingController();
   TextEditingController zipController = TextEditingController();
   TextEditingController addressController = TextEditingController();
+  TextEditingController shippingController = TextEditingController();
   bool loading = false;
   bool loading_details = false;
   bool outer_loader = false;

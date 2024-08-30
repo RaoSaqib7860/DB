@@ -167,7 +167,9 @@ class _AccountScreenState extends State<AccountScreen> {
                             padding: EdgeInsets.symmetric(
                                 horizontal: 7.w, vertical: 1.1.h),
                             child: Text(
-                              isSelected == true ? 'Update'.tr : 'See packages'.tr,
+                              isSelected == true
+                                  ? 'Update'.tr
+                                  : 'See packages'.tr,
                               style: TextStyle(
                                   color: Colors.white, fontSize: 11.sp),
                             ),

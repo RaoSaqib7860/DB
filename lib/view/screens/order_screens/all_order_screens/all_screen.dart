@@ -49,7 +49,7 @@ class _AllScreenState extends State<AllScreen> {
       child: Stack(
         children: [
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 5.w),
+            padding: EdgeInsets.symmetric(horizontal: 3.w),
             child: provider.loading
                 ? SizedBox()
                 : provider.allOrderModel!.data!.orders!.isEmpty
@@ -65,247 +65,256 @@ class _AllScreenState extends State<AllScreen> {
                           itemCount:
                               provider.allOrderModel!.data!.orders!.length,
                           itemBuilder: (context, index) {
-                            return DataLoading(
-                              isLoading: provider.loading,
-                              child: Column(
-                                children: [
-                                  Container(
-                                    width: 100.w,
-                                    decoration: BoxDecoration(
-                                        color: Colors.white,
-                                        borderRadius: BorderRadius.circular(3),
-                                        boxShadow: [
-                                          BoxShadow(
-                                              color: Colors.grey.withAlpha(50),
-                                              offset: Offset(1, 1),
-                                              spreadRadius: 1,
-                                              blurRadius: 2),
-                                          BoxShadow(
-                                              color: Colors.grey.withAlpha(50),
-                                              offset: Offset(-1, -1),
-                                              spreadRadius: 1,
-                                              blurRadius: 2),
-                                        ]),
-                                    child: Padding(
-                                      padding: EdgeInsets.symmetric(
-                                          horizontal: 2.w, vertical: 1.h),
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              Text(
-                                                'Order '.tr + '${provider.allOrderModel!.data!.orders![index].orderNo}'.tr,
-                                                style: TextStyle(
+                            return InkWell(
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          AllOrderDetailScreen(
+                                        orderId: provider.allOrderModel!.data!
+                                            .orders![index].id
+                                            .toString(),
+                                      ),
+                                    )).then((value) async {
+                                  var data = await DataProvider()
+                                      .allOrderModelApi(map: {
+                                    'user_id': '${user_model.data!.userId}',
+                                    'type': 'all',
+                                  });
+                                  provider.allOrderModel = data;
+                                  setState(() {});
+                                });
+                              },
+                              child: Padding(
+                                padding: EdgeInsets.symmetric(horizontal: 2.w),
+                                child: Column(
+                                  children: [
+                                    Container(
+                                      width: 100.w,
+                                      decoration: BoxDecoration(
+                                          color: Colors.white,
+                                          borderRadius:
+                                              BorderRadius.circular(3),
+                                          boxShadow: [
+                                            BoxShadow(
+                                                color:
+                                                    Colors.grey.withAlpha(50),
+                                                offset: Offset(1, 1),
+                                                spreadRadius: 1,
+                                                blurRadius: 2),
+                                            BoxShadow(
+                                                color:
+                                                    Colors.grey.withAlpha(50),
+                                                offset: Offset(-1, -1),
+                                                spreadRadius: 1,
+                                                blurRadius: 2),
+                                          ]),
+                                      child: Padding(
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: 2.w, vertical: 1.h),
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                Text(
+                                                  'Order '.tr +
+                                                      '${provider.allOrderModel!.data!.orders![index].orderNo}'
+                                                          .tr,
+                                                  style: TextStyle(
+                                                    fontSize: 12.sp,
+                                                    color: Colors.black,
+                                                  ),
+                                                ),
+                                                Text(
+                                                  'Items: '.tr +
+                                                      '${provider.allOrderModel!.data!.orders![index].orderItemsCount}'
+                                                          .tr,
+                                                  style: TextStyle(
+                                                    fontSize: 9.sp,
+                                                    color: Colors.black,
+                                                  ),
+                                                ),
+                                                Text(
+                                                  '${DateFormat('dd-MMM-yyyy').format(DateTime.parse('${provider.allOrderModel!.data!.orders![index].updatedAt}'))}',
+                                                  style: TextStyle(
+                                                    fontSize: 9.sp,
+                                                    color: Colors.black,
+                                                  ),
+                                                )
+                                              ],
+                                            ),
+                                            SizedBox(
+                                              height: 1.h,
+                                            ),
+                                            Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                Text(
+                                                  'Customer name:'.tr,
+                                                  style: TextStyle(
+                                                    fontSize: 10.sp,
+                                                    color: Color(0xff5B5B5B),
+                                                  ),
+                                                ),
+                                                Container(
+                                                  color: Color(0xffF0C9D0),
+                                                  child: Padding(
+                                                    padding:
+                                                        EdgeInsets.symmetric(
+                                                            horizontal: 1.w,
+                                                            vertical: 0.5.h),
+                                                    child: Text(
+                                                      'Rs${provider.allOrderModel!.data!.orders![index].total}',
+                                                      style: TextStyle(
+                                                          color: redColor,
+                                                          fontSize: 11.sp,
+                                                          fontWeight:
+                                                              FontWeight.bold),
+                                                    ),
+                                                  ),
+                                                )
+                                              ],
+                                            ),
+                                            //SizedBox(height: 1.h,),
+                                            Text(
+                                              '${provider.allOrderModel!.data!.orders![index].orderContent?.value?.name}',
+                                              style: TextStyle(
                                                   fontSize: 12.sp,
-                                                  color: Colors.black,
-                                                ),
-                                              ),
-                                              Text(
-                                                'Items: '.tr + '${provider.allOrderModel!.data!.orders![index].orderItemsCount}'.tr,
-                                                style: TextStyle(
-                                                  fontSize: 9.sp,
-                                                  color: Colors.black,
-                                                ),
-                                              ),
-                                              Text(
-                                                '${DateFormat('dd-MMM-yyyy').format(DateTime.parse('${provider.allOrderModel!.data!.orders![index].updatedAt}'))}',
-                                                style: TextStyle(
-                                                  fontSize: 9.sp,
-                                                  color: Colors.black,
-                                                ),
-                                              )
-                                            ],
-                                          ),
-                                          SizedBox(
-                                            height: 1.h,
-                                          ),
-                                          Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              Text(
-                                                'Customer name:'.tr,
-                                                style: TextStyle(
-                                                  fontSize: 10.sp,
-                                                  color: Color(0xff5B5B5B),
-                                                ),
-                                              ),
-                                              Container(
-                                                color: Color(0xffF0C9D0),
-                                                child: Padding(
-                                                  padding: EdgeInsets.symmetric(
-                                                      horizontal: 1.w,
-                                                      vertical: 0.5.h),
-                                                  child: Text(
-                                                    'Rs${provider.allOrderModel!.data!.orders![index].total}',
-                                                    style: TextStyle(
-                                                        color: redColor,
-                                                        fontSize: 11.sp,
-                                                        fontWeight:
-                                                            FontWeight.bold),
-                                                  ),
-                                                ),
-                                              )
-                                            ],
-                                          ),
-                                          //SizedBox(height: 1.h,),
-                                          Text(
-                                            '${provider.allOrderModel!.data!.orders![index].orderContent?.value?.name}',
-                                            style: TextStyle(
-                                                fontSize: 12.sp,
-                                                color: redColor,
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                          SizedBox(
-                                            height: 2.h,
-                                          ),
-                                          Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              Row(
-                                                children: [
-                                                  Text(
-                                                    'Fulfillment:'.tr,
-                                                    style: TextStyle(
-                                                      fontSize: 9.sp,
-                                                      color: Colors.black,
-                                                    ),
-                                                  ),
-                                                  SizedBox(
-                                                    width: 0.6.w,
-                                                  ),
-                                                  Container(
-                                                    decoration: BoxDecoration(
-                                                      color: blueColor,
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              3),
-                                                    ),
-                                                    child: Padding(
-                                                      padding:
-                                                          EdgeInsets.symmetric(
-                                                              horizontal: 2.w,
-                                                              vertical: 0.3.h),
-                                                      child: Text(
-                                                        '${provider.allOrderModel!.data!.orders![index].status}',
-                                                        style: TextStyle(
-                                                          fontSize: 8.sp,
-                                                          color: Colors.white,
-                                                        ),
+                                                  color: redColor,
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                            SizedBox(
+                                              height: 2.h,
+                                            ),
+                                            Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                Row(
+                                                  children: [
+                                                    Text(
+                                                      'Fulfillment:'.tr,
+                                                      style: TextStyle(
+                                                        fontSize: 9.sp,
+                                                        color: Colors.black,
                                                       ),
                                                     ),
-                                                  )
-                                                ],
-                                              ),
-                                              Row(
-                                                children: [
-                                                  Text(
-                                                    'Payment:'.tr,
-                                                    style: TextStyle(
-                                                      fontSize: 9.sp,
-                                                      color: Colors.black,
+                                                    SizedBox(
+                                                      width: 0.6.w,
                                                     ),
-                                                  ),
-                                                  SizedBox(
-                                                    width: 0.6.w,
-                                                  ),
-                                                  Container(
-                                                    decoration: BoxDecoration(
-                                                      color: blueColor,
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              3),
-                                                    ),
-                                                    child: Padding(
-                                                      padding:
-                                                          EdgeInsets.symmetric(
-                                                              horizontal: 2.w,
-                                                              vertical: 0.3.h),
-                                                      child: Text(
-                                                        '${provider.payment_status['${provider.allOrderModel!.data!.orders![index].paymentStatus}']}',
-                                                        style: TextStyle(
-                                                          fontSize: 8.sp,
-                                                          color: Colors.white,
+                                                    Container(
+                                                      decoration: BoxDecoration(
+                                                        color: blueColor,
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(3),
+                                                      ),
+                                                      child: Padding(
+                                                        padding: EdgeInsets
+                                                            .symmetric(
+                                                                horizontal: 2.w,
+                                                                vertical:
+                                                                    0.3.h),
+                                                        child: Text(
+                                                          '${provider.allOrderModel!.data!.orders![index].status}',
+                                                          style: TextStyle(
+                                                            fontSize: 8.sp,
+                                                            color: Colors.white,
+                                                          ),
                                                         ),
                                                       ),
+                                                    )
+                                                  ],
+                                                ),
+                                                Row(
+                                                  children: [
+                                                    Text(
+                                                      'Payment:'.tr,
+                                                      style: TextStyle(
+                                                        fontSize: 9.sp,
+                                                        color: Colors.black,
+                                                      ),
                                                     ),
-                                                  )
-                                                ],
-                                              )
-                                            ],
-                                          ),
-                                          Divider(
-                                            thickness: 1,
-                                            color: Colors.black26,
-                                          ),
-                                          Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: [
-                                                  Text(
-                                                    'Customer type'.tr,
-                                                    style: TextStyle(
-                                                      fontSize: 9.sp,
-                                                      color: Color(0xff5B5B5B),
+                                                    SizedBox(
+                                                      width: 0.6.w,
                                                     ),
-                                                  ),
-                                                  SizedBox(
-                                                    height: 0.2.h,
-                                                  ),
-                                                  Text(
-                                                    provider
-                                                                .allOrderModel!
-                                                                .data!
-                                                                .orders![index]
-                                                                .customerId ==
-                                                            null
-                                                        ? 'Guest'
-                                                        : 'Existing',
-                                                    style: TextStyle(
-                                                      fontSize: 10.sp,
-                                                      color: blueColor,
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                              GestureDetector(
-                                                onTap: () {
-                                                  Navigator.push(
-                                                      context,
-                                                      MaterialPageRoute(
-                                                        builder: (context) =>
-                                                            AllOrderDetailScreen(
-                                                          orderId: provider
-                                                              .allOrderModel!
-                                                              .data!
-                                                              .orders![index]
-                                                              .id
-                                                              .toString(),
+                                                    Container(
+                                                      decoration: BoxDecoration(
+                                                        color: blueColor,
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(3),
+                                                      ),
+                                                      child: Padding(
+                                                        padding: EdgeInsets
+                                                            .symmetric(
+                                                                horizontal: 2.w,
+                                                                vertical:
+                                                                    0.3.h),
+                                                        child: Text(
+                                                          '${provider.payment_status['${provider.allOrderModel!.data!.orders![index].paymentStatus}']}',
+                                                          style: TextStyle(
+                                                            fontSize: 8.sp,
+                                                            color: Colors.white,
+                                                          ),
                                                         ),
-                                                      )).then((value) async {
-                                                    var data =
-                                                        await DataProvider()
-                                                            .allOrderModelApi(
-                                                                map: {
-                                                          'user_id':
-                                                              '${user_model.data!.userId}',
-                                                          'type': 'all',
-                                                        });
-                                                    provider.allOrderModel =
-                                                        data;
-                                                    setState(() {});
-                                                  });
-                                                },
-                                                child: Container(
+                                                      ),
+                                                    )
+                                                  ],
+                                                )
+                                              ],
+                                            ),
+                                            Divider(
+                                              thickness: 1,
+                                              color: Colors.black26,
+                                            ),
+                                            Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    Text(
+                                                      'Customer type'.tr,
+                                                      style: TextStyle(
+                                                        fontSize: 9.sp,
+                                                        color:
+                                                            Color(0xff5B5B5B),
+                                                      ),
+                                                    ),
+                                                    SizedBox(
+                                                      height: 0.2.h,
+                                                    ),
+                                                    Text(
+                                                      provider
+                                                                  .allOrderModel!
+                                                                  .data!
+                                                                  .orders![
+                                                                      index]
+                                                                  .customerId ==
+                                                              null
+                                                          ? 'Guest'
+                                                          : 'Existing',
+                                                      style: TextStyle(
+                                                        fontSize: 10.sp,
+                                                        color: blueColor,
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                                Container(
                                                   decoration: BoxDecoration(
                                                       borderRadius:
                                                           BorderRadius.circular(
@@ -341,18 +350,18 @@ class _AllScreenState extends State<AllScreen> {
                                                       ],
                                                     ),
                                                   ),
-                                                ),
-                                              )
-                                            ],
-                                          )
-                                        ],
+                                                )
+                                              ],
+                                            )
+                                          ],
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                  SizedBox(
-                                    height: 2.h,
-                                  )
-                                ],
+                                    SizedBox(
+                                      height: 2.h,
+                                    )
+                                  ],
+                                ),
                               ),
                             );
                           },

@@ -3,12 +3,14 @@ import 'package:db_2_0/custom_widgets/data_loading.dart';
 import 'package:easy_stepper/easy_stepper.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_switch/flutter_switch.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:sizer/sizer.dart';
+import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../../api_repository/api_utils.dart';
 import '../../../utils_services/storage_util.dart';
@@ -20,7 +22,6 @@ import 'Store Information/store_info_screen.dart';
 import 'Update Store Setup/update_store_provider.dart';
 import 'home_chart.dart';
 import 'home_screens/logo_screen.dart';
-import 'home_screens/website_design_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -60,6 +61,8 @@ class _HomeScreenState extends State<HomeScreen> {
     }
     setState(() {});
   }
+
+  bool show_more = false;
 
   int active_scrool = 0;
 
@@ -107,7 +110,6 @@ class _HomeScreenState extends State<HomeScreen> {
                                         style: TextStyle(
                                           color: Colors.white,
                                           fontSize: 11.sp,
-                                          //fontWeight: FontWeight.bold
                                         ),
                                       ),
                                       Padding(
@@ -139,14 +141,14 @@ class _HomeScreenState extends State<HomeScreen> {
                                                 "id": '1'
                                               });
                                             } else {
-                                              loginModel!.data!.onOff = 2;
+                                              loginModel!.data!.onOff = 0;
                                               storage.write('userData',
                                                   loginModel!.toJson());
                                               DataProvider()
                                                   .storeOnOffApi(map: {
                                                 "user_id": loginModel!.data!.id
                                                     .toString(),
-                                                "id": '2'
+                                                "id": '0'
                                               });
                                             }
                                             setState(() {
@@ -283,7 +285,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                     height: 1.h,
                                   ),
                                   Text(
-                                    'Customer can visit the following link and place their orders.'.tr,
+                                    'Customer can visit the following link and place their orders.'
+                                        .tr,
                                     style: TextStyle(
                                         fontSize: 11.sp,
                                         color: Colors.black,
@@ -491,11 +494,36 @@ class _HomeScreenState extends State<HomeScreen> {
                                         MainAxisAlignment.spaceBetween,
                                     children: [
                                       Text(
-                                        'Total Earnings - ${provider.dashboardModel?.data?.orders?.isEmpty ?? true ? '' : provider.dashboardModel?.data?.orders?.first.year}'.tr,
+                                        'Total Earnings - '.tr +
+                                            '${provider.dashboardModel?.data?.orders?.isEmpty ?? true ? '' : provider.dashboardModel?.data?.orders?.first.year}',
                                         style: TextStyle(
                                           fontSize: 9.sp,
                                           color: Colors.black,
                                           //fontWeight: FontWeight.bold
+                                        ),
+                                      ),
+                                      InkWell(
+                                        onTap: () {
+                                          show_more = !show_more;
+                                          setState(() {});
+                                        },
+                                        child: Row(
+                                          mainAxisSize: MainAxisSize.min,
+                                          children: [
+                                            Text(
+                                              'Show More'.tr,
+                                              style: TextStyle(
+                                                fontSize: 9.sp,
+                                                color: Color(0xff1568A8),
+                                              ),
+                                            ),
+                                            Icon(
+                                              !show_more
+                                                  ? Icons.arrow_drop_down
+                                                  : Icons.arrow_drop_up,
+                                              color: Color(0xff1568A8),
+                                            )
+                                          ],
                                         ),
                                       ),
                                     ],
@@ -514,10 +542,6 @@ class _HomeScreenState extends State<HomeScreen> {
                                             color: Colors.black,
                                             fontWeight: FontWeight.bold),
                                       ),
-                                      SvgPicture.asset(
-                                        'assets/svgs/fold.svg',
-                                        height: 2.3.h,
-                                      ),
                                     ],
                                   ),
                                   SizedBox(
@@ -531,6 +555,222 @@ class _HomeScreenState extends State<HomeScreen> {
                         SizedBox(
                           height: 2.h,
                         ),
+                        if (show_more)
+                          Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 5.w),
+                            child: Container(
+                              width: 100.w,
+                              decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(3),
+                                  boxShadow: [
+                                    BoxShadow(
+                                        color: Colors.grey.withAlpha(50),
+                                        offset: Offset(1, 1),
+                                        spreadRadius: 1,
+                                        blurRadius: 2),
+                                    BoxShadow(
+                                        color: Colors.grey.withAlpha(50),
+                                        offset: Offset(-1, -1),
+                                        spreadRadius: 1,
+                                        blurRadius: 2),
+                                  ]),
+                              child: Padding(
+                                padding: EdgeInsets.symmetric(
+                                  horizontal: 3.w,
+                                ),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    SizedBox(
+                                      height: 1.3.h,
+                                    ),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text(
+                                          'Total Orders'.tr,
+                                          style: TextStyle(
+                                            fontSize: 9.sp,
+                                            color: Colors.black,
+                                            //fontWeight: FontWeight.bold
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    SizedBox(
+                                      height: 0.5.h,
+                                    ),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text(
+                                          '${provider.dashboardModel!.data!.totalSales}',
+                                          style: TextStyle(
+                                              fontSize: 12.sp,
+                                              color: Colors.black,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                      ],
+                                    ),
+                                    SizedBox(
+                                      height: 1.h,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                        if (show_more)
+                          SizedBox(
+                            height: 2.h,
+                          ),
+                        if (show_more)
+                          Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 5.w),
+                            child: Container(
+                              width: 100.w,
+                              decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(3),
+                                  boxShadow: [
+                                    BoxShadow(
+                                        color: Colors.grey.withAlpha(50),
+                                        offset: Offset(1, 1),
+                                        spreadRadius: 1,
+                                        blurRadius: 2),
+                                    BoxShadow(
+                                        color: Colors.grey.withAlpha(50),
+                                        offset: Offset(-1, -1),
+                                        spreadRadius: 1,
+                                        blurRadius: 2),
+                                  ]),
+                              child: Padding(
+                                padding: EdgeInsets.symmetric(
+                                  horizontal: 3.w,
+                                ),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    SizedBox(
+                                      height: 1.3.h,
+                                    ),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text(
+                                          'Total Customers'.tr,
+                                          style: TextStyle(
+                                            fontSize: 9.sp,
+                                            color: Colors.black,
+                                            //fontWeight: FontWeight.bold
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    SizedBox(
+                                      height: 0.5.h,
+                                    ),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text(
+                                          '${provider.dashboardModel!.data!.totalSales}',
+                                          style: TextStyle(
+                                              fontSize: 12.sp,
+                                              color: Colors.black,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                      ],
+                                    ),
+                                    SizedBox(
+                                      height: 1.h,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                        if (show_more)
+                          SizedBox(
+                            height: 2.h,
+                          ),
+                        if (show_more)
+                          Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 5.w),
+                            child: Container(
+                              width: 100.w,
+                              decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(3),
+                                  boxShadow: [
+                                    BoxShadow(
+                                        color: Colors.grey.withAlpha(50),
+                                        offset: Offset(1, 1),
+                                        spreadRadius: 1,
+                                        blurRadius: 2),
+                                    BoxShadow(
+                                        color: Colors.grey.withAlpha(50),
+                                        offset: Offset(-1, -1),
+                                        spreadRadius: 1,
+                                        blurRadius: 2),
+                                  ]),
+                              child: Padding(
+                                padding: EdgeInsets.symmetric(
+                                  horizontal: 3.w,
+                                ),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    SizedBox(
+                                      height: 1.3.h,
+                                    ),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text(
+                                          'Total Products'.tr,
+                                          style: TextStyle(
+                                            fontSize: 9.sp,
+                                            color: Colors.black,
+                                            //fontWeight: FontWeight.bold
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    SizedBox(
+                                      height: 0.5.h,
+                                    ),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text(
+                                          '${provider.dashboardModel!.data!.todayOrders}',
+                                          style: TextStyle(
+                                              fontSize: 12.sp,
+                                              color: Colors.black,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                      ],
+                                    ),
+                                    SizedBox(
+                                      height: 1.h,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                        if (show_more)
+                          SizedBox(
+                            height: 2.h,
+                          ),
                         Padding(
                           padding: EdgeInsets.symmetric(horizontal: 5.w),
                           child: Container(
@@ -761,12 +1001,23 @@ class _HomeScreenState extends State<HomeScreen> {
                                             thickness: 1,
                                             color: Colors.grey,
                                           ),
-                                          Center(
-                                              child: Image(
-                                            image: AssetImage(
-                                                'assets/images/blue_circle.png'),
-                                            height: 10.h,
-                                          )),
+                                          Expanded(
+                                            child: SfCircularChart(
+                                                series: <CircularSeries>[
+                                                  PieSeries<ChartData, String>(
+                                                      dataSource: provider
+                                                          .poduct_limit_chartData,
+                                                      pointColorMapper:
+                                                          (ChartData data, _) =>
+                                                              null,
+                                                      xValueMapper:
+                                                          (ChartData data, _) =>
+                                                              data.x,
+                                                      yValueMapper:
+                                                          (ChartData data, _) =>
+                                                              data.y)
+                                                ]),
+                                          )
                                         ],
                                       ),
                                     ),
@@ -813,7 +1064,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                               text: TextSpan(children: [
                                             TextSpan(
                                               text:
-                                                  '${provider.dashboardModel!.data!.storageSize}',
+                                                  '${provider.dashboardModel!.data!.storageUsed}' +
+                                                      '/1000MB',
                                               style: TextStyle(
                                                 color: blueColor,
                                                 fontSize: 8.sp,
@@ -824,12 +1076,23 @@ class _HomeScreenState extends State<HomeScreen> {
                                             thickness: 1,
                                             color: Colors.grey,
                                           ),
-                                          Center(
-                                              child: Image(
-                                            image: AssetImage(
-                                                'assets/images/blue_circle.png'),
-                                            height: 10.h,
-                                          )),
+                                          Expanded(
+                                            child: SfCircularChart(
+                                                series: <CircularSeries>[
+                                                  PieSeries<ChartData, String>(
+                                                      dataSource: provider
+                                                          .usage_storage_chartData,
+                                                      pointColorMapper:
+                                                          (ChartData data, _) =>
+                                                              null,
+                                                      xValueMapper:
+                                                          (ChartData data, _) =>
+                                                              data.x,
+                                                      yValueMapper:
+                                                          (ChartData data, _) =>
+                                                              data.y)
+                                                ]),
+                                          )
                                         ],
                                       ),
                                     ),
@@ -1135,7 +1398,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                                   ? false
                                                   : true,
                                               subtitle:
-                                                  'Online Stores with a logo get 5 times more Orders and 10 times more Store Views.'.tr,
+                                                  'Online Stores with a logo get 5 times more Orders and 10 times more Store Views.'
+                                                      .tr,
                                               ontap: () {
                                                 Navigator.pop(context);
                                                 Navigator.push(
@@ -1160,7 +1424,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                               },
                                             ),
                                             bottomContainer(
-                                                title: 'Add Store Information'.tr,
+                                                title:
+                                                    'Add Store Information'.tr,
                                                 complete: provider
                                                             .storeStatusModel!
                                                             .location!
@@ -1169,7 +1434,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                                     ? false
                                                     : true,
                                                 subtitle:
-                                                    'Online Stores with complete information increase customer trust by 70%'.tr,
+                                                    'Online Stores with complete information increase customer trust by 70%'
+                                                        .tr,
                                                 ontap: () {
                                                   Navigator.pop(context);
                                                   Navigator.push(
@@ -1208,7 +1474,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                                     ? false
                                                     : true,
                                                 subtitle:
-                                                    'Make fulfilling orders easier by adding Pickup Location for your delivery.'.tr,
+                                                    'Make fulfilling orders easier by adding Pickup Location for your delivery.'
+                                                        .tr,
                                                 ontap: () {
                                                   Navigator.pop(context);
                                                   Navigator.push(

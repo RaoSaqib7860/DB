@@ -18,10 +18,20 @@ class EditShippingAddressScreen extends StatefulWidget {
   String? zipCode;
   String? address;
   String? shippingMethod;
-   EditShippingAddressScreen({Key? key, required this.orderId,this.name,this.email,this.address,this.phone,this.shippingMethod,this.zipCode}) : super(key: key);
+  EditShippingAddressScreen(
+      {Key? key,
+      required this.orderId,
+      this.name,
+      this.email,
+      this.address,
+      this.phone,
+      this.shippingMethod,
+      this.zipCode})
+      : super(key: key);
 
   @override
-  State<EditShippingAddressScreen> createState() => _EditShippingAddressScreenState();
+  State<EditShippingAddressScreen> createState() =>
+      _EditShippingAddressScreenState();
 }
 
 class _EditShippingAddressScreenState extends State<EditShippingAddressScreen> {
@@ -30,22 +40,22 @@ class _EditShippingAddressScreenState extends State<EditShippingAddressScreen> {
     sent_data();
     super.initState();
   }
-  sent_data(){
+
+  sent_data() {
     final AllOrderProvider provider =
-    Provider.of<AllOrderProvider>(context, listen: false);
+        Provider.of<AllOrderProvider>(context, listen: false);
     provider.nameController.text = widget.name ?? '';
     provider.emailController.text = widget.email ?? '';
     provider.phoneController.text = widget.phone ?? '';
     provider.zipController.text = widget.zipCode ?? '';
     provider.addressController.text = widget.address ?? '';
-    setState(() {
-
-    });
+    provider.shippingController.text = widget.shippingMethod ?? '';
+    setState(() {});
   }
+
   @override
   Widget build(BuildContext context) {
-    final AllOrderProvider provider = Provider.of<AllOrderProvider>(
-        context);
+    final AllOrderProvider provider = Provider.of<AllOrderProvider>(context);
     return DataLoading(
       isLoading: provider.loading,
       child: Scaffold(
@@ -60,15 +70,23 @@ class _EditShippingAddressScreenState extends State<EditShippingAddressScreen> {
                 child: Center(
                   child: Row(
                     children: [
-                      SizedBox(width: 3.w,),
+                      SizedBox(
+                        width: 3.w,
+                      ),
                       GestureDetector(
                           onTap: () {
                             Navigator.pop(context);
                           },
-                          child: SvgPicture.asset('assets/svgs/back_arrow.svg',height: 2.h,)),
-                      SizedBox(width: 2.w,),
+                          child: SvgPicture.asset(
+                            'assets/svgs/back_arrow.svg',
+                            height: 2.h,
+                          )),
+                      SizedBox(
+                        width: 2.w,
+                      ),
                       Text(
-                        'Edit Shippng Address for Order No: ' + '${widget.orderId}',
+                        'Edit Shippng Address for Order No: ' +
+                            '${widget.orderId}',
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: 10.sp,
@@ -79,39 +97,62 @@ class _EditShippingAddressScreenState extends State<EditShippingAddressScreen> {
                   ),
                 ),
               ),
-              SizedBox(height: 2.h,),
+              SizedBox(
+                height: 2.h,
+              ),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 2.w),
                 child: Column(
                   children: [
-                    CustomLineTextField(name: 'Customer Name'.tr, hint: 'Hamza'.tr,controller: provider.nameController,),
-                    CustomLineTextField(name: 'Customer Email'.tr, hint: 'hamza@hotmail.com',controller: provider.emailController,),
-                    CustomLineTextField(name: 'Customer Phone'.tr,controller: provider.phoneController,),
-                    CustomLineTextField(name: 'Zip Code'.tr,controller: provider.zipController,),
-                    CustomLineTextField(name: 'Address'.tr,controller: provider.addressController,),
-                    //CustomLineTextField(name: 'Shipping Method'.tr,),
-                    SizedBox(height: 10.h,),
+                    CustomLineTextField(
+                      name: 'Customer Name'.tr,
+                      hint: 'Hamza'.tr,
+                      controller: provider.nameController,
+                    ),
+                    CustomLineTextField(
+                      name: 'Customer Email'.tr,
+                      hint: 'hamza@hotmail.com',
+                      controller: provider.emailController,
+                    ),
+                    CustomLineTextField(
+                      name: 'Customer Phone'.tr,
+                      controller: provider.phoneController,
+                    ),
+                    CustomLineTextField(
+                      name: 'Zip Code'.tr,
+                      controller: provider.zipController,
+                    ),
+                    CustomLineTextField(
+                      name: 'Address'.tr,
+                      controller: provider.addressController,
+                    ),
+                    CustomLineTextField(
+                      name: 'Shipping Method'.tr,
+                      controller: provider.shippingController,
+                      enable: false,
+                    ),
+                    SizedBox(
+                      height: 10.h,
+                    ),
                     GestureDetector(
                       onTap: () {
-                        provider.update_order_detail_data(orderId: widget.orderId,context: context);
-
+                        provider.update_order_detail_data(
+                            orderId: widget.orderId, context: context);
                       },
                       child: Padding(
                         padding: EdgeInsets.symmetric(horizontal: 3.w),
                         child: Container(
                           height: 5.5.h,
                           decoration: BoxDecoration(
-                            color: blueColor,
-                            borderRadius: BorderRadius.circular(4)
-                          ),
+                              color: blueColor,
+                              borderRadius: BorderRadius.circular(4)),
                           child: Center(
                             child: Text(
                               'Save'.tr,
                               style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white,
-                                fontSize: 13.sp
-                              ),
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white,
+                                  fontSize: 13.sp),
                             ),
                           ),
                         ),

@@ -38,7 +38,7 @@ import 'base_path.dart';
 class DataProvider {
   var headers = {'csrf': '5574499YmRzanYyZzExa2J3Y3N1b2Y='};
   Future loginFunction(
-      {Map<String, dynamic>? map, BuildContext? context}) async {
+      {Map<String, dynamic>? map, BuildContext? context,bool? hide_snack}) async {
     final response = await http.post(Uri.parse('$baseURL$userLogin'),
         body: map, headers: headers);
     print('objectnamwb${response.body} ');
@@ -92,7 +92,9 @@ class DataProvider {
       log("loginFunction code is = ${response.statusCode}");
       storage.write('userData', user_model.toJson());
       print('objectnamw${user_model.data!.userId} ');
-      Get.snackbar('Success', '${data['message']}');
+      if(hide_snack==false){
+        Get.snackbar('Success', '${data['message']}');
+      }
       return user_model;
     } else {
       Get.snackbar('Alert', '${data['message']}');
@@ -270,6 +272,7 @@ class DataProvider {
       return null;
     }
   }
+
   Future updateSocialLinkApi({Map<String, dynamic>? map}) async {
     print('map is === $map');
     GetSocialLinkModel? getSocialLinkModel;
@@ -288,13 +291,12 @@ class DataProvider {
       return null;
     }
   }
+
   Future getAnalyticsApi({Map<String, dynamic>? map}) async {
     print('map is === $map');
     GetAnalyticsModel? getAnalyticsModel;
-    final response = await http.post(
-        Uri.parse('$baseURL$storeAnalyticsUrl'),
-        body: map,
-        headers: headers);
+    final response = await http.post(Uri.parse('$baseURL$storeAnalyticsUrl'),
+        body: map, headers: headers);
     var data = jsonDecode(response.body);
     log("loginFunction code is = ${data}");
     if (data['result'] == 'success') {
@@ -306,13 +308,12 @@ class DataProvider {
       return null;
     }
   }
+
   Future getOrderHistoryApi({Map<String, dynamic>? map}) async {
     print('map is === $map');
     GetOrserHistoryModel? getOrserHistoryModel;
-    final response = await http.post(
-        Uri.parse('$baseURL$getOrderHistoryUrl'),
-        body: map,
-        headers: headers);
+    final response = await http.post(Uri.parse('$baseURL$getOrderHistoryUrl'),
+        body: map, headers: headers);
     var data = jsonDecode(response.body);
     log("loginFunction code is = ${data}");
     if (data['result'] == 'success') {
@@ -324,6 +325,7 @@ class DataProvider {
       return null;
     }
   }
+
   Future getSubscriptionHistoryApi({Map<String, dynamic>? map}) async {
     print('map is === $map');
     GetSubscriptionPlanHistoryModel? getSubscriptionPlanHistoryModel;
@@ -335,13 +337,15 @@ class DataProvider {
     log("loginFunction code is = ${data}");
     if (data['result'] == 'success') {
       log("loginFunction code is = ${response.statusCode}");
-      getSubscriptionPlanHistoryModel = GetSubscriptionPlanHistoryModel.fromJson(data);
+      getSubscriptionPlanHistoryModel =
+          GetSubscriptionPlanHistoryModel.fromJson(data);
       return getSubscriptionPlanHistoryModel;
     } else {
       Get.snackbar('Alert', '${data['message']}');
       return null;
     }
   }
+
   Future getOrderSubscriptionHistoryApi({Map<String, dynamic>? map}) async {
     print('map is === $map');
     GetSubscriptionOrderHistoryModel? getSubscriptionOrderHistoryModel;
@@ -353,7 +357,8 @@ class DataProvider {
     log("loginFunction code is = ${data}");
     if (data['result'] == 'success') {
       log("loginFunction code is = ${response.statusCode}");
-      getSubscriptionOrderHistoryModel = GetSubscriptionOrderHistoryModel.fromJson(data);
+      getSubscriptionOrderHistoryModel =
+          GetSubscriptionOrderHistoryModel.fromJson(data);
       return getSubscriptionOrderHistoryModel;
     } else {
       Get.snackbar('Alert', '${data['message']}');
@@ -379,14 +384,15 @@ class DataProvider {
     }
   }
 
-  Future updateProductSEOApi({Map<String, dynamic>? map,bool? update=false}) async {
+  Future updateProductSEOApi(
+      {Map<String, dynamic>? map, bool? update = false}) async {
     print('map is === $map');
     UpdateProductSEOModel? updateProductSEOModel;
     final response = await http.post(
         Uri.parse('$baseURL$updateProductSEOInfoUrl'),
         body: map,
         headers: headers);
-    if(update==false){
+    if (update == false) {
       var data = jsonDecode(response.body);
       if (data['result'] == 'success') {
         log("loginFunction code is = ${response.statusCode}");
@@ -398,13 +404,12 @@ class DataProvider {
       }
     }
   }
+
   Future GetStoreInfoApi({Map<String, dynamic>? map}) async {
     print('map is === $map');
     GetStoreInfoModel? getStoreInfoModel;
-    final response = await http.post(
-        Uri.parse('$baseURL$getStoreInfoUrl'),
-        body: map,
-        headers: headers);
+    final response = await http.post(Uri.parse('$baseURL$getStoreInfoUrl'),
+        body: map, headers: headers);
     var data = jsonDecode(response.body);
     if (data['result'] == 'success') {
       log("loginFunction code is = ${response.statusCode}");

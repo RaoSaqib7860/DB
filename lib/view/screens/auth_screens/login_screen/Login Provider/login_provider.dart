@@ -3,6 +3,7 @@ import 'package:db_2_0/view/screens/home_screen/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../../../utils_services/storage_util.dart';
 import '../../../bottom_sheet/bottom_sheet.dart';
 import '../../../store_setup_screen/store_setup_screen.dart';
 import '../Model/login_model.dart';
@@ -41,6 +42,9 @@ class LoginProvider extends ChangeNotifier {
       loading = false;
       updateState();
       LoginModel? loginModel = result;
+      storage.write('email',
+          is_email == true ? emailController.text : phoneController.text);
+      storage.write('password', passwordController.text);
       if (result != null) {
         if (loginModel!.data!.isProduct == 1 &&
             loginModel.data!.isPaymentMethod == 1) {

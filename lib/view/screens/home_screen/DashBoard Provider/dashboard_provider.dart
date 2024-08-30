@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../../api_repository/api_utils.dart';
 import '../../auth_screens/login_screen/Login Provider/login_model_globle.dart';
 import '../Models/store_status_model.dart';
+import '../home_chart.dart';
 import '../models/dashboard_model.dart';
 
 class HomePageProvider extends ChangeNotifier {
@@ -12,6 +13,8 @@ class HomePageProvider extends ChangeNotifier {
   DashBoardModel? dashboardModel;
   StoreStatusModel? storeStatusModel;
   dynamic values;
+  final List<ChartData>? poduct_limit_chartData = [];
+  final List<ChartData>? usage_storage_chartData = [];
   get_dashboard_data() async {
     print('objectis${user_model.data!.userId}');
     loading = true;
@@ -19,6 +22,18 @@ class HomePageProvider extends ChangeNotifier {
     var data = await DataProvider()
         .getHome(userId: user_model.data!.userId.toString());
     dashboardModel = DashBoardModel.fromJson(data);
+    poduct_limit_chartData!.add(
+      ChartData('a', double.parse('${dashboardModel!.data!.productLimit}')),
+    );
+    poduct_limit_chartData!.add(
+      ChartData('a', double.parse('${dashboardModel!.data!.products}')),
+    );
+    usage_storage_chartData!.add(
+      ChartData('a', double.parse('${dashboardModel!.data!.storageUsed}')),
+    );
+    usage_storage_chartData!.add(
+      ChartData('a', double.parse('${1000}')),
+    );
     print('objectis${dashboardModel!.toJson()}');
     update_state();
     print('objectis${user_model.data!.userId}');

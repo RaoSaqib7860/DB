@@ -55,7 +55,7 @@ class _CustomLineTextFieldState extends State<CustomLineTextField> {
               onChanged: widget.onChanged,
               style: TextStyle(fontSize: 10.sp, color: Colors.black),
               decoration: InputDecoration(
-                  hintText: widget.hint!.tr,
+                  hintText: widget.hint??''.tr,
                   hintStyle: TextStyle(fontSize: 9.sp),
                   contentPadding: EdgeInsets.only(bottom: 1.6.h)),
             ),

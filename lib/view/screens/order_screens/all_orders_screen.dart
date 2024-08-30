@@ -39,7 +39,6 @@ class _AllOrdersScreenState extends State<AllOrdersScreen> {
   @override
   Widget build(BuildContext context) {
     final AllOrderProvider provider = Provider.of<AllOrderProvider>(context);
-    provider.typeOrder=provider.typeOrder;
     return GestureDetector(
       onTap: () {
         FocusManager.instance.primaryFocus?.unfocus();

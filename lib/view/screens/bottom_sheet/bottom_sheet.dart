@@ -4,11 +4,15 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:persistent_bottom_nav_bar/persistent_bottom_nav_bar.dart';
 import 'package:sizer/sizer.dart';
+import '../../../api_repository/api_utils.dart';
 import '../account_screen/account_scrreen.dart';
+import '../auth_screens/login_screen/Login Provider/login_model_globle.dart';
 import '../delivery_screens/delivery_main_screen.dart';
 import '../home_screen/home_screen.dart';
+import '../order_screens/Models/all_order_model.dart';
 import '../order_screens/all_orders_screen.dart';
 import '../product_screens/product_screen.dart';
+import 'package:badges/badges.dart' as badges;
 
 PersistentTabController? persistentcontroller;
 bool selectHome = true;
@@ -26,6 +30,7 @@ class _BottomSheetScreenState extends State<BottomSheetScreen> {
 
   @override
   void initState() {
+    get_orders();
     persistentcontroller = PersistentTabController(initialIndex: widget.index!);
     super.initState();
   }
@@ -38,6 +43,15 @@ class _BottomSheetScreenState extends State<BottomSheetScreen> {
     'Urdu'.tr,
   ];
   String dropdownvalue = 'Eng';
+  AllOrderModel? allOrderModel;
+  get_orders() async {
+    print('get_orders call');
+    allOrderModel = await DataProvider().allOrderModelApi(map: {
+      'user_id': '${user_model.data!.userId}',
+      'type': 'all',
+    });
+    setState(() {});
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -116,6 +130,9 @@ class _BottomSheetScreenState extends State<BottomSheetScreen> {
                 onItemSelected: (v) {
                   persistentcontroller!.index = v;
                   setState(() {});
+                  if (v == 1) {
+                    get_orders();
+                  }
                 },
               ),
             ),
@@ -216,7 +233,8 @@ class _BottomSheetScreenState extends State<BottomSheetScreen> {
                                               height: 0.5.h,
                                             ),
                                             Text(
-                                              'Lorem Ipsum is simply dummy text of the printing and typesetting industry.'.tr,
+                                              'Lorem Ipsum is simply dummy text of the printing and typesetting industry.'
+                                                  .tr,
                                               style: TextStyle(
                                                 color: Colors.black,
                                                 fontSize: 7.sp,
@@ -289,19 +307,66 @@ class _BottomSheetScreenState extends State<BottomSheetScreen> {
         //inactiveColorPrimary: Colors.white
       ),
       PersistentBottomNavBarItem(
-        icon: SizedBox(
-          child: SvgPicture.asset(
-            'assets/svgs/Order.svg',
-          ),
-          height: 5.h,
-        ),
-        inactiveIcon: SizedBox(
-          child: SvgPicture.asset(
-            'assets/svgs/Order.svg',
-            color: Colors.white,
-          ),
-          height: 5.h,
-        ),
+        icon: allOrderModel != null &&
+                allOrderModel!.data!.orderCounts!.pending != 0
+            ? badges.Badge(
+                position: badges.BadgePosition.topEnd(top: -1, end: -2),
+                showBadge: true,
+                ignorePointer: false,
+                onTap: () {},
+                badgeStyle: badges.BadgeStyle(
+                  badgeColor: redColor,
+                ),
+                badgeContent: Container(
+                  decoration: BoxDecoration(),
+                  child: Text(
+                      style: TextStyle(fontSize: 9, color: Colors.white),
+                      '${allOrderModel?.data?.orderCounts?.pending}'),
+                ),
+                child: SizedBox(
+                  child: SvgPicture.asset(
+                    'assets/svgs/Order.svg',
+                  ),
+                  height: 5.h,
+                ),
+              )
+            : SizedBox(
+                child: SvgPicture.asset(
+                  'assets/svgs/Order.svg',
+                ),
+                height: 5.h,
+              ),
+        inactiveIcon: allOrderModel != null &&
+                allOrderModel!.data!.orderCounts!.pending != 0
+            ? badges.Badge(
+                position: badges.BadgePosition.topEnd(top: -1, end: -2),
+                showBadge: true,
+                ignorePointer: false,
+                onTap: () {},
+                badgeStyle: badges.BadgeStyle(
+                  badgeColor: redColor,
+                ),
+                badgeContent: Container(
+                  decoration: BoxDecoration(),
+                  child: Text(
+                      style: TextStyle(fontSize: 9, color: Colors.white),
+                      '${allOrderModel?.data?.orderCounts?.pending}'),
+                ),
+                child: SizedBox(
+                  child: SvgPicture.asset(
+                    'assets/svgs/Order.svg',
+                    color: Colors.white,
+                  ),
+                  height: 5.h,
+                ),
+              )
+            : SizedBox(
+                child: SvgPicture.asset(
+                  'assets/svgs/Order.svg',
+                  color: Colors.white,
+                ),
+                height: 5.h,
+              ),
         activeColorPrimary: Colors.white,
         // inactiveColorPrimary: Colors.grey
       ),

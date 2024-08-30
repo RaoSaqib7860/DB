@@ -222,22 +222,38 @@ class _AllOrderDetailScreenState extends State<AllOrderDetailScreen> {
                                   SizedBox(
                                     height: 1.h,
                                   ),
-                                  Row(
-                                    children: [
-                                      SvgPicture.asset(
-                                        'assets/svgs/empty_checkbox.svg',
-                                        height: 2.h,
-                                      ),
-                                      SizedBox(
-                                        width: 2.w,
-                                      ),
-                                      Text(
-                                        'Notify to customer'.tr,
-                                        style: TextStyle(
-                                            color: Colors.black,
-                                            fontSize: 9.sp),
-                                      )
-                                    ],
+                                  InkWell(
+                                    onTap: () async {
+                                      await DataProvider().orderInfoApi(map: {
+                                        'user_id': '${user_model.data!.id}',
+                                        'order_id': '${widget.orderId}',
+                                        'mail_notify': '1'
+                                      });
+                                      var data = await DataProvider()
+                                          .orderInfoApi(map: {
+                                        'user_id': '${user_model.data!.userId}',
+                                        'order_id': '${widget.orderId}',
+                                      });
+                                      provider.orderInfoModel = data;
+                                      provider.update_state();
+                                    },
+                                    child: Row(
+                                      children: [
+                                        SvgPicture.asset(
+                                          'assets/svgs/empty_checkbox.svg',
+                                          height: 2.h,
+                                        ),
+                                        SizedBox(
+                                          width: 2.w,
+                                        ),
+                                        Text(
+                                          'Notify to customer'.tr,
+                                          style: TextStyle(
+                                              color: Colors.black,
+                                              fontSize: 9.sp),
+                                        )
+                                      ],
+                                    ),
                                   ),
                                   SizedBox(
                                     height: 1.h,
@@ -433,25 +449,6 @@ class _AllOrderDetailScreenState extends State<AllOrderDetailScreen> {
                                       ),
                                       Row(
                                         children: [
-                                          Container(
-                                            decoration: BoxDecoration(
-                                                color: blueColor,
-                                                borderRadius:
-                                                    BorderRadius.circular(3)),
-                                            child: Padding(
-                                              padding: EdgeInsets.symmetric(
-                                                  horizontal: 5.w,
-                                                  vertical: 0.9.h),
-                                              child: Text(
-                                                'Print'.tr,
-                                                style: TextStyle(
-                                                    color: Colors.white,
-                                                    fontSize: 10.sp,
-                                                    fontWeight:
-                                                        FontWeight.bold),
-                                              ),
-                                            ),
-                                          ),
                                           SizedBox(
                                             width: 2.w,
                                           ),
@@ -884,23 +881,23 @@ class _AllOrderDetailScreenState extends State<AllOrderDetailScreen> {
                                           CrossAxisAlignment.start,
                                       children: [
                                         detailContainer(
-                                            text:
-                                                'Customer Name: '.tr + '${provider.orderInfoModel?.orderData?.orderContent?.value?.name}'),
+                                            text: 'Customer Name: '.tr +
+                                                '${provider.orderInfoModel?.orderData?.orderContent?.value?.name}'),
                                         detailContainer(
-                                            text:
-                                                 'Customer Email: '.tr + '${provider.orderInfoModel?.orderData?.orderContent?.value?.email}'),
+                                            text: 'Customer Email: '.tr +
+                                                '${provider.orderInfoModel?.orderData?.orderContent?.value?.email}'),
                                         detailContainer(
-                                            text:
-                                                'Customer Phone: '.tr + '${provider.orderInfoModel?.orderData?.orderContent?.value?.phone}'),
+                                            text: 'Customer Phone: '.tr +
+                                                '${provider.orderInfoModel?.orderData?.orderContent?.value?.phone}'),
                                         detailContainer(
-                                            text:
-                                                'Location: '.tr + '${provider.orderInfoModel?.orderData?.shippingInfo?.city?.name}'),
+                                            text: 'Location: '.tr +
+                                                '${provider.orderInfoModel?.orderData?.shippingInfo?.city?.name}'),
                                         detailContainer(
-                                            text:
-                                                 'Zip Code: '.tr + '${provider.orderInfoModel?.orderData?.orderContent?.value?.zipCode}'),
+                                            text: 'Zip Code: '.tr +
+                                                '${provider.orderInfoModel?.orderData?.orderContent?.value?.zipCode}'),
                                         detailContainer(
-                                            text:
-                                            'Address: '.tr + '${provider.orderInfoModel?.orderData?.orderContent?.value?.address}'),
+                                            text: 'Address: '.tr +
+                                                '${provider.orderInfoModel?.orderData?.orderContent?.value?.address}'),
                                         detailContainer(
                                             text:
                                                 '${provider.orderInfoModel?.orderData?.shippingInfo?.shippingMethod?.name}'),
@@ -915,11 +912,18 @@ class _AllOrderDetailScreenState extends State<AllOrderDetailScreen> {
                                                   builder: (context) =>
                                                       EditShippingAddressScreen(
                                                     orderId: widget.orderId,
-                                                        name: '${provider.orderInfoModel?.orderData?.orderContent?.value?.name}',
-                                                        email: '${provider.orderInfoModel?.orderData?.orderContent?.value?.email}',
-                                                        phone: '${provider.orderInfoModel?.orderData?.orderContent?.value?.phone}',
-                                                        zipCode: '${provider.orderInfoModel?.orderData?.orderContent?.value?.zipCode}',
-                                                        address: '${provider.orderInfoModel?.orderData?.orderContent?.value?.address}',
+                                                    name:
+                                                        '${provider.orderInfoModel?.orderData?.orderContent?.value?.name}',
+                                                    email:
+                                                        '${provider.orderInfoModel?.orderData?.orderContent?.value?.email}',
+                                                    phone:
+                                                        '${provider.orderInfoModel?.orderData?.orderContent?.value?.phone}',
+                                                    zipCode:
+                                                        '${provider.orderInfoModel?.orderData?.orderContent?.value?.zipCode}',
+                                                    address:
+                                                        '${provider.orderInfoModel?.orderData?.orderContent?.value?.address}',
+                                                    shippingMethod:
+                                                        '${provider.orderInfoModel?.orderData?.shippingInfo?.shippingMethod?.name}',
                                                   ),
                                                 )).then((value) {
                                               provider.get_order_detail_data(
@@ -985,38 +989,38 @@ class _AllOrderDetailScreenState extends State<AllOrderDetailScreen> {
                                       height: 2.h,
                                     ),
                                     detailContainer(
-                                        text:
-                                        'Code Center: '.tr + '${provider.orderInfoModel?.tcsData?.costCenterCode}'),
+                                        text: 'Code Center: '.tr +
+                                            '${provider.orderInfoModel?.tcsData?.costCenterCode}'),
                                     detailContainer(
-                                        text:
-                                        'Customer Name: '.tr + '${provider.orderInfoModel?.tcsData?.consigneeName}'),
+                                        text: 'Customer Name: '.tr +
+                                            '${provider.orderInfoModel?.tcsData?.consigneeName}'),
                                     detailContainer(
-                                        text:
-                                        'Address: '.tr + '${provider.orderInfoModel?.tcsData?.consigneeAddress}'),
+                                        text: 'Address: '.tr +
+                                            '${provider.orderInfoModel?.tcsData?.consigneeAddress}'),
                                     detailContainer(
-                                        text:
-                                        'Mobile #: '.tr + '${provider.orderInfoModel?.tcsData?.consigneeMobNo}'),
+                                        text: 'Mobile #: '.tr +
+                                            '${provider.orderInfoModel?.tcsData?.consigneeMobNo}'),
                                     detailContainer(
-                                        text:
-                                        'Email: '.tr + '${provider.orderInfoModel?.tcsData?.consigneeEmail}'),
+                                        text: 'Email: '.tr +
+                                            '${provider.orderInfoModel?.tcsData?.consigneeEmail}'),
                                     detailContainer(
-                                        text:
-                                        'Address: '.tr + '${provider.orderInfoModel?.tcsData?.originCityName}'),
+                                        text: 'Address: '.tr +
+                                            '${provider.orderInfoModel?.tcsData?.originCityName}'),
                                     detailContainer(
-                                        text:
-                                        'Destination Location: '.tr + '${provider.orderInfoModel?.tcsData?.destinationCityName}'),
+                                        text: 'Destination Location: '.tr +
+                                            '${provider.orderInfoModel?.tcsData?.destinationCityName}'),
                                     detailContainer(
-                                        text:
-                                        'Item weight: '.tr + '${provider.orderInfoModel?.tcsData?.weight}/kg'),
+                                        text: 'Item weight: '.tr +
+                                            '${provider.orderInfoModel?.tcsData?.weight}/kg'),
                                     detailContainer(
-                                        text:
-                                        'No of item: '.tr + '${provider.orderInfoModel?.tcsData?.pieces}'),
+                                        text: 'No of item: '.tr +
+                                            '${provider.orderInfoModel?.tcsData?.pieces}'),
                                     detailContainer(
-                                        text:
-                                        'COD charges: '.tr + '${provider.orderInfoModel?.tcsData?.codAmount}'),
+                                        text: 'COD charges: '.tr +
+                                            '${provider.orderInfoModel?.tcsData?.codAmount}'),
                                     detailContainer(
-                                        text:
-                                        'Customer Reference No: '.tr + '${provider.orderInfoModel?.tcsData?.customerReferenceNo}'),
+                                        text: 'Customer Reference No: '.tr +
+                                            '${provider.orderInfoModel?.tcsData?.customerReferenceNo}'),
                                     detailContainer(
                                         text:
                                             '${provider.orderInfoModel?.tcsData?.result}'),
