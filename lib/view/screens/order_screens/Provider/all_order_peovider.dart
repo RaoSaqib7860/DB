@@ -33,13 +33,13 @@ class AllOrderProvider extends ChangeNotifier {
     '4': 'Cancel'.tr
   };
   Map<String, String> typeOrder = {
-    'All Orders'.tr: 'all'.tr,
-    'Awaiting Processing'.tr: 'pending'.tr,
-    'Processing'.tr: 'processing'.tr,
-    'Ready For Pickup'.tr: 'ready-for-pickup'.tr,
-    'Completed'.tr: 'completed'.tr,
-    'Archived'.tr: 'archived'.tr,
-    'Canceled'.tr: 'canceled'.tr,
+    'All Orders': 'all',
+    'Awaiting Processing': 'pending',
+    'Processing': 'processing',
+    'Ready For Pickup': 'ready-for-pickup',
+    'Completed': 'completed',
+    'Archived': 'archived',
+    'Canceled': 'canceled',
   };
 
   Map<String, String> payment_status_map = {
