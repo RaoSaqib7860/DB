@@ -277,7 +277,7 @@ class _SEOScreenState extends State<SEOScreen> {
                                   'meta_title': '${titleController.text}',
                                   'meta_keyword': '${keyController.text}',
                                   'meta_description': '${desController.text}',
-                                },update: true);
+                                }, update: true);
                                 CustomToastManager.showToast(
                                     context: context,
                                     height: 8.h,
@@ -330,21 +330,6 @@ class _SEOScreenState extends State<SEOScreen> {
                             SizedBox(
                               width: 3.w,
                             ),
-                            Container(
-                              decoration: BoxDecoration(
-                                color: blueColor,
-                                borderRadius: BorderRadius.circular(5),
-                              ),
-                              child: Padding(
-                                padding: EdgeInsets.symmetric(
-                                    horizontal: 7.w, vertical: 0.8.h),
-                                child: Text(
-                                  'Next',
-                                  style: TextStyle(
-                                      color: Colors.white, fontSize: 10.sp),
-                                ),
-                              ),
-                            )
                           ],
                         ),
                       ),

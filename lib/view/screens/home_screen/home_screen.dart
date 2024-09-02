@@ -607,7 +607,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                           MainAxisAlignment.spaceBetween,
                                       children: [
                                         Text(
-                                          '${provider.dashboardModel!.data!.totalSales}',
+                                          '${provider.dashboardModel!.data!.totalorders}',
                                           style: TextStyle(
                                               fontSize: 12.sp,
                                               color: Colors.black,
@@ -679,7 +679,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                           MainAxisAlignment.spaceBetween,
                                       children: [
                                         Text(
-                                          '${provider.dashboardModel!.data!.totalSales}',
+                                          '${provider.dashboardModel!.data!.customers}',
                                           style: TextStyle(
                                               fontSize: 12.sp,
                                               color: Colors.black,
@@ -751,7 +751,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                           MainAxisAlignment.spaceBetween,
                                       children: [
                                         Text(
-                                          '${provider.dashboardModel!.data!.todayOrders}',
+                                          '${provider.dashboardModel!.data!.products}',
                                           style: TextStyle(
                                               fontSize: 12.sp,
                                               color: Colors.black,

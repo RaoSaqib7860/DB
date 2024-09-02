@@ -31,12 +31,13 @@ class Data {
   String? storageSize;
   String? todaySaleAmount;
   String? todayOrders;
+  String? totalorders;
+  String? customers;
   String? yesterdaySaleAmount;
   String? lastweekSaleAmount;
   String? lastmonthSaleAmount;
   String? thismonthSaleAmount;
   List<Orders>? orders;
- // List<Null>? earnings;
   int? products;
   int? pages;
   dynamic storageUsed;
@@ -56,8 +57,9 @@ class Data {
         this.lastmonthSaleAmount,
         this.thismonthSaleAmount,
         this.orders,
-        //this.earnings,
         this.products,
+        this.totalorders,
+        this.customers,
         this.pages,
         this.storageUsed,
         this.planName,
@@ -71,6 +73,8 @@ class Data {
     storageSize = json['storage_size'];
     todaySaleAmount = json['today_sale_amount'];
     todayOrders = json['today_orders'];
+    totalorders = json['totalorders'].toString();
+    customers = json['customers'].toString();
     yesterdaySaleAmount = json['yesterday_sale_amount'];
     lastweekSaleAmount = json['lastweek_sale_amount'];
     lastmonthSaleAmount = json['lastmonth_sale_amount'];
@@ -103,6 +107,9 @@ class Data {
     data['storage_size'] = this.storageSize;
     data['today_sale_amount'] = this.todaySaleAmount;
     data['today_orders'] = this.todayOrders;
+    data['totalorders'] = this.totalorders;
+    data['customers'] = this.customers;
+    data['products'] = this.products;
     data['yesterday_sale_amount'] = this.yesterdaySaleAmount;
     data['lastweek_sale_amount'] = this.lastweekSaleAmount;
     data['lastmonth_sale_amount'] = this.lastmonthSaleAmount;

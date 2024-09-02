@@ -1,4 +1,5 @@
 import 'package:db_2_0/custom_widgets/data_loading.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
@@ -8,6 +9,7 @@ import 'package:sizer/sizer.dart';
 
 import '../../../../api_repository/api_utils.dart';
 import '../../../../custom_widgets/app_colors.dart';
+import '../../../../custom_widgets/cupertino_alert_dialog.dart';
 import '../../auth_screens/login_screen/Login Provider/login_model_globle.dart';
 import '../Provider/all_order_peovider.dart';
 import '../create_order_screen.dart';
@@ -30,15 +32,8 @@ class _AllScreenState extends State<AllScreen> {
   call_orders() {
     final AllOrderProvider provider =
         Provider.of<AllOrderProvider>(context, listen: false);
-    provider.get_order_data(map: {
-      'user_id': '${user_model.data!.userId}',
-      'type': 'all',
-      //'src' : '',
-      // 'payment_status' : '1',
-      //'status' : '1',
-      //'start' : '1',
-      //'end' : '1',
-    });
+    provider.get_order_data(
+        map: {'user_id': '${user_model.data!.userId}', 'type': 'all'});
   }
 
   @override
@@ -213,7 +208,23 @@ class _AllScreenState extends State<AllScreen> {
                                                     ),
                                                     Container(
                                                       decoration: BoxDecoration(
-                                                        color: blueColor,
+                                                        color: provider
+                                                                    .allOrderModel!
+                                                                    .data!
+                                                                    .orders![
+                                                                        index]
+                                                                    .status ==
+                                                                'pending'
+                                                            ? Color(0xffffc107)
+                                                            : provider
+                                                                        .allOrderModel!
+                                                                        .data!
+                                                                        .orders![
+                                                                            index]
+                                                                        .status ==
+                                                                    'canceled'
+                                                                ? redColor
+                                                                : blueColor,
                                                         borderRadius:
                                                             BorderRadius
                                                                 .circular(3),
@@ -314,6 +325,53 @@ class _AllScreenState extends State<AllScreen> {
                                                     ),
                                                   ],
                                                 ),
+                                                if (provider
+                                                        .allOrderModel!
+                                                        .data!
+                                                        .orders![index]
+                                                        .status ==
+                                                    'canceled')
+                                                  InkWell(
+                                                      onTap: () {
+                                                        show_cupertinoDialog(
+                                                            context: context,
+                                                            title: 'Delete',
+                                                            subtitle:
+                                                                'Are you sure you want to delete?',
+                                                            no_subtitle: 'No',
+                                                            yes_title: "Yes",
+                                                            on_done: () {
+                                                              DataProvider()
+                                                                  .destroyorder_api(
+                                                                      map: {
+                                                                    'user_id':
+                                                                        user_model
+                                                                            .data!
+                                                                            .id
+                                                                            .toString(),
+                                                                    'method':
+                                                                        'delete',
+                                                                    'order_id': provider
+                                                                        .allOrderModel!
+                                                                        .data!
+                                                                        .orders![
+                                                                            index]
+                                                                        .id
+                                                                        .toString()
+                                                                  });
+                                                              provider
+                                                                  .allOrderModel!
+                                                                  .data!
+                                                                  .orders!
+                                                                  .removeAt(
+                                                                      index);
+                                                              setState(() {});
+                                                            });
+                                                      },
+                                                      child: const Icon(
+                                                        CupertinoIcons.delete,
+                                                        color: Colors.red,
+                                                      )),
                                                 Container(
                                                   decoration: BoxDecoration(
                                                       borderRadius:

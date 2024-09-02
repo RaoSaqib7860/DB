@@ -18,9 +18,11 @@ class AllProductProvider extends ChangeNotifier {
   BrandsProductModel? brandsProductModel;
   String dropdownvalue = 'All Products';
   int index = 1;
+  dynamic map_data;
   Future get_product_data({Map<String, dynamic>? map}) async {
     loading = true;
     update_state();
+    map_data=map;
     var data = await DataProvider().allProductModelApi(map: map);
     allProductModel = data;
     print('objectismodel${allProductModel!.toJson()}');

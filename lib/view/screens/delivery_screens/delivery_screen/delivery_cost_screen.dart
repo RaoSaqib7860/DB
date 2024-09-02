@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
-
+import 'package:timeago/timeago.dart' as timeago;
 import '../../../../api_repository/api_utils.dart';
 import '../../../../custom_widgets/app_colors.dart';
 import '../../../../custom_widgets/cupertino_alert_dialog.dart';
@@ -53,80 +53,6 @@ class _DeliveryCostScreenState extends State<DeliveryCostScreen> {
               SizedBox(
                 height: 2.h,
               ),
-              // Padding(
-              //   padding: EdgeInsets.symmetric(horizontal: 2.w),
-              //   child: Container(
-              //     height: 3.5.h,
-              //     width: 50.w,
-              //     decoration: BoxDecoration(
-              //         color: Colors.white,
-              //         borderRadius: BorderRadius.circular(7),
-              //         border: Border.all(color: Colors.grey, width: 1)),
-              //     child: Row(
-              //       children: [
-              //         Container(
-              //           height: 3.h,
-              //           width: 33.w,
-              //           child: Center(
-              //             child: Padding(
-              //               padding: EdgeInsets.only(left: 2.w, right: 1.w),
-              //               child: DropdownButton(
-              //                 isExpanded: true,
-              //                 underline: Container(),
-              //                 icon: Icon(
-              //                   Icons.keyboard_arrow_down_outlined,
-              //                   size: 2.h,
-              //                   color: Colors.black,
-              //                 ),
-              //                 value: dropdownvalue,
-              //                 items: items.map((String items) {
-              //                   return DropdownMenuItem(
-              //                     value: items,
-              //                     child: Text(
-              //                       items,
-              //                       style: TextStyle(
-              //                           fontSize: 8.sp, color: Colors.black),
-              //                     ),
-              //                   );
-              //                 }).toList(),
-              //                 onChanged: (String? newValue) {
-              //                   setState(() {
-              //                     dropdownvalue = newValue!;
-              //                   });
-              //                 },
-              //                 hint: Text(
-              //                   "Font Family",
-              //                   style: TextStyle(
-              //                       fontWeight: FontWeight.bold,
-              //                       color: Colors.black),
-              //                 ),
-              //               ),
-              //             ),
-              //           ),
-              //         ),
-              //         Expanded(
-              //             child: Container(
-              //           decoration: BoxDecoration(
-              //             color: blueColor,
-              //             borderRadius: BorderRadius.only(
-              //                 topRight: Radius.circular(6),
-              //                 bottomRight: Radius.circular(6)),
-              //           ),
-              //           child: Center(
-              //             child: Text(
-              //               'Submit',
-              //               style:
-              //                   TextStyle(fontSize: 8.sp, color: Colors.white),
-              //             ),
-              //           ),
-              //         ))
-              //       ],
-              //     ),
-              //   ),
-              // ),
-              // SizedBox(
-              //   height: 2.h,
-              // ),
               Expanded(
                   child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: 5.w),
@@ -143,6 +69,8 @@ class _DeliveryCostScreenState extends State<DeliveryCostScreen> {
                               provider.deliveryCostModel?.data?.length ?? 0,
                           padding: EdgeInsets.only(bottom: 12.h),
                           itemBuilder: (context, index) {
+                            final fifteenAgo = DateTime.parse(
+                                '${provider.deliveryCostModel?.data?[index].date}');
                             return Padding(
                               padding: EdgeInsets.all(1.0),
                               child: Column(
@@ -216,7 +144,7 @@ class _DeliveryCostScreenState extends State<DeliveryCostScreen> {
                                                       horizontal: 1.w,
                                                       vertical: 0.2.h),
                                                   child: Text(
-                                                    '8 months ago',
+                                                    '${timeago.format(fifteenAgo)}',
                                                     style: TextStyle(
                                                         color: redColor,
                                                         fontSize: 9.sp,

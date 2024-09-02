@@ -9,6 +9,7 @@ import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 import 'package:timeago/timeago.dart' as timeago;
 import '../../../api_repository/api_utils.dart';
+import '../../../custom_widgets/web_view.dart';
 import '../auth_screens/login_screen/Login Provider/login_model_globle.dart';
 import 'Provider/all_product_provider.dart';
 import 'edit_product/edit_product.dart';
@@ -93,7 +94,7 @@ class _PublishScreenState extends State<PublishScreen> {
                                   dropdownvalue = newValue!;
                                 });
                               },
-                              hint:  Text(
+                              hint: Text(
                                 "Select Action".tr,
                                 style: TextStyle(
                                     fontSize: 11, color: Colors.black),
@@ -184,10 +185,8 @@ class _PublishScreenState extends State<PublishScreen> {
                               )
                             : RefreshIndicator(
                                 onRefresh: () async {
-                                  await provider.get_product_data(map: {
-                                    'user_id': '${user_model.data!.userId}',
-                                    'type': '1'
-                                  });
+                                  await provider.get_product_data(
+                                      map: provider.map_data);
                                 },
                                 child: ListView.builder(
                                   itemCount: provider
@@ -293,7 +292,8 @@ class _PublishScreenState extends State<PublishScreen> {
                                                                           10.sp),
                                                                 ),
                                                                 Text(
-                                                                  'Created at'.tr,
+                                                                  'Created at'
+                                                                      .tr,
                                                                   style: TextStyle(
                                                                       color: Color(
                                                                           0xff0B7A3E),
@@ -355,8 +355,8 @@ class _PublishScreenState extends State<PublishScreen> {
                                                                     text: TextSpan(
                                                                         children: [
                                                                       TextSpan(
-                                                                          text:
-                                                                              'Discount: '.tr,
+                                                                          text: 'Discount: '
+                                                                              .tr,
                                                                           style: TextStyle(
                                                                               color: Color(0xff636363),
                                                                               fontSize: 9.sp)),
@@ -371,8 +371,8 @@ class _PublishScreenState extends State<PublishScreen> {
                                                                     text: TextSpan(
                                                                         children: [
                                                                       TextSpan(
-                                                                          text:
-                                                                              'Regular price: '.tr,
+                                                                          text: 'Regular price: '
+                                                                              .tr,
                                                                           style: TextStyle(
                                                                               color: Color(0xff636363),
                                                                               fontSize: 9.sp)),
@@ -417,7 +417,11 @@ class _PublishScreenState extends State<PublishScreen> {
                                                                         productId:
                                                                             '${provider.allProductModel!.data!.posts![index].id.toString()}',
                                                                       ),
-                                                                    ));
+                                                                    )).then((value) {
+                                                                  provider.get_product_data(
+                                                                      map: provider
+                                                                          .map_data);
+                                                                });
                                                               },
                                                               child: SvgPicture
                                                                   .asset(
@@ -428,9 +432,24 @@ class _PublishScreenState extends State<PublishScreen> {
                                                             SizedBox(
                                                               width: 2.w,
                                                             ),
-                                                            SvgPicture.asset(
-                                                              'assets/svgs/eyess.svg',
-                                                              height: 2.7.h,
+                                                            InkWell(
+                                                              onTap: () {
+                                                                Navigator.push(
+                                                                    context,
+                                                                    MaterialPageRoute(
+                                                                      builder:
+                                                                          (context) =>
+                                                                              WebView(
+                                                                        url:
+                                                                            'https://octanefashion.dialboxx.com/product/${provider.allProductModel!.data!.posts![index].title}/${provider.allProductModel!.data!.posts![index].id}',
+                                                                      ),
+                                                                    ));
+                                                              },
+                                                              child: SvgPicture
+                                                                  .asset(
+                                                                'assets/svgs/eyess.svg',
+                                                                height: 2.7.h,
+                                                              ),
                                                             ),
                                                           ],
                                                         ),
@@ -444,7 +463,8 @@ class _PublishScreenState extends State<PublishScreen> {
                                                               width: 2.w,
                                                             ),
                                                             Text(
-                                                              'Sale:'.tr + '${provider.allProductModel!.data!.posts![index].orderCount}',
+                                                              'Sale:'.tr +
+                                                                  '${provider.allProductModel!.data!.posts![index].orderCount}',
                                                               style: TextStyle(
                                                                   color: Colors
                                                                       .black,
@@ -531,35 +551,6 @@ class _PublishScreenState extends State<PublishScreen> {
               ),
             ),
           ),
-          // Positioned(
-          //   bottom: 1.h,
-          //   child: Padding(
-          //     padding:  EdgeInsets.symmetric(horizontal: 5.w),
-          //     child: GestureDetector(
-          //       onTap: () {
-          //        // Navigator.push(context, MaterialPageRoute(builder: (context) => CreateOrderScreen(),));
-          //       },
-          //       child: Container(
-          //         height: 5.5.h,
-          //         width: 90.w,
-          //         decoration: BoxDecoration(
-          //           color: Color(0xff505050),
-          //           borderRadius: BorderRadius.circular(5),
-          //         ),
-          //         child: Center(
-          //           child: Text(
-          //             'Add Product in Bulk',
-          //             style: TextStyle(
-          //                 color: Colors.white,
-          //                 fontSize: 13.sp,
-          //                 fontWeight: FontWeight.bold
-          //             ),
-          //           ),
-          //         ),
-          //       ),
-          //     ),
-          //   ),
-          // )
         ],
       ),
     );

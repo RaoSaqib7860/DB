@@ -33,6 +33,7 @@ class _AllOrderDetailScreenState extends State<AllOrderDetailScreen> {
     super.initState();
   }
 
+  bool notify = false;
   @override
   Widget build(BuildContext context) {
     final AllOrderProvider provider = Provider.of<AllOrderProvider>(context);
@@ -222,41 +223,30 @@ class _AllOrderDetailScreenState extends State<AllOrderDetailScreen> {
                                   SizedBox(
                                     height: 1.h,
                                   ),
-                                  InkWell(
-                                    onTap: () async {
-                                      await DataProvider().orderInfoApi(map: {
-                                        'user_id': '${user_model.data!.id}',
-                                        'order_id': '${widget.orderId}',
-                                        'mail_notify': '1'
-                                      });
-                                      var data = await DataProvider()
-                                          .orderInfoApi(map: {
-                                        'user_id': '${user_model.data!.userId}',
-                                        'order_id': '${widget.orderId}',
-                                      });
-                                      provider.orderInfoModel = data;
-                                      provider.update_state();
-                                    },
-                                    child: Row(
-                                      children: [
-                                        SvgPicture.asset(
-                                          'assets/svgs/empty_checkbox.svg',
-                                          height: 2.h,
-                                        ),
-                                        SizedBox(
-                                          width: 2.w,
-                                        ),
-                                        Text(
-                                          'Notify to customer'.tr,
-                                          style: TextStyle(
-                                              color: Colors.black,
-                                              fontSize: 9.sp),
-                                        )
-                                      ],
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    height: 1.h,
+                                  Row(
+                                    children: [
+                                      Checkbox(
+                                          visualDensity: VisualDensity(
+                                              horizontal: 0, vertical: 0),
+                                          value: notify,
+                                          activeColor: blueColor,
+                                          onChanged: (v) {
+                                            notify = !notify;
+                                            setState(() {});
+                                            DataProvider().orderInfoApi(map: {
+                                              'user_id':
+                                                  '${user_model.data!.id}',
+                                              'order_id': '${widget.orderId}',
+                                              'mail_notify': '1'
+                                            });
+                                          }),
+                                      Text(
+                                        'Notify to customer'.tr,
+                                        style: TextStyle(
+                                            color: Colors.black,
+                                            fontSize: 9.sp),
+                                      )
+                                    ],
                                   ),
                                   Container(
                                     width: 40.w,

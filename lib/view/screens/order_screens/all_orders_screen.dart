@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -180,7 +179,7 @@ class _AllOrdersScreenState extends State<AllOrdersScreen> {
                                               ),
                                               Container(
                                                 height: 5.h,
-                                                width: 40.w,
+                                                width: 48.w,
                                                 decoration: BoxDecoration(
                                                     color: Colors.white,
                                                     borderRadius:
@@ -259,7 +258,7 @@ class _AllOrdersScreenState extends State<AllOrdersScreen> {
                                               ),
                                               Container(
                                                 height: 5.h,
-                                                width: 40.w,
+                                                width: 48.w,
                                                 decoration: BoxDecoration(
                                                     color: Colors.white,
                                                     borderRadius:
@@ -339,7 +338,7 @@ class _AllOrdersScreenState extends State<AllOrdersScreen> {
                                               ),
                                               Container(
                                                 height: 5.h,
-                                                width: 40.w,
+                                                width: 48.w,
                                                 decoration: BoxDecoration(
                                                     color: Colors.white,
                                                     borderRadius:
@@ -411,11 +410,11 @@ class _AllOrdersScreenState extends State<AllOrdersScreen> {
                                                             pressType: PressType
                                                                 .singlePress,
                                                             timeFormat:
-                                                                'dd/MM/yyyy',
+                                                                'MM/dd/yyyy',
                                                             onChange:
                                                                 (dateTime) {
                                                               start_date = DateFormat(
-                                                                      'dd/MM/yyyy')
+                                                                      'MM/dd/yyyy')
                                                                   .format(
                                                                       dateTime);
                                                               setState(() {});
@@ -450,7 +449,7 @@ class _AllOrdersScreenState extends State<AllOrdersScreen> {
                                               ),
                                               Container(
                                                 height: 5.h,
-                                                width: 40.w,
+                                                width: 48.w,
                                                 decoration: BoxDecoration(
                                                     color: Colors.white,
                                                     borderRadius:
@@ -522,11 +521,11 @@ class _AllOrdersScreenState extends State<AllOrdersScreen> {
                                                             pressType: PressType
                                                                 .singlePress,
                                                             timeFormat:
-                                                                'dd/MM/yyyy',
+                                                                'MM/dd/yyyy',
                                                             onChange:
                                                                 (dateTime) {
                                                               end_data = DateFormat(
-                                                                      'dd/MM/yyyy')
+                                                                      'MM/dd/yyyy')
                                                                   .format(
                                                                       dateTime);
                                                               setState(() {});
@@ -605,6 +604,9 @@ class _AllOrdersScreenState extends State<AllOrdersScreen> {
                                                           map: {
                                                             'user_id':
                                                                 '${user_model.data!.userId}',
+                                                            'type':provider
+                                                                .full_fill_payment_status_map[
+                                                            full_fill_payment],
                                                             'payment_status':
                                                                 provider.payment_status_map[
                                                                     payment],

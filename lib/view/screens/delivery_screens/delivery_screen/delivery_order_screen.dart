@@ -134,7 +134,11 @@ class _DeliveryOrderScreenState extends State<DeliveryOrderScreen> {
                     GestureDetector(
                       onTap: () {
                         // Navigator.push(context, MaterialPageRoute(builder: (context) => TcsScreen(),));
-                         Navigator.push(context, MaterialPageRoute(builder: (context) => DeliveryDetail(),));
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => DeliveryDetail(),
+                            ));
                       },
                       child: Container(
                         decoration: BoxDecoration(
@@ -188,196 +192,206 @@ class _DeliveryOrderScreenState extends State<DeliveryOrderScreen> {
                           itemCount: provider.deliveryOrders?.data?.length ?? 0,
                           padding: EdgeInsets.only(bottom: 12.h),
                           itemBuilder: (context, index) {
-                            return Padding(
-                              padding: EdgeInsets.all(1.0),
-                              child: Column(
-                                children: [
-                                  Container(
-                                    width: 100.w,
-                                    decoration: BoxDecoration(
-                                        color: Colors.white,
-                                        borderRadius: BorderRadius.circular(3),
-                                        boxShadow: [
-                                          BoxShadow(
-                                              color: Colors.grey.withAlpha(50),
-                                              offset: Offset(1, 1),
-                                              spreadRadius: 1,
-                                              blurRadius: 2),
-                                          BoxShadow(
-                                              color: Colors.grey.withAlpha(50),
-                                              offset: Offset(-1, -1),
-                                              spreadRadius: 1,
-                                              blurRadius: 2),
-                                        ]),
-                                    child: Padding(
-                                      padding: EdgeInsets.symmetric(
-                                          horizontal: 2.w, vertical: 1.h),
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          SizedBox(
-                                            height: 0.5.h,
-                                          ),
-                                          Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              Text(
-                                                "ID : ${provider.deliveryOrders?.data?[index].id}",
-                                                style: TextStyle(
-                                                    color: Colors.black,
-                                                    fontSize: 11.sp),
-                                              ),
-                                              Text(
-                                                "${provider.deliveryOrders?.data?[index].result}",
-                                                style: TextStyle(
-                                                  color: Colors.black,
-                                                  fontSize: 8.sp,
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                          //SizedBox(height: 0.5.h,),
-                                          Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              Padding(
-                                                padding:
-                                                    EdgeInsets.only(top: 0.5.h),
-                                                child: Text(
-                                                  "${provider.deliveryOrders?.data?[index].consigneeName}",
+                            return InkWell(
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          AllOrderDetailScreen(
+                                        orderId:
+                                            '${provider.deliveryOrders?.data?[index].orderid}',
+                                      ),
+                                    ));
+                              },
+                              child: Padding(
+                                padding: EdgeInsets.all(1.0),
+                                child: Column(
+                                  children: [
+                                    Container(
+                                      width: 100.w,
+                                      decoration: BoxDecoration(
+                                          color: Colors.white,
+                                          borderRadius:
+                                              BorderRadius.circular(3),
+                                          boxShadow: [
+                                            BoxShadow(
+                                                color:
+                                                    Colors.grey.withAlpha(50),
+                                                offset: Offset(1, 1),
+                                                spreadRadius: 1,
+                                                blurRadius: 2),
+                                            BoxShadow(
+                                                color:
+                                                    Colors.grey.withAlpha(50),
+                                                offset: Offset(-1, -1),
+                                                spreadRadius: 1,
+                                                blurRadius: 2),
+                                          ]),
+                                      child: Padding(
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: 2.w, vertical: 1.h),
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            SizedBox(
+                                              height: 0.5.h,
+                                            ),
+                                            Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                Text(
+                                                  "ID : ${provider.deliveryOrders?.data?[index].id}",
                                                   style: TextStyle(
-                                                      color: Color(0xff005493),
-                                                      fontSize: 11.sp,
-                                                      fontWeight:
-                                                          FontWeight.bold),
+                                                      color: Colors.black,
+                                                      fontSize: 11.sp),
                                                 ),
-                                              ),
-                                              Text(
-                                                '${provider.deliveryOrders?.data?[index].codAmount}',
-                                                style: TextStyle(
-                                                    color: redColor,
-                                                    fontSize: 10.sp,
-                                                    fontWeight:
-                                                        FontWeight.bold),
-                                              )
-                                            ],
-                                          ),
-                                          SizedBox(
-                                            height: 0.2.h,
-                                          ),
-                                          Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              Text(
-                                                "${provider.deliveryOrders?.data?[index].consigneeMobNo}",
-                                                style: TextStyle(
-                                                  color: Colors.black,
-                                                  fontSize: 10.sp,
+                                                Text(
+                                                  "${provider.deliveryOrders?.data?[index].result}",
+                                                  style: TextStyle(
+                                                    color: Colors.black,
+                                                    fontSize: 8.sp,
+                                                  ),
                                                 ),
-                                              ),
-                                              Container(
-                                                color: Color(0xffF0C9D0),
-                                                child: Padding(
-                                                  padding: EdgeInsets.symmetric(
-                                                      horizontal: 1.w,
-                                                      vertical: 0.2.h),
+                                              ],
+                                            ),
+                                            //SizedBox(height: 0.5.h,),
+                                            Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                Padding(
+                                                  padding: EdgeInsets.only(
+                                                      top: 0.5.h),
                                                   child: Text(
-                                                    '${provider.deliveryOrders?.data?[index].orderdatetime}',
+                                                    "${provider.deliveryOrders?.data?[index].consigneeName}",
                                                     style: TextStyle(
-                                                        color: redColor,
-                                                        fontSize: 9.sp,
+                                                        color:
+                                                            Color(0xff005493),
+                                                        fontSize: 11.sp,
                                                         fontWeight:
                                                             FontWeight.bold),
                                                   ),
                                                 ),
-                                              )
-                                            ],
-                                          ),
-                                          SizedBox(
-                                            height: 0.2.h,
-                                          ),
-                                          Text(
-                                            '${provider.deliveryOrders?.data?[index].originCityName}',
-                                            style: TextStyle(
-                                                color: Color(0xff9B001E),
-                                                fontSize: 10.sp,
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                          //SizedBox(height: 1.h,),
-                                          Divider(
-                                            thickness: 0.8,
-                                            color: Color(0xff707070),
-                                          ),
-                                          SizedBox(
-                                            height: 0.1.h,
-                                          ),
-                                          Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              Text(
-                                                'To : ${provider.deliveryOrders?.data?[index].destinationCityName}',
-                                                style: TextStyle(
-                                                  color: Colors.black,
-                                                  fontSize: 11.sp,
-                                                  //fontWeight: FontWeight.bold
+                                                Text(
+                                                  '${provider.deliveryOrders?.data?[index].codAmount}',
+                                                  style: TextStyle(
+                                                      color: redColor,
+                                                      fontSize: 10.sp,
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                )
+                                              ],
+                                            ),
+                                            SizedBox(
+                                              height: 0.2.h,
+                                            ),
+                                            Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                Text(
+                                                  "${provider.deliveryOrders?.data?[index].consigneeMobNo}",
+                                                  style: TextStyle(
+                                                    color: Colors.black,
+                                                    fontSize: 10.sp,
+                                                  ),
                                                 ),
-                                              ),
-                                              InkWell(
-                                                  onTap: () {
-                                                    show_cupertinoDialog(
-                                                        context: context,
-                                                        title: 'Delete',
-                                                        subtitle:
-                                                            'Are you sure you want to delete?',
-                                                        no_subtitle: 'No',
-                                                        yes_title: "Yes",
-                                                        on_done: () {
-                                                          DataProvider()
-                                                              .tcs_remove_ordersApi(
-                                                                  map: {
-                                                                'user_id':
-                                                                    user_model
-                                                                        .data!
-                                                                        .id
-                                                                        .toString(),
-                                                                'method':
-                                                                    'delete',
-                                                                'order_ids[]': provider
-                                                                    .deliveryOrders
-                                                                    ?.data?[
-                                                                        index]
-                                                                    .id
-                                                                    .toString()
-                                                              });
-                                                          provider
-                                                              .deliveryOrders!
-                                                              .data
-                                                              ?.removeAt(index);
-                                                          setState(() {});
-                                                        });
-                                                  },
-                                                  child: const Icon(
-                                                    CupertinoIcons.delete,
-                                                    color: Colors.red,
-                                                  )),
-                                              GestureDetector(
-                                                onTap: () {
-                                                  Navigator.push(
-                                                      context,
-                                                      MaterialPageRoute(
-                                                        builder: (context) =>
-                                                            AllOrderDetailScreen(
-                                                          orderId:
-                                                              '${provider.deliveryOrders?.data?[index].orderid}',
-                                                        ),
-                                                      ));
-                                                },
-                                                child: Container(
+                                                Container(
+                                                  color: Color(0xffF0C9D0),
+                                                  child: Padding(
+                                                    padding:
+                                                        EdgeInsets.symmetric(
+                                                            horizontal: 1.w,
+                                                            vertical: 0.2.h),
+                                                    child: Text(
+                                                      '${provider.deliveryOrders?.data?[index].orderdatetime}',
+                                                      style: TextStyle(
+                                                          color: redColor,
+                                                          fontSize: 9.sp,
+                                                          fontWeight:
+                                                              FontWeight.bold),
+                                                    ),
+                                                  ),
+                                                )
+                                              ],
+                                            ),
+                                            SizedBox(
+                                              height: 0.2.h,
+                                            ),
+                                            Text(
+                                              '${provider.deliveryOrders?.data?[index].originCityName}',
+                                              style: TextStyle(
+                                                  color: Color(0xff9B001E),
+                                                  fontSize: 10.sp,
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                            //SizedBox(height: 1.h,),
+                                            Divider(
+                                              thickness: 0.8,
+                                              color: Color(0xff707070),
+                                            ),
+                                            SizedBox(
+                                              height: 0.1.h,
+                                            ),
+                                            Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                Text(
+                                                  'To : ${provider.deliveryOrders?.data?[index].destinationCityName}',
+                                                  style: TextStyle(
+                                                    color: Colors.black,
+                                                    fontSize: 11.sp,
+                                                    //fontWeight: FontWeight.bold
+                                                  ),
+                                                ),
+                                                InkWell(
+                                                    onTap: () {
+                                                      show_cupertinoDialog(
+                                                          context: context,
+                                                          title: 'Delete',
+                                                          subtitle:
+                                                              'Are you sure you want to delete?',
+                                                          no_subtitle: 'No',
+                                                          yes_title: "Yes",
+                                                          on_done: () {
+                                                            DataProvider()
+                                                                .tcs_remove_ordersApi(
+                                                                    map: {
+                                                                  'user_id':
+                                                                      user_model
+                                                                          .data!
+                                                                          .id
+                                                                          .toString(),
+                                                                  'method':
+                                                                      'delete',
+                                                                  'order_ids[]': provider
+                                                                      .deliveryOrders
+                                                                      ?.data?[
+                                                                          index]
+                                                                      .id
+                                                                      .toString()
+                                                                });
+                                                            provider
+                                                                .deliveryOrders!
+                                                                .data
+                                                                ?.removeAt(
+                                                                    index);
+                                                            setState(() {});
+                                                          });
+                                                    },
+                                                    child: const Icon(
+                                                      CupertinoIcons.delete,
+                                                      color: Colors.red,
+                                                    )),
+                                                Container(
                                                   decoration: BoxDecoration(
                                                       color: Colors.white,
                                                       borderRadius:
@@ -411,18 +425,18 @@ class _DeliveryOrderScreenState extends State<DeliveryOrderScreen> {
                                                       ],
                                                     ),
                                                   ),
-                                                ),
-                                              )
-                                            ],
-                                          )
-                                        ],
+                                                )
+                                              ],
+                                            )
+                                          ],
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                  SizedBox(
-                                    height: 2.h,
-                                  )
-                                ],
+                                    SizedBox(
+                                      height: 2.h,
+                                    )
+                                  ],
+                                ),
                               ),
                             );
                           },

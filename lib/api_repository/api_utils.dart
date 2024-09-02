@@ -268,7 +268,7 @@ class DataProvider {
       updateInventoryProduct = UpdateInventoryProduct.fromJson(data);
       return updateInventoryProduct;
     } else {
-      Get.snackbar('Alert', '${data['message']}');
+      //Get.snackbar('Alert', '${data['message']}');
       return null;
     }
   }
@@ -685,6 +685,13 @@ class DataProvider {
   Future delivery_locationApi_crud({Map<String, dynamic>? map}) async {
     print('map is === $map');
     final response = await http.post(Uri.parse('$baseURL$delivery_location'),
+        body: map, headers: headers);
+    log("loginFunction code is = ${response.body}");
+  }
+
+  Future destroyorder_api({Map<String, dynamic>? map}) async {
+    print('map is === $map');
+    final response = await http.post(Uri.parse('$baseURL$destroyorder'),
         body: map, headers: headers);
     log("loginFunction code is = ${response.body}");
   }

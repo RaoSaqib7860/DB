@@ -1,13 +1,13 @@
 import 'dart:async';
 import 'package:db_2_0/utils_services/storage_util.dart';
 import 'package:db_2_0/view/screens/auth_screens/login_screen/login_screen.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 import '../../../api_repository/api_utils.dart';
 import '../auth_screens/login_screen/Login Provider/login_model_globle.dart';
 import '../auth_screens/login_screen/Model/login_model.dart';
-import '../auth_screens/sign_up_screen/sign_up_screen.dart';
 import '../bottom_sheet/bottom_sheet.dart';
 import '../store_setup_screen/store_setup_screen.dart';
 
@@ -37,13 +37,18 @@ class _SplashScreenState extends State<SplashScreen> {
       print('objectnamw ${user_model.data!.userId}');
       if (user_model.data!.isProduct == 1 &&
           user_model.data!.isPaymentMethod == 1) {
-        Timer(Duration(seconds: 1), () {
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => BottomSheetScreen(),
-              ));
-        });
+        // Timer(Duration(seconds: 1), () {
+        //   Navigator.push(
+        //       context,
+        //       MaterialPageRoute(
+        //         builder: (context) => BottomSheetScreen(),
+        //       ));
+        // });
+        Navigator.push(
+            context,
+            PageRouteBuilder(
+                transitionDuration: Duration(seconds: 2),
+                pageBuilder: (_, __, ___) => BottomSheetScreen()));
       } else {
         Timer(Duration(seconds: 3), () {
           Get.offAll(StoreSetupScreen());
@@ -68,9 +73,12 @@ class _SplashScreenState extends State<SplashScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image(
-              image: AssetImage('assets/images/app_logo.png'),
-              height: 9.h,
+            Hero(
+              tag: 'app_logo',
+              child: Image(
+                image: AssetImage('assets/images/app_logo.png'),
+                height: 9.h,
+              ),
             ),
           ],
         ),

@@ -279,18 +279,24 @@ class _ImageScreenState extends State<ImageScreen> {
                             SizedBox(
                               width: 3.w,
                             ),
-                            Container(
-                              decoration: BoxDecoration(
-                                color: blueColor,
-                                borderRadius: BorderRadius.circular(5),
-                              ),
-                              child: Padding(
-                                padding: EdgeInsets.symmetric(
-                                    horizontal: 7.w, vertical: 0.8.h),
-                                child: Text(
-                                  'Next'.tr,
-                                  style: TextStyle(
-                                      color: Colors.white, fontSize: 10.sp),
+                            InkWell(
+                              onTap: (){
+                                provider.selectedPage = 'Inventory';
+                                provider.update_state();
+                              },
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  color: blueColor,
+                                  borderRadius: BorderRadius.circular(5),
+                                ),
+                                child: Padding(
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: 7.w, vertical: 0.8.h),
+                                  child: Text(
+                                    'Next'.tr,
+                                    style: TextStyle(
+                                        color: Colors.white, fontSize: 10.sp),
+                                  ),
                                 ),
                               ),
                             )

@@ -186,7 +186,7 @@ class _ProductScreenState extends State<ProductScreen> {
                           padding: EdgeInsets.only(left: 4.w, right: 4.w),
                           child: HtmlEditor(
                             controller: contentController, //required
-                            htmlEditorOptions:  HtmlEditorOptions(
+                            htmlEditorOptions: HtmlEditorOptions(
                               hint: "Write product content".tr,
                             ),
                             otherOptions: OtherOptions(
@@ -474,7 +474,8 @@ class _ProductScreenState extends State<ProductScreen> {
                               ),
                               GestureDetector(
                                 onTap: () {
-                                  //Get.to(EditProductScreen(dropdownvalue: 'Pricing',));
+                                  provider.selectedPage = 'Pricing';
+                                  provider.update_state();
                                 },
                                 child: Container(
                                   decoration: BoxDecoration(

@@ -43,7 +43,21 @@ class _EditProductScreenState extends State<EditProductScreen> {
                 children: [
                   GestureDetector(
                     onTap: () {
-                      Navigator.pop(context);
+                      if (provider.selectedPage == 'Product') {
+                        Navigator.pop(context);
+                      } else if (provider.selectedPage == 'Pricing') {
+                        provider.selectedPage = 'Product';
+                        setState(() {});
+                      } else if (provider.selectedPage == 'Images') {
+                        provider.selectedPage = 'Pricing';
+                        setState(() {});
+                      } else if (provider.selectedPage == 'Inventory') {
+                        provider.selectedPage = 'Images';
+                        setState(() {});
+                      } else if (provider.selectedPage == 'SEO') {
+                        provider.selectedPage = 'Inventory';
+                        setState(() {});
+                      }
                     },
                     child: Padding(
                       padding: EdgeInsets.symmetric(horizontal: 3.w),

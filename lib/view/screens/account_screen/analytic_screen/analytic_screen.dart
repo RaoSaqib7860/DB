@@ -10,6 +10,7 @@ import 'package:syncfusion_flutter_charts/charts.dart';
 
 import '../../../../custom_widgets/app_colors.dart';
 import '../../../../custom_widgets/custom_dialogue.dart';
+import '../../order_screens/all_order_screens/all_order_detail_screen.dart';
 import 'Provider/get_analytics_provider.dart';
 
 class AnalyticScreen extends StatefulWidget {
@@ -491,240 +492,252 @@ class _AnalyticScreenState extends State<AnalyticScreen> {
                                       ?.orders?.dataOf?.length ??
                                   0,
                               itemBuilder: (context, index) {
-                                return Column(
-                                  children: [
-                                    Padding(
-                                      padding:
-                                          EdgeInsets.symmetric(horizontal: 4.w),
-                                      child: Container(
-                                        width: 100.w,
-                                        decoration: BoxDecoration(
-                                            color: Colors.white,
-                                            borderRadius:
-                                                BorderRadius.circular(3),
-                                            boxShadow: [
-                                              BoxShadow(
-                                                  color:
-                                                      Colors.grey.withAlpha(50),
-                                                  offset: Offset(1, 1),
-                                                  spreadRadius: 1,
-                                                  blurRadius: 2),
-                                              BoxShadow(
-                                                  color:
-                                                      Colors.grey.withAlpha(50),
-                                                  offset: Offset(-1, -1),
-                                                  spreadRadius: 1,
-                                                  blurRadius: 2),
-                                            ]),
-                                        child: Padding(
-                                          padding: EdgeInsets.symmetric(
-                                              horizontal: 4.w, vertical: 2.h),
-                                          child: Row(
-                                            children: [
-                                              Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: [
-                                                  Text(
-                                                    'Invoice No'.tr,
-                                                    style: TextStyle(
-                                                        color: Colors.black,
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                        fontSize: 11.sp),
-                                                  ),
-                                                  SizedBox(
-                                                    height: 0.8.h,
-                                                  ),
-                                                  Text(
-                                                    '${provider.getOrserHistoryModel!.data!.orders!.dataOf![index].orderNo}',
-                                                    style: TextStyle(
-                                                        color: Colors.black,
-                                                        fontSize: 10.sp),
-                                                  ),
-                                                  SizedBox(
-                                                    height: 0.8.h,
-                                                  ),
-                                                  Text(
-                                                    'Customer'.tr,
-                                                    style: TextStyle(
-                                                        color: Colors.black,
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                        fontSize: 11.sp),
-                                                  ),
-                                                  SizedBox(
-                                                    height: 0.8.h,
-                                                  ),
-                                                  Text(
-                                                    '${provider.getOrserHistoryModel?.data?.orders?.dataOf?[index].customer?.name ?? ''}',
-                                                    style: TextStyle(
-                                                        color: Colors.black,
-                                                        fontSize: 10.sp),
-                                                  ),
-                                                  SizedBox(
-                                                    height: 0.8.h,
-                                                  ),
-                                                  Text(
-                                                    'Payment'.tr,
-                                                    style: TextStyle(
-                                                        color: Colors.black,
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                        fontSize: 11.sp),
-                                                  ),
-                                                  SizedBox(
-                                                    height: 0.8.h,
-                                                  ),
-                                                  Container(
-                                                    color: Colors.green,
-                                                    child: Padding(
-                                                      padding:
-                                                          EdgeInsets.symmetric(
-                                                              horizontal: 2.w,
-                                                              vertical: 0.5.h),
-                                                      child: Text(
-                                                        '${provider.payment_status['${provider.getOrserHistoryModel!.data!.orders!.dataOf![index].paymentStatus}']}',
-                                                        style: TextStyle(
-                                                            color: Colors.white,
-                                                            fontSize: 9.sp),
+                                return InkWell(
+                                  onTap: (){
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              AllOrderDetailScreen(
+                                                orderId: '${provider.getOrserHistoryModel!.data!.orders!.dataOf![index].id}',
+                                              ),
+                                        ));
+                                  },
+                                  child: Column(
+                                    children: [
+                                      Padding(
+                                        padding:
+                                            EdgeInsets.symmetric(horizontal: 4.w),
+                                        child: Container(
+                                          width: 100.w,
+                                          decoration: BoxDecoration(
+                                              color: Colors.white,
+                                              borderRadius:
+                                                  BorderRadius.circular(3),
+                                              boxShadow: [
+                                                BoxShadow(
+                                                    color:
+                                                        Colors.grey.withAlpha(50),
+                                                    offset: Offset(1, 1),
+                                                    spreadRadius: 1,
+                                                    blurRadius: 2),
+                                                BoxShadow(
+                                                    color:
+                                                        Colors.grey.withAlpha(50),
+                                                    offset: Offset(-1, -1),
+                                                    spreadRadius: 1,
+                                                    blurRadius: 2),
+                                              ]),
+                                          child: Padding(
+                                            padding: EdgeInsets.symmetric(
+                                                horizontal: 4.w, vertical: 2.h),
+                                            child: Row(
+                                              children: [
+                                                Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    Text(
+                                                      'Invoice No'.tr,
+                                                      style: TextStyle(
+                                                          color: Colors.black,
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                          fontSize: 11.sp),
+                                                    ),
+                                                    SizedBox(
+                                                      height: 0.8.h,
+                                                    ),
+                                                    Text(
+                                                      '${provider.getOrserHistoryModel!.data!.orders!.dataOf![index].orderNo}',
+                                                      style: TextStyle(
+                                                          color: Colors.black,
+                                                          fontSize: 10.sp),
+                                                    ),
+                                                    SizedBox(
+                                                      height: 0.8.h,
+                                                    ),
+                                                    Text(
+                                                      'Customer'.tr,
+                                                      style: TextStyle(
+                                                          color: Colors.black,
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                          fontSize: 11.sp),
+                                                    ),
+                                                    SizedBox(
+                                                      height: 0.8.h,
+                                                    ),
+                                                    Text(
+                                                      '${provider.getOrserHistoryModel?.data?.orders?.dataOf?[index].customer?.name ?? ''}',
+                                                      style: TextStyle(
+                                                          color: Colors.black,
+                                                          fontSize: 10.sp),
+                                                    ),
+                                                    SizedBox(
+                                                      height: 0.8.h,
+                                                    ),
+                                                    Text(
+                                                      'Payment'.tr,
+                                                      style: TextStyle(
+                                                          color: Colors.black,
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                          fontSize: 11.sp),
+                                                    ),
+                                                    SizedBox(
+                                                      height: 0.8.h,
+                                                    ),
+                                                    Container(
+                                                      color: Colors.green,
+                                                      child: Padding(
+                                                        padding:
+                                                            EdgeInsets.symmetric(
+                                                                horizontal: 2.w,
+                                                                vertical: 0.5.h),
+                                                        child: Text(
+                                                          '${provider.payment_status['${provider.getOrserHistoryModel!.data!.orders!.dataOf![index].paymentStatus}']}',
+                                                          style: TextStyle(
+                                                              color: Colors.white,
+                                                              fontSize: 9.sp),
+                                                        ),
                                                       ),
                                                     ),
-                                                  ),
-                                                  SizedBox(
-                                                    height: 0.8.h,
-                                                  ),
-                                                  Text(
-                                                    'Item (s)',
-                                                    style: TextStyle(
-                                                        color: Colors.black,
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                        fontSize: 11.sp),
-                                                  ),
-                                                  SizedBox(
-                                                    height: 0.8.h,
-                                                  ),
-                                                  Text(
-                                                    '${provider.getOrserHistoryModel!.data!.orders!.dataOf![index].orderItemsCount}',
-                                                    style: TextStyle(
-                                                        color: Colors.black,
-                                                        fontSize: 10.sp),
-                                                  ),
-                                                ],
-                                              ),
-                                              SizedBox(
-                                                width: 23.w,
-                                              ),
-                                              Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: [
-                                                  Text(
-                                                    'Date',
-                                                    style: TextStyle(
-                                                        color: Colors.black,
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                        fontSize: 11.sp),
-                                                  ),
-                                                  SizedBox(
-                                                    height: 0.8.h,
-                                                  ),
-                                                  Text(
-                                                    '${DateFormat('dd-MMM-yyyy').format(DateTime.parse('${provider.getOrserHistoryModel!.data!.orders!.dataOf![index].createdAt}'))}',
-                                                    style: TextStyle(
-                                                        color: Colors.black,
-                                                        fontSize: 10.sp),
-                                                  ),
-                                                  SizedBox(
-                                                    height: 0.8.h,
-                                                  ),
-                                                  Text(
-                                                    'Order total'.tr,
-                                                    style: TextStyle(
-                                                        color: Colors.black,
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                        fontSize: 11.sp),
-                                                  ),
-                                                  SizedBox(
-                                                    height: 0.8.h,
-                                                  ),
-                                                  Text(
-                                                    '${provider.getOrserHistoryModel!.data!.orders!.dataOf![index].total}',
-                                                    style: TextStyle(
-                                                        color: Colors.black,
-                                                        fontSize: 10.sp),
-                                                  ),
-                                                  SizedBox(
-                                                    height: 0.8.h,
-                                                  ),
-                                                  Text(
-                                                    'Fulfillment'.tr,
-                                                    style: TextStyle(
-                                                        color: Colors.black,
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                        fontSize: 11.sp),
-                                                  ),
-                                                  SizedBox(
-                                                    height: 0.8.h,
-                                                  ),
-                                                  Container(
-                                                    color: Colors.green,
-                                                    child: Padding(
-                                                      padding:
-                                                          EdgeInsets.symmetric(
-                                                              horizontal: 2.w,
-                                                              vertical: 0.5.h),
-                                                      child: Text(
-                                                        '${provider.getOrserHistoryModel!.data!.orders!.dataOf![index].status}',
-                                                        style: TextStyle(
-                                                            color: Colors.white,
-                                                            fontSize: 9.sp),
+                                                    SizedBox(
+                                                      height: 0.8.h,
+                                                    ),
+                                                    Text(
+                                                      'Item (s)',
+                                                      style: TextStyle(
+                                                          color: Colors.black,
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                          fontSize: 11.sp),
+                                                    ),
+                                                    SizedBox(
+                                                      height: 0.8.h,
+                                                    ),
+                                                    Text(
+                                                      '${provider.getOrserHistoryModel!.data!.orders!.dataOf![index].orderItemsCount}',
+                                                      style: TextStyle(
+                                                          color: Colors.black,
+                                                          fontSize: 10.sp),
+                                                    ),
+                                                  ],
+                                                ),
+                                                SizedBox(
+                                                  width: 23.w,
+                                                ),
+                                                Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    Text(
+                                                      'Date',
+                                                      style: TextStyle(
+                                                          color: Colors.black,
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                          fontSize: 11.sp),
+                                                    ),
+                                                    SizedBox(
+                                                      height: 0.8.h,
+                                                    ),
+                                                    Text(
+                                                      '${DateFormat('dd-MMM-yyyy').format(DateTime.parse('${provider.getOrserHistoryModel!.data!.orders!.dataOf![index].createdAt}'))}',
+                                                      style: TextStyle(
+                                                          color: Colors.black,
+                                                          fontSize: 10.sp),
+                                                    ),
+                                                    SizedBox(
+                                                      height: 0.8.h,
+                                                    ),
+                                                    Text(
+                                                      'Order total'.tr,
+                                                      style: TextStyle(
+                                                          color: Colors.black,
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                          fontSize: 11.sp),
+                                                    ),
+                                                    SizedBox(
+                                                      height: 0.8.h,
+                                                    ),
+                                                    Text(
+                                                      '${provider.getOrserHistoryModel!.data!.orders!.dataOf![index].total}',
+                                                      style: TextStyle(
+                                                          color: Colors.black,
+                                                          fontSize: 10.sp),
+                                                    ),
+                                                    SizedBox(
+                                                      height: 0.8.h,
+                                                    ),
+                                                    Text(
+                                                      'Fulfillment'.tr,
+                                                      style: TextStyle(
+                                                          color: Colors.black,
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                          fontSize: 11.sp),
+                                                    ),
+                                                    SizedBox(
+                                                      height: 0.8.h,
+                                                    ),
+                                                    Container(
+                                                      color: Colors.green,
+                                                      child: Padding(
+                                                        padding:
+                                                            EdgeInsets.symmetric(
+                                                                horizontal: 2.w,
+                                                                vertical: 0.5.h),
+                                                        child: Text(
+                                                          '${provider.getOrserHistoryModel!.data!.orders!.dataOf![index].status}',
+                                                          style: TextStyle(
+                                                              color: Colors.white,
+                                                              fontSize: 9.sp),
+                                                        ),
                                                       ),
                                                     ),
-                                                  ),
-                                                  SizedBox(
-                                                    height: 0.8.h,
-                                                  ),
-                                                  Text(
-                                                    'Invoice'.tr,
-                                                    style: TextStyle(
-                                                        color: Colors.black,
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                        fontSize: 11.sp),
-                                                  ),
-                                                  SizedBox(
-                                                    height: 0.8.h,
-                                                  ),
-                                                  Container(
-                                                    color: Color(0xff9B001E),
-                                                    child: Padding(
-                                                      padding:
-                                                          EdgeInsets.symmetric(
-                                                              horizontal: 0.6.w,
-                                                              vertical: 0.1.h),
-                                                      child: Icon(
-                                                        Icons.remove_red_eye,
-                                                        color: Colors.white,
-                                                        size: 2.2.h,
+                                                    SizedBox(
+                                                      height: 0.8.h,
+                                                    ),
+                                                    Text(
+                                                      'Invoice'.tr,
+                                                      style: TextStyle(
+                                                          color: Colors.black,
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                          fontSize: 11.sp),
+                                                    ),
+                                                    SizedBox(
+                                                      height: 0.8.h,
+                                                    ),
+                                                    Container(
+                                                      color: Color(0xff9B001E),
+                                                      child: Padding(
+                                                        padding:
+                                                            EdgeInsets.symmetric(
+                                                                horizontal: 0.6.w,
+                                                                vertical: 0.1.h),
+                                                        child: Icon(
+                                                          Icons.remove_red_eye,
+                                                          color: Colors.white,
+                                                          size: 2.2.h,
+                                                        ),
                                                       ),
                                                     ),
-                                                  ),
-                                                ],
-                                              ),
-                                            ],
+                                                  ],
+                                                ),
+                                              ],
+                                            ),
                                           ),
                                         ),
                                       ),
-                                    ),
-                                    SizedBox(
-                                      height: 2.h,
-                                    ),
-                                  ],
+                                      SizedBox(
+                                        height: 2.h,
+                                      ),
+                                    ],
+                                  ),
                                 );
                               },
                             )),

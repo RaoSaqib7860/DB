@@ -34,14 +34,16 @@ class Data {
   int? id;
   String? name;
   String? price;
+  String? date;
   List<Relations>? relations;
 
-  Data({this.id, this.name, this.price, this.relations});
+  Data({this.id, this.name, this.price, this.relations,this.date});
 
   Data.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
     price = json['price'];
+    date = json['date'];
     if (json['relations'] != null) {
       relations = <Relations>[];
       json['relations'].forEach((v) {
@@ -55,6 +57,7 @@ class Data {
     data['id'] = this.id;
     data['name'] = this.name;
     data['price'] = this.price;
+    data['date'] = this.date;
     if (this.relations != null) {
       data['relations'] = this.relations!.map((v) => v.toJson()).toList();
     }

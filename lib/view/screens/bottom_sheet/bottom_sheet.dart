@@ -1,5 +1,11 @@
+import 'dart:async';
+import 'dart:developer';
+
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:db_2_0/custom_widgets/app_colors.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:persistent_bottom_nav_bar/persistent_bottom_nav_bar.dart';
@@ -28,11 +34,18 @@ class BottomSheetScreen extends StatefulWidget {
 class _BottomSheetScreenState extends State<BottomSheetScreen> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
+  List<ConnectivityResult> _connectionStatus = [ConnectivityResult.none];
+  final Connectivity _connectivity = Connectivity();
+  late StreamSubscription<List<ConnectivityResult>> _connectivitySubscription;
+
   @override
   void initState() {
     get_orders();
     persistentcontroller = PersistentTabController(initialIndex: widget.index!);
     super.initState();
+    initConnectivity();
+    _connectivitySubscription =
+        _connectivity.onConnectivityChanged.listen(_updateConnectionStatus);
   }
 
   bool? reel_active = false;
@@ -54,6 +67,56 @@ class _BottomSheetScreenState extends State<BottomSheetScreen> {
   }
 
   @override
+  void dispose() {
+    _connectivitySubscription.cancel();
+    super.dispose();
+  }
+
+  Future<void> initConnectivity() async {
+    late List<ConnectivityResult> result;
+    try {
+      result = await _connectivity.checkConnectivity();
+    } on PlatformException catch (e) {
+      log('Couldn\'t check connectivity status', error: e);
+      return;
+    }
+    if (!mounted) {
+      return Future.value(null);
+    }
+
+    return _updateConnectionStatus(result);
+  }
+
+  bool active_dialog = false;
+  Future<void> _updateConnectionStatus(List<ConnectivityResult> result) async {
+    setState(() {
+      _connectionStatus = result;
+    });
+    print('Connectivity changed: $_connectionStatus');
+    if (_connectionStatus.contains(ConnectivityResult.none) &&
+        active_dialog == false) {
+      active_dialog = true;
+      showDialog(
+          context: context,
+          builder: (BuildContext context) => const CupertinoAlertDialog(
+                title: Text("No Internet Connection"),
+                content: Text(
+                    "You are not connected to the internet.Kindly check your connection and try again."),
+                actions: <Widget>[
+                  CupertinoDialogAction(
+                    child: Text("OK"),
+                  ),
+                ],
+              ));
+    } else {
+      if (active_dialog) {
+        active_dialog = false;
+        Navigator.of(context).pop();
+      }
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Stack(
       children: [
@@ -61,55 +124,60 @@ class _BottomSheetScreenState extends State<BottomSheetScreen> {
           backgroundColor: Colors.white,
           key: _scaffoldKey,
           appBar: AppBar(
-              backgroundColor: Colors.white,
-              elevation: 0,
-              title: Image(
+            backgroundColor: Colors.white,
+            elevation: 0,
+            title: Hero(
+              tag: 'app_logo',
+              child: Image(
                 image: AssetImage('assets/images/app_logo.png'),
                 height: 4.h,
               ),
-              centerTitle: true,
-              actions: [
-                Padding(
-                  padding: EdgeInsets.only(right: 4.w),
-                  child: GestureDetector(
-                      onTap: () {
-                        isSelected = true;
-                        setState(() {});
-                      },
-                      child: SvgPicture.asset(
-                        'assets/svgs/noti.svg',
-                        height: 3.h,
-                      )),
-                ),
-              ],
-              leadingWidth: 20.w,
-              leading: Padding(
-                padding: EdgeInsets.only(left: 4.w),
-                child: DropdownButton(
-                  isExpanded: true,
-                  value: dropdownvalue,
-                  icon: Icon(
-                    Icons.keyboard_arrow_down,
-                    color: Colors.black,
-                    size: 2.h,
-                  ),
-                  underline: Container(),
-                  items: items.map((String items) {
-                    return DropdownMenuItem(
-                      value: items,
-                      child: Text(
-                        items,
-                        style: TextStyle(color: Colors.black54),
-                      ),
-                    );
-                  }).toList(),
-                  onChanged: (String? newValue) {
-                    setState(() {
-                      dropdownvalue = newValue!;
-                    });
-                  },
-                ),
-              )),
+            ),
+            centerTitle: true,
+            automaticallyImplyLeading: false,
+            actions: [
+              Padding(
+                padding: EdgeInsets.only(right: 4.w),
+                child: GestureDetector(
+                    onTap: () {
+                      isSelected = true;
+                      setState(() {});
+                    },
+                    child: SvgPicture.asset(
+                      'assets/svgs/noti.svg',
+                      height: 3.h,
+                    )),
+              ),
+            ],
+            leadingWidth: 20.w,
+            // leading: Padding(
+            //   padding: EdgeInsets.only(left: 4.w),
+            //   child: DropdownButton(
+            //     isExpanded: true,
+            //     value: dropdownvalue,
+            //     icon: Icon(
+            //       Icons.keyboard_arrow_down,
+            //       color: Colors.black,
+            //       size: 2.h,
+            //     ),
+            //     underline: Container(),
+            //     items: items.map((String items) {
+            //       return DropdownMenuItem(
+            //         value: items,
+            //         child: Text(
+            //           items,
+            //           style: TextStyle(color: Colors.black54),
+            //         ),
+            //       );
+            //     }).toList(),
+            //     onChanged: (String? newValue) {
+            //       setState(() {
+            //         dropdownvalue = newValue!;
+            //       });
+            //     },
+            //   ),
+            // )
+          ),
           body: PersistentTabView.custom(
             context,
             itemCount: 5,
