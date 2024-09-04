@@ -299,8 +299,8 @@ class _StoreInnfoScreenState extends State<StoreInnfoScreen> {
                 ),
                 Padding(
                   padding: EdgeInsets.only(left: 4.w, right: 4.w),
-                  child: const Text(
-                    'Order Received payment',
+                  child:  Text(
+                    'I will sale (shop type)'.tr,
                     style: TextStyle(color: Colors.black),
                   ),
                 ),
@@ -365,8 +365,8 @@ class _StoreInnfoScreenState extends State<StoreInnfoScreen> {
                 ),
                 Padding(
                   padding: EdgeInsets.only(left: 4.w, right: 4.w),
-                  child: const Text(
-                    'Order Received payment',
+                  child:  Text(
+                    'Order Received payment'.tr,
                     style: TextStyle(color: Colors.black),
                   ),
                 ),

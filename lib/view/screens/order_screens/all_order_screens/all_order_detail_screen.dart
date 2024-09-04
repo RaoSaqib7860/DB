@@ -162,9 +162,14 @@ class _AllOrderDetailScreenState extends State<AllOrderDetailScreen> {
                                           SizedBox(
                                             height: 1.h,
                                           ),
-                                          customText(
-                                              text:
-                                                  '${provider.orderInfoModel?.orderData?.orderItem!.first.amount} × ${provider.orderInfoModel?.orderData?.orderItem!.first.qty}'),
+                                          ...provider.orderInfoModel!.orderData!.orderItem!.map((e) {
+                                            return customText(
+                                                text:
+                                                '${(e.amount ?? 0)} x ${e.qty??0}');
+                                          }).toList(),
+                                          // customText(
+                                          //     text:
+                                          //         '${provider.orderInfoModel?.orderData?.orderItem!.first.amount} × ${provider.orderInfoModel?.orderData?.orderItem!.first.qty}'),
                                           customText(text: 'Shipping Fee'.tr),
                                           customText(text: 'Tax'.tr),
                                           customText(text: 'Discount'.tr),
@@ -194,9 +199,14 @@ class _AllOrderDetailScreenState extends State<AllOrderDetailScreen> {
                                           SizedBox(
                                             height: 1.h,
                                           ),
-                                          customText(
-                                              text:
-                                                  'Rs${(provider.orderInfoModel?.orderData?.orderItem?.first.amount ?? 0) * (provider.orderInfoModel?.orderData?.orderItem?.first.qty ?? 0)}'),
+                                          ...provider.orderInfoModel!.orderData!.orderItem!.map((e) {
+                                            return customText(
+                                                text:
+                                                'Rs${(e.amount ?? 0) * (e.qty ?? 0)}');
+                                          }).toList(),
+                                          // customText(
+                                          //     text:
+                                          //         'Rs${(provider.orderInfoModel?.orderData?.orderItem?.first.amount ?? 0) * (provider.orderInfoModel?.orderData?.orderItem?.first.qty ?? 0)}'),
                                           customText(
                                               text:
                                                   'Rs${provider.orderInfoModel!.orderData?.shipping}'),
