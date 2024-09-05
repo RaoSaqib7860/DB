@@ -1,4 +1,5 @@
 import 'package:db_2_0/custom_widgets/app_colors.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -60,7 +61,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
                       }
                     },
                     child: Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 3.w),
+                      padding: EdgeInsets.symmetric(horizontal: 5.w),
                       child: SvgPicture.asset(
                         'assets/svgs/back_arrow.svg',
                         height: 2.h,
@@ -68,12 +69,29 @@ class _EditProductScreenState extends State<EditProductScreen> {
                     ),
                   ),
                   SizedBox(
-                    width: 28.w,
+                    width: 7.w,
                   ),
-                  Text(
-                    'Edit Product'.tr,
-                    style: TextStyle(color: Colors.white, fontSize: 13.sp),
+                  Expanded(
+                    child: Center(
+                      child: Text(
+                        'Edit Product'.tr,
+                        style: TextStyle(color: Colors.white, fontSize: 13.sp),
+                      ),
+                    ),
                   ),
+                  InkWell(
+                    onTap: (){
+                      provider.selectedPage = 'Product';
+                      Navigator.pop(context);
+                    },
+                    child: Text(
+                      'Back to Main'.tr,
+                      style: TextStyle(color: Colors.white, fontSize: 11.sp),
+                    ),
+                  ),
+                  SizedBox(
+                    width: 2.w,
+                  )
                 ],
               ),
             ),

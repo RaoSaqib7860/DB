@@ -35,17 +35,22 @@ class AccountScreen extends StatefulWidget {
   @override
   State<AccountScreen> createState() => _AccountScreenState();
 }
+const _chars = 'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890';
+Random _rnd = Random();
 
+String getRandomString(int length) => String.fromCharCodes(Iterable.generate(
+    length, (_) => _chars.codeUnitAt(_rnd.nextInt(_chars.length))));
 class _AccountScreenState extends State<AccountScreen> {
   bool isSelected = false;
   int ind = 0;
   bool loading = false;
-  String image_key='';
+  String image_key = '';
   @override
   void initState() {
-     image_key= Random().nextInt(100).toString();
+    image_key = getRandomString(15);
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     return DataLoading(
@@ -91,7 +96,7 @@ class _AccountScreenState extends State<AccountScreen> {
                             'email': storage.read('email'),
                             'password': storage.read('password'),
                           }, context: context, hide_snack: true);
-                          image_key= Random().nextInt(100).toString();
+                          image_key = getRandomString(15);
                           user_model = um;
                           loading = false;
                           setState(() {});
@@ -192,24 +197,22 @@ class _AccountScreenState extends State<AccountScreen> {
                             SizedBox(
                               height: 1.h,
                             ),
-                            GestureDetector(
-                              onTap: () {
-                                isSelected = true;
-                                setState(() {});
-                              },
-                              child: Text(
-                                isSelected == true ? 'Over'.tr : '6 Days'.tr,
-                                style: TextStyle(
-                                    color: redColor,
-                                    fontSize: 13.sp,
-                                    fontWeight: FontWeight.bold),
-                              ),
+                            Text(
+                              isSelected == true ? 'Over'.tr : '6 Days'.tr,
+                              style: TextStyle(
+                                  color: redColor,
+                                  fontSize: 13.sp,
+                                  fontWeight: FontWeight.bold),
                             )
                           ],
                         ),
                         GestureDetector(
                           onTap: () {
-                            //Navigator.push(context, MaterialPageRoute(builder: (context) => SubscriptionScreen(),));
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => SubscriptionScreen(),
+                                ));
                           },
                           child: Container(
                             decoration: BoxDecoration(
@@ -286,25 +289,16 @@ class _AccountScreenState extends State<AccountScreen> {
                   child: customRow(image: 'subb', text: 'Subscriptions Plans')),
               GestureDetector(
                   onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => WebView(
-                            url:
-                                'https://youtu.be/dYCJgXQ7OtA?si=CQFL4DAZRTZ4qz7G',
-                          ),
-                        ));
+                    Get.to(WebView(
+                      url: 'https://youtu.be/dYCJgXQ7OtA?si=CQFL4DAZRTZ4qz7G',
+                    ));
                   },
                   child: customRow(image: 'tutorial', text: 'Tutorials')),
               GestureDetector(
                   onTap: () async {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => WebView(
-                            url: 'https://dialboxx.com/page/refund-policy-faqs',
-                          ),
-                        ));
+                    Get.to(WebView(
+                      url: 'https://dialboxx.com/page/refund-policy-faqs',
+                    ));
                   },
                   child: customRow(image: 'faqs', text: 'FAQ’s')),
               GestureDetector(

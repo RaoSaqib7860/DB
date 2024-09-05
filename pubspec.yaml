@@ -55,7 +55,7 @@ dependencies:
   cached_network_image: ^3.3.1
   flutter_html: ^3.0.0-beta.2
   html: ^0.15.4
-  html_editor_enhanced:
+  html_editor_enhanced: ^2.6.0
   dio: ^5.5.0+1
   syncfusion_flutter_charts: 25.1.35
   easy_stepper: ^0.8.5+1
@@ -72,7 +72,7 @@ dev_dependencies:
   # activated in the `analysis_options.yaml` file located at the root of your
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
-  flutter_lints: ^3.0.0
+  flutter_lints:
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

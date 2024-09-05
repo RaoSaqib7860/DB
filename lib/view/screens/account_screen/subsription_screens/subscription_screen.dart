@@ -92,18 +92,6 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                             ),
                           ),
                         ),
-                        // SizedBox(height: 2.h,),
-                        // Padding(
-                        //   padding: EdgeInsets.symmetric(horizontal: 4.w,),
-                        //   child: Text(
-                        //     'Plan',
-                        //     style: TextStyle(
-                        //         color: blueColor,
-                        //         fontSize: 12.sp,
-                        //         fontWeight: FontWeight.bold
-                        //     ),
-                        //   ),
-                        // ),
                         SizedBox(
                           height: 2.h,
                         ),
@@ -123,18 +111,11 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                               : '',
                           purchaseText: 'Purchase'.tr,
                           purchaseIcon: Icons.arrow_forward,
-                          on_purchase_tap: (){
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => WebView(
-                                    url:
-                                    'https://octanefashion.dialboxx.com/seller/make-payment/${provider
-                                        .getSubscriptionPlanHistoryModel!
-                                        .data![0]
-                                        .id}',
-                                  ),
-                                ));
+                          on_purchase_tap: () {
+                            Get.to(WebView(
+                              url:
+                                  'https://octanefashion.dialboxx.com/seller/make-payment/${provider.getSubscriptionPlanHistoryModel!.data![0].id}',
+                            ));
                           },
                           ontap: () {
                             Navigator.push(
@@ -143,8 +124,10 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                                   builder: (context) => BasicScreen(
                                     planId: provider
                                         .getSubscriptionPlanHistoryModel!
-                                        .data![0]
+                                        .data![2]
                                         .id,
+                                    name:
+                                        '${provider.getSubscriptionPlanHistoryModel!.data![0].name}',
                                   ),
                                 ));
                           },
@@ -164,18 +147,11 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                               : '',
                           purchaseText: 'Purchase'.tr,
                           purchaseIcon: Icons.arrow_forward,
-                          on_purchase_tap: (){
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => WebView(
-                                    url:
-                                    'https://octanefashion.dialboxx.com/seller/make-payment/${provider
-                                        .getSubscriptionPlanHistoryModel!
-                                        .data![1]
-                                        .id}',
-                                  ),
-                                ));
+                          on_purchase_tap: () {
+                            Get.to(WebView(
+                              url:
+                                  'https://octanefashion.dialboxx.com/seller/make-payment/${provider.getSubscriptionPlanHistoryModel!.data![1].id}',
+                            ));
                           },
                           ontap: () {
                             Navigator.push(
@@ -186,9 +162,10 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                                         .getSubscriptionPlanHistoryModel!
                                         .data![1]
                                         .id,
+                                    name:
+                                        '${provider.getSubscriptionPlanHistoryModel!.data![1].name}',
                                   ),
                                 ));
-                            //Navigator.push(context, MaterialPageRoute(builder: (context) => PlusScreen(),));
                           },
                         ),
                         customContainer(
@@ -201,21 +178,13 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                           validText:
                               '${provider.getSubscriptionPlanHistoryModel!.data![2].days}',
                           commissionText: 'Zero % Commission'.tr,
-                          //costText: '2,083',
                           purchaseText: 'Contact us'.tr,
                           purchaseIcon: Icons.phone_enabled,
-                          on_purchase_tap: (){
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => WebView(
-                                    url:
-                                    'https://octanefashion.dialboxx.com/seller/make-payment/${provider
-                                        .getSubscriptionPlanHistoryModel!
-                                        .data![2]
-                                        .id}',
-                                  ),
-                                ));
+                          on_purchase_tap: () {
+                            Get.to(WebView(
+                              url:
+                                  'https://octanefashion.dialboxx.com/seller/make-payment/${provider.getSubscriptionPlanHistoryModel!.data![2].id}',
+                            ));
                           },
                           ontap: () {
                             Navigator.push(
@@ -224,11 +193,12 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                                   builder: (context) => BasicScreen(
                                     planId: provider
                                         .getSubscriptionPlanHistoryModel!
-                                        .data![2]
+                                        .data![0]
                                         .id,
+                                    name:
+                                        '${provider.getSubscriptionPlanHistoryModel!.data![2].name}',
                                   ),
                                 ));
-                            //Navigator.push(context, MaterialPageRoute(builder: (context) => EnterpriseScreen(),));
                           },
                         ),
                         //SizedBox(height: 2.h,),

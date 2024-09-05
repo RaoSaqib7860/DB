@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:db_2_0/api_repository/api_utils.dart';
 import 'package:db_2_0/custom_widgets/data_loading.dart';
+import 'package:db_2_0/custom_widgets/web_view.dart';
 import 'package:db_2_0/view/screens/auth_screens/login_screen/Login%20Provider/login_model_globle.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -1029,11 +1030,12 @@ class _AllOrderDetailScreenState extends State<AllOrderDetailScreen> {
                                           EdgeInsets.symmetric(horizontal: 8.w),
                                       child: InkWell(
                                         onTap: () async {
-                                          if (!await launchUrl(Uri.parse(
-                                              'https://envio.tcscourier.com/BookingReportPDF/GenerateLabels?consingmentNumber=${provider.orderInfoModel?.tcsData?.result?.split(' ').last}'))) {
-                                            throw Exception(
-                                                'Could not launch ${'https://envio.tcscourier.com/BookingReportPDF/GenerateLabels?consingmentNumber=${provider.orderInfoModel?.tcsData?.result?.split(' ').last}'}');
-                                          }
+                                          Get.to(WebView(url: 'https://envio.tcscourier.com/BookingReportPDF/GenerateLabels?consingmentNumber=${provider.orderInfoModel?.tcsData?.result?.split(' ').last}',));
+                                          // if (!await launchUrl(Uri.parse(
+                                          //     'https://envio.tcscourier.com/BookingReportPDF/GenerateLabels?consingmentNumber=${provider.orderInfoModel?.tcsData?.result?.split(' ').last}'))) {
+                                          //   throw Exception(
+                                          //       'Could not launch ${'https://envio.tcscourier.com/BookingReportPDF/GenerateLabels?consingmentNumber=${provider.orderInfoModel?.tcsData?.result?.split(' ').last}'}');
+                                          // }
                                         },
                                         child: Container(
                                           decoration:

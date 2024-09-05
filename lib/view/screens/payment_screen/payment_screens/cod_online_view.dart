@@ -150,7 +150,7 @@ class _CODAndOnlineState extends State<CODAndOnline> {
                   ],
                 ),
                 SizedBox(
-                  height: 36.h,
+                  height: 10.h,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,

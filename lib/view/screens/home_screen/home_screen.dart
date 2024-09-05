@@ -940,7 +940,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         Padding(
                           padding: EdgeInsets.symmetric(horizontal: 5.w),
                           child: Container(
-                            height: 20.h,
+                            height: 25.h,
                             width: 100.w,
                             child: Row(
                               children: [
@@ -962,47 +962,61 @@ class _HomeScreenState extends State<HomeScreen> {
                                               blurRadius: 2),
                                         ]),
                                     child: Padding(
-                                      padding: EdgeInsets.symmetric(
-                                          horizontal: 4.w, vertical: 1.5.h),
+                                      padding:
+                                          EdgeInsets.symmetric(vertical: 1.5.h),
                                       child: Column(
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
                                         children: [
-                                          Text(
-                                            'Product Limit'.tr,
-                                            style: TextStyle(
-                                              color: blueColor,
-                                              fontSize: 8.sp,
+                                          Padding(
+                                            padding: EdgeInsets.only(left: 4.w),
+                                            child: Text(
+                                              'Product Limit'.tr,
+                                              style: TextStyle(
+                                                color: blueColor,
+                                                fontSize: 8.sp,
+                                              ),
                                             ),
                                           ),
                                           SizedBox(
                                             height: 0.5.h,
                                           ),
-                                          RichText(
-                                              text: TextSpan(children: [
-                                            TextSpan(
-                                              text:
-                                                  '${provider.dashboardModel!.data!.products}',
-                                              style: TextStyle(
-                                                color: redColor,
-                                                fontSize: 8.sp,
+                                          Padding(
+                                            padding: EdgeInsets.only(left: 4.w),
+                                            child: RichText(
+                                                text: TextSpan(children: [
+                                              TextSpan(
+                                                text:
+                                                    '${provider.dashboardModel!.data!.products}',
+                                                style: TextStyle(
+                                                  color: redColor,
+                                                  fontSize: 8.sp,
+                                                ),
                                               ),
+                                              TextSpan(
+                                                text:
+                                                    '/${provider.dashboardModel!.data!.productLimit}',
+                                                style: TextStyle(
+                                                  color: blueColor,
+                                                  fontSize: 8.sp,
+                                                ),
+                                              )
+                                            ])),
+                                          ),
+                                          Padding(
+                                            padding: EdgeInsets.symmetric(
+                                                horizontal: 4.w),
+                                            child: Divider(
+                                              thickness: 1,
+                                              color: Colors.grey,
                                             ),
-                                            TextSpan(
-                                              text:
-                                                  '/${provider.dashboardModel!.data!.productLimit}',
-                                              style: TextStyle(
-                                                color: blueColor,
-                                                fontSize: 8.sp,
-                                              ),
-                                            )
-                                          ])),
-                                          Divider(
-                                            thickness: 1,
-                                            color: Colors.grey,
                                           ),
                                           Expanded(
                                             child: SfCircularChart(
+                                                legend: const Legend(
+                                                    isVisible: true,
+                                                    position:
+                                                        LegendPosition.bottom),
                                                 series: <CircularSeries>[
                                                   PieSeries<ChartData, String>(
                                                       dataSource: provider
@@ -1044,40 +1058,54 @@ class _HomeScreenState extends State<HomeScreen> {
                                               blurRadius: 2),
                                         ]),
                                     child: Padding(
-                                      padding: EdgeInsets.symmetric(
-                                          horizontal: 4.w, vertical: 1.5.h),
+                                      padding:
+                                          EdgeInsets.symmetric(vertical: 1.5.h),
                                       child: Column(
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
                                         children: [
-                                          Text(
-                                            'Usage Storage'.tr,
-                                            style: TextStyle(
-                                              color: blueColor,
-                                              fontSize: 9.sp,
+                                          Padding(
+                                            padding: EdgeInsets.only(left: 4.w),
+                                            child: Text(
+                                              'Usage Storage'.tr,
+                                              style: TextStyle(
+                                                color: blueColor,
+                                                fontSize: 9.sp,
+                                              ),
                                             ),
                                           ),
                                           SizedBox(
                                             height: 0.5.h,
                                           ),
-                                          RichText(
-                                              text: TextSpan(children: [
-                                            TextSpan(
-                                              text:
-                                                  '${provider.dashboardModel!.data!.storageUsed}' +
-                                                      '/1000MB',
-                                              style: TextStyle(
-                                                color: blueColor,
-                                                fontSize: 8.sp,
-                                              ),
-                                            )
-                                          ])),
-                                          Divider(
-                                            thickness: 1,
-                                            color: Colors.grey,
+                                          Padding(
+                                            padding: EdgeInsets.only(left: 4.w),
+                                            child: RichText(
+                                                text: TextSpan(children: [
+                                              TextSpan(
+                                                text:
+                                                    '${provider.dashboardModel!.data!.storageUsed}' +
+                                                        '/1000MB',
+                                                style: TextStyle(
+                                                  color: blueColor,
+                                                  fontSize: 8.sp,
+                                                ),
+                                              )
+                                            ])),
+                                          ),
+                                          Padding(
+                                            padding: EdgeInsets.symmetric(
+                                                horizontal: 4.w),
+                                            child: Divider(
+                                              thickness: 1,
+                                              color: Colors.grey,
+                                            ),
                                           ),
                                           Expanded(
                                             child: SfCircularChart(
+                                                legend: const Legend(
+                                                    isVisible: true,
+                                                    position:
+                                                        LegendPosition.bottom),
                                                 series: <CircularSeries>[
                                                   PieSeries<ChartData, String>(
                                                       dataSource: provider

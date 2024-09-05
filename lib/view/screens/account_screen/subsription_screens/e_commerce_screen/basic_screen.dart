@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 
@@ -12,7 +13,8 @@ import '../Provider/subscription_history_plan+provider.dart';
 
 class BasicScreen extends StatefulWidget {
   late int? planId;
-  BasicScreen({Key? key, this.planId}) : super(key: key);
+  late String? name;
+  BasicScreen({Key? key, this.planId, this.name}) : super(key: key);
 
   @override
   State<BasicScreen> createState() => _BasicScreenState();
@@ -58,19 +60,32 @@ class _BasicScreenState extends State<BasicScreen> {
               child: Center(
                 child: Row(
                   children: [
-                    SizedBox(
-                      width: 3.w,
+                    InkWell(
+                      onTap: () {
+                        Navigator.of(context).pop();
+                      },
+                      child: SizedBox(
+                        width: 5.w,
+                      ),
                     ),
                     GestureDetector(
                         onTap: () {
-                          Navigator.pop(context);
+                          Navigator.of(context).pop();
                         },
                         child: SvgPicture.asset(
                           'assets/svgs/back_arrow.svg',
                           height: 2.h,
                         )),
+                    InkWell(
+                      onTap: () {
+                        Navigator.of(context).pop();
+                      },
+                      child: SizedBox(
+                        width: 5.w,
+                      ),
+                    ),
                     SizedBox(
-                      width: 31.w,
+                      width: 22.w,
                     ),
                     Text(
                       'Subscriptions',
@@ -92,7 +107,7 @@ class _BasicScreenState extends State<BasicScreen> {
                 horizontal: 4.w,
               ),
               child: Text(
-                'E-Commerce Basic',
+                '${widget.name}',
                 style: TextStyle(
                     color: blueColor,
                     fontSize: 11.sp,
@@ -279,14 +294,10 @@ class _BasicScreenState extends State<BasicScreen> {
             Center(
               child: GestureDetector(
                 onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => WebView(
-                          url:
-                              'https://octanefashion.dialboxx.com/seller/make-payment/${widget.planId}',
-                        ),
-                      ));
+                  Get.to(WebView(
+                    url:
+                        'https://octanefashion.dialboxx.com/seller/make-payment/${widget.planId}',
+                  ));
                 },
                 child: Padding(
                   padding: EdgeInsets.symmetric(horizontal: 5.w),

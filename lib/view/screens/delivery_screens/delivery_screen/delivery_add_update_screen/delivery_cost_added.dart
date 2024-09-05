@@ -67,21 +67,26 @@ class _DeliveryCostAddedState extends State<DeliveryCostAdded> {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Row(
-                        children: [
-                          SizedBox(
-                            width: 5.w,
-                          ),
-                          GestureDetector(
-                              onTap: () {
-                                Navigator.pop(context);
-                              },
-                              child: SvgPicture.asset(
-                                'assets/svgs/back_arrow.svg',
-                                height: 2.h,
-                                color: Colors.black,
-                              )),
-                        ],
+                      InkWell(
+                        onTap: () {
+                          Navigator.of(context).pop();
+                        },
+                        child: Row(
+                          children: [
+                            SizedBox(
+                              width: 5.w,
+                            ),
+                            SvgPicture.asset(
+                              'assets/svgs/back_arrow.svg',
+                              height: 2.h,
+                              color: Colors.black,
+                            ),
+                            SizedBox(
+                              width: 5.w,
+                            ),
+                          ],
+                          mainAxisSize: MainAxisSize.min,
+                        ),
                       ),
                       SizedBox(
                         height: 3.h,
@@ -243,35 +248,46 @@ class _DeliveryCostAddedState extends State<DeliveryCostAdded> {
                       padding: EdgeInsets.symmetric(horizontal: 5.w),
                       child: GestureDetector(
                         onTap: () async {
-                          if (data!.id == null) {
-                            List value = [];
-                            data?.relations!.forEach((element) {
-                              value.add(element.relationId.toString());
-                            });
-                            await DataProvider().delivery_costApi_crud(map: {
-                              'user_id': '${user_model.data!.userId}',
-                              'method': 'add',
-                              'title': delivery_method_controller.text,
-                              'price': delivery_cost_controller.text,
-                              'locations[]': value.join(',')
-                            });
-                            Get.snackbar(
-                                'Success', 'Method Added Successfully!');
+                          List nn = [];
+                          data?.relations!.forEach((element) {
+                            nn.add(element.relationId.toString());
+                          });
+                          if (nn.isNotEmpty &&
+                              delivery_method_controller.text.isNotEmpty &&
+                              delivery_method_controller.text.isNotEmpty) {
+                            if (data!.id == null) {
+                              List value = [];
+                              data?.relations!.forEach((element) {
+                                value.add(element.relationId.toString());
+                              });
+                              await DataProvider().delivery_costApi_crud(map: {
+                                'user_id': '${user_model.data!.userId}',
+                                'method': 'add',
+                                'title': delivery_method_controller.text,
+                                'price': delivery_cost_controller.text,
+                                'locations[]': value.join(',')
+                              });
+                              Get.snackbar(
+                                  'Success', 'Method Added Successfully!');
+                            } else {
+                              List value = [];
+                              data?.relations!.forEach((element) {
+                                value.add(element.relationId.toString());
+                              });
+                              await DataProvider().delivery_costApi_crud(map: {
+                                'user_id': '${user_model.data!.userId}',
+                                'method': 'edit',
+                                'method_id': data?.id.toString(),
+                                'title': delivery_method_controller.text,
+                                'price': delivery_cost_controller.text,
+                                'locations[]': value.join(',')
+                              });
+                              Get.snackbar(
+                                  'Success', 'Method Updated Successfully!');
+                            }
                           } else {
-                            List value = [];
-                            data?.relations!.forEach((element) {
-                              value.add(element.relationId.toString());
-                            });
-                            await DataProvider().delivery_costApi_crud(map: {
-                              'user_id': '${user_model.data!.userId}',
-                              'method': 'edit',
-                              'method_id': data?.id.toString(),
-                              'title': delivery_method_controller.text,
-                              'price': delivery_cost_controller.text,
-                              'locations[]': value.join(',')
-                            });
                             Get.snackbar(
-                                'Success', 'Method Updated Successfully!');
+                                'Alert', 'Kindly Select Location First.');
                           }
                         },
                         child: Container(

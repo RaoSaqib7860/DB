@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:db_2_0/custom_widgets/app_colors.dart';
 import 'package:db_2_0/custom_widgets/data_loading.dart';
 import 'package:db_2_0/view/screens/product_screens/add_product_screen/add_product_screen.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -283,13 +284,16 @@ class _PublishScreenState extends State<PublishScreen> {
                                                                   MainAxisAlignment
                                                                       .spaceBetween,
                                                               children: [
-                                                                Text(
-                                                                  '${provider.allProductModel!.data!.posts![index].title}',
-                                                                  style: TextStyle(
-                                                                      color: Color(
-                                                                          0xff3E3E3E),
-                                                                      fontSize:
-                                                                          10.sp),
+                                                                Expanded(
+                                                                  child: Text(
+                                                                    '${provider.allProductModel!.data!.posts![index].title}',
+                                                                    style: TextStyle(
+                                                                      overflow: TextOverflow.ellipsis,
+                                                                        color: Color(
+                                                                            0xff3E3E3E),
+                                                                        fontSize:
+                                                                            10.sp),
+                                                                  ),
                                                                 ),
                                                                 Text(
                                                                   'Created at'
@@ -434,16 +438,9 @@ class _PublishScreenState extends State<PublishScreen> {
                                                             ),
                                                             InkWell(
                                                               onTap: () {
-                                                                Navigator.push(
-                                                                    context,
-                                                                    MaterialPageRoute(
-                                                                      builder:
-                                                                          (context) =>
-                                                                              WebView(
-                                                                        url:
-                                                                            'https://octanefashion.dialboxx.com/product/${provider.allProductModel!.data!.posts![index].title}/${provider.allProductModel!.data!.posts![index].id}',
-                                                                      ),
-                                                                    ));
+                                                                Get.to(WebView(
+                                                                  url: 'https://octanefashion.dialboxx.com/product/${provider.allProductModel!.data!.posts![index].title}/${provider.allProductModel!.data!.posts![index].id}',
+                                                                ));
                                                               },
                                                               child: SvgPicture
                                                                   .asset(

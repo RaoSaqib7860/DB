@@ -55,8 +55,6 @@ class _AnalyticScreenState extends State<AnalyticScreen> {
             ? SizedBox()
             : SingleChildScrollView(
                 child: Container(
-                  // height: 100.h,
-                  // width: 100.w,
                   child: SingleChildScrollView(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -66,32 +64,39 @@ class _AnalyticScreenState extends State<AnalyticScreen> {
                           width: 100.w,
                           color: blueColor,
                           child: Center(
-                            child: Padding(
-                              padding: EdgeInsets.symmetric(horizontal: 2.w),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  GestureDetector(
-                                      onTap: () {
-                                        Navigator.pop(context);
-                                      },
-                                      child: SvgPicture.asset(
-                                        'assets/svgs/back_arrow.svg',
-                                        height: 2.h,
-                                      )),
-                                  Text(
-                                    'Analytics'.tr,
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 12.sp,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                  SizedBox(
-                                    width: 2.w,
-                                  ),
-                                ],
-                              ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                InkWell(
+                                    onTap: () {
+                                      Navigator.pop(context);
+                                    },
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        SizedBox(
+                                          width: 5.w,
+                                        ),
+                                        SvgPicture.asset(
+                                          'assets/svgs/back_arrow.svg',
+                                          height: 2.h,
+                                        ),
+                                        SizedBox(
+                                          width: 5.w,
+                                        ),
+                                      ],
+                                    )),
+                                Text(
+                                  'Analytics'.tr,
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 12.sp,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                SizedBox(
+                                  width: 10.w,
+                                ),
+                              ],
                             ),
                           ),
                         ),
@@ -493,21 +498,22 @@ class _AnalyticScreenState extends State<AnalyticScreen> {
                                   0,
                               itemBuilder: (context, index) {
                                 return InkWell(
-                                  onTap: (){
+                                  onTap: () {
                                     Navigator.push(
                                         context,
                                         MaterialPageRoute(
                                           builder: (context) =>
                                               AllOrderDetailScreen(
-                                                orderId: '${provider.getOrserHistoryModel!.data!.orders!.dataOf![index].id}',
-                                              ),
+                                            orderId:
+                                                '${provider.getOrserHistoryModel!.data!.orders!.dataOf![index].id}',
+                                          ),
                                         ));
                                   },
                                   child: Column(
                                     children: [
                                       Padding(
-                                        padding:
-                                            EdgeInsets.symmetric(horizontal: 4.w),
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: 4.w),
                                         child: Container(
                                           width: 100.w,
                                           decoration: BoxDecoration(
@@ -516,14 +522,14 @@ class _AnalyticScreenState extends State<AnalyticScreen> {
                                                   BorderRadius.circular(3),
                                               boxShadow: [
                                                 BoxShadow(
-                                                    color:
-                                                        Colors.grey.withAlpha(50),
+                                                    color: Colors.grey
+                                                        .withAlpha(50),
                                                     offset: Offset(1, 1),
                                                     spreadRadius: 1,
                                                     blurRadius: 2),
                                                 BoxShadow(
-                                                    color:
-                                                        Colors.grey.withAlpha(50),
+                                                    color: Colors.grey
+                                                        .withAlpha(50),
                                                     offset: Offset(-1, -1),
                                                     spreadRadius: 1,
                                                     blurRadius: 2),
@@ -591,14 +597,16 @@ class _AnalyticScreenState extends State<AnalyticScreen> {
                                                     Container(
                                                       color: Colors.green,
                                                       child: Padding(
-                                                        padding:
-                                                            EdgeInsets.symmetric(
+                                                        padding: EdgeInsets
+                                                            .symmetric(
                                                                 horizontal: 2.w,
-                                                                vertical: 0.5.h),
+                                                                vertical:
+                                                                    0.5.h),
                                                         child: Text(
                                                           '${provider.payment_status['${provider.getOrserHistoryModel!.data!.orders!.dataOf![index].paymentStatus}']}',
                                                           style: TextStyle(
-                                                              color: Colors.white,
+                                                              color:
+                                                                  Colors.white,
                                                               fontSize: 9.sp),
                                                         ),
                                                       ),
@@ -686,14 +694,16 @@ class _AnalyticScreenState extends State<AnalyticScreen> {
                                                     Container(
                                                       color: Colors.green,
                                                       child: Padding(
-                                                        padding:
-                                                            EdgeInsets.symmetric(
+                                                        padding: EdgeInsets
+                                                            .symmetric(
                                                                 horizontal: 2.w,
-                                                                vertical: 0.5.h),
+                                                                vertical:
+                                                                    0.5.h),
                                                         child: Text(
                                                           '${provider.getOrserHistoryModel!.data!.orders!.dataOf![index].status}',
                                                           style: TextStyle(
-                                                              color: Colors.white,
+                                                              color:
+                                                                  Colors.white,
                                                               fontSize: 9.sp),
                                                         ),
                                                       ),
@@ -715,10 +725,12 @@ class _AnalyticScreenState extends State<AnalyticScreen> {
                                                     Container(
                                                       color: Color(0xff9B001E),
                                                       child: Padding(
-                                                        padding:
-                                                            EdgeInsets.symmetric(
-                                                                horizontal: 0.6.w,
-                                                                vertical: 0.1.h),
+                                                        padding: EdgeInsets
+                                                            .symmetric(
+                                                                horizontal:
+                                                                    0.6.w,
+                                                                vertical:
+                                                                    0.1.h),
                                                         child: Icon(
                                                           Icons.remove_red_eye,
                                                           color: Colors.white,

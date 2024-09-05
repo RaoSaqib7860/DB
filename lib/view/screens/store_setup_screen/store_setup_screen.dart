@@ -1,11 +1,10 @@
 import 'package:db_2_0/custom_widgets/app_colors.dart';
 import 'package:db_2_0/view/screens/auth_screens/login_screen/Login%20Provider/login_model_globle.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:sizer/sizer.dart';
-
+import '../../../custom_widgets/web_view.dart';
 import '../../../utils_services/storage_util.dart';
 import '../auth_screens/login_screen/Model/login_model.dart';
 import '../auth_screens/login_screen/login_screen.dart';
@@ -154,7 +153,8 @@ class _StoreSetupScreenState extends State<StoreSetupScreen> {
                                 height: 0.4.h,
                               ),
                               Text(
-                                'Congratulations on Opening your\nnew online store!'.tr,
+                                'Congratulations on Opening your\nnew online store!'
+                                    .tr,
                                 maxLines: 3,
                                 style: TextStyle(
                                   fontSize: 11.sp,
@@ -165,18 +165,26 @@ class _StoreSetupScreenState extends State<StoreSetupScreen> {
                               SizedBox(
                                 height: 0.4.h,
                               ),
-                              Text(
-                                'Visit Store.'.tr,
-                                style: TextStyle(
-                                    fontSize: 11.sp,
-                                    color: blueColor,
-                                    decoration: TextDecoration.underline,
-                                    decorationStyle: TextDecorationStyle.solid,
-                                    decorationColor: blueColor,
-                                    height: 0.14.h,
-                                    decorationThickness: 0.3.h
-                                    //fontWeight: FontWeight.w500
-                                    ),
+                              InkWell(
+                                onTap: () {
+                                  Get.to(WebView(
+                                    url: '${user_model.data!.fullDomain}',
+                                  ));
+                                },
+                                child: Text(
+                                  'Visit Store.'.tr,
+                                  style: TextStyle(
+                                      fontSize: 11.sp,
+                                      color: blueColor,
+                                      decoration: TextDecoration.underline,
+                                      decorationStyle:
+                                          TextDecorationStyle.solid,
+                                      decorationColor: blueColor,
+                                      height: 0.14.h,
+                                      decorationThickness: 0.3.h
+                                      //fontWeight: FontWeight.w500
+                                      ),
+                                ),
                               ),
                             ],
                           )
@@ -243,7 +251,8 @@ class _StoreSetupScreenState extends State<StoreSetupScreen> {
                                 height: 0.4.h,
                               ),
                               Text(
-                                'Set up your first product by adding\nthe product name and image.'.tr,
+                                'Set up your first product by adding\nthe product name and image.'
+                                    .tr,
                                 maxLines: 3,
                                 style: TextStyle(
                                   fontSize: 11.sp,
@@ -347,7 +356,8 @@ class _StoreSetupScreenState extends State<StoreSetupScreen> {
                                 height: 0.4.h,
                               ),
                               Text(
-                                'Choose how you would like to\nreceive payment for your orders.'.tr,
+                                'Choose how you would like to\nreceive payment for your orders.'
+                                    .tr,
                                 maxLines: 3,
                                 style: TextStyle(
                                   fontSize: 11.sp,
