@@ -29,6 +29,7 @@ class StoreStatusModel {
 
 class Location {
   dynamic logo;
+  dynamic favicon;
   dynamic address;
   dynamic phone;
   dynamic shopName;
@@ -37,6 +38,7 @@ class Location {
 
   Location.fromJson(Map<String, dynamic> json) {
     logo = json['logo'];
+    favicon = json['favicon'];
     address = json['address'];
     phone = json['phone'];
     shopName = json['store_email'];
@@ -45,6 +47,7 @@ class Location {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['logo'] = this.logo;
+    data['favicon'] = this.favicon;
     data['address'] = this.address;
     data['phone'] = this.phone;
     data['store_email'] = this.shopName;
