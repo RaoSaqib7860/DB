@@ -43,7 +43,16 @@ class _CreateCategoryScreenState extends State<CreateCategoryScreen> {
                         onTap: () {
                           Navigator.pop(context);
                         },
-                        child: SvgPicture.asset('assets/svgs/back_arrow.svg',height: 2.h,)),
+                        child: Container(
+                          height: 4.h,
+                          width: 10.w,
+                          child: Center(
+                            child: SvgPicture.asset(
+                              'assets/svgs/back_arrow.svg',
+                              height: 3.h,
+                            ),
+                          ),
+                        )),
                     SizedBox(width: 30.w,),
                     Text(
                       'Product Category',

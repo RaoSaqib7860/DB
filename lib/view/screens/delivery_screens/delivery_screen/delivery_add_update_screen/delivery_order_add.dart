@@ -118,14 +118,19 @@ class _DeliveryOrderAddState extends State<DeliveryOrderAdd> {
                             width: 7.w,
                           ),
                           GestureDetector(
-                              onTap: () {
-                                Navigator.pop(context);
-                              },
-                              child: SvgPicture.asset(
-                                'assets/svgs/back_arrow.svg',
-                                height: 2.h,
-                                color: Colors.black,
-                              )),
+                        onTap: () {
+                          Navigator.pop(context);
+                        },
+                        child: Container(
+                          height: 4.h,
+                          width: 10.w,
+                          child: Center(
+                            child: SvgPicture.asset(
+                              'assets/svgs/back_arrow.svg',
+                              height: 3.h,
+                            ),
+                          ),
+                        )),
                         ],
                       ),
                       SizedBox(

@@ -1,6 +1,7 @@
 import 'package:db_2_0/custom_widgets/app_colors.dart';
 import 'package:db_2_0/custom_widgets/data_loading.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 import '../../../../api_repository/api_utils.dart';
@@ -39,11 +40,16 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                             onTap: () {
                               Navigator.pop(context);
                             },
-                            child: Icon(
-                              Icons.arrow_back_ios,
-                              color: blueColor,
-                              size: 2.5.h,
-                            ))),
+                            child: Container(
+                              height: 4.h,
+                              width: 10.w,
+                              child: Center(
+                                child: SvgPicture.asset(
+                                  'assets/svgs/back_arrow.svg',
+                                  height: 3.h,
+                                ),
+                              ),
+                            )),),
                     SizedBox(
                       height: 4.h,
                     ),

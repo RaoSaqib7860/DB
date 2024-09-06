@@ -1,6 +1,7 @@
 import 'package:db_2_0/custom_widgets/data_loading.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -77,10 +78,20 @@ class _AnalyticScreenState extends State<AnalyticScreen> {
                                         SizedBox(
                                           width: 5.w,
                                         ),
-                                        SvgPicture.asset(
-                                          'assets/svgs/back_arrow.svg',
-                                          height: 2.h,
-                                        ),
+                                        GestureDetector(
+                                            onTap: () {
+                                              Navigator.pop(context);
+                                            },
+                                            child: Container(
+                                              height: 4.h,
+                                              width: 10.w,
+                                              child: Center(
+                                                child: SvgPicture.asset(
+                                                  '',
+                                                  height: 3.h,
+                                                ),
+                                              ),
+                                            )),
                                         SizedBox(
                                           width: 5.w,
                                         ),
@@ -1058,6 +1069,136 @@ class _AnalyticScreenState extends State<AnalyticScreen> {
                                   ),
                                 ],
                               ),
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 2.h,
+                        ),
+
+                        Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 4.w),
+                          child: Container(
+                            width: 100.w,
+                            height: 28.h,
+                            decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(3),
+                                boxShadow: [
+                                  BoxShadow(
+                                      color: Colors.grey.withAlpha(50),
+                                      offset: Offset(1, 1),
+                                      spreadRadius: 1,
+                                      blurRadius: 2),
+                                  BoxShadow(
+                                      color: Colors.grey.withAlpha(50),
+                                      offset: Offset(-1, -1),
+                                      spreadRadius: 1,
+                                      blurRadius: 2),
+                                ]),
+                            child: Column(
+                              children: [
+                                const Align(
+                                    alignment: Alignment.topLeft,
+                                    child: Padding(
+                                      padding: EdgeInsets.all(8.0),
+                                      child: Text('Top Most Visit Pages',style: TextStyle(
+                                        fontWeight: FontWeight.w500
+                                      ),),
+                                    )),
+                                Expanded(
+                                  child: ListView.builder(
+                                    itemCount: provider.getAnalyticsModel?.data?.pages?.length ?? 0,
+                                    itemBuilder: (context, index) {
+                                    return Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Column(
+                                        children: [
+                                          Row(
+                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Container(
+                                                width: 60.w,
+                                                child: Text('${provider.getAnalyticsModel!.data!.pages![index].url}',
+                                                maxLines: 1,
+                                                  overflow: TextOverflow.ellipsis,
+                                                ),
+                                              ),
+                                              Text('${provider.getAnalyticsModel!.data!.pages![index].viewCount}'),
+                                  
+                                            ],
+                                          ),
+                                          Divider(),
+                                        ],
+                                      ),
+                                    );
+                                  },),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 2.h,
+                        ),
+                        Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 4.w),
+                          child: Container(
+                            width: 100.w,
+                            height: 26.h,
+                            decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(3),
+                                boxShadow: [
+                                  BoxShadow(
+                                      color: Colors.grey.withAlpha(50),
+                                      offset: Offset(1, 1),
+                                      spreadRadius: 1,
+                                      blurRadius: 2),
+                                  BoxShadow(
+                                      color: Colors.grey.withAlpha(50),
+                                      offset: Offset(-1, -1),
+                                      spreadRadius: 1,
+                                      blurRadius: 2),
+                                ]),
+                            child: Column(
+                              children: [
+                                const Align(
+                                    alignment: Alignment.topLeft,
+                                    child: Padding(
+                                      padding: EdgeInsets.all(8.0),
+                                      child: Text('Top Most Visitor (City Wise)',style: TextStyle(
+                                          fontWeight: FontWeight.w500
+                                      ),),
+                                    )),
+                                Expanded(
+                                  child: ListView.builder(
+                                    itemCount: provider.getAnalyticsModel?.data?.cities?.length ?? 0,
+                                    itemBuilder: (context, index) {
+                                      return Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: Column(
+                                          children: [
+                                            Row(
+                                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                              children: [
+                                                Container(
+                                                  //width: 60.w,
+                                                  child: Text('${index + 1}' ': ${provider.getAnalyticsModel!.data!.cities![index].city} ' '- Visits ${provider.getAnalyticsModel!.data!.cities![index].viewCount}',
+                                                    maxLines: 1,
+                                                    overflow: TextOverflow.ellipsis,
+                                                  ),
+                                                ),
+
+
+                                              ],
+                                            ),
+                                          ],
+                                        ),
+                                      );
+                                    },),
+                                ),
+                              ],
                             ),
                           ),
                         ),

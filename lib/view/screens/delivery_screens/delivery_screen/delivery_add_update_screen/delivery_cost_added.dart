@@ -78,7 +78,7 @@ class _DeliveryCostAddedState extends State<DeliveryCostAdded> {
                             ),
                             SvgPicture.asset(
                               'assets/svgs/back_arrow.svg',
-                              height: 2.h,
+                              height: 3.h,
                               color: Colors.black,
                             ),
                             SizedBox(
