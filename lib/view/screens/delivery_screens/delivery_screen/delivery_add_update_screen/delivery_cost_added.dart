@@ -67,26 +67,59 @@ class _DeliveryCostAddedState extends State<DeliveryCostAdded> {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      InkWell(
-                        onTap: () {
-                          Navigator.of(context).pop();
-                        },
-                        child: Row(
-                          children: [
-                            SizedBox(
-                              width: 5.w,
-                            ),
-                            SvgPicture.asset(
-                              'assets/svgs/back_arrow.svg',
-                              height: 3.h,
-                              color: Colors.black,
-                            ),
-                            SizedBox(
-                              width: 5.w,
-                            ),
-                          ],
-                          mainAxisSize: MainAxisSize.min,
+                      Container(
+                        height: 7.h,
+                        width: 100.w,
+                        color: blueColor,
+                        child: Center(
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              InkWell(
+                                  onTap: () {
+                                    Navigator.pop(context);
+                                  },
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      SizedBox(
+                                        width: 5.w,
+                                      ),
+                                      GestureDetector(
+                                          onTap: () {
+                                            Navigator.pop(context);
+                                          },
+                                          child: Container(
+                                            height: 4.h,
+                                            width: 10.w,
+                                            child: Center(
+                                              child: SvgPicture.asset(
+                                                'assets/svgs/back_arrow.svg',
+                                                height: 3.h,
+                                              ),
+                                            ),
+                                          )),
+                                      SizedBox(
+                                        width: 1.w,
+                                      ),
+                                    ],
+                                  )),
+                              Text(
+                                'Create Method'.tr,
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 12.sp,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                              SizedBox(
+                                width: 10.w,
+                              ),
+                            ],
+                          ),
                         ),
+                      ),
+                      SizedBox(
+                        height: 1.5.h,
                       ),
                       SizedBox(
                         height: 3.h,

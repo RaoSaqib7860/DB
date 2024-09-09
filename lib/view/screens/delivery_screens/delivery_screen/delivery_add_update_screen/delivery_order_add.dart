@@ -112,26 +112,59 @@ class _DeliveryOrderAddState extends State<DeliveryOrderAdd> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Row(
-                        children: [
-                          SizedBox(
-                            width: 7.w,
+                      Container(
+                        height: 7.h,
+                        width: 100.w,
+                        color: blueColor,
+                        child: Center(
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              InkWell(
+                                  onTap: () {
+                                    Navigator.pop(context);
+                                  },
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      SizedBox(
+                                        width: 5.w,
+                                      ),
+                                      GestureDetector(
+                                          onTap: () {
+                                            Navigator.pop(context);
+                                          },
+                                          child: Container(
+                                            height: 4.h,
+                                            width: 10.w,
+                                            child: Center(
+                                              child: SvgPicture.asset(
+                                                'assets/svgs/back_arrow.svg',
+                                                height: 3.h,
+                                              ),
+                                            ),
+                                          )),
+                                      SizedBox(
+                                        width: 1.w,
+                                      ),
+                                    ],
+                                  )),
+                              Text(
+                                'Create Delivery'.tr,
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 12.sp,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                              SizedBox(
+                                width: 10.w,
+                              ),
+                            ],
                           ),
-                          GestureDetector(
-                        onTap: () {
-                          Navigator.pop(context);
-                        },
-                        child: Container(
-                          height: 4.h,
-                          width: 10.w,
-                          child: Center(
-                            child: SvgPicture.asset(
-                              'assets/svgs/back_arrow.svg',
-                              height: 3.h,
-                            ),
-                          ),
-                        )),
-                        ],
+                        ),
+                      ),
+                      SizedBox(
+                        height: 1.5.h,
                       ),
                       SizedBox(
                         height: 2.h,
