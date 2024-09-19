@@ -58,7 +58,7 @@ class _ProductScreenState extends State<ProductScreen> {
     await provider.update_product_data(productId: widget.productId);
     await provider.get_brands_data();
     await provider.get_categories_data();
-    print('updateProductModel...${provider.updateProductModel!.toJson()}');
+    print('updateProductModel...${provider.updateProductModel?.data?.content?.content ?? ''}');
     if (provider.updateProductModel?.data?.product?.featured == 1) {
       selectFeature = 'Trending products';
     } else if (provider.updateProductModel?.data?.product?.featured == 2) {
@@ -68,7 +68,7 @@ class _ProductScreenState extends State<ProductScreen> {
     publish =
         provider.updateProductModel?.data?.product?.status == 1 ? true : false;
     contentController
-        .insertHtml(provider.updateProductModel?.data?.content?.content ?? '');
+        .insertHtml(provider.updateProductModel?.data?.content?.content ?? "");
     nameControllerT.text =
         provider.updateProductModel?.data?.product?.title ?? '';
     slugController.text =

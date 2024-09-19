@@ -21,6 +21,7 @@ import '../../../custom_widgets/custom_bottomsheet.dart';
 import '../../../custom_widgets/custom_fill_container.dart';
 import '../../../custom_widgets/web_view.dart';
 import '../auth_screens/login_screen/login_screen.dart';
+import '../home_screen/Models/store_status_model.dart';
 import '../home_screen/Update Store Setup/update_store_provider.dart';
 import '../home_screen/home_screens/logo_screen.dart';
 import '../payment_screen/payment_screen.dart';
@@ -50,7 +51,15 @@ class _AccountScreenState extends State<AccountScreen> {
   @override
   void initState() {
     image_key = getRandomString(15);
+    check_store_status();
     super.initState();
+  }
+
+  StoreStatusModel? storeStatusModel;
+  Future check_store_status() async {
+    storeStatusModel = await DataProvider()
+        .check_logoApi(map: {'user_id': user_model.data!.userId.toString()});
+    setState(() {});
   }
 
   @override
@@ -90,16 +99,14 @@ class _AccountScreenState extends State<AccountScreen> {
                             MaterialPageRoute(
                                 builder: (context) => ChangeNotifierProvider(
                                       create: (_) => UpdateStoreProvider(),
-                                      child: LogoScreen(from_account: true,),
+                                      child: LogoScreen(
+                                        from_account: true,
+                                      ),
                                     ))).then((value) async {
                           loading = true;
                           setState(() {});
-                          var um = await DataProvider().loginFunction(map: {
-                            'email': storage.read('email'),
-                            'password': storage.read('password'),
-                          }, context: context, hide_snack: true);
+                          await check_store_status();
                           image_key = getRandomString(15);
-                          user_model = um;
                           loading = false;
                           setState(() {});
                         });
@@ -110,19 +117,24 @@ class _AccountScreenState extends State<AccountScreen> {
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(5),
                             border: Border.all(color: Colors.grey, width: 1)),
-                        child: CachedNetworkImage(
-                          imageUrl: "${user_model.data?.storelogo}",
-                          fit: BoxFit.cover,
-                          cacheKey: image_key,
-                          progressIndicatorBuilder:
-                              (context, url, downloadProgress) => Center(
-                            child: CircularProgressIndicator(
-                                strokeWidth: 1.5,
-                                value: downloadProgress.progress),
-                          ),
-                          errorWidget: (context, url, error) => Image.network(
-                              'https://octanefashion.dialboxx.com/uploads/default.png'),
-                        ),
+                        child: storeStatusModel == null
+                            ? Center(
+                                child:
+                                    CircularProgressIndicator(strokeWidth: 1.5),
+                              )
+                            : CachedNetworkImage(
+                                imageUrl: "${storeStatusModel?.location?.logo}",
+                                fit: BoxFit.cover,
+                                cacheKey: image_key,
+                                progressIndicatorBuilder:
+                                    (context, url, downloadProgress) => Center(
+                                  child: CircularProgressIndicator(
+                                      strokeWidth: 1.5,
+                                      value: downloadProgress.progress),
+                                ),
+                                errorWidget: (context, url, error) => Image.network(
+                                    'https://octanefashion.dialboxx.com/uploads/default.png'),
+                              ),
                       ),
                     ),
                     SizedBox(

@@ -133,7 +133,6 @@ class _DeliveryOrderScreenState extends State<DeliveryOrderScreen> {
                     ),
                     GestureDetector(
                       onTap: () {
-                        // Navigator.push(context, MaterialPageRoute(builder: (context) => TcsScreen(),));
                         Navigator.push(
                             context,
                             MaterialPageRoute(

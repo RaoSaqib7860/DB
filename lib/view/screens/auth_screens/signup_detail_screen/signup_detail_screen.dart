@@ -492,35 +492,47 @@ class _SignUpDetailScreenState extends State<SignUpDetailScreen> {
                   ),
                   GestureDetector(
                     onTap: () {
-                      if (provider.emailController.text.isNotEmpty) {
-                        if (provider.businessNameController.text.isNotEmpty) {
-                          if (provider.domainController.text.isNotEmpty) {
-                            if (provider.mobileController.text.isNotEmpty) {
-                              if (provider.passwordController.text.isNotEmpty) {
-                                if (provider.selected_categgory != null) {
-                                  if (provider.checkboxSelected == true) {
-                                    provider.sign_up_api(context);
+                      if (provider.passwordController.text ==
+                          provider.cPasswordController.text) {
+                        if (provider.emailController.text.isNotEmpty) {
+                          if (provider.businessNameController.text.isNotEmpty) {
+                            if (provider.domainController.text.isNotEmpty) {
+                              if (provider.mobileController.text.isNotEmpty) {
+                                if (provider
+                                    .passwordController.text.isNotEmpty) {
+                                  if (provider.selected_categgory != null) {
+                                    if (provider.checkboxSelected == true) {
+                                      provider.sign_up_api(context);
+                                    } else {
+                                      Get.snackbar(
+                                          'Alert'.tr,
+                                          'You must accept the term and conditions to register an account.'
+                                              .tr);
+                                    }
                                   } else {
-                                    Get.snackbar('Alert'.tr,
-                                        'You must accept the term and conditions to register an account.'.tr);
+                                    Get.snackbar(
+                                        'Alert'.tr, 'Category is empty.'.tr);
                                   }
                                 } else {
-                                  Get.snackbar('Alert'.tr, 'Category is empty.'.tr);
+                                  Get.snackbar(
+                                      'Alert'.tr, 'Password is empty.'.tr);
                                 }
                               } else {
-                                Get.snackbar('Alert'.tr, 'Password is empty.'.tr);
+                                Get.snackbar(
+                                    'Alert'.tr, 'Mobile number is empty.'.tr);
                               }
                             } else {
-                              Get.snackbar('Alert'.tr, 'Mobile number is empty.'.tr);
+                              Get.snackbar('Alert'.tr, 'Domain is empty.'.tr);
                             }
                           } else {
-                            Get.snackbar('Alert'.tr, 'Domain is empty.'.tr);
+                            Get.snackbar(
+                                'Alert'.tr, 'Business Name is empty.'.tr);
                           }
                         } else {
-                          Get.snackbar('Alert'.tr, 'Business Name is empty.'.tr);
+                          Get.snackbar('Alert'.tr, 'Email is empty.'.tr);
                         }
                       } else {
-                        Get.snackbar('Alert'.tr, 'Email is empty.'.tr);
+                        Get.snackbar('Alert'.tr, 'Password not matched.'.tr);
                       }
                     },
                     child: Container(

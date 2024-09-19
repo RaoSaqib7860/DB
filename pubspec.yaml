@@ -57,7 +57,7 @@ dependencies:
   html: ^0.15.4
   html_editor_enhanced: ^2.6.0
   dio: ^5.5.0+1
-  syncfusion_flutter_charts: 25.1.35
+  syncfusion_flutter_charts: ^26.2.14
   easy_stepper: ^0.8.5+1
   webview_flutter: ^4.8.0
   badges: ^3.1.2

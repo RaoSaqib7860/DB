@@ -581,8 +581,8 @@ class DataProvider {
     final response = await http.post(Uri.parse('$baseURL$get_categories'),
         body: map, headers: headers);
     var data = jsonDecode(response.body);
+    log("get_categoriesApi data is = ${response.body}");
     if (data['result'] == 'success') {
-      log("loginFunction code is = ${response.statusCode}");
       orderInfoModel = CateoryProductModel.fromJson(data);
       return orderInfoModel;
     } else {

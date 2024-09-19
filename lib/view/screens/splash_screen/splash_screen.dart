@@ -25,7 +25,7 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   fetch_data() async {
-    print('objectnamw ');
+    print('objectnamw ${storage.hasData('userData')}');
     super.initState();
     if (storage.hasData('userData')) {
       await DataProvider().loginFunction(map: {
@@ -37,13 +37,6 @@ class _SplashScreenState extends State<SplashScreen> {
       print('objectnamw ${user_model.data!.userId}');
       if (user_model.data!.isProduct == 1 &&
           user_model.data!.isPaymentMethod == 1) {
-        // Timer(Duration(seconds: 1), () {
-        //   Navigator.push(
-        //       context,
-        //       MaterialPageRoute(
-        //         builder: (context) => BottomSheetScreen(),
-        //       ));
-        // });
         Navigator.push(
             context,
             PageRouteBuilder(

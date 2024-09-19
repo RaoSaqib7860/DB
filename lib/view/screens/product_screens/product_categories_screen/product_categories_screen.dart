@@ -153,251 +153,275 @@ class _ProductCategoriesScreenState extends State<ProductCategoriesScreen> {
             Expanded(
                 child: provider.category_loading
                     ? SizedBox()
-                    : ListView.builder(
-                        itemCount: provider.cateoryProductModel?.data
-                                ?.categories?.length ??
-                            0,
-                        padding: EdgeInsets.only(bottom: 12.h),
-                        itemBuilder: (context, index) {
-                          return Padding(
-                            padding: EdgeInsets.all(1.0),
-                            child: Column(
-                              children: [
-                                Container(
-                                  width: 100.w,
-                                  decoration: BoxDecoration(
-                                      color: Colors.white,
-                                      borderRadius: BorderRadius.circular(3),
-                                      boxShadow: [
-                                        BoxShadow(
-                                            color: Colors.grey.withAlpha(50),
-                                            offset: Offset(1, 1),
-                                            spreadRadius: 1,
-                                            blurRadius: 2),
-                                        BoxShadow(
-                                            color: Colors.grey.withAlpha(50),
-                                            offset: Offset(-1, -1),
-                                            spreadRadius: 1,
-                                            blurRadius: 2),
-                                      ]),
-                                  child: Padding(
-                                    padding: EdgeInsets.symmetric(
-                                        horizontal: 2.w, vertical: 1.h),
-                                    child: Column(
-                                      children: [
-                                        Row(
+                    : provider.cateoryProductModel?.data?.categories?.length ==
+                                0 ||
+                            provider.cateoryProductModel?.data?.categories
+                                    ?.length ==
+                                null
+                        ? SizedBox(
+                            height: 50.h,
+                            width: 100.w,
+                            child: const Center(
+                              child: Text("No data"),
+                            ),
+                          )
+                        : ListView.builder(
+                            itemCount: provider.cateoryProductModel?.data
+                                    ?.categories?.length ??
+                                0,
+                            padding: EdgeInsets.only(bottom: 12.h),
+                            itemBuilder: (context, index) {
+                              return Padding(
+                                padding: EdgeInsets.all(1.0),
+                                child: Column(
+                                  children: [
+                                    Container(
+                                      width: 100.w,
+                                      decoration: BoxDecoration(
+                                          color: Colors.white,
+                                          borderRadius:
+                                              BorderRadius.circular(3),
+                                          boxShadow: [
+                                            BoxShadow(
+                                                color:
+                                                    Colors.grey.withAlpha(50),
+                                                offset: Offset(1, 1),
+                                                spreadRadius: 1,
+                                                blurRadius: 2),
+                                            BoxShadow(
+                                                color:
+                                                    Colors.grey.withAlpha(50),
+                                                offset: Offset(-1, -1),
+                                                spreadRadius: 1,
+                                                blurRadius: 2),
+                                          ]),
+                                      child: Padding(
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: 2.w, vertical: 1.h),
+                                        child: Column(
                                           children: [
-                                            Container(
-                                              height: 9.h,
-                                              width: 40.w,
-                                              decoration: BoxDecoration(
-                                                  border: Border.all(
-                                                      width: 1,
-                                                      color: Colors.grey),
-                                                  borderRadius:
-                                                      BorderRadius.circular(5)),
-                                              child: Center(
-                                                child: CachedNetworkImage(
-                                                  imageUrl:
-                                                      "https://${user_model.data?.domain}/${provider.cateoryProductModel?.data?.categories?[index].metas?.first.content}",
-                                                  fit: BoxFit.contain,
-                                                  progressIndicatorBuilder:
-                                                      (context, url,
-                                                              downloadProgress) =>
-                                                          Center(
-                                                    child:
-                                                        CircularProgressIndicator(
+                                            Row(
+                                              children: [
+                                                Container(
+                                                  height: 9.h,
+                                                  width: 40.w,
+                                                  decoration: BoxDecoration(
+                                                      border: Border.all(
+                                                          width: 1,
+                                                          color: Colors.grey),
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              5)),
+                                                  child: Center(
+                                                    child: CachedNetworkImage(
+                                                      imageUrl:
+                                                          "https://${user_model.data?.domain}/${provider.cateoryProductModel?.data?.categories?[index].metas?.first.content}",
+                                                      fit: BoxFit.contain,
+                                                      progressIndicatorBuilder:
+                                                          (context, url,
+                                                                  downloadProgress) =>
+                                                              Center(
+                                                        child: CircularProgressIndicator(
                                                             strokeWidth: 1.5,
                                                             value:
                                                                 downloadProgress
                                                                     .progress),
-                                                  ),
-                                                  errorWidget: (context, url,
-                                                          error) =>
-                                                      Image.network(
-                                                          'https://octanefashion.dialboxx.com/uploads/default.png'),
-                                                ),
-                                              ),
-                                            ),
-                                            SizedBox(
-                                              width: 2.w,
-                                            ),
-                                            Expanded(
-                                              child: Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: [
-                                                  Text(
-                                                    '${provider.cateoryProductModel?.data?.categories?[index].name}',
-                                                    overflow:
-                                                        TextOverflow.ellipsis,
-                                                    style: TextStyle(
-                                                      fontSize: 10.sp,
-                                                      color: Color(0xff3E3E3E),
-                                                      fontWeight:
-                                                          FontWeight.bold,
-                                                      overflow:
-                                                          TextOverflow.ellipsis,
+                                                      ),
+                                                      errorWidget: (context,
+                                                              url, error) =>
+                                                          Image.network(
+                                                              'https://octanefashion.dialboxx.com/uploads/default.png'),
                                                     ),
-                                                  ),
-                                                  SizedBox(
-                                                    height: 1.h,
-                                                  ),
-                                                  Text(
-                                                    '/Category/${provider.cateoryProductModel?.data?.categories?[index].name}/${provider.cateoryProductModel?.data?.categories?[index].id}',
-                                                    overflow:
-                                                        TextOverflow.ellipsis,
-                                                    style: TextStyle(
-                                                        fontSize: 8.sp,
-                                                        color:
-                                                            Color(0xff3E3E3E),
-                                                        overflow: TextOverflow
-                                                            .ellipsis,
-                                                        decoration:
-                                                            TextDecoration
-                                                                .underline),
-                                                  ),
-                                                ],
-                                              ),
-                                            )
-                                          ],
-                                        ),
-                                        SizedBox(
-                                          height: 0.5.h,
-                                        ),
-                                        Divider(
-                                          thickness: 1,
-                                          color: Colors.black26,
-                                        ),
-                                        SizedBox(
-                                          height: 0.5.h,
-                                        ),
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            GestureDetector(
-                                              onTap: () {
-                                                Navigator.push(
-                                                    context,
-                                                    MaterialPageRoute(
-                                                      builder: (context) =>
-                                                          CreateCategoryScreen(),
-                                                    ));
-                                              },
-                                              child: Row(
-                                                children: [
-                                                  SvgPicture.asset(
-                                                    'assets/svgs/action.svg',
-                                                    height: 2.7.h,
-                                                  ),
-                                                  SizedBox(
-                                                    width: 2.w,
-                                                  ),
-                                                  Text(
-                                                    'Action'.tr,
-                                                    overflow:
-                                                        TextOverflow.ellipsis,
-                                                    style: TextStyle(
-                                                      color: Colors.black,
-                                                      fontSize: 10.sp,
-                                                      overflow:
-                                                          TextOverflow.ellipsis,
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                            Row(
-                                              children: [
-                                                Text(
-                                                  'Featured:'.tr,
-                                                  overflow:
-                                                      TextOverflow.ellipsis,
-                                                  style: TextStyle(
-                                                    color: Colors.black,
-                                                    fontSize: 10.sp,
-                                                    overflow:
-                                                        TextOverflow.ellipsis,
                                                   ),
                                                 ),
                                                 SizedBox(
-                                                  width: 1.w,
+                                                  width: 2.w,
                                                 ),
-                                                Container(
-                                                  decoration: BoxDecoration(
-                                                      color: blueColor,
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              4)),
-                                                  child: Padding(
-                                                    padding:
-                                                        EdgeInsets.symmetric(
-                                                            horizontal: 2.5.w,
-                                                            vertical: 0.4.h),
-                                                    child: Text(
-                                                      provider
-                                                                  .cateoryProductModel
-                                                                  ?.data
-                                                                  ?.categories?[
-                                                                      index]
-                                                                  .featured ==
-                                                              1
-                                                          ? 'Yes'.tr
-                                                          : 'No'.tr,
-                                                      style: TextStyle(
-                                                          color: Colors.white,
-                                                          fontSize: 9.sp),
-                                                    ),
+                                                Expanded(
+                                                  child: Column(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: [
+                                                      Text(
+                                                        '${provider.cateoryProductModel?.data?.categories?[index].name}',
+                                                        overflow: TextOverflow
+                                                            .ellipsis,
+                                                        style: TextStyle(
+                                                          fontSize: 10.sp,
+                                                          color:
+                                                              Color(0xff3E3E3E),
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                          overflow: TextOverflow
+                                                              .ellipsis,
+                                                        ),
+                                                      ),
+                                                      SizedBox(
+                                                        height: 1.h,
+                                                      ),
+                                                      Text(
+                                                        '/Category/${provider.cateoryProductModel?.data?.categories?[index].name}/${provider.cateoryProductModel?.data?.categories?[index].id}',
+                                                        overflow: TextOverflow
+                                                            .ellipsis,
+                                                        style: TextStyle(
+                                                            fontSize: 8.sp,
+                                                            color: Color(
+                                                                0xff3E3E3E),
+                                                            overflow:
+                                                                TextOverflow
+                                                                    .ellipsis,
+                                                            decoration:
+                                                                TextDecoration
+                                                                    .underline),
+                                                      ),
+                                                    ],
                                                   ),
                                                 )
                                               ],
                                             ),
-                                            Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
+                                            SizedBox(
+                                              height: 0.5.h,
+                                            ),
+                                            Divider(
+                                              thickness: 1,
+                                              color: Colors.black26,
+                                            ),
+                                            SizedBox(
+                                              height: 0.5.h,
+                                            ),
+                                            Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
                                               children: [
-                                                Text(
-                                                  'Created at'.tr,
-                                                  overflow:
-                                                      TextOverflow.ellipsis,
-                                                  style: TextStyle(
-                                                    color: Color(0xff0B7A3E),
-                                                    fontSize: 9.sp,
-                                                    overflow:
-                                                        TextOverflow.ellipsis,
+                                                GestureDetector(
+                                                  onTap: () {
+                                                    Navigator.push(
+                                                        context,
+                                                        MaterialPageRoute(
+                                                          builder: (context) =>
+                                                              CreateCategoryScreen(),
+                                                        ));
+                                                  },
+                                                  child: Row(
+                                                    children: [
+                                                      SvgPicture.asset(
+                                                        'assets/svgs/action.svg',
+                                                        height: 2.7.h,
+                                                      ),
+                                                      SizedBox(
+                                                        width: 2.w,
+                                                      ),
+                                                      Text(
+                                                        'Action'.tr,
+                                                        overflow: TextOverflow
+                                                            .ellipsis,
+                                                        style: TextStyle(
+                                                          color: Colors.black,
+                                                          fontSize: 10.sp,
+                                                          overflow: TextOverflow
+                                                              .ellipsis,
+                                                        ),
+                                                      ),
+                                                    ],
                                                   ),
                                                 ),
-                                                SizedBox(
-                                                  height: 0.3.h,
+                                                Row(
+                                                  children: [
+                                                    Text(
+                                                      'Featured:'.tr,
+                                                      overflow:
+                                                          TextOverflow.ellipsis,
+                                                      style: TextStyle(
+                                                        color: Colors.black,
+                                                        fontSize: 10.sp,
+                                                        overflow: TextOverflow
+                                                            .ellipsis,
+                                                      ),
+                                                    ),
+                                                    SizedBox(
+                                                      width: 1.w,
+                                                    ),
+                                                    Container(
+                                                      decoration: BoxDecoration(
+                                                          color: blueColor,
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(4)),
+                                                      child: Padding(
+                                                        padding: EdgeInsets
+                                                            .symmetric(
+                                                                horizontal:
+                                                                    2.5.w,
+                                                                vertical:
+                                                                    0.4.h),
+                                                        child: Text(
+                                                          provider
+                                                                      .cateoryProductModel
+                                                                      ?.data
+                                                                      ?.categories?[
+                                                                          index]
+                                                                      .featured ==
+                                                                  1
+                                                              ? 'Yes'.tr
+                                                              : 'No'.tr,
+                                                          style: TextStyle(
+                                                              color:
+                                                                  Colors.white,
+                                                              fontSize: 9.sp),
+                                                        ),
+                                                      ),
+                                                    )
+                                                  ],
                                                 ),
-                                                Text(
-                                                  '1 month ago'.tr,
-                                                  overflow:
-                                                      TextOverflow.ellipsis,
-                                                  style: TextStyle(
-                                                    color: Color(0xff636363),
-                                                    fontSize: 8.5.sp,
-                                                    overflow:
-                                                        TextOverflow.ellipsis,
-                                                  ),
-                                                ),
+                                                Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    Text(
+                                                      'Created at'.tr,
+                                                      overflow:
+                                                          TextOverflow.ellipsis,
+                                                      style: TextStyle(
+                                                        color:
+                                                            Color(0xff0B7A3E),
+                                                        fontSize: 9.sp,
+                                                        overflow: TextOverflow
+                                                            .ellipsis,
+                                                      ),
+                                                    ),
+                                                    SizedBox(
+                                                      height: 0.3.h,
+                                                    ),
+                                                    Text(
+                                                      '1 month ago'.tr,
+                                                      overflow:
+                                                          TextOverflow.ellipsis,
+                                                      style: TextStyle(
+                                                        color:
+                                                            Color(0xff636363),
+                                                        fontSize: 8.5.sp,
+                                                        overflow: TextOverflow
+                                                            .ellipsis,
+                                                      ),
+                                                    ),
+                                                  ],
+                                                )
                                               ],
                                             )
                                           ],
-                                        )
-                                      ],
+                                        ),
+                                      ),
                                     ),
-                                  ),
+                                    SizedBox(
+                                      height: 2.h,
+                                    )
+                                  ],
                                 ),
-                                SizedBox(
-                                  height: 2.h,
-                                )
-                              ],
-                            ),
-                          );
-                        },
-                      ))
+                              );
+                            },
+                          ))
           ],
         ),
       ),
