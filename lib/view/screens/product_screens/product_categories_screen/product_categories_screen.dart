@@ -1,12 +1,13 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:db_2_0/custom_widgets/data_loading.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:flutter_switch/flutter_switch.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
-
+import 'package:dio/dio.dart'as dio;
 import '../../../../custom_widgets/app_colors.dart';
 import '../../auth_screens/login_screen/Login Provider/login_model_globle.dart';
 import '../Provider/all_product_provider.dart';
@@ -128,7 +129,10 @@ class _ProductCategoriesScreenState extends State<ProductCategoriesScreen> {
                         context,
                         MaterialPageRoute(
                           builder: (context) => CreateCategoryScreen(),
-                        ));
+                        )).then((value) {
+                      provider.get_categories(
+                          map: {'user_id': '${user_model.data!.userId}'});
+                    });
                   },
                   child: Container(
                     height: 3.5.h,
@@ -277,7 +281,23 @@ class _ProductCategoriesScreenState extends State<ProductCategoriesScreen> {
                                                       ),
                                                     ],
                                                   ),
-                                                )
+                                                ),
+                                                InkWell(
+                                                    onTap: ()async{
+                                                      Map<String, dynamic> map = {
+                                                        'user_id': '${user_model.data!.userId}',
+                                                        'action': 'remove',
+                                                        'cat_id': '${provider.cateoryProductModel?.data?.categories?[index].id}',
+                                                        'domain_id': '${user_model.data!.domainId}',
+
+                                                      };
+                                                      //map.removeWhere((key, value) => value == null);
+                                                      await provider.upload_categories(
+                                                          uploadMedia: dio.FormData.fromMap(map));
+                                                      await provider.get_categories(map: {'user_id': '${user_model.data!.userId}'});
+
+                                                    },
+                                                    child: Icon(CupertinoIcons.delete,color: Colors.red,)),
                                               ],
                                             ),
                                             SizedBox(
@@ -301,7 +321,14 @@ class _ProductCategoriesScreenState extends State<ProductCategoriesScreen> {
                                                         context,
                                                         MaterialPageRoute(
                                                           builder: (context) =>
-                                                              CreateCategoryScreen(),
+                                                              CreateCategoryScreen(
+                                                                type: '1',
+                                                            name:
+                                                                '${provider.cateoryProductModel?.data?.categories?[index].name}',
+                                                                pId: '${provider.cateoryProductModel!.data!.categories![index].children![0].id}',
+                                                                featudeId: provider.cateoryProductModel?.data?.categories?[index].featured,
+                                                                url: '${provider.cateoryProductModel?.data?.categories?[index].metas?[0].type}',
+                                                          ),
                                                         ));
                                                   },
                                                   child: Row(

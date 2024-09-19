@@ -6,7 +6,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
-
+import 'package:dio/dio.dart'as dio;
 import '../../../../custom_widgets/app_colors.dart';
 import '../../auth_screens/login_screen/Login Provider/login_model_globle.dart';
 import '../Provider/all_product_provider.dart';
@@ -127,7 +127,9 @@ class _ProductBrandScreenState extends State<ProductBrandScreen> {
                         context,
                         MaterialPageRoute(
                           builder: (context) => CreateBrandScreen(),
-                        ));
+                        )).then((value) {
+                      provider.get_brands(map: {'user_id': '${user_model.data!.userId}'});
+                    });
                   },
                   child: Container(
                     height: 3.5.h,
@@ -274,9 +276,26 @@ class _ProductBrandScreenState extends State<ProductBrandScreen> {
                                                                 TextDecoration
                                                                     .underline),
                                                       ),
+
                                                     ],
                                                   ),
-                                                )
+                                                ),
+                                                InkWell(
+                                                    onTap: ()async{
+                                                      Map<String, dynamic> map = {
+                                                        'user_id': '${user_model.data!.userId}',
+                                                        'action': 'remove',
+                                                        'brand_id': '${provider.brandsProductModel?.data?.categories?[index].id}',
+                                                        'domain_id': '${user_model.data!.domainId}',
+
+                                                      };
+                                                      //map.removeWhere((key, value) => value == null);
+                                                      await provider.pload_Brand(
+                                                          uploadMedia: dio.FormData.fromMap(map));
+                                                     await provider.get_brands(map: {'user_id': '${user_model.data!.userId}'});
+
+                                                    },
+                                                    child: Icon(CupertinoIcons.delete,color: Colors.red,)),
                                               ],
                                             ),
                                             SizedBox(
@@ -300,8 +319,15 @@ class _ProductBrandScreenState extends State<ProductBrandScreen> {
                                                         context,
                                                         MaterialPageRoute(
                                                           builder: (context) =>
-                                                              CreateBrandScreen(),
-                                                        ));
+                                                              CreateBrandScreen(
+                                                                type: '1',
+                                                                name: '${provider.brandsProductModel?.data?.categories?[index].name}',
+                                                                url: '${provider.brandsProductModel?.data?.categories?[index].metaContent}',
+                                                                bId: provider.brandsProductModel?.data?.categories?[index].id,
+                                                              ),
+                                                        )).then((value) async{
+                                                     await provider.get_brands(map: {'user_id': '${user_model.data!.userId}'});
+                                                    });
                                                   },
                                                   child: Row(
                                                     children: [

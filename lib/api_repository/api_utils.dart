@@ -33,6 +33,7 @@ import '../view/screens/product_screens/Models/edit_product_price_model.dart';
 import '../view/screens/product_screens/Models/update_inventory_model.dart';
 import '../view/screens/product_screens/Models/update_product_image_model.dart';
 import '../view/screens/product_screens/Models/update_product_seo_model.dart';
+import '../view/screens/product_screens/manage_inventory_screens/Model/inventory_model.dart';
 import 'base_path.dart';
 
 class DataProvider {
@@ -463,6 +464,32 @@ class DataProvider {
       Get.snackbar('Alert', '${data['message']}');
     }
   }
+  Future upload_categories_api({dio.FormData? uploadMedia}) async {
+    print('objectmapis${uploadMedia}');
+    final response = await dio.Dio().post('$baseURL$uploadCategoriesUrl',
+        data: uploadMedia, options: dio.Options(headers: headers));
+    var data = response.data;
+    print('$data');
+    if (data['result'] == 'success') {
+      log("loginFunction code is = ${response.statusCode}");
+      Get.snackbar('Success', '${data['message']}');
+    } else {
+      Get.snackbar('Alert', '${data['message']}');
+    }
+  }
+  Future upload_brand_api({dio.FormData? uploadMedia}) async {
+    print('objectmapis${uploadMedia}');
+    final response = await dio.Dio().post('$baseURL$uploadBrandUrl',
+        data: uploadMedia, options: dio.Options(headers: headers));
+    var data = response.data;
+    print('$data');
+    if (data['result'] == 'success') {
+      log("loginFunction code is = ${response.statusCode}");
+      Get.snackbar('Success', '${data['message']}');
+    } else {
+      Get.snackbar('Alert', '${data['message']}');
+    }
+  }
 
   Future stor_info_api({Map<String, dynamic>? map}) async {
     print('map is === $map');
@@ -553,6 +580,21 @@ class DataProvider {
       log("loginFunction code is = ${response.statusCode}");
       orderInfoModel = OrderInfoModel.fromJson(data);
       return orderInfoModel;
+    } else {
+      Get.snackbar('Alert', '${data['message']}');
+      return null;
+    }
+  }
+  Future inventoryInfoApi({Map<String, dynamic>? map}) async {
+    print('map is === $map');
+    GetInvontoryModel? getInvontoryModel;
+    final response = await http.post(Uri.parse('$baseURL$inventory_info'),
+        body: map, headers: headers);
+    var data = jsonDecode(response.body);
+    if (data['result'] == 'success') {
+      log("loginFunction code is = ${response.statusCode}");
+      getInvontoryModel = GetInvontoryModel.fromJson(data);
+      return getInvontoryModel;
     } else {
       Get.snackbar('Alert', '${data['message']}');
       return null;

@@ -1,4 +1,5 @@
 import 'package:db_2_0/view/screens/product_screens/Models/all_product_model.dart';
+import 'package:dio/dio.dart'as dio;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -12,6 +13,8 @@ class AllProductProvider extends ChangeNotifier {
   TextEditingController searchController = TextEditingController();
   bool loading = true;
   bool category_loading = true;
+  bool upload_category_loading = false;
+  bool upload_brand_loading = false;
   bool brands_loading = true;
   AllProductModel? allProductModel;
   CateoryProductModel? cateoryProductModel;
@@ -39,6 +42,24 @@ class AllProductProvider extends ChangeNotifier {
     cateoryProductModel = data;
     print('objectis${user_model.data!.userId}');
     category_loading = false;
+    update_state();
+  }
+  upload_categories({dio.FormData? uploadMedia}) async {
+    upload_category_loading = true;
+    update_state();
+    var data = await DataProvider().upload_categories_api(uploadMedia: uploadMedia);
+    // cateoryProductModel = data;
+    // print('objectis${user_model.data!.userId}');
+    upload_category_loading = false;
+    update_state();
+  }
+  pload_Brand({dio.FormData? uploadMedia}) async {
+    upload_brand_loading = true;
+    update_state();
+    var data = await DataProvider().upload_brand_api(uploadMedia: uploadMedia);
+    // cateoryProductModel = data;
+    // print('objectis${user_model.data!.userId}');
+    upload_brand_loading = false;
     update_state();
   }
 
