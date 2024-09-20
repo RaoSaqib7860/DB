@@ -34,6 +34,7 @@ const store_location = 'seller-updatestorelocation';
 const order_status_update = 'order-status-update';
 const get_categories = 'get-categories';
 const get_brands = 'get-brands';
+const updateInventory = 'stock-update';
 const delivery_orders = 'delivery-orders';
 const delivery_location = 'delivery-location';
 const destroyorder = 'destroyorder';

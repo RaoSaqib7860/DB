@@ -7,9 +7,11 @@ class GetInventoryProvider extends ChangeNotifier{
   bool inventory_loading = false;
   GetInvontoryModel? getInvontoryModel;
 
-  Future get_inventoryApi({Map<String, String>? map}) async {
-    inventory_loading = true;
-    notifyListeners();
+  Future get_inventoryApi({Map<String, dynamic>? map,bool? load=true}) async {
+    if(load==true){
+      inventory_loading = true;
+      notifyListeners();
+    }
     var data = await DataProvider().inventoryInfoApi(map: map);
     getInvontoryModel = data;
     inventory_loading = false;

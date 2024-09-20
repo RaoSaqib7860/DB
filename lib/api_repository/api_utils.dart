@@ -191,6 +191,21 @@ class DataProvider {
     }
   }
 
+  Future updateInventory({Map<String, dynamic>? map}) async {
+    print('map is === $map');
+    final response = await http.post(Uri.parse('$baseURL$updateInventory'),
+        body: map, headers: headers);
+    var data = jsonDecode(response.body);
+    print('${data}');
+    if (data['result'] == 'success') {
+      log("loginFunction code is = ${response.statusCode}");
+      return true;
+    } else {
+      Get.snackbar('Alert', '${data['message']}');
+      return null;
+    }
+  }
+
   Future allProductModelApi({Map<String, dynamic>? map}) async {
     print('map is === $map');
     AllProductModel? allProductModel;

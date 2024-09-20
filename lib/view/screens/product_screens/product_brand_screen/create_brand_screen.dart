@@ -186,15 +186,26 @@ class _CreateBrandScreenState extends State<CreateBrandScreen> {
                 color: Colors.black,
               ),
             ),
-            if (logoImage != null || widget.url != null)
+            if (logoImage != null && widget.url == null)
               Padding(
                 padding:  EdgeInsets.only(left: 8.0),
                 child: Container(
                   height: 10.h,
                   width: 20.w,
                   child: Center(
-                    child: widget.type != '1'?
-                    Image.file(logoImage!):
+                    child:
+                    Image.file(logoImage!),
+                  ),
+                ),
+              ),
+            if ( widget.url != null && logoImage == null)
+              Padding(
+                padding:  EdgeInsets.only(left: 8.0),
+                child: Container(
+                  height: 10.h,
+                  width: 20.w,
+                  child: Center(
+                    child:
                     CachedNetworkImage(
                       imageUrl:
                       "https://${user_model.data?.domain}/${widget.url}",
