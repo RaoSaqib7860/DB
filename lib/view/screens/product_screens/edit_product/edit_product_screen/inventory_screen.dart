@@ -17,7 +17,8 @@ import '../../Provider/add_product_provider.dart';
 class InventoryScreen extends StatefulWidget {
   final int? index;
   final String? productId;
-  const InventoryScreen({this.index, Key? key, this.productId})
+  String? type;
+   InventoryScreen({this.index, Key? key,this.type, this.productId})
       : super(key: key);
 
   @override
@@ -27,8 +28,8 @@ class InventoryScreen extends StatefulWidget {
 class _InventoryScreenState extends State<InventoryScreen> {
   TextEditingController skuController = TextEditingController();
   var manageStock = [
+    'Don\'t Need to Manage Stock',
     'Manage Stock',
-    'Dont Need to Manage Stock',
   ];
   var stockStatus = [
     'In Stock',
@@ -59,19 +60,23 @@ class _InventoryScreenState extends State<InventoryScreen> {
     if (provider.updateInventoryProduct?.data?.info?.stock?.stockManage == 0) {
       setState(() {
         stockManage = 'Manage Stock';
+        manageStockIndex=1;
       });
     } else {
       setState(() {
-        stockManage = 'Dont Need to Manage Stock';
+        stockManage = 'Don\'t Need to Manage Stock';
+        manageStockIndex=0;
       });
     }
     if (provider.updateInventoryProduct?.data?.info?.stock?.stockStatus == 0) {
       setState(() {
         statusStock = 'In Stock';
+        stockStatusIndex=0;
       });
     } else {
       setState(() {
         statusStock = 'Out Of Stock';
+        stockStatusIndex=1;
       });
     }
     setState(() {});
@@ -159,6 +164,49 @@ class _InventoryScreenState extends State<InventoryScreen> {
                           ),
                         ),
                       ),
+                      Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 6.w),
+                        child: Text(
+                          'Stock Status'.tr,
+                          style:
+                              TextStyle(color: Colors.black, fontSize: 10.sp),
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 6.w),
+                        child: DropdownButton(
+                          isExpanded: true,
+                          value: statusStock,
+                          icon: Icon(
+                            Icons.keyboard_arrow_down_outlined,
+                            size: 3.h,
+                            color: Colors.black,
+                          ),
+                          items: stockStatus.map((String? items) {
+                            return DropdownMenuItem(
+                              value: items,
+                              child: Text(
+                                items!,
+                                style: TextStyle(
+                                    color: Colors.grey, fontSize: 11.sp),
+                              ),
+                            );
+                          }).toList(),
+                          onChanged: (String? newValue) {
+                            setState(() {
+                              statusStock = newValue!;
+                              stockStatusIndex = stockStatus.indexOf(newValue);
+                            });
+                          },
+                          hint: Text(
+                            "Select".tr,
+                            style: TextStyle(
+                                fontSize: 12,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.grey),
+                          ),
+                        ),
+                      ),
                       SizedBox(
                         height: 2.h,
                       ),
@@ -225,7 +273,7 @@ class _InventoryScreenState extends State<InventoryScreen> {
                                 ),
                                 Container(
                                     //width: 50.w,
-                                    height: 10.h,
+                                    height: 16.h,
                                     child: ListView.builder(
                                       itemCount: provider
                                           .updateInventoryProduct!
@@ -251,12 +299,16 @@ class _InventoryScreenState extends State<InventoryScreen> {
                                                       MainAxisAlignment
                                                           .spaceBetween,
                                                   children: [
-                                                    Text(
-                                                      '${provider.updateInventoryProduct!.data!.stockData![index].colorName}',
-                                                      style: TextStyle(
-                                                          color:
-                                                              Color(0xff454545),
-                                                          fontSize: 13.sp),
+                                                    Container(
+                                                      height: 5.h,
+                                                      width: 10.w,
+                                                      child: Text(
+                                                        '${provider.updateInventoryProduct!.data!.stockData![index].colorName}',overflow: TextOverflow.ellipsis,
+                                                        style: TextStyle(
+                                                            color:
+                                                                Color(0xff454545),
+                                                            fontSize: 12.sp),
+                                                      ),
                                                     ),
                                                     Padding(
                                                       padding: EdgeInsets.only(
@@ -280,12 +332,19 @@ class _InventoryScreenState extends State<InventoryScreen> {
                                                         ),
                                                       ),
                                                     ),
-                                                    Text(
-                                                      '${provider.updateInventoryProduct!.data!.stockData![index].quantity}',
-                                                      style: TextStyle(
-                                                          color:
-                                                              Color(0xff454545),
-                                                          fontSize: 13.sp),
+                                                    Container(
+                                                      height: 5.h,
+                                                      width: 10.w,
+                                                      child: Align(
+                                                        alignment: Alignment.topRight,
+                                                        child: Text(
+                                                          '${provider.updateInventoryProduct!.data!.stockData![index].quantity}',
+                                                          style: TextStyle(
+                                                              color:
+                                                                  Color(0xff454545),
+                                                              fontSize: 13.sp),
+                                                        ),
+                                                      ),
                                                     ),
                                                   ],
                                                 ),
@@ -320,7 +379,6 @@ class _InventoryScreenState extends State<InventoryScreen> {
                                   'sku': '${skuController.text}',
                                   'stock_manage': '${manageStockIndex}',
                                   'stock_status': '${stockStatusIndex}',
-                                  //'stock_qty': '',
                                 });
                                 CustomToastManager.showToast(
                                     context: context,

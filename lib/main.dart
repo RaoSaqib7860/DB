@@ -10,6 +10,7 @@ import 'package:db_2_0/view/screens/home_screen/Update%20Store%20Setup/update_st
 import 'package:db_2_0/view/screens/order_screens/Provider/all_order_peovider.dart';
 import 'package:db_2_0/view/screens/product_screens/Provider/add_product_provider.dart';
 import 'package:db_2_0/view/screens/product_screens/Provider/all_product_provider.dart';
+import 'package:db_2_0/view/screens/product_screens/manage_inventory_screens/Provider/inventory_provider.dart';
 import 'package:db_2_0/view/screens/splash_screen/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get_storage/get_storage.dart';
@@ -37,6 +38,7 @@ void main() async {
         ChangeNotifierProvider(create: (_) => GetAndUpdateStoreProvider()),
         ChangeNotifierProvider(create: (_) => GetAnalyticsProvider()),
         ChangeNotifierProvider(create: (_) => GetSubscriptionPlanProvider()),
+        ChangeNotifierProvider(create: (_) => GetInventoryProvider()),
       ],
       child: const MyApp(),
     ),
