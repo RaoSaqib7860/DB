@@ -1,5 +1,4 @@
 import 'package:db_2_0/view/screens/product_screens/manage_inventory_screens/total_inventory_screen.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 

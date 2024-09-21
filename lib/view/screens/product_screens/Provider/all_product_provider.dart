@@ -1,5 +1,5 @@
 import 'package:db_2_0/view/screens/product_screens/Models/all_product_model.dart';
-import 'package:dio/dio.dart'as dio;
+import 'package:dio/dio.dart' as dio;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -25,7 +25,7 @@ class AllProductProvider extends ChangeNotifier {
   Future get_product_data({Map<String, dynamic>? map}) async {
     loading = true;
     update_state();
-    map_data=map;
+    map_data = map;
     var data = await DataProvider().allProductModelApi(map: map);
     allProductModel = data;
     print('objectismodel${allProductModel!.toJson()}');
@@ -44,15 +44,22 @@ class AllProductProvider extends ChangeNotifier {
     category_loading = false;
     update_state();
   }
+
   upload_categories({dio.FormData? uploadMedia}) async {
-    upload_category_loading = true;
-    update_state();
-    var data = await DataProvider().upload_categories_api(uploadMedia: uploadMedia);
-    // cateoryProductModel = data;
-    // print('objectis${user_model.data!.userId}');
-    upload_category_loading = false;
-    update_state();
+    try {
+      upload_category_loading = true;
+      update_state();
+      var data =
+          await DataProvider().upload_categories_api(uploadMedia: uploadMedia);
+      upload_category_loading = false;
+      update_state();
+    } catch (e) {
+      print('exception while calling upload_categories ....$e');
+      upload_category_loading = false;
+      update_state();
+    }
   }
+
   pload_Brand({dio.FormData? uploadMedia}) async {
     upload_brand_loading = true;
     update_state();

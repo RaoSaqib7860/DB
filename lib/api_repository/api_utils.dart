@@ -498,8 +498,8 @@ class DataProvider {
         data: uploadMedia, options: dio.Options(headers: headers));
     var data = response.data;
     print('$data');
+    log("loginFunction code is = ${response.data}");
     if (data['result'] == 'success') {
-      log("loginFunction code is = ${response.statusCode}");
       Get.snackbar('Success', '${data['message']}');
     } else {
       Get.snackbar('Alert', '${data['message']}');
@@ -614,6 +614,12 @@ class DataProvider {
       Get.snackbar('Alert', '${data['message']}');
       return null;
     }
+  }
+  Future inventoryInfoUpdateApi({Map<String, dynamic>? map}) async {
+    print('map is === $map');
+    final response = await http.post(Uri.parse('$baseURL$inventory_info_update'),
+        body: map, headers: headers);
+    log("inventoryInfoUpdateApi code is = ${response.body}");
   }
 
   Future getstore_infoApi({Map<String, dynamic>? map}) async {

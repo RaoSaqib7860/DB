@@ -7,6 +7,7 @@ import 'package:flutter_switch/flutter_switch.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 
+import '../../../../api_repository/api_utils.dart';
 import '../../../../custom_widgets/app_colors.dart';
 import '../../auth_screens/login_screen/Login Provider/login_model_globle.dart';
 import '../edit_product/edit_product.dart';
@@ -338,6 +339,7 @@ class _TotalInventoryScreenState extends State<TotalInventoryScreen> {
                                                   height: 2.7.h,
                                                   valueFontSize: 25.0,
                                                   toggleSize: 2.3.h,
+                                                  disabled: true,
                                                   value: provider
                                                               .getInvontoryModel!
                                                               .data![index]
@@ -347,42 +349,58 @@ class _TotalInventoryScreenState extends State<TotalInventoryScreen> {
                                                       : false,
                                                   borderRadius: 30.0,
                                                   padding: 1,
-                                                  onToggle: (val) {
-                                                    setState(() {
-                                                      if (val) {
-                                                        provider
-                                                            .getInvontoryModel!
-                                                            .data![index]
-                                                            .stockManage = 1;
-                                                        provider
-                                                            .get_inventoryApi(
-                                                                map: {
-                                                              'user_id':
-                                                                  '${user_model.data!.userId}',
-                                                              'domain_id':
-                                                                  '${user_model.data!.domainId}',
-                                                              'stock_status': '0',
-                                                                  'stock_qty':'${provider.getInvontoryModel!.data![index].stockQty}'
-                                                            },
-                                                                load: false);
-                                                      } else {
-                                                        provider
-                                                            .getInvontoryModel!
-                                                            .data![index]
-                                                            .stockManage = 0;
-                                                        provider
-                                                            .get_inventoryApi(
-                                                                map: {
-                                                              'user_id':
-                                                                  '${user_model.data!.userId}',
-                                                              'domain_id':
-                                                                  '${user_model.data!.domainId}',
-                                                              'stock_status': "1",
-                                                                  'stock_qty':'${provider.getInvontoryModel!.data![index].stockQty}'
-                                                            },
-                                                                load: false);
-                                                      }
-                                                    });
+                                                  onToggle: (val) async {
+                                                    if (val) {
+                                                      provider
+                                                          .getInvontoryModel!
+                                                          .data![index]
+                                                          .stockManage = 1;
+                                                      setState(() {});
+                                                      await DataProvider()
+                                                          .inventoryInfoUpdateApi(
+                                                              map: {
+                                                            'user_id':
+                                                                '${user_model.data!.userId}',
+                                                            'domain_id':
+                                                                '${user_model.data!.domainId}',
+                                                            'stock_status': '1',
+                                                            'stock_qty':
+                                                                '${provider.getInvontoryModel!.data![index].stockQty}'
+                                                          });
+                                                      provider.get_inventoryApi(
+                                                          map: {
+                                                            'user_id':
+                                                                '${user_model.data!.userId}',
+                                                            'domain_id':
+                                                                '${user_model.data!.domainId}',
+                                                          },
+                                                          load: false);
+                                                    } else {
+                                                      provider
+                                                          .getInvontoryModel!
+                                                          .data![index]
+                                                          .stockManage = 0;
+                                                      setState(() {});
+                                                      await DataProvider()
+                                                          .inventoryInfoUpdateApi(
+                                                              map: {
+                                                            'user_id':
+                                                                '${user_model.data!.userId}',
+                                                            'domain_id':
+                                                                '${user_model.data!.domainId}',
+                                                            'stock_status': '0',
+                                                            'stock_qty':
+                                                                '${provider.getInvontoryModel!.data![index].stockQty}'
+                                                          });
+                                                      provider.get_inventoryApi(
+                                                          map: {
+                                                            'user_id':
+                                                                '${user_model.data!.userId}',
+                                                            'domain_id':
+                                                                '${user_model.data!.domainId}',
+                                                          },
+                                                          load: false);
+                                                    }
                                                   },
                                                 )
                                               ],
@@ -424,37 +442,94 @@ class _TotalInventoryScreenState extends State<TotalInventoryScreen> {
                                         ),
                                       ],
                                     ),
-                                    if(provider
-                                        .getInvontoryModel!
-                                        .data![index]
-                                        .stockManage == 1)
-                                    Row(
-                                      children: [
-                                        Icon(
-                                          Icons.remove,
-                                          color: Color(0xff050505),
-                                          size: 1.5.h,
-                                        ),
-                                        SizedBox(
-                                          width: 2.w,
-                                        ),
-                                        Text(
-                                          '${provider.getInvontoryModel!.data![index].stockQty}',
-                                          style: TextStyle(
-                                              color: Colors.black,
-                                              fontSize: 10.sp,
-                                              fontWeight: FontWeight.bold),
-                                        ),
-                                        SizedBox(
-                                          width: 1.w,
-                                        ),
-                                        Icon(
-                                          Icons.add,
-                                          color: Color(0xff050505),
-                                          size: 1.5.h,
-                                        ),
-                                      ],
-                                    )
+                                    if (provider.getInvontoryModel!.data![index]
+                                            .stockManage ==
+                                        1)
+                                      Row(
+                                        children: [
+                                          IconButton(
+                                            onPressed: () async {
+                                              provider
+                                                  .getInvontoryModel!
+                                                  .data![index]
+                                                  .stockQty = provider
+                                                      .getInvontoryModel!
+                                                      .data![index]
+                                                      .stockQty! -
+                                                  1;
+                                              setState(() {});
+                                              await DataProvider()
+                                                  .inventoryInfoUpdateApi(map: {
+                                                'user_id':
+                                                    '${user_model.data!.userId}',
+                                                'product_id':
+                                                    '${provider.getInvontoryModel!.data![index].termId}',
+                                                'stock_status': '1',
+                                                'stock_qty':
+                                                    '${provider.getInvontoryModel!.data![index].stockQty}'
+                                              });
+                                              provider.get_inventoryApi(map: {
+                                                'user_id':
+                                                    '${user_model.data!.userId}',
+                                                'domain_id':
+                                                    '${user_model.data!.domainId}',
+                                              }, load: false);
+                                            },
+                                            icon: Icon(
+                                              Icons.remove,
+                                              color: Color(0xff050505),
+                                              size: 1.5.h,
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            width: 2.w,
+                                          ),
+                                          Text(
+                                            '${provider.getInvontoryModel!.data![index].stockQty}',
+                                            style: TextStyle(
+                                                color: Colors.black,
+                                                fontSize: 10.sp,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                          SizedBox(
+                                            width: 1.w,
+                                          ),
+                                          IconButton(
+                                            onPressed: () async {
+                                              provider
+                                                  .getInvontoryModel!
+                                                  .data![index]
+                                                  .stockQty = provider
+                                                      .getInvontoryModel!
+                                                      .data![index]
+                                                      .stockQty! +
+                                                  1;
+                                              setState(() {});
+                                              await DataProvider()
+                                                  .inventoryInfoUpdateApi(map: {
+                                                'user_id':
+                                                    '${user_model.data!.userId}',
+                                                'product_id':
+                                                '${provider.getInvontoryModel!.data![index].termId}',
+                                                'stock_status': '1',
+                                                'stock_qty':
+                                                    '${provider.getInvontoryModel!.data![index].stockQty}'
+                                              });
+                                              provider.get_inventoryApi(map: {
+                                                'user_id':
+                                                    '${user_model.data!.userId}',
+                                                'domain_id':
+                                                    '${user_model.data!.domainId}',
+                                              }, load: false);
+                                            },
+                                            icon: Icon(
+                                              Icons.add,
+                                              color: Color(0xff050505),
+                                              size: 1.5.h,
+                                            ),
+                                          ),
+                                        ],
+                                      )
                                   ],
                                 )
                               ],

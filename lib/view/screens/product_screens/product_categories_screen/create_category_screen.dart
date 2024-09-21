@@ -2,38 +2,20 @@ import 'dart:io';
 import 'package:dio/dio.dart' as dio;
 import 'package:db_2_0/custom_widgets/data_loading.dart';
 import 'package:dio/dio.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
-
 import '../../../../custom_widgets/app_colors.dart';
 import '../../../../custom_widgets/custom_line_textfield.dart';
 import '../../auth_screens/login_screen/Login Provider/login_model_globle.dart';
 import '../Provider/all_product_provider.dart';
-import '../product_screen.dart';
+import '../Models/category_product_model.dart';
 
 class CreateCategoryScreen extends StatefulWidget {
-  String? name;
-  String? type;
-  String? pId;
-  int? featudeId;
-  int? menuId;
-  int? topHeaderId;
-  String? url;
-
-  CreateCategoryScreen(
-      {Key? key,
-      this.name,
-      this.url,
-      this.featudeId,
-      this.menuId,
-      this.pId,
-        this.type,
-      this.topHeaderId})
-      : super(key: key);
+  final Categories? Category;
+  const CreateCategoryScreen({super.key, this.Category});
 
   @override
   State<CreateCategoryScreen> createState() => _CreateCategoryScreenState();
@@ -88,21 +70,17 @@ class _CreateCategoryScreenState extends State<CreateCategoryScreen> {
   }
 
   api_call() {
-    if (widget.type == '1') {
+    if (widget.Category != null) {
       final AllProductProvider provider =
           Provider.of<AllProductProvider>(context, listen: false);
       provider.get_categories(map: {'user_id': '${user_model.data!.userId}'});
-      nameController.text = widget.name ?? '';
-      if(widget.featudeId == 0){
+      nameController.text = widget.Category!.name ?? '';
+      if (widget.Category!.featured == 0) {
         selectFeatured = 'No';
-      }else{
+      } else {
         selectFeatured = 'Yes';
       }
       setState(() {});
-    } else {
-      final AllProductProvider provider =
-          Provider.of<AllProductProvider>(context, listen: false);
-      provider.get_categories(map: {'user_id': '${user_model.data!.userId}'});
     }
   }
 
@@ -225,12 +203,6 @@ class _CreateCategoryScreenState extends State<CreateCategoryScreen> {
                           ),
                         ),
                       ),
-                    if(widget.pId != null)
-                    Wrap(
-                      children: provider.cateoryProductModel!.data!.categories![0].children!.map((e) {
-                        return Chip(label: Text('${e.name}'),onDeleted: (){},);
-                      }).toList(),
-                    ),
                     SizedBox(
                       height: 1.5.h,
                     ),
@@ -433,8 +405,7 @@ class _CreateCategoryScreenState extends State<CreateCategoryScreen> {
                         height: 10.h,
                         width: 20.w,
                         child: Center(
-                          child:
-                          Image.file(logoImage!),
+                          child: Image.file(logoImage!),
                         ),
                       ),
                     SizedBox(
@@ -444,22 +415,26 @@ class _CreateCategoryScreenState extends State<CreateCategoryScreen> {
                       onTap: () async {
                         Map<String, dynamic> map = {
                           'user_id': '${user_model.data!.userId}',
-                          'action': 'add',
+                          'action': widget.Category == null ? 'add' : 'update',
                           'name': '${nameController.text}',
                           'featured': '$selectFeaturedIndex',
                           'menu_status': '$selectAssignIndex',
                           'top_menu': '$selectAssignToHeaderIndex',
                           'p_id': id,
                           'domain_id': '${user_model.data!.domainId}',
-                          'file': await MultipartFile.fromFile(
-                            logoImage!.path,
-                          ),
+                          'cat_id': widget.Category == null
+                              ? null
+                              : widget.Category!.id,
+                          'file': logoImage == null
+                              ? null
+                              : await MultipartFile.fromFile(
+                                  logoImage!.path,
+                                ),
                         };
                         map.removeWhere((key, value) => value == null);
                         await provider.upload_categories(
                             uploadMedia: dio.FormData.fromMap(map));
                         Navigator.pop(context);
-                        // Navigator.push(context, MaterialPageRoute(builder: (context) => ProductScreen(),));
                       },
                       child: Padding(
                         padding: EdgeInsets.only(left: 4.w, right: 4.w),

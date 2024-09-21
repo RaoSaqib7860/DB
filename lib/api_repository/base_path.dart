@@ -30,6 +30,7 @@ const uploadCategoriesUrl = 'categories-function';
 const uploadBrandUrl = 'brands-function';
 const store_info = 'seller-updatestoreinfo';
 const inventory_info = 'get-inventory';
+const inventory_info_update = 'stock-update';
 const store_location = 'seller-updatestorelocation';
 const order_status_update = 'order-status-update';
 const get_categories = 'get-categories';

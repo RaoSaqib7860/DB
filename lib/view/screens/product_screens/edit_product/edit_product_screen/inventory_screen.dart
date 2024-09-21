@@ -1,15 +1,12 @@
 import 'package:db_2_0/custom_widgets/data_loading.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
-
 import '../../../../../custom_widgets/app_colors.dart';
 import '../../../../../custom_widgets/custom_line_textfield.dart';
 import '../../../../../custom_widgets/custom_toast.dart';
 import '../../../auth_screens/login_screen/Login Provider/login_model_globle.dart';
-import '../../../bottom_sheet/bottom_sheet.dart';
 import 'package:get/get.dart';
 
 import '../../Provider/add_product_provider.dart';
@@ -18,7 +15,7 @@ class InventoryScreen extends StatefulWidget {
   final int? index;
   final String? productId;
   String? type;
-   InventoryScreen({this.index, Key? key,this.type, this.productId})
+  InventoryScreen({this.index, Key? key, this.type, this.productId})
       : super(key: key);
 
   @override
@@ -32,8 +29,8 @@ class _InventoryScreenState extends State<InventoryScreen> {
     'Manage Stock',
   ];
   var stockStatus = [
-    'In Stock',
     'Out Of Stock',
+    'In Stock',
   ];
 
   String? stockManage;
@@ -59,24 +56,24 @@ class _InventoryScreenState extends State<InventoryScreen> {
         provider.updateInventoryProduct?.data?.info?.stock?.sku ?? '';
     if (provider.updateInventoryProduct?.data?.info?.stock?.stockManage == 0) {
       setState(() {
-        stockManage = 'Manage Stock';
-        manageStockIndex=1;
+        stockManage = 'Don\'t Need to Manage Stock';
+        manageStockIndex = 0;
       });
     } else {
       setState(() {
-        stockManage = 'Don\'t Need to Manage Stock';
-        manageStockIndex=0;
+        stockManage = 'Manage Stock';
+        manageStockIndex = 1;
       });
     }
     if (provider.updateInventoryProduct?.data?.info?.stock?.stockStatus == 0) {
       setState(() {
-        statusStock = 'In Stock';
-        stockStatusIndex=0;
+        statusStock = 'Out Of Stock';
+        stockStatusIndex = 0;
       });
     } else {
       setState(() {
-        statusStock = 'Out Of Stock';
-        stockStatusIndex=1;
+        statusStock = 'In Stock';
+        stockStatusIndex = 1;
       });
     }
     setState(() {});
@@ -303,10 +300,12 @@ class _InventoryScreenState extends State<InventoryScreen> {
                                                       height: 5.h,
                                                       width: 10.w,
                                                       child: Text(
-                                                        '${provider.updateInventoryProduct!.data!.stockData![index].colorName}',overflow: TextOverflow.ellipsis,
+                                                        '${provider.updateInventoryProduct!.data!.stockData![index].colorName}',
+                                                        overflow: TextOverflow
+                                                            .ellipsis,
                                                         style: TextStyle(
-                                                            color:
-                                                                Color(0xff454545),
+                                                            color: Color(
+                                                                0xff454545),
                                                             fontSize: 12.sp),
                                                       ),
                                                     ),
@@ -336,12 +335,13 @@ class _InventoryScreenState extends State<InventoryScreen> {
                                                       height: 5.h,
                                                       width: 10.w,
                                                       child: Align(
-                                                        alignment: Alignment.topRight,
+                                                        alignment:
+                                                            Alignment.topRight,
                                                         child: Text(
                                                           '${provider.updateInventoryProduct!.data!.stockData![index].quantity}',
                                                           style: TextStyle(
-                                                              color:
-                                                                  Color(0xff454545),
+                                                              color: Color(
+                                                                  0xff454545),
                                                               fontSize: 13.sp),
                                                         ),
                                                       ),

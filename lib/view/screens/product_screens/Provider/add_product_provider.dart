@@ -156,6 +156,7 @@ class AddProductProvider extends ChangeNotifier {
   }
 
   Future update_Inventory_ProductApi({Map<String, dynamic>? map}) async {
+    print('objecupdate_Inventory_ProductApi data .....${map}');
     inentory_loading = true;
     update_state();
     var data = await DataProvider().updateInventoryProductApi(map: map);

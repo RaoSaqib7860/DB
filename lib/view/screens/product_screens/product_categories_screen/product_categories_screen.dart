@@ -7,7 +7,7 @@ import 'package:flutter_switch/flutter_switch.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
-import 'package:dio/dio.dart'as dio;
+import 'package:dio/dio.dart' as dio;
 import '../../../../custom_widgets/app_colors.dart';
 import '../../auth_screens/login_screen/Login Provider/login_model_globle.dart';
 import '../Provider/all_product_provider.dart';
@@ -283,21 +283,34 @@ class _ProductCategoriesScreenState extends State<ProductCategoriesScreen> {
                                                   ),
                                                 ),
                                                 InkWell(
-                                                    onTap: ()async{
-                                                      Map<String, dynamic> map = {
-                                                        'user_id': '${user_model.data!.userId}',
+                                                    onTap: () async {
+                                                      Map<String, dynamic> map =
+                                                          {
+                                                        'user_id':
+                                                            '${user_model.data!.userId}',
                                                         'action': 'remove',
-                                                        'cat_id': '${provider.cateoryProductModel?.data?.categories?[index].id}',
-                                                        'domain_id': '${user_model.data!.domainId}',
-
+                                                        'cat_id':
+                                                            '${provider.cateoryProductModel?.data?.categories?[index].id}',
+                                                        'domain_id':
+                                                            '${user_model.data!.domainId}',
                                                       };
                                                       //map.removeWhere((key, value) => value == null);
-                                                      await provider.upload_categories(
-                                                          uploadMedia: dio.FormData.fromMap(map));
-                                                      await provider.get_categories(map: {'user_id': '${user_model.data!.userId}'});
-
+                                                      await provider
+                                                          .upload_categories(
+                                                              uploadMedia:
+                                                                  dio.FormData
+                                                                      .fromMap(
+                                                                          map));
+                                                      await provider
+                                                          .get_categories(map: {
+                                                        'user_id':
+                                                            '${user_model.data!.userId}'
+                                                      });
                                                     },
-                                                    child: Icon(CupertinoIcons.delete,color: Colors.red,)),
+                                                    child: Icon(
+                                                      CupertinoIcons.delete,
+                                                      color: Colors.red,
+                                                    )),
                                               ],
                                             ),
                                             SizedBox(
@@ -322,14 +335,18 @@ class _ProductCategoriesScreenState extends State<ProductCategoriesScreen> {
                                                         MaterialPageRoute(
                                                           builder: (context) =>
                                                               CreateCategoryScreen(
-                                                                type: '1',
-                                                            name:
-                                                                '${provider.cateoryProductModel?.data?.categories?[index].name}',
-                                                                pId: '${provider.cateoryProductModel!.data!.categories![index].children![0].id}',
-                                                                featudeId: provider.cateoryProductModel?.data?.categories?[index].featured,
-                                                                url: '${provider.cateoryProductModel?.data?.categories?[index].metas?[0].type}',
+                                                            Category: provider
+                                                                .cateoryProductModel
+                                                                ?.data
+                                                                ?.categories?[index],
                                                           ),
-                                                        ));
+                                                        )).then((value) {
+                                                      provider.get_categories(
+                                                          map: {
+                                                            'user_id':
+                                                                '${user_model.data!.userId}'
+                                                          });
+                                                    });
                                                   },
                                                   child: Row(
                                                     children: [
