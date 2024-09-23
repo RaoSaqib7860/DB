@@ -3,13 +3,13 @@ import 'package:db_2_0/custom_widgets/data_loading.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:html_editor_enhanced/html_editor.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 import '../../../../../custom_widgets/custom_line_textfield.dart';
 import '../../../Brands/Brands Model/brand_model.dart';
 import '../../../auth_screens/login_screen/Login Provider/login_model_globle.dart';
 import '../../Provider/add_product_provider.dart';
+import 'package:html_editor_enhanced_android_fix/html_editor.dart';
 
 class ProductScreen extends StatefulWidget {
   final int? index;

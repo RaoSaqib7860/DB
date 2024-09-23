@@ -39,7 +39,9 @@ import 'base_path.dart';
 class DataProvider {
   var headers = {'csrf': '5574499YmRzanYyZzExa2J3Y3N1b2Y='};
   Future loginFunction(
-      {Map<String, dynamic>? map, BuildContext? context,bool? hide_snack}) async {
+      {Map<String, dynamic>? map,
+      BuildContext? context,
+      bool? hide_snack}) async {
     final response = await http.post(Uri.parse('$baseURL$userLogin'),
         body: map, headers: headers);
     print('objectnamwb${response.body} ');
@@ -93,7 +95,7 @@ class DataProvider {
       log("loginFunction code is = ${response.statusCode}");
       storage.write('userData', user_model.toJson());
       print('objectnamw${user_model.data!.userId} ');
-      if(hide_snack==false){
+      if (hide_snack == false) {
         Get.snackbar('Success', '${data['message']}');
       }
       return user_model;
@@ -479,6 +481,7 @@ class DataProvider {
       Get.snackbar('Alert', '${data['message']}');
     }
   }
+
   Future upload_categories_api({dio.FormData? uploadMedia}) async {
     print('objectmapis${uploadMedia}');
     final response = await dio.Dio().post('$baseURL$uploadCategoriesUrl',
@@ -492,6 +495,7 @@ class DataProvider {
       Get.snackbar('Alert', '${data['message']}');
     }
   }
+
   Future upload_brand_api({dio.FormData? uploadMedia}) async {
     print('objectmapis${uploadMedia}');
     final response = await dio.Dio().post('$baseURL$uploadBrandUrl',
@@ -600,6 +604,7 @@ class DataProvider {
       return null;
     }
   }
+
   Future inventoryInfoApi({Map<String, dynamic>? map}) async {
     print('map is === $map');
     GetInvontoryModel? getInvontoryModel;
@@ -615,10 +620,13 @@ class DataProvider {
       return null;
     }
   }
+
   Future inventoryInfoUpdateApi({Map<String, dynamic>? map}) async {
     print('map is === $map');
-    final response = await http.post(Uri.parse('$baseURL$inventory_info_update'),
-        body: map, headers: headers);
+    final response = await http.post(
+        Uri.parse('$baseURL$inventory_info_update'),
+        body: map,
+        headers: headers);
     log("inventoryInfoUpdateApi code is = ${response.body}");
   }
 

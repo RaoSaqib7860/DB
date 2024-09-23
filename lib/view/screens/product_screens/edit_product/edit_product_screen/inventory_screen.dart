@@ -14,8 +14,8 @@ import '../../Provider/add_product_provider.dart';
 class InventoryScreen extends StatefulWidget {
   final int? index;
   final String? productId;
-  String? type;
-  InventoryScreen({this.index, Key? key, this.type, this.productId})
+  final String? type;
+  const InventoryScreen({this.index, Key? key, this.type, this.productId})
       : super(key: key);
 
   @override
@@ -95,6 +95,44 @@ class _InventoryScreenState extends State<InventoryScreen> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      if(widget.type=='0')
+                        Container(
+                          height: 7.h,
+                          width: 100.w,
+                          color: blueColor,
+                          child: Center(
+                            child: Padding(
+                              padding: EdgeInsets.symmetric(horizontal: 2.w),
+                              child: Row(
+                                mainAxisAlignment:
+                                MainAxisAlignment.spaceBetween,
+                                children: [
+                                  GestureDetector(
+                                      onTap: () {
+                                        Navigator.pop(context);
+                                      },
+                                      child: Padding(
+                                        padding:  EdgeInsets.only(left: 3.w),
+                                        child: SvgPicture.asset(
+                                          'assets/svgs/back_arrow.svg',
+                                          height: 2.h,
+                                        ),
+                                      )),
+                                  Text(
+                                    'Manage Inventory'.tr,
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 13.sp,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                  SizedBox(
+                                    width: 2.w,
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
                       SizedBox(
                         height: 2.h,
                       ),
