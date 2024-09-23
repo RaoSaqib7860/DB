@@ -76,19 +76,21 @@ class _InventoryScreenState extends State<InventoryScreen> {
         stockStatusIndex = 1;
       });
     }
+     inentory_loading=false;
     setState(() {});
   }
 
   int? manageStockIndex;
   int? stockStatusIndex;
+  bool inentory_loading=true;
   @override
   Widget build(BuildContext context) {
     final AddProductProvider provider =
         Provider.of<AddProductProvider>(context);
     return DataLoading(
-      isLoading: provider.inentory_loading,
+      isLoading: inentory_loading,
       child: Scaffold(
-        body: provider.inentory_loading
+        body: inentory_loading
             ? SizedBox()
             : SingleChildScrollView(
                 child: Container(

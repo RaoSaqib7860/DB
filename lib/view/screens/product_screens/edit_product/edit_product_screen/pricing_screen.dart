@@ -67,16 +67,17 @@ class _PricingScreenState extends State<PricingScreen> {
             .updateProductPriceModel?.data!.price?.specialPrice
             ?.toString() ??
         '0';
+    pricing_loading=false;
     setState(() {});
   }
-
+bool pricing_loading=true;
   @override
   Widget build(BuildContext context) {
     final AddProductProvider provider =
         Provider.of<AddProductProvider>(context);
 
     return DataLoading(
-      isLoading: provider.pricing_loading,
+      isLoading: pricing_loading,
       child: Scaffold(
         body: SingleChildScrollView(
           child: provider.updateProductPriceModel == null

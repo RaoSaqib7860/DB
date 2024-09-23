@@ -12,9 +12,6 @@ import '../Model/get_order_history_model.dart';
 
 
 class GetAnalyticsProvider extends ChangeNotifier{
-
-
-  bool? loading = false;
   GetAnalyticsModel? getAnalyticsModel;
   GetOrserHistoryModel? getOrserHistoryModel;
 
@@ -26,27 +23,21 @@ class GetAnalyticsProvider extends ChangeNotifier{
   };
 
   getAnalyticsApiFunction({Map<String, dynamic>? map}) async {
-    loading = true;
-    update_state();
     var data = await DataProvider().getAnalyticsApi(map:{
       'user_id': '${user_model.data!.userId}',
       'domain_id': '${user_model.data!.domainId}'
     });
     getAnalyticsModel = data;
     print('objectis${user_model.data!.userId}');
-    loading = false;
     update_state();
   }
   getOrderHistoryFunction({Map<String, dynamic>? map}) async {
-    loading = true;
-    update_state();
     var data = await DataProvider().getOrderHistoryApi(map:{
       'user_id': '${user_model.data!.userId}',
       'domain_id': '${user_model.data!.domainId}'
     });
     getOrserHistoryModel = data;
     print('objectis${user_model.data!.userId}');
-    loading = false;
     update_state();
   }
 

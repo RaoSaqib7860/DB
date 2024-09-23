@@ -34,21 +34,28 @@ class _PublishScreenState extends State<PublishScreen> {
 
   @override
   void initState() {
-    final AllProductProvider provider =
-        Provider.of<AllProductProvider>(context, listen: false);
-    provider.get_product_data(
-        map: {'user_id': '${user_model.data!.userId}', 'type': '1'});
+    get_prod();
     super.initState();
   }
 
   String? dropdownvalue;
 
+  get_prod() async {
+    final AllProductProvider provider =
+        Provider.of<AllProductProvider>(context, listen: false);
+    await provider.get_product_data(
+        map: {'user_id': '${user_model.data!.userId}', 'type': '1'});
+    loading = false;
+    setState(() {});
+  }
+
+  bool loading = true;
   @override
   Widget build(BuildContext context) {
     final AllProductProvider provider =
         Provider.of<AllProductProvider>(context);
     return DataLoading(
-      isLoading: provider.loading,
+      isLoading: loading,
       child: Stack(
         children: [
           Padding(
@@ -106,16 +113,16 @@ class _PublishScreenState extends State<PublishScreen> {
                       ),
                       Expanded(
                           child: InkWell(
-                        onTap: () {
+                        onTap: () async{
                           if (dropdownvalue != null) {
                             int index = items.indexOf(dropdownvalue!);
                             if (index == 3) {
-                              provider.get_product_data(map: {
+                               provider.get_product_data(map: {
                                 'user_id': '${user_model.data!.userId}',
                                 'type': '0'
                               });
                             } else {
-                              provider.get_product_data(map: {
+                             provider.get_product_data(map: {
                                 'user_id': '${user_model.data!.userId}',
                                 'type': '${index + 1}'
                               });
@@ -178,7 +185,7 @@ class _PublishScreenState extends State<PublishScreen> {
                   height: 2.h,
                 ),
                 Expanded(
-                    child: provider.loading
+                    child: loading
                         ? SizedBox()
                         : provider.allProductModel!.data!.posts!.isEmpty
                             ? Center(
@@ -197,7 +204,7 @@ class _PublishScreenState extends State<PublishScreen> {
                                     final fifteenAgo = DateTime.parse(
                                         '${provider.allProductModel!.data!.posts![index].createdAt}');
                                     return DataLoading(
-                                      isLoading: provider.loading,
+                                      isLoading: loading,
                                       child: Padding(
                                         padding: EdgeInsets.all(1.0),
                                         child: Column(
@@ -288,7 +295,9 @@ class _PublishScreenState extends State<PublishScreen> {
                                                                   child: Text(
                                                                     '${provider.allProductModel!.data!.posts![index].title}',
                                                                     style: TextStyle(
-                                                                      overflow: TextOverflow.ellipsis,
+                                                                        overflow:
+                                                                            TextOverflow
+                                                                                .ellipsis,
                                                                         color: Color(
                                                                             0xff3E3E3E),
                                                                         fontSize:
@@ -439,7 +448,8 @@ class _PublishScreenState extends State<PublishScreen> {
                                                             InkWell(
                                                               onTap: () {
                                                                 Get.to(WebView(
-                                                                  url: 'https://octanefashion.dialboxx.com/product/${provider.allProductModel!.data!.posts![index].title}/${provider.allProductModel!.data!.posts![index].id}',
+                                                                  url:
+                                                                      'https://octanefashion.dialboxx.com/product/${provider.allProductModel!.data!.posts![index].title}/${provider.allProductModel!.data!.posts![index].id}',
                                                                 ));
                                                               },
                                                               child: SvgPicture

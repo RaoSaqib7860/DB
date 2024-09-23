@@ -23,11 +23,6 @@ class AddProductProvider extends ChangeNotifier {
   TextEditingController priceController = TextEditingController();
   TextEditingController quantityController = TextEditingController();
   bool value = false;
-  bool loading = false;
-  bool pricing_loading = false;
-  bool image_loading = false;
-  bool seo_loading = false;
-  bool inentory_loading = false;
   UpdateProductModel? updateProductModel;
   UpdateProductPriceModel? updateProductPriceModel;
   UpdateProductImageModel? updateProductImageModel;
@@ -55,8 +50,6 @@ class AddProductProvider extends ChangeNotifier {
 
   String? selectedPage = 'Product';
   Future add_product_data() async {
-    loading = true;
-    update_state();
     await DataProvider().addProductApi(map: {
       'user_id': '${user_model.data!.userId}',
       'title': '${nameController.text}',
@@ -70,14 +63,11 @@ class AddProductProvider extends ChangeNotifier {
     LoginModel loginModel = LoginModel.fromJson(data);
     loginModel.data!.isProduct = 1;
     storage.write('userData', loginModel.toJson());
-    loading = false;
     update_state();
   }
 
   get_update_product_data(
       {Map<String, dynamic>? map, BuildContext? context}) async {
-    loading = true;
-    update_state();
     await DataProvider().getUpdateOrderApi(map: map);
     CustomToastManager.showToast(
         context: context,
@@ -110,14 +100,9 @@ class AddProductProvider extends ChangeNotifier {
             ),
           ),
         ));
-    loading = false;
-    update_state();
   }
 
   Future update_product_data({String? productId}) async {
-    //current_api_object = map;
-    loading = true;
-    update_state();
     var data = await DataProvider().updateProductApi(map: {
       'user_id': '${user_model.data!.userId}',
       'product_id': '${productId}',
@@ -126,51 +111,35 @@ class AddProductProvider extends ChangeNotifier {
     print('objectismodel${updateProductModel!.toJson()}');
     update_state();
     print('objectis${user_model.data!.userId}');
-    loading = false;
-    update_state();
   }
 
   Future update_price_product_data({Map<String, dynamic>? map}) async {
-    pricing_loading = true;
-    update_state();
     var data = await DataProvider().updateProductPriceApi(map: map);
     updateProductPriceModel = data;
     //print('objectismodel${updateProductPriceModel!.toJson()}');
     update_state();
     print('objectis${user_model.data!.userId}');
-    pricing_loading = false;
-    update_state();
   }
 
   Future update_SEO_product_data({Map<String, dynamic>? map,bool? update=false}) async {
-    seo_loading = true;
-    update_state();
     var data = await DataProvider().updateProductSEOApi(map: map,update: update);
     if(update==false){
       updateProductSEOModel = data;
     }
     update_state();
     print('objectis${user_model.data!.userId}');
-    seo_loading = false;
-    update_state();
   }
 
   Future update_Inventory_ProductApi({Map<String, dynamic>? map}) async {
     print('objecupdate_Inventory_ProductApi data .....${map}');
-    inentory_loading = true;
-    update_state();
     var data = await DataProvider().updateInventoryProductApi(map: map);
     updateInventoryProduct = data;
     update_state();
     print('objectis${user_model.data!.userId}');
-    inentory_loading = false;
-    update_state();
   }
 
   Future update_Image_product_data(
       {String? productId, bool? update = false}) async {
-    image_loading = true;
-    update_state();
     FormData map_data = FormData.fromMap({
       'user_id': '${user_model.data!.userId}',
       'product_id': '${productId}',
@@ -191,13 +160,9 @@ class AddProductProvider extends ChangeNotifier {
     }
     update_state();
     print('objectis${user_model.data!.userId}');
-    image_loading = false;
-    update_state();
   }
 
   Future get_brands_data() async {
-    loading = true;
-    update_state();
     var data = await DataProvider().allBrandsApi(map: {
       'user_id': '${user_model.data!.userId}',
     });
@@ -205,13 +170,9 @@ class AddProductProvider extends ChangeNotifier {
     print('objectismodel${allBrandsModel!.toJson()}');
     update_state();
     print('objectis${user_model.data!.userId}');
-    loading = false;
-    update_state();
   }
 
   Future get_categories_data() async {
-    loading = true;
-    update_state();
     var data = await DataProvider().get_categoriesApi(map: {
       'user_id': '${user_model.data!.userId}',
     });
@@ -219,8 +180,6 @@ class AddProductProvider extends ChangeNotifier {
     print('objectismodel${cateoryProductModel!.toJson()}');
     update_state();
     print('objectis${user_model.data!.userId}');
-    loading = false;
-    update_state();
   }
 
   update_state() {

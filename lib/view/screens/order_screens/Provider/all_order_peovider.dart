@@ -18,8 +18,6 @@ class AllOrderProvider extends ChangeNotifier {
   TextEditingController zipController = TextEditingController();
   TextEditingController addressController = TextEditingController();
   TextEditingController shippingController = TextEditingController();
-  bool loading = false;
-  bool loading_details = false;
   bool outer_loader = false;
   AllOrderModel? allOrderModel;
   OrderInfoModel? orderInfoModel;
@@ -69,20 +67,15 @@ class AllOrderProvider extends ChangeNotifier {
 
   Future get_order_data({Map<String, dynamic>? map}) async {
     current_api_object = map;
-    loading = true;
-    update_state();
     var data = await DataProvider().allOrderModelApi(map: map);
     allOrderModel = data;
     print('objectismodel${allOrderModel!.toJson()}');
     update_state();
     print('objectis${user_model.data!.userId}');
-    loading = false;
     update_state();
   }
 
-  get_order_detail_data({String? orderId}) async {
-    loading_details = true;
-    update_state();
+  Future get_order_detail_data({String? orderId}) async {
     var data = await DataProvider().orderInfoApi(map: {
       'user_id': '${user_model.data!.userId}',
       'order_id': '${orderId}',
@@ -91,13 +84,10 @@ class AllOrderProvider extends ChangeNotifier {
     print('objectismodel${orderInfoModel!.toJson()}');
     update_state();
     print('objectis${user_model.data!.userId}');
-    loading_details = false;
     update_state();
   }
 
   update_order_detail_data({String? orderId, BuildContext? context}) async {
-    loading = true;
-    update_state();
     var data = await DataProvider().updateOrderApi(map: {
       'order_id': '${orderId}',
       'name': '${nameController.text}',
@@ -138,10 +128,8 @@ class AllOrderProvider extends ChangeNotifier {
             ),
           ));
       Navigator.pop(context!);
-      loading = false;
       update_state();
     } else {
-      loading = false;
       update_state();
     }
   }

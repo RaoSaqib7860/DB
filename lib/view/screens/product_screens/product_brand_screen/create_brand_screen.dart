@@ -69,7 +69,6 @@ class _CreateBrandScreenState extends State<CreateBrandScreen> {
       //
       //   });
       // }
-      setState(() {});
     }
   }
 
@@ -80,13 +79,14 @@ class _CreateBrandScreenState extends State<CreateBrandScreen> {
     super.initState();
   }
 
+  bool upload_brand_loading = false;
   @override
   Widget build(BuildContext context) {
     final AllProductProvider provider =
         Provider.of<AllProductProvider>(context);
     return Scaffold(
       body: DataLoading(
-        isLoading: provider.upload_brand_loading,
+        isLoading: upload_brand_loading,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -332,8 +332,12 @@ class _CreateBrandScreenState extends State<CreateBrandScreen> {
                                 ),
                               };
                               map.removeWhere((key, value) => value == null);
+                              upload_brand_loading = true;
+                              setState(() {});
                               await provider.pload_Brand(
                                   uploadMedia: dio.FormData.fromMap(map));
+                              upload_brand_loading = false;
+                              setState(() {});
                               Navigator.pop(context);
                             } else {
                               Map<String, dynamic> map = {
@@ -350,8 +354,12 @@ class _CreateBrandScreenState extends State<CreateBrandScreen> {
                                       ),
                               };
                               map.removeWhere((key, value) => value == null);
+                              upload_brand_loading = true;
+                              setState(() {});
                               await provider.pload_Brand(
                                   uploadMedia: dio.FormData.fromMap(map));
+                              upload_brand_loading = false;
+                              setState(() {});
                               Navigator.pop(context);
                             }
                           } else {

@@ -50,14 +50,16 @@ class _EditShippingAddressScreenState extends State<EditShippingAddressScreen> {
     provider.zipController.text = widget.zipCode ?? '';
     provider.addressController.text = widget.address ?? '';
     provider.shippingController.text = widget.shippingMethod ?? '';
+    loading = false;
     setState(() {});
   }
 
+  bool loading = true;
   @override
   Widget build(BuildContext context) {
     final AllOrderProvider provider = Provider.of<AllOrderProvider>(context);
     return DataLoading(
-      isLoading: provider.loading,
+      isLoading: loading,
       child: Scaffold(
         body: SingleChildScrollView(
           child: Column(

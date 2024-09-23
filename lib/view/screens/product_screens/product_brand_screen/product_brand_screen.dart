@@ -28,18 +28,27 @@ class _ProductBrandScreenState extends State<ProductBrandScreen> {
 
   @override
   void initState() {
-    final AllProductProvider provider =
-        Provider.of<AllProductProvider>(context, listen: false);
-    provider.get_brands(map: {'user_id': '${user_model.data!.userId}'});
+    get_brand();
     super.initState();
   }
 
+  get_brand()async{
+    final AllProductProvider provider =
+    Provider.of<AllProductProvider>(context, listen: false);
+    await provider.get_brands(map: {'user_id': '${user_model.data!.userId}'});
+    brands_loading=false;
+    setState(() {
+
+    });
+  }
+
+  bool brands_loading=true;
   @override
   Widget build(BuildContext context) {
     final AllProductProvider provider =
         Provider.of<AllProductProvider>(context);
     return DataLoading(
-      isLoading: provider.brands_loading,
+      isLoading: brands_loading,
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: 5.w),
         child: Column(
@@ -152,7 +161,7 @@ class _ProductBrandScreenState extends State<ProductBrandScreen> {
               height: 2.h,
             ),
             Expanded(
-                child: provider.brands_loading
+                child: brands_loading
                     ? SizedBox()
                     : provider.brandsProductModel?.data?.categories?.length ==
                                 0 ||

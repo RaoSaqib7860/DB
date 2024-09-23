@@ -32,19 +32,26 @@ class _DeliveryCostScreenState extends State<DeliveryCostScreen> {
 
   @override
   void initState() {
-    final DeliveryProvider provider =
-        Provider.of<DeliveryProvider>(context, listen: false);
-    provider.delivery_costApi(map: {
-      'user_id': '${user_model.data!.userId}',
-    });
+    get_data();
     super.initState();
   }
 
+  get_data() async{
+    final DeliveryProvider provider =
+        Provider.of<DeliveryProvider>(context, listen: false);
+    await provider.delivery_costApi(map: {
+      'user_id': '${user_model.data!.userId}',
+    });
+    cost_loading = false;
+    setState(() {});
+  }
+
+  bool cost_loading = true;
   @override
   Widget build(BuildContext context) {
     final DeliveryProvider provider = Provider.of<DeliveryProvider>(context);
     return DataLoading(
-      isLoading: provider.cost_loading,
+      isLoading: cost_loading,
       child: Stack(
         children: [
           Column(
@@ -56,7 +63,7 @@ class _DeliveryCostScreenState extends State<DeliveryCostScreen> {
               Expanded(
                   child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: 5.w),
-                child: provider.cost_loading
+                child: cost_loading
                     ? SizedBox()
                     : RefreshIndicator(
                         onRefresh: () async {
@@ -271,7 +278,7 @@ class _DeliveryCostScreenState extends State<DeliveryCostScreen> {
               ))
             ],
           ),
-          if (!provider.cost_loading)
+          if (!cost_loading)
             Positioned(
               bottom: 2.h,
               child: Padding(

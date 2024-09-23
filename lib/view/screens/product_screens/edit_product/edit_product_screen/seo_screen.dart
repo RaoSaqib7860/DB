@@ -43,16 +43,18 @@ class _SEOScreenState extends State<SEOScreen> {
     titleController.text = provider.updateProductSEOModel!.data!.metaTitle!;
     keyController.text = provider.updateProductSEOModel!.data!.metaKeyword!;
     desController.text = provider.updateProductSEOModel!.data!.metaDescription!;
+    seo_loading = false;
     setState(() {});
   }
 
+  bool seo_loading = true;
   @override
   Widget build(BuildContext context) {
     final AddProductProvider provider =
         Provider.of<AddProductProvider>(context);
 
     return DataLoading(
-      isLoading: provider.seo_loading,
+      isLoading: seo_loading,
       child: Scaffold(
         body: SingleChildScrollView(
           child: provider.updateProductSEOModel == null

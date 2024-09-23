@@ -8,19 +8,16 @@ import '../models/dashboard_model.dart';
 
 class HomePageProvider extends ChangeNotifier {
   final GlobalKey<ScaffoldState> scaffoldkey = GlobalKey();
-  bool loading = false;
   bool outer_loading = false;
   DashBoardModel? dashboardModel;
   StoreStatusModel? storeStatusModel;
   dynamic values;
   List<ChartData>? poduct_limit_chartData = [];
   List<ChartData>? usage_storage_chartData = [];
-  get_dashboard_data() async {
+  Future get_dashboard_data() async {
     poduct_limit_chartData = [];
     usage_storage_chartData = [];
     print('objectis${user_model.data!.userId}');
-    loading = true;
-    update_state();
     var data = await DataProvider()
         .getHome(userId: user_model.data!.userId.toString());
     dashboardModel = DashBoardModel.fromJson(data);
@@ -44,7 +41,6 @@ class HomePageProvider extends ChangeNotifier {
     print('objectis${user_model.data!.userId}');
     values =
         double.parse('${dashboardModel!.data!.storageUsed}').toStringAsFixed(2);
-    loading = false;
     update_state();
   }
 

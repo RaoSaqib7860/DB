@@ -30,18 +30,25 @@ class _ProductCategoriesScreenState extends State<ProductCategoriesScreen> {
 
   @override
   void initState() {
-    final AllProductProvider provider =
-        Provider.of<AllProductProvider>(context, listen: false);
-    provider.get_categories(map: {'user_id': '${user_model.data!.userId}'});
+    get_cat();
     super.initState();
   }
 
+  get_cat() async{
+    final AllProductProvider provider =
+        Provider.of<AllProductProvider>(context, listen: false);
+    await provider.get_categories(map: {'user_id': '${user_model.data!.userId}'});
+    category_loading = false;
+    setState(() {});
+  }
+
+  bool category_loading = true;
   @override
   Widget build(BuildContext context) {
     final AllProductProvider provider =
         Provider.of<AllProductProvider>(context);
     return DataLoading(
-      isLoading: provider.category_loading,
+      isLoading: category_loading,
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: 5.w),
         child: Column(
@@ -155,7 +162,7 @@ class _ProductCategoriesScreenState extends State<ProductCategoriesScreen> {
               height: 2.h,
             ),
             Expanded(
-                child: provider.category_loading
+                child: category_loading
                     ? SizedBox()
                     : provider.cateoryProductModel?.data?.categories?.length ==
                                 0 ||

@@ -22,13 +22,14 @@ class AddProductScreen extends StatefulWidget {
 }
 
 class _AddProductScreenState extends State<AddProductScreen> {
+  bool loading=true;
   @override
   Widget build(BuildContext context) {
     final AddProductProvider provider =
         Provider.of<AddProductProvider>(context);
     return Scaffold(
       body: DataLoading(
-        isLoading: provider.loading,
+        isLoading: loading,
         child: Stack(
           children: [
             Column(
@@ -160,6 +161,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                       provider.priceController.text.isNotEmpty &&
                       provider.quantityController.text.isNotEmpty) {
                     await provider.add_product_data();
+                    loading=false;
                     CustomToastManager.showToast(
                         context: context,
                         height: 8.h,

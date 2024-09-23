@@ -26,7 +26,7 @@ class _ImageScreenState extends State<ImageScreen> {
     api_call();
     super.initState();
   }
-
+bool image_loading=true;
   api_call() async {
     final AddProductProvider provider =
         Provider.of<AddProductProvider>(context, listen: false);
@@ -34,6 +34,10 @@ class _ImageScreenState extends State<ImageScreen> {
     provider.updateProductImageModel = null;
     setState(() {});
     await provider.update_Image_product_data(productId: widget.productId);
+    image_loading=false;
+    setState(() {
+
+    });
   }
 
   @override
@@ -41,7 +45,7 @@ class _ImageScreenState extends State<ImageScreen> {
     final AddProductProvider provider =
         Provider.of<AddProductProvider>(context);
     return DataLoading(
-      isLoading: provider.image_loading,
+      isLoading: image_loading,
       child: Scaffold(
         body: SingleChildScrollView(
           child: provider.updateProductImageModel == null

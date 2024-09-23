@@ -32,19 +32,26 @@ class _DeliveryLocationScreenState extends State<DeliveryLocationScreen> {
 
   @override
   void initState() {
-    final DeliveryProvider provider =
-        Provider.of<DeliveryProvider>(context, listen: false);
-    provider.delivery_locationApi(map: {
-      'user_id': '${user_model.data!.userId}',
-    });
+    get_data();
     super.initState();
   }
 
+  get_data() async {
+    final DeliveryProvider provider =
+        Provider.of<DeliveryProvider>(context, listen: false);
+    await provider.delivery_locationApi(map: {
+      'user_id': '${user_model.data!.userId}',
+    });
+    location_loading = false;
+    setState(() {});
+  }
+
+  bool location_loading = true;
   @override
   Widget build(BuildContext context) {
     final DeliveryProvider provider = Provider.of<DeliveryProvider>(context);
     return DataLoading(
-      isLoading: provider.location_loading,
+      isLoading: location_loading,
       child: Stack(
         children: [
           Column(
@@ -132,7 +139,7 @@ class _DeliveryLocationScreenState extends State<DeliveryLocationScreen> {
               Expanded(
                   child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: 5.w),
-                child: provider.location_loading
+                child: location_loading
                     ? SizedBox()
                     : RefreshIndicator(
                         onRefresh: () async {

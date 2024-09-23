@@ -84,13 +84,14 @@ class _CreateCategoryScreenState extends State<CreateCategoryScreen> {
     }
   }
 
+  bool upload_category_loading = false;
   @override
   Widget build(BuildContext context) {
     final AllProductProvider provider =
         Provider.of<AllProductProvider>(context);
     return Scaffold(
       body: DataLoading(
-        isLoading: provider.upload_category_loading,
+        isLoading: upload_category_loading,
         child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -432,8 +433,12 @@ class _CreateCategoryScreenState extends State<CreateCategoryScreen> {
                                 ),
                         };
                         map.removeWhere((key, value) => value == null);
+                        upload_category_loading = true;
+                        setState(() {});
                         await provider.upload_categories(
                             uploadMedia: dio.FormData.fromMap(map));
+                        upload_category_loading = false;
+                        setState(() {});
                         Navigator.pop(context);
                       },
                       child: Padding(

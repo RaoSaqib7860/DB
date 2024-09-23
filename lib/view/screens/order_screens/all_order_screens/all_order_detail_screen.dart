@@ -28,20 +28,28 @@ class AllOrderDetailScreen extends StatefulWidget {
 class _AllOrderDetailScreenState extends State<AllOrderDetailScreen> {
   @override
   void initState() {
-    final AllOrderProvider provider =
-        Provider.of<AllOrderProvider>(context, listen: false);
-    provider.get_order_detail_data(orderId: widget.orderId);
+    get_oder_detail();
     super.initState();
   }
 
+  get_oder_detail() async{
+    final AllOrderProvider provider =
+        Provider.of<AllOrderProvider>(context, listen: false);
+    await provider.get_order_detail_data(orderId: widget.orderId);
+    loading_details = false;
+    setState(() {});
+  }
+
   bool notify = false;
+
+  bool loading_details = true;
   @override
   Widget build(BuildContext context) {
     final AllOrderProvider provider = Provider.of<AllOrderProvider>(context);
     return DataLoading(
-      isLoading: provider.loading_details || provider.outer_loader,
+      isLoading: loading_details || provider.outer_loader,
       child: Scaffold(
-        body: provider.loading_details
+        body: loading_details
             ? SizedBox()
             : SingleChildScrollView(
                 child: Column(
@@ -57,19 +65,19 @@ class _AllOrderDetailScreenState extends State<AllOrderDetailScreen> {
                               width: 3.w,
                             ),
                             GestureDetector(
-                        onTap: () {
-                          Navigator.pop(context);
-                        },
-                        child: Container(
-                          height: 4.h,
-                          width: 10.w,
-                          child: Center(
-                            child: SvgPicture.asset(
-                              'assets/svgs/back_arrow.svg',
-                              height: 3.h,
-                            ),
-                          ),
-                        )),
+                                onTap: () {
+                                  Navigator.pop(context);
+                                },
+                                child: Container(
+                                  height: 4.h,
+                                  width: 10.w,
+                                  child: Center(
+                                    child: SvgPicture.asset(
+                                      'assets/svgs/back_arrow.svg',
+                                      height: 3.h,
+                                    ),
+                                  ),
+                                )),
                             SizedBox(
                               width: 24.w,
                             ),
@@ -169,10 +177,12 @@ class _AllOrderDetailScreenState extends State<AllOrderDetailScreen> {
                                           SizedBox(
                                             height: 1.h,
                                           ),
-                                          ...provider.orderInfoModel!.orderData!.orderItem!.map((e) {
+                                          ...provider.orderInfoModel!.orderData!
+                                              .orderItem!
+                                              .map((e) {
                                             return customText(
                                                 text:
-                                                '${(e.amount ?? 0)} x ${e.qty??0}');
+                                                    '${(e.amount ?? 0)} x ${e.qty ?? 0}');
                                           }).toList(),
                                           // customText(
                                           //     text:
@@ -206,10 +216,12 @@ class _AllOrderDetailScreenState extends State<AllOrderDetailScreen> {
                                           SizedBox(
                                             height: 1.h,
                                           ),
-                                          ...provider.orderInfoModel!.orderData!.orderItem!.map((e) {
+                                          ...provider.orderInfoModel!.orderData!
+                                              .orderItem!
+                                              .map((e) {
                                             return customText(
                                                 text:
-                                                'Rs${(e.amount ?? 0) * (e.qty ?? 0)}');
+                                                    'Rs${(e.amount ?? 0) * (e.qty ?? 0)}');
                                           }).toList(),
                                           // customText(
                                           //     text:
@@ -1036,7 +1048,10 @@ class _AllOrderDetailScreenState extends State<AllOrderDetailScreen> {
                                           EdgeInsets.symmetric(horizontal: 8.w),
                                       child: InkWell(
                                         onTap: () async {
-                                          Get.to(WebView(url: 'https://envio.tcscourier.com/BookingReportPDF/GenerateLabels?consingmentNumber=${provider.orderInfoModel?.tcsData?.result?.split(' ').last}',));
+                                          Get.to(WebView(
+                                            url:
+                                                'https://envio.tcscourier.com/BookingReportPDF/GenerateLabels?consingmentNumber=${provider.orderInfoModel?.tcsData?.result?.split(' ').last}',
+                                          ));
                                           // if (!await launchUrl(Uri.parse(
                                           //     'https://envio.tcscourier.com/BookingReportPDF/GenerateLabels?consingmentNumber=${provider.orderInfoModel?.tcsData?.result?.split(' ').last}'))) {
                                           //   throw Exception(

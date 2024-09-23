@@ -29,23 +29,26 @@ class _AllScreenState extends State<AllScreen> {
     super.initState();
   }
 
-  call_orders() {
+  bool loading = true;
+  call_orders() async {
     final AllOrderProvider provider =
         Provider.of<AllOrderProvider>(context, listen: false);
-    provider.get_order_data(
+    await provider.get_order_data(
         map: {'user_id': '${user_model.data!.userId}', 'type': 'all'});
+    loading = false;
+    setState(() {});
   }
 
   @override
   Widget build(BuildContext context) {
     final AllOrderProvider provider = Provider.of<AllOrderProvider>(context);
     return DataLoading(
-      isLoading: provider.loading,
+      isLoading: loading,
       child: Stack(
         children: [
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 3.w),
-            child: provider.loading
+            child: loading
                 ? SizedBox()
                 : provider.allOrderModel!.data!.orders!.isEmpty
                     ? Center(

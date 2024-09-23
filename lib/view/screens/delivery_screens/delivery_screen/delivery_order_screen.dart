@@ -36,19 +36,26 @@ class _DeliveryOrderScreenState extends State<DeliveryOrderScreen> {
 
   @override
   void initState() {
-    final DeliveryProvider provider =
-        Provider.of<DeliveryProvider>(context, listen: false);
-    provider.delivery_ordersApi(map: {
-      'user_id': '${user_model.data!.userId}',
-    });
+    get_data();
     super.initState();
   }
 
+  get_data() async {
+    final DeliveryProvider provider =
+        Provider.of<DeliveryProvider>(context, listen: false);
+    await provider.delivery_ordersApi(map: {
+      'user_id': '${user_model.data!.userId}',
+    });
+    order_loading = false;
+    setState(() {});
+  }
+
+  bool order_loading = true;
   @override
   Widget build(BuildContext context) {
     final DeliveryProvider provider = Provider.of<DeliveryProvider>(context);
     return DataLoading(
-      isLoading: provider.order_loading,
+      isLoading: order_loading,
       child: Stack(
         children: [
           Column(
@@ -179,7 +186,7 @@ class _DeliveryOrderScreenState extends State<DeliveryOrderScreen> {
               Expanded(
                   child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: 5.w),
-                child: provider.order_loading
+                child: order_loading
                     ? SizedBox()
                     : RefreshIndicator(
                         onRefresh: () async {

@@ -77,16 +77,17 @@ class _ProductScreenState extends State<ProductScreen> {
         provider.updateProductModel?.data?.product?.featured.toString() ?? '';
     desController.text =
         provider.updateProductModel?.data?.content?.excerpt ?? '';
+    loading=false;
     setState(() {});
   }
-
+bool loading=true;
   @override
   Widget build(BuildContext context) {
     final AddProductProvider provider =
         Provider.of<AddProductProvider>(context);
 
     return DataLoading(
-      isLoading: provider.loading,
+      isLoading: loading,
       child: Scaffold(
         body: SingleChildScrollView(
           child: provider.updateProductModel == null

@@ -42,15 +42,17 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
-    final HomePageProvider provider =
-        Provider.of<HomePageProvider>(context, listen: false);
-    provider.get_dashboard_data();
-    provider.check_store_status();
+
     get_storage();
   }
 
+  bool loading = true;
   LoginModel? loginModel;
   get_storage() async {
+    final HomePageProvider provider =
+        Provider.of<HomePageProvider>(context, listen: false);
+    await provider.get_dashboard_data();
+    provider.check_store_status();
     var data = await storage.read('userData');
     print('${data}');
     loginModel = LoginModel.fromJson(data);
@@ -59,6 +61,7 @@ class _HomeScreenState extends State<HomeScreen> {
     } else {
       _value = false;
     }
+    loading = false;
     setState(() {});
   }
 
@@ -71,10 +74,10 @@ class _HomeScreenState extends State<HomeScreen> {
     final HomePageProvider provider = Provider.of<HomePageProvider>(context);
 
     return DataLoading(
-      isLoading: provider.loading || provider.outer_loading,
+      isLoading: loading || provider.outer_loading,
       child: Scaffold(
         backgroundColor: Colors.white,
-        body: provider.loading
+        body: loading
             ? SizedBox()
             : Stack(
                 children: [
