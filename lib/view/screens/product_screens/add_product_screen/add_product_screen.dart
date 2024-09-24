@@ -22,7 +22,7 @@ class AddProductScreen extends StatefulWidget {
 }
 
 class _AddProductScreenState extends State<AddProductScreen> {
-  bool loading=true;
+  bool loading = false;
   @override
   Widget build(BuildContext context) {
     final AddProductProvider provider =
@@ -48,19 +48,19 @@ class _AddProductScreenState extends State<AddProductScreen> {
                       child: Row(
                         children: [
                           GestureDetector(
-                        onTap: () {
-                          Navigator.pop(context);
-                        },
-                        child: Container(
-                          height: 4.h,
-                          width: 10.w,
-                          child: Center(
-                            child: SvgPicture.asset(
-                              'assets/svgs/back_arrow.svg',
-                              height: 3.h,
-                            ),
-                          ),
-                        )),
+                              onTap: () {
+                                Navigator.pop(context);
+                              },
+                              child: Container(
+                                height: 4.h,
+                                width: 10.w,
+                                child: Center(
+                                  child: SvgPicture.asset(
+                                    'assets/svgs/back_arrow.svg',
+                                    height: 3.h,
+                                  ),
+                                ),
+                              )),
                           SizedBox(
                             width: 25.w,
                           ),
@@ -129,7 +129,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                 Row(
                   children: [
                     Padding(
-                      padding: EdgeInsets.only(left: 3.w,right: 2.w),
+                      padding: EdgeInsets.only(left: 3.w, right: 2.w),
                       child: FlutterSwitch(
                         activeColor: blueColor,
                         inactiveColor: Color(0xff484848),
@@ -160,8 +160,11 @@ class _AddProductScreenState extends State<AddProductScreen> {
                   if (provider.nameController.text.isNotEmpty &&
                       provider.priceController.text.isNotEmpty &&
                       provider.quantityController.text.isNotEmpty) {
+                    loading = true;
+                    setState(() {});
                     await provider.add_product_data();
-                    loading=false;
+                    loading = false;
+                    setState(() {});
                     CustomToastManager.showToast(
                         context: context,
                         height: 8.h,

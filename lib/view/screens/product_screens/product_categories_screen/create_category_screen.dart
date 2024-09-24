@@ -439,7 +439,6 @@ class _CreateCategoryScreenState extends State<CreateCategoryScreen> {
                             uploadMedia: dio.FormData.fromMap(map));
                         upload_category_loading = false;
                         setState(() {});
-                        Navigator.pop(context);
                       },
                       child: Padding(
                         padding: EdgeInsets.only(left: 4.w, right: 4.w),

@@ -3,7 +3,6 @@ import 'package:db_2_0/custom_widgets/data_loading.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:flutter_switch/flutter_switch.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
@@ -22,7 +21,6 @@ class ProductCategoriesScreen extends StatefulWidget {
 }
 
 class _ProductCategoriesScreenState extends State<ProductCategoriesScreen> {
-  bool _value = false;
   var items = [
     'Delete Permanently'.tr,
   ];
@@ -34,10 +32,11 @@ class _ProductCategoriesScreenState extends State<ProductCategoriesScreen> {
     super.initState();
   }
 
-  get_cat() async{
+  get_cat() async {
     final AllProductProvider provider =
         Provider.of<AllProductProvider>(context, listen: false);
-    await provider.get_categories(map: {'user_id': '${user_model.data!.userId}'});
+    await provider
+        .get_categories(map: {'user_id': '${user_model.data!.userId}'});
     category_loading = false;
     setState(() {});
   }
@@ -176,196 +175,228 @@ class _ProductCategoriesScreenState extends State<ProductCategoriesScreen> {
                               child: Text("No data"),
                             ),
                           )
-                        : ListView.builder(
-                            itemCount: provider.cateoryProductModel?.data
-                                    ?.categories?.length ??
-                                0,
-                            padding: EdgeInsets.only(bottom: 12.h),
-                            itemBuilder: (context, index) {
-                              return Padding(
-                                padding: EdgeInsets.all(1.0),
-                                child: Column(
-                                  children: [
-                                    Container(
-                                      width: 100.w,
-                                      decoration: BoxDecoration(
-                                          color: Colors.white,
-                                          borderRadius:
-                                              BorderRadius.circular(3),
-                                          boxShadow: [
-                                            BoxShadow(
-                                                color:
-                                                    Colors.grey.withAlpha(50),
-                                                offset: Offset(1, 1),
-                                                spreadRadius: 1,
-                                                blurRadius: 2),
-                                            BoxShadow(
-                                                color:
-                                                    Colors.grey.withAlpha(50),
-                                                offset: Offset(-1, -1),
-                                                spreadRadius: 1,
-                                                blurRadius: 2),
-                                          ]),
-                                      child: Padding(
-                                        padding: EdgeInsets.symmetric(
-                                            horizontal: 2.w, vertical: 1.h),
-                                        child: Column(
-                                          children: [
-                                            Row(
-                                              children: [
-                                                Container(
-                                                  height: 9.h,
-                                                  width: 40.w,
-                                                  decoration: BoxDecoration(
-                                                      border: Border.all(
-                                                          width: 1,
-                                                          color: Colors.grey),
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              5)),
-                                                  child: Center(
-                                                    child: CachedNetworkImage(
-                                                      imageUrl:
-                                                          "https://${user_model.data?.domain}/${provider.cateoryProductModel?.data?.categories?[index].metas?.first.content}",
-                                                      fit: BoxFit.contain,
-                                                      progressIndicatorBuilder:
-                                                          (context, url,
-                                                                  downloadProgress) =>
-                                                              Center(
-                                                        child: CircularProgressIndicator(
-                                                            strokeWidth: 1.5,
-                                                            value:
-                                                                downloadProgress
-                                                                    .progress),
+                        : RefreshIndicator(
+                            onRefresh: () async {
+                              await provider.get_categories(map: {
+                                'user_id': '${user_model.data!.userId}'
+                              });
+                            },
+                            child: ListView.builder(
+                              itemCount: provider.cateoryProductModel?.data
+                                      ?.categories?.length ??
+                                  0,
+                              padding: EdgeInsets.only(bottom: 12.h),
+                              itemBuilder: (context, index) {
+                                return Padding(
+                                  padding: EdgeInsets.all(1.0),
+                                  child: Column(
+                                    children: [
+                                      Container(
+                                        width: 100.w,
+                                        decoration: BoxDecoration(
+                                            color: Colors.white,
+                                            borderRadius:
+                                                BorderRadius.circular(3),
+                                            boxShadow: [
+                                              BoxShadow(
+                                                  color:
+                                                      Colors.grey.withAlpha(50),
+                                                  offset: Offset(1, 1),
+                                                  spreadRadius: 1,
+                                                  blurRadius: 2),
+                                              BoxShadow(
+                                                  color:
+                                                      Colors.grey.withAlpha(50),
+                                                  offset: Offset(-1, -1),
+                                                  spreadRadius: 1,
+                                                  blurRadius: 2),
+                                            ]),
+                                        child: Padding(
+                                          padding: EdgeInsets.symmetric(
+                                              horizontal: 2.w, vertical: 1.h),
+                                          child: Column(
+                                            children: [
+                                              Row(
+                                                children: [
+                                                  Container(
+                                                    height: 9.h,
+                                                    width: 40.w,
+                                                    decoration: BoxDecoration(
+                                                        border: Border.all(
+                                                            width: 1,
+                                                            color: Colors.grey),
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(5)),
+                                                    child: Center(
+                                                      child: CachedNetworkImage(
+                                                        imageUrl: provider
+                                                                .cateoryProductModel!
+                                                                .data!
+                                                                .categories![
+                                                                    index]
+                                                                .metas!
+                                                                .isEmpty
+                                                            ? ''
+                                                            : "https://${user_model.data?.domain}/${provider.cateoryProductModel?.data?.categories?[index].metas?.first.content}",
+                                                        fit: BoxFit.contain,
+                                                        progressIndicatorBuilder:
+                                                            (context, url,
+                                                                    downloadProgress) =>
+                                                                Center(
+                                                          child: CircularProgressIndicator(
+                                                              strokeWidth: 1.5,
+                                                              value:
+                                                                  downloadProgress
+                                                                      .progress),
+                                                        ),
+                                                        errorWidget: (context,
+                                                                url, error) =>
+                                                            Image.network(
+                                                                'https://octanefashion.dialboxx.com/uploads/default.png'),
                                                       ),
-                                                      errorWidget: (context,
-                                                              url, error) =>
-                                                          Image.network(
-                                                              'https://octanefashion.dialboxx.com/uploads/default.png'),
                                                     ),
                                                   ),
-                                                ),
-                                                SizedBox(
-                                                  width: 2.w,
-                                                ),
-                                                Expanded(
-                                                  child: Column(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    children: [
-                                                      Text(
-                                                        '${provider.cateoryProductModel?.data?.categories?[index].name}',
-                                                        overflow: TextOverflow
-                                                            .ellipsis,
-                                                        style: TextStyle(
-                                                          fontSize: 10.sp,
-                                                          color:
-                                                              Color(0xff3E3E3E),
-                                                          fontWeight:
-                                                              FontWeight.bold,
+                                                  SizedBox(
+                                                    width: 2.w,
+                                                  ),
+                                                  Expanded(
+                                                    child: Column(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        Text(
+                                                          '${provider.cateoryProductModel?.data?.categories?[index].name}',
                                                           overflow: TextOverflow
                                                               .ellipsis,
-                                                        ),
-                                                      ),
-                                                      SizedBox(
-                                                        height: 1.h,
-                                                      ),
-                                                      Text(
-                                                        '/Category/${provider.cateoryProductModel?.data?.categories?[index].name}/${provider.cateoryProductModel?.data?.categories?[index].id}',
-                                                        overflow: TextOverflow
-                                                            .ellipsis,
-                                                        style: TextStyle(
-                                                            fontSize: 8.sp,
+                                                          style: TextStyle(
+                                                            fontSize: 10.sp,
                                                             color: Color(
                                                                 0xff3E3E3E),
+                                                            fontWeight:
+                                                                FontWeight.bold,
                                                             overflow:
                                                                 TextOverflow
                                                                     .ellipsis,
-                                                            decoration:
-                                                                TextDecoration
-                                                                    .underline),
-                                                      ),
-                                                    ],
+                                                          ),
+                                                        ),
+                                                        SizedBox(
+                                                          height: 1.h,
+                                                        ),
+                                                        Text(
+                                                          '/Category/${provider.cateoryProductModel?.data?.categories?[index].name}/${provider.cateoryProductModel?.data?.categories?[index].id}',
+                                                          overflow: TextOverflow
+                                                              .ellipsis,
+                                                          style: TextStyle(
+                                                              fontSize: 8.sp,
+                                                              color: Color(
+                                                                  0xff3E3E3E),
+                                                              overflow:
+                                                                  TextOverflow
+                                                                      .ellipsis,
+                                                              decoration:
+                                                                  TextDecoration
+                                                                      .underline),
+                                                        ),
+                                                      ],
+                                                    ),
                                                   ),
-                                                ),
-                                                InkWell(
-                                                    onTap: () async {
-                                                      Map<String, dynamic> map =
-                                                          {
-                                                        'user_id':
-                                                            '${user_model.data!.userId}',
-                                                        'action': 'remove',
-                                                        'cat_id':
-                                                            '${provider.cateoryProductModel?.data?.categories?[index].id}',
-                                                        'domain_id':
-                                                            '${user_model.data!.domainId}',
-                                                      };
-                                                      //map.removeWhere((key, value) => value == null);
-                                                      await provider
-                                                          .upload_categories(
-                                                              uploadMedia:
-                                                                  dio.FormData
-                                                                      .fromMap(
-                                                                          map));
-                                                      await provider
-                                                          .get_categories(map: {
-                                                        'user_id':
-                                                            '${user_model.data!.userId}'
+                                                  InkWell(
+                                                      onTap: () async {
+                                                        Map<String, dynamic>
+                                                            map = {
+                                                          'user_id':
+                                                              '${user_model.data!.userId}',
+                                                          'action': 'remove',
+                                                          'cat_id':
+                                                              '${provider.cateoryProductModel?.data?.categories?[index].id}',
+                                                          'domain_id':
+                                                              '${user_model.data!.domainId}',
+                                                        };
+                                                        //map.removeWhere((key, value) => value == null);
+                                                        await provider
+                                                            .upload_categories(
+                                                                uploadMedia: dio
+                                                                        .FormData
+                                                                    .fromMap(
+                                                                        map));
+                                                        await provider
+                                                            .get_categories(
+                                                                map: {
+                                                              'user_id':
+                                                                  '${user_model.data!.userId}'
+                                                            });
+                                                      },
+                                                      child: Icon(
+                                                        CupertinoIcons.delete,
+                                                        color: Colors.red,
+                                                      )),
+                                                ],
+                                              ),
+                                              SizedBox(
+                                                height: 0.5.h,
+                                              ),
+                                              Divider(
+                                                thickness: 1,
+                                                color: Colors.black26,
+                                              ),
+                                              SizedBox(
+                                                height: 0.5.h,
+                                              ),
+                                              Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                children: [
+                                                  GestureDetector(
+                                                    onTap: () {
+                                                      Navigator.push(
+                                                          context,
+                                                          MaterialPageRoute(
+                                                            builder: (context) =>
+                                                                CreateCategoryScreen(
+                                                              Category: provider
+                                                                  .cateoryProductModel
+                                                                  ?.data
+                                                                  ?.categories?[index],
+                                                            ),
+                                                          )).then((value) {
+                                                        provider.get_categories(
+                                                            map: {
+                                                              'user_id':
+                                                                  '${user_model.data!.userId}'
+                                                            });
                                                       });
                                                     },
-                                                    child: Icon(
-                                                      CupertinoIcons.delete,
-                                                      color: Colors.red,
-                                                    )),
-                                              ],
-                                            ),
-                                            SizedBox(
-                                              height: 0.5.h,
-                                            ),
-                                            Divider(
-                                              thickness: 1,
-                                              color: Colors.black26,
-                                            ),
-                                            SizedBox(
-                                              height: 0.5.h,
-                                            ),
-                                            Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                              children: [
-                                                GestureDetector(
-                                                  onTap: () {
-                                                    Navigator.push(
-                                                        context,
-                                                        MaterialPageRoute(
-                                                          builder: (context) =>
-                                                              CreateCategoryScreen(
-                                                            Category: provider
-                                                                .cateoryProductModel
-                                                                ?.data
-                                                                ?.categories?[index],
+                                                    child: Row(
+                                                      children: [
+                                                        SvgPicture.asset(
+                                                          'assets/svgs/action.svg',
+                                                          height: 2.7.h,
+                                                        ),
+                                                        SizedBox(
+                                                          width: 2.w,
+                                                        ),
+                                                        Text(
+                                                          'Action'.tr,
+                                                          overflow: TextOverflow
+                                                              .ellipsis,
+                                                          style: TextStyle(
+                                                            color: Colors.black,
+                                                            fontSize: 10.sp,
+                                                            overflow:
+                                                                TextOverflow
+                                                                    .ellipsis,
                                                           ),
-                                                        )).then((value) {
-                                                      provider.get_categories(
-                                                          map: {
-                                                            'user_id':
-                                                                '${user_model.data!.userId}'
-                                                          });
-                                                    });
-                                                  },
-                                                  child: Row(
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                  Row(
                                                     children: [
-                                                      SvgPicture.asset(
-                                                        'assets/svgs/action.svg',
-                                                        height: 2.7.h,
-                                                      ),
-                                                      SizedBox(
-                                                        width: 2.w,
-                                                      ),
                                                       Text(
-                                                        'Action'.tr,
+                                                        'Featured:'.tr,
                                                         overflow: TextOverflow
                                                             .ellipsis,
                                                         style: TextStyle(
@@ -375,103 +406,90 @@ class _ProductCategoriesScreenState extends State<ProductCategoriesScreen> {
                                                               .ellipsis,
                                                         ),
                                                       ),
+                                                      SizedBox(
+                                                        width: 1.w,
+                                                      ),
+                                                      Container(
+                                                        decoration: BoxDecoration(
+                                                            color: blueColor,
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        4)),
+                                                        child: Padding(
+                                                          padding: EdgeInsets
+                                                              .symmetric(
+                                                                  horizontal:
+                                                                      2.5.w,
+                                                                  vertical:
+                                                                      0.4.h),
+                                                          child: Text(
+                                                            provider
+                                                                        .cateoryProductModel
+                                                                        ?.data
+                                                                        ?.categories?[
+                                                                            index]
+                                                                        .featured ==
+                                                                    1
+                                                                ? 'Yes'.tr
+                                                                : 'No'.tr,
+                                                            style: TextStyle(
+                                                                color: Colors
+                                                                    .white,
+                                                                fontSize: 9.sp),
+                                                          ),
+                                                        ),
+                                                      )
                                                     ],
                                                   ),
-                                                ),
-                                                Row(
-                                                  children: [
-                                                    Text(
-                                                      'Featured:'.tr,
-                                                      overflow:
-                                                          TextOverflow.ellipsis,
-                                                      style: TextStyle(
-                                                        color: Colors.black,
-                                                        fontSize: 10.sp,
+                                                  Column(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: [
+                                                      Text(
+                                                        'Created at'.tr,
                                                         overflow: TextOverflow
                                                             .ellipsis,
-                                                      ),
-                                                    ),
-                                                    SizedBox(
-                                                      width: 1.w,
-                                                    ),
-                                                    Container(
-                                                      decoration: BoxDecoration(
-                                                          color: blueColor,
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(4)),
-                                                      child: Padding(
-                                                        padding: EdgeInsets
-                                                            .symmetric(
-                                                                horizontal:
-                                                                    2.5.w,
-                                                                vertical:
-                                                                    0.4.h),
-                                                        child: Text(
-                                                          provider
-                                                                      .cateoryProductModel
-                                                                      ?.data
-                                                                      ?.categories?[
-                                                                          index]
-                                                                      .featured ==
-                                                                  1
-                                                              ? 'Yes'.tr
-                                                              : 'No'.tr,
-                                                          style: TextStyle(
-                                                              color:
-                                                                  Colors.white,
-                                                              fontSize: 9.sp),
+                                                        style: TextStyle(
+                                                          color:
+                                                              Color(0xff0B7A3E),
+                                                          fontSize: 9.sp,
+                                                          overflow: TextOverflow
+                                                              .ellipsis,
                                                         ),
                                                       ),
-                                                    )
-                                                  ],
-                                                ),
-                                                Column(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  children: [
-                                                    Text(
-                                                      'Created at'.tr,
-                                                      overflow:
-                                                          TextOverflow.ellipsis,
-                                                      style: TextStyle(
-                                                        color:
-                                                            Color(0xff0B7A3E),
-                                                        fontSize: 9.sp,
+                                                      SizedBox(
+                                                        height: 0.3.h,
+                                                      ),
+                                                      Text(
+                                                        '1 month ago'.tr,
                                                         overflow: TextOverflow
                                                             .ellipsis,
+                                                        style: TextStyle(
+                                                          color:
+                                                              Color(0xff636363),
+                                                          fontSize: 8.5.sp,
+                                                          overflow: TextOverflow
+                                                              .ellipsis,
+                                                        ),
                                                       ),
-                                                    ),
-                                                    SizedBox(
-                                                      height: 0.3.h,
-                                                    ),
-                                                    Text(
-                                                      '1 month ago'.tr,
-                                                      overflow:
-                                                          TextOverflow.ellipsis,
-                                                      style: TextStyle(
-                                                        color:
-                                                            Color(0xff636363),
-                                                        fontSize: 8.5.sp,
-                                                        overflow: TextOverflow
-                                                            .ellipsis,
-                                                      ),
-                                                    ),
-                                                  ],
-                                                )
-                                              ],
-                                            )
-                                          ],
+                                                    ],
+                                                  )
+                                                ],
+                                              )
+                                            ],
+                                          ),
                                         ),
                                       ),
-                                    ),
-                                    SizedBox(
-                                      height: 2.h,
-                                    )
-                                  ],
-                                ),
-                              );
-                            },
+                                      SizedBox(
+                                        height: 2.h,
+                                      )
+                                    ],
+                                  ),
+                                );
+                              },
+                            ),
                           ))
           ],
         ),

@@ -28,6 +28,7 @@ class AllProductProvider extends ChangeNotifier {
     var data = await DataProvider().get_categoriesApi(map: map);
     cateoryProductModel = data;
     print('objectis${user_model.data!.userId}');
+    update_state();
   }
 
   upload_categories({dio.FormData? uploadMedia}) async {
