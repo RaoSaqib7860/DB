@@ -21,6 +21,7 @@ class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: CustomContainer(
+        is_back_btn: true,
         widgets: SingleChildScrollView(
           child: Column(
             children: [

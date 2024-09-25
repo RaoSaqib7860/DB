@@ -29,27 +29,29 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
         },
         child: Scaffold(
           body: CustomContainer(
+            is_back_btn: true,
             widgets: SingleChildScrollView(
               child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: 5.w, vertical: 2.h),
                 child: Column(
                   children: [
                     Align(
-                        alignment: Alignment.topLeft,
-                        child: GestureDetector(
-                            onTap: () {
-                              Navigator.pop(context);
-                            },
-                            child: Container(
-                              height: 4.h,
-                              width: 10.w,
-                              child: Center(
-                                child: SvgPicture.asset(
-                                  'assets/svgs/back_arrow.svg',
-                                  height: 3.h,
-                                ),
+                      alignment: Alignment.topLeft,
+                      child: GestureDetector(
+                          onTap: () {
+                            Navigator.pop(context);
+                          },
+                          child: Container(
+                            height: 4.h,
+                            width: 10.w,
+                            child: Center(
+                              child: SvgPicture.asset(
+                                'assets/svgs/back_arrow.svg',
+                                height: 3.h,
                               ),
-                            )),),
+                            ),
+                          )),
+                    ),
                     SizedBox(
                       height: 4.h,
                     ),
@@ -71,8 +73,12 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                       height: 2.h,
                     ),
                     Text(
-                      'Enter your Email or Number below and we will\n     send you a link to reset your Password.'.tr,
-                      style: TextStyle(fontSize: 11.sp),
+                      'Enter your Email below and we \nwill send you a link to reset your Password.'
+                          .tr,
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontSize: 11.sp,
+                      ),
                     ),
                     SizedBox(
                       height: 2.h,
@@ -80,7 +86,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: 8.w),
                       child: CustomTextField(
-                        hintText: 'Email or number'.tr,
+                        hintText: 'Email'.tr,
                         controller: email_controller,
                       ),
                     ),

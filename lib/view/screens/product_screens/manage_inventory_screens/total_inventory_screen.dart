@@ -17,7 +17,8 @@ import '../product_categories_screen/product_categories_screen.dart';
 import 'Provider/inventory_provider.dart';
 
 class TotalInventoryScreen extends StatefulWidget {
-  const TotalInventoryScreen({Key? key}) : super(key: key);
+  final int? index;
+  const TotalInventoryScreen({Key? key, this.index}) : super(key: key);
 
   @override
   State<TotalInventoryScreen> createState() => _TotalInventoryScreenState();
@@ -175,6 +176,18 @@ class _TotalInventoryScreenState extends State<TotalInventoryScreen> {
                                 provider.getInvontoryModel?.data?.length ?? 0,
                             padding: EdgeInsets.only(bottom: 12.h),
                             itemBuilder: (context, index) {
+                              if (widget.index == 1 &&
+                                  provider.getInvontoryModel!.data![index]
+                                          .stockManage !=
+                                      1) {
+                                return SizedBox();
+                              }
+                              if (widget.index == 2 &&
+                                  provider.getInvontoryModel!.data![index]
+                                          .stockManage ==
+                                      1) {
+                                return SizedBox();
+                              }
                               return InkWell(
                                 onTap: () {
                                   Navigator.push(

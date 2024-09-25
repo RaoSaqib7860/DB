@@ -13,11 +13,7 @@ class ManageInventoryScreen extends StatefulWidget {
 
 class _ManageInventoryScreenState extends State<ManageInventoryScreen> {
   int ind = 0;
-  List list = [
-    'Total (12)',
-    'In Stock(11)',
-    'Stock Out (1)'
-  ];
+  List list = ['Total (12)', 'In Stock(11)', 'Stock Out (1)'];
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +21,7 @@ class _ManageInventoryScreenState extends State<ManageInventoryScreen> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
-          padding:  EdgeInsets.symmetric(horizontal: 5.w),
+          padding: EdgeInsets.symmetric(horizontal: 5.w),
           child: Container(
             height: 3.2.h,
             child: ListView.builder(
@@ -44,29 +40,49 @@ class _ManageInventoryScreenState extends State<ManageInventoryScreen> {
                         decoration: BoxDecoration(
                             color: ind == index ? blueColor : Colors.white,
                             borderRadius: BorderRadius.circular(5),
-                            border: Border.all(color: ind == index ? blueColor : Colors.black,width: 1)
-                        ),
+                            border: Border.all(
+                                color: ind == index ? blueColor : Colors.black,
+                                width: 1)),
                         child: Padding(
-                          padding:  EdgeInsets.symmetric(horizontal: 2.w,vertical: 0.6.h),
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 2.w, vertical: 0.6.h),
                           child: Text(
                             list[index],
-                            style: TextStyle(color: ind == index ? Colors.white : Colors.black,fontSize: 10.sp),
+                            style: TextStyle(
+                                color:
+                                    ind == index ? Colors.white : Colors.black,
+                                fontSize: 10.sp),
                           ),
                         ),
                       ),
                     ),
-                    SizedBox(width: 2.w,),
+                    SizedBox(
+                      width: 2.w,
+                    ),
                   ],
                 );
               },
             ),
           ),
         ),
-        SizedBox(height: 2.h,),
-        if(ind==0)
-          Expanded(
-              child: TotalInventoryScreen()
-          )
+        SizedBox(
+          height: 2.h,
+        ),
+        if (ind == 0)
+          const Expanded(
+              child: TotalInventoryScreen(
+            index: 0,
+          )),
+        if (ind == 1)
+          const Expanded(
+              child: TotalInventoryScreen(
+            index: 1,
+          )),
+        if (ind == 2)
+          const Expanded(
+              child: TotalInventoryScreen(
+            index: 2,
+          ))
       ],
     );
   }

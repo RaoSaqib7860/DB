@@ -47,6 +47,7 @@ class AllProductProvider extends ChangeNotifier {
   Future get_brands({Map<String, dynamic>? map}) async {
     var data = await DataProvider().get_brandsApi(map: map);
     brandsProductModel = data;
+    update_state();
     print('objectis${user_model.data!.userId}');
   }
 

@@ -504,7 +504,7 @@ class _SignUpDetailScreenState extends State<SignUpDetailScreen> {
                                     if (provider.checkboxSelected == true) {
                                       if (validateEmail(
                                           provider.emailController.text)) {
-                                        //provider.sign_up_api(context);
+                                        provider.sign_up_api(context);
                                       } else {
                                         Get.snackbar('Alert'.tr,
                                             'Email is not valid.'.tr);
