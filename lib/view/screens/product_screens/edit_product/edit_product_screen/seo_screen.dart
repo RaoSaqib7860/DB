@@ -248,7 +248,7 @@ class _SEOScreenState extends State<SEOScreen> {
                                   height: 1.h,
                                 ),
                                 Text(
-                                  'Jun 6, 2024 - if you want this this product you can call me anytime i will deliver your order than and there so you and have your product really fast.',
+                                  'Jun 6, 2024 - if you want this this product you can call me anytime i will deliver your order than and there so you and have your product really fast.'.tr,
                                   style: TextStyle(
                                     color: Color(0xff454545),
                                     fontSize: 8.sp,

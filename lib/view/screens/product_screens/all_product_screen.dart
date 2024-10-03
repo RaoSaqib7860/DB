@@ -50,7 +50,7 @@ class _AllProductScreenState extends State<AllProductScreen> {
                             width: 1)),
                     child: Padding(
                       padding: EdgeInsets.symmetric(
-                          horizontal: 2.w, vertical: 0.6.h),
+                          horizontal: 2.w, vertical: 0.3.h),
                       child: Text(
                         'Publish '.tr + '(${provider.allProductModel?.data?.actives ?? ''})',
                         style: TextStyle(
@@ -85,7 +85,7 @@ class _AllProductScreenState extends State<AllProductScreen> {
                             width: 1)),
                     child: Padding(
                       padding: EdgeInsets.symmetric(
-                          horizontal: 2.w, vertical: 0.6.h),
+                          horizontal: 2.w, vertical: 0.3.h),
                       child: Text(
                         'Draft '.tr + '(${provider.allProductModel?.data?.drafts ?? ''})',
                         style: TextStyle(
@@ -120,7 +120,7 @@ class _AllProductScreenState extends State<AllProductScreen> {
                             width: 1)),
                     child: Padding(
                       padding: EdgeInsets.symmetric(
-                          horizontal: 2.w, vertical: 0.6.h),
+                          horizontal: 2.w, vertical: 0.3.h),
                       child: Text(
                         'Incomplete '.tr + '(${provider.allProductModel?.data?.incomplete ?? ''})',
                         style: TextStyle(
@@ -155,7 +155,7 @@ class _AllProductScreenState extends State<AllProductScreen> {
                             width: 1)),
                     child: Padding(
                       padding: EdgeInsets.symmetric(
-                          horizontal: 2.w, vertical: 0.6.h),
+                          horizontal: 2.w, vertical: 0.3.h),
                       child: Text(
                         'Trash '.tr + '(${provider.allProductModel?.data?.trash ?? ''})',
                         style: TextStyle(

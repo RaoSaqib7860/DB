@@ -3,6 +3,7 @@ import 'package:db_2_0/custom_widgets/data_loading.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 
@@ -129,7 +130,7 @@ class _DeliveryOrderScreenState extends State<DeliveryOrderScreen> {
                             ),
                             child: Center(
                               child: Text(
-                                'Submit',
+                                'Submit'.tr,
                                 style: TextStyle(
                                     fontSize: 7.sp, color: Colors.white),
                               ),
@@ -158,7 +159,7 @@ class _DeliveryOrderScreenState extends State<DeliveryOrderScreen> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Text(
-                                'Pick up address for',
+                                'Pick up address for'.tr,
                                 style: TextStyle(
                                   color: Colors.white,
                                   fontSize: 7.sp,
@@ -364,9 +365,9 @@ class _DeliveryOrderScreenState extends State<DeliveryOrderScreen> {
                                                           context: context,
                                                           title: 'Delete',
                                                           subtitle:
-                                                              'Are you sure you want to delete?',
-                                                          no_subtitle: 'No',
-                                                          yes_title: "Yes",
+                                                              'Are you sure you want to delete?'.tr,
+                                                          no_subtitle: 'No'.tr,
+                                                          yes_title: "Yes".tr,
                                                           on_done: () {
                                                             DataProvider()
                                                                 .tcs_remove_ordersApi(
@@ -412,7 +413,7 @@ class _DeliveryOrderScreenState extends State<DeliveryOrderScreen> {
                                                     child: Row(
                                                       children: [
                                                         Text(
-                                                          'Detail',
+                                                          'Detail'.tr,
                                                           style: TextStyle(
                                                             color: Colors.black,
                                                             fontSize: 9.sp,
@@ -478,7 +479,7 @@ class _DeliveryOrderScreenState extends State<DeliveryOrderScreen> {
                   ),
                   child: Center(
                     child: Text(
-                      'Create Delivery (COD)',
+                      'Create Delivery (COD)'.tr,
                       style: TextStyle(
                           color: Colors.white,
                           fontSize: 12.sp,

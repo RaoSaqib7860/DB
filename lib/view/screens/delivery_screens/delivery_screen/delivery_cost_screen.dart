@@ -2,6 +2,7 @@ import 'package:db_2_0/custom_widgets/data_loading.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 import 'package:timeago/timeago.dart' as timeago;
@@ -114,14 +115,14 @@ class _DeliveryCostScreenState extends State<DeliveryCostScreen> {
                                                 MainAxisAlignment.spaceBetween,
                                             children: [
                                               Text(
-                                                "Delivery Method:",
+                                                "Delivery Method:".tr,
                                                 style: TextStyle(
                                                     color: Colors.black,
                                                     fontWeight: FontWeight.bold,
                                                     fontSize: 11.sp),
                                               ),
                                               Text(
-                                                "CREATED AT",
+                                                "CREATED AT".tr,
                                                 style: TextStyle(
                                                     color: Colors.black,
                                                     fontSize: 8.sp),
@@ -166,7 +167,7 @@ class _DeliveryCostScreenState extends State<DeliveryCostScreen> {
                                             height: 0.5.h,
                                           ),
                                           Text(
-                                            "Delivery cost :${provider.deliveryCostModel?.data?[index].price}",
+                                            "Delivery cost :".tr +"${provider.deliveryCostModel?.data?[index].price}",
                                             style: TextStyle(
                                                 color: Color(0xff005493),
                                                 fontSize: 9.sp),
@@ -214,7 +215,7 @@ class _DeliveryCostScreenState extends State<DeliveryCostScreen> {
                                                 width: 2.w,
                                               ),
                                               Text(
-                                                "Action",
+                                                "Action".tr,
                                                 style: TextStyle(
                                                     color: Colors.black,
                                                     fontSize: 10.sp),
@@ -226,11 +227,11 @@ class _DeliveryCostScreenState extends State<DeliveryCostScreen> {
                                                   onTap: () {
                                                     show_cupertinoDialog(
                                                         context: context,
-                                                        title: 'Delete',
+                                                        title: 'Delete'.tr,
                                                         subtitle:
-                                                            'Are you sure you want to delete?',
-                                                        no_subtitle: 'No',
-                                                        yes_title: "Yes",
+                                                            'Are you sure you want to delete?'.tr,
+                                                        no_subtitle: 'No'.tr,
+                                                        yes_title: "Yes".tr,
                                                         on_done: () {
                                                           DataProvider()
                                                               .delivery_costApi_crud(
@@ -306,7 +307,7 @@ class _DeliveryCostScreenState extends State<DeliveryCostScreen> {
                     ),
                     child: Center(
                       child: Text(
-                        'Create Method',
+                        'Create Method'.tr,
                         style: TextStyle(
                             color: Colors.white,
                             fontSize: 12.sp,

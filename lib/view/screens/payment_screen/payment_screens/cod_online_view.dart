@@ -3,6 +3,7 @@ import 'package:db_2_0/custom_widgets/data_loading.dart';
 import 'package:db_2_0/view/screens/auth_screens/login_screen/Login%20Provider/login_model_globle.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_switch/flutter_switch.dart';
+import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../../../custom_widgets/app_colors.dart';
@@ -48,7 +49,7 @@ class _CODAndOnlineState extends State<CODAndOnline> {
                   height: 3.h,
                 ),
                 Text(
-                  'Display name at checkout',
+                  'Display name at checkout'.tr,
                   style: TextStyle(
                       fontSize: 13.sp,
                       color: Colors.black,
@@ -63,7 +64,7 @@ class _CODAndOnlineState extends State<CODAndOnline> {
                   child: TextField(
                     controller: name_controller,
                     decoration: InputDecoration(
-                      hintText: ' Name',
+                      hintText: ' Name'.tr,
                       hintStyle: TextStyle(
                           fontSize: 10.sp, color: Colors.black.withAlpha(170)),
                     ),
@@ -73,7 +74,7 @@ class _CODAndOnlineState extends State<CODAndOnline> {
                   height: 0.5.h,
                 ),
                 Text(
-                  'Customers will see this when checking out.',
+                  'Customers will see this when checking out.'.tr,
                   style: TextStyle(
                     fontSize: 8.sp,
                     color: Color(0xff8E8E8E),
@@ -84,7 +85,7 @@ class _CODAndOnlineState extends State<CODAndOnline> {
                   height: 2.h,
                 ),
                 Text(
-                  'Additional Details',
+                  'Additional Details'.tr,
                   style: TextStyle(
                       fontSize: 13.sp,
                       color: Colors.black,
@@ -98,7 +99,7 @@ class _CODAndOnlineState extends State<CODAndOnline> {
                   child: TextField(
                     controller: detail_controller,
                     decoration: InputDecoration(
-                      hintText: ' Type here',
+                      hintText: ' Type here'.tr,
                       hintStyle: TextStyle(
                           fontSize: 10.sp, color: Colors.black.withAlpha(170)),
                       //contentPadding: EdgeInsets.only(top: 0.002.h,left: 2.w)
@@ -109,7 +110,7 @@ class _CODAndOnlineState extends State<CODAndOnline> {
                   height: 0.5.h,
                 ),
                 Text(
-                  'Displayed on the Payment method page, while the customer\nis choosing how to pay.',
+                  'Displayed on the Payment method page, while the customer\nis choosing how to pay.'.tr,
                   style: TextStyle(
                     fontSize: 8.sp,
                     color: Color(0xff8E8E8E),
@@ -143,7 +144,7 @@ class _CODAndOnlineState extends State<CODAndOnline> {
                     Padding(
                       padding: EdgeInsets.only(left: 3.w),
                       child: Text(
-                        'Enable',
+                        'Enable'.tr,
                         style: TextStyle(color: Colors.black, fontSize: 12.sp),
                       ),
                     ),
@@ -168,7 +169,7 @@ class _CODAndOnlineState extends State<CODAndOnline> {
                             borderRadius: BorderRadius.circular(5)),
                         child: Center(
                           child: Text(
-                            'Back',
+                            'Back'.tr,
                             style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 12.sp,
@@ -210,7 +211,7 @@ class _CODAndOnlineState extends State<CODAndOnline> {
                             borderRadius: BorderRadius.circular(5)),
                         child: Center(
                           child: Text(
-                            'Save',
+                            'Save'.tr,
                             style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 12.sp,

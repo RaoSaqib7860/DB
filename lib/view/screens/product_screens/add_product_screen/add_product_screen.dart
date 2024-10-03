@@ -62,7 +62,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                                 ),
                               )),
                           SizedBox(
-                            width: 25.w,
+                            width: 20.w,
                           ),
                           Text(
                             'Add Product'.tr,

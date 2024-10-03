@@ -189,7 +189,7 @@ class _PublishScreenState extends State<PublishScreen> {
                         ? SizedBox()
                         : provider.allProductModel!.data!.posts!.isEmpty
                             ? Center(
-                                child: Text('No Data Found'),
+                                child: Text('No Data Found'.tr),
                               )
                             : RefreshIndicator(
                                 onRefresh: () async {

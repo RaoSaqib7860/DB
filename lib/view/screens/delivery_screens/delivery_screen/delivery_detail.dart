@@ -70,7 +70,7 @@ class _DeliveryDetailState extends State<DeliveryDetail> {
                               width: 25.w,
                             ),
                             Text(
-                              'Pickup Location',
+                              'Pickup Location'.tr,
                               style: TextStyle(
                                   color: Colors.white, fontSize: 13.sp),
                             ),
@@ -105,8 +105,8 @@ class _DeliveryDetailState extends State<DeliveryDetail> {
                                 },
                                 child: SizedBox(
                                   height: 6.h,
-                                  child: const Center(
-                                    child: Text('Add Your Pickup Address.'),
+                                  child:  Center(
+                                    child: Text('Add Your Pickup Address.'.tr),
                                   ),
                                 ),
                               )
@@ -129,8 +129,8 @@ class _DeliveryDetailState extends State<DeliveryDetail> {
                                               crossAxisAlignment:
                                                   CrossAxisAlignment.start,
                                               children: [
-                                                const Text(
-                                                  'Contact Person',
+                                                 Text(
+                                                  'Contact Person'.tr,
                                                   style: TextStyle(
                                                       fontSize: 14,
                                                       fontWeight:
@@ -142,8 +142,8 @@ class _DeliveryDetailState extends State<DeliveryDetail> {
                                                     fontSize: 14,
                                                   ),
                                                 ),
-                                                const Text(
-                                                  'Pickup Location',
+                                                 Text(
+                                                  'Pickup Location'.tr,
                                                   style: TextStyle(
                                                       fontSize: 14,
                                                       fontWeight:
@@ -155,8 +155,8 @@ class _DeliveryDetailState extends State<DeliveryDetail> {
                                                     fontSize: 14,
                                                   ),
                                                 ),
-                                                const Text(
-                                                  'Postal Code',
+                                                 Text(
+                                                  'Postal Code'.tr,
                                                   style: TextStyle(
                                                       fontSize: 14,
                                                       fontWeight:
@@ -168,8 +168,8 @@ class _DeliveryDetailState extends State<DeliveryDetail> {
                                                     fontSize: 14,
                                                   ),
                                                 ),
-                                                const Text(
-                                                  'GST Number',
+                                                 Text(
+                                                  'GST Number'.tr,
                                                   style: TextStyle(
                                                       fontSize: 14,
                                                       fontWeight:
@@ -197,7 +197,7 @@ class _DeliveryDetailState extends State<DeliveryDetail> {
                                                   CrossAxisAlignment.start,
                                               children: [
                                                 Text(
-                                                  'Contact Number',
+                                                  'Contact Number'.tr,
                                                   style: TextStyle(
                                                       fontSize: 14,
                                                       fontWeight:
@@ -210,7 +210,7 @@ class _DeliveryDetailState extends State<DeliveryDetail> {
                                                   ),
                                                 ),
                                                 Text(
-                                                  'City',
+                                                  'City'.tr,
                                                   style: TextStyle(
                                                       fontSize: 14,
                                                       fontWeight:
@@ -223,7 +223,7 @@ class _DeliveryDetailState extends State<DeliveryDetail> {
                                                   ),
                                                 ),
                                                 Text(
-                                                  'Return Address',
+                                                  'Return Address'.tr,
                                                   style: TextStyle(
                                                       fontSize: 14,
                                                       fontWeight:
@@ -251,8 +251,8 @@ class _DeliveryDetailState extends State<DeliveryDetail> {
                                     Container(
                                       width: 60.w,
                                       //color: Colors.redAccent,
-                                      child: const Text.rich(TextSpan(
-                                          text: 'Email us ',
+                                      child:  Text.rich(TextSpan(
+                                          text: 'Email us '.tr,
                                           style: TextStyle(fontSize: 15),
                                           children: [
                                             TextSpan(
@@ -262,7 +262,7 @@ class _DeliveryDetailState extends State<DeliveryDetail> {
                                                   color: Colors.blue),
                                             ),
                                             TextSpan(
-                                              text: 'to update Pickup Address',
+                                              text: 'to update Pickup Address'.tr,
                                               style: TextStyle(
                                                 fontSize: 15,
                                               ),

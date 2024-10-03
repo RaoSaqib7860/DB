@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../../custom_widgets/app_colors.dart';
@@ -32,13 +33,13 @@ class _DeliveryMainScreenState extends State<DeliveryMainScreen> {
               unselectedLabelColor: Colors.grey[400],
               tabs: [
                 Text(
-                  'Delivery Orders',
+                  'Delivery Orders'.tr,
                 ),
                 Text(
-                  'Delivery Location',
+                  'Delivery Location'.tr,
                 ),
                 Text(
-                  'Delivery Cost',
+                  'Delivery Cost'.tr,
                 ),
               ],
             ),

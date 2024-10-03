@@ -3,6 +3,7 @@ import 'package:db_2_0/custom_widgets/data_loading.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 import 'package:timeago/timeago.dart' as timeago;
@@ -186,7 +187,7 @@ class _DeliveryLocationScreenState extends State<DeliveryLocationScreen> {
                                             height: 0.5.h,
                                           ),
                                           Text(
-                                            "Delivery Location:",
+                                            "Delivery Location:".tr,
                                             style: TextStyle(
                                                 color: Colors.black,
                                                 fontSize: 10.sp),
@@ -208,7 +209,7 @@ class _DeliveryLocationScreenState extends State<DeliveryLocationScreen> {
                                                     CrossAxisAlignment.end,
                                                 children: [
                                                   Text(
-                                                    "CREATED AT",
+                                                    "CREATED AT".tr,
                                                     style: TextStyle(
                                                       color: Colors.black,
                                                       fontSize: 8.sp,
@@ -289,7 +290,7 @@ class _DeliveryLocationScreenState extends State<DeliveryLocationScreen> {
                                                 width: 2.w,
                                               ),
                                               Text(
-                                                "Action",
+                                                "Action".tr,
                                                 style: TextStyle(
                                                     color: Colors.black,
                                                     fontSize: 10.sp),
@@ -301,11 +302,11 @@ class _DeliveryLocationScreenState extends State<DeliveryLocationScreen> {
                                                   onTap: () {
                                                     show_cupertinoDialog(
                                                         context: context,
-                                                        title: 'Delete',
+                                                        title: 'Delete'.tr,
                                                         subtitle:
-                                                            'Are you sure you want to delete?',
-                                                        no_subtitle: 'No',
-                                                        yes_title: "Yes",
+                                                            'Are you sure you want to delete?'.tr,
+                                                        no_subtitle: 'No'.tr,
+                                                        yes_title: "Yes".tr,
                                                         on_done: () {
                                                           DataProvider()
                                                               .delivery_locationApi_crud(
@@ -380,7 +381,7 @@ class _DeliveryLocationScreenState extends State<DeliveryLocationScreen> {
                   ),
                   child: Center(
                     child: Text(
-                      'Create Location',
+                      'Create Location'.tr,
                       style: TextStyle(
                           color: Colors.white,
                           fontSize: 12.sp,

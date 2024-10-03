@@ -549,7 +549,7 @@ class _SignUpDetailScreenState extends State<SignUpDetailScreen> {
                         padding: EdgeInsets.symmetric(
                             vertical: 0.7.h, horizontal: 14.w),
                         child: Text(
-                          'Next',
+                          'Next'.tr,
                           style:
                               TextStyle(color: Colors.white, fontSize: 13.sp),
                         ),

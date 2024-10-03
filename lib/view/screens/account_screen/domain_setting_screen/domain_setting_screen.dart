@@ -292,7 +292,7 @@ class _DomainSettingScreenState extends State<DomainSettingScreen> {
                                                     ),
                                                     child: Center(
                                                       child: Text(
-                                                        'Update',
+                                                        'Update'.tr,
                                                         style: TextStyle(
                                                             fontSize: 9.sp,
                                                             color:
@@ -315,7 +315,7 @@ class _DomainSettingScreenState extends State<DomainSettingScreen> {
                                                 ),
                                                 Expanded(
                                                   child: Text(
-                                                    'You\'ll need to setup a DNS record to point to your store on our server. DNS records can be setup through your domain registrars control panel. Since every registrar has a different setup, contact them for assistance if you\'re unsure.',
+                                                    'You\'ll need to setup a DNS record to point to your store on our server. DNS records can be setup through your domain registrars control panel. Since every registrar has a different setup, contact them for assistance if you\'re unsure.'.tr,
                                                     overflow:
                                                         TextOverflow.ellipsis,
                                                     maxLines: 4,
