@@ -42,7 +42,6 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
-
     get_storage();
   }
 
@@ -72,7 +71,6 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     final HomePageProvider provider = Provider.of<HomePageProvider>(context);
-
     return DataLoading(
       isLoading: loading || provider.outer_loading,
       child: Scaffold(

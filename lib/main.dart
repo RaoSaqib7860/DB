@@ -4,7 +4,6 @@ import 'package:db_2_0/view/screens/account_screen/analytic_screen/Provider/get_
 import 'package:db_2_0/view/screens/account_screen/store_setting_screen/Provider/get_store_info_provider.dart';
 import 'package:db_2_0/view/screens/account_screen/subsription_screens/Provider/subscription_history_plan+provider.dart';
 import 'package:db_2_0/view/screens/auth_screens/login_screen/Login%20Provider/login_provider.dart';
-import 'package:db_2_0/view/screens/auth_screens/signup_detail_screen/SignUp%20Provider/sign_up_provider.dart';
 import 'package:db_2_0/view/screens/home_screen/DashBoard%20Provider/dashboard_provider.dart';
 import 'package:db_2_0/view/screens/home_screen/Update%20Store%20Setup/update_store_provider.dart';
 import 'package:db_2_0/view/screens/order_screens/Provider/all_order_peovider.dart';
@@ -52,28 +51,26 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder<LanguageModel>(
-        builder: (BuildContext context, LanguageModel value, Widget? child) {
-          return Sizer(
-            builder: (context, orientation, deviceType) {
-              return GetMaterialApp(
-                title: 'DB',
-                translations: LocaleString(),
-                locale: Locale('en', 'US'),
-                theme: ThemeData(
-                  primarySwatch: Colors.blue,
-                ),
-                home:
-                //BottomSheetScreen(),
-                SplashScreen(),
-                //SplashScreen(),
-                debugShowCheckedModeBanner: false,
-              );
-            },
-          );
-    },
-    valueListenable: language,
+      builder: (BuildContext context, LanguageModel value, Widget? child) {
+        return Sizer(
+          builder: (context, orientation, deviceType) {
+            return GetMaterialApp(
+              title: 'DB',
+              translations: LocaleString(),
+              locale: Locale('en', 'US'),
+              theme: ThemeData(
+                primarySwatch: Colors.blue,
+              ),
+              home:
+                  //BottomSheetScreen(),
+                  SplashScreen(),
+              //SplashScreen(),
+              debugShowCheckedModeBanner: false,
+            );
+          },
+        );
+      },
+      valueListenable: language,
     );
-
-
   }
 }

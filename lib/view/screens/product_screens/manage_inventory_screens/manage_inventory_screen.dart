@@ -1,8 +1,10 @@
 import 'package:db_2_0/view/screens/product_screens/manage_inventory_screens/total_inventory_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../../../custom_widgets/app_colors.dart';
+import 'Provider/inventory_provider.dart';
 
 class ManageInventoryScreen extends StatefulWidget {
   const ManageInventoryScreen({Key? key}) : super(key: key);
@@ -13,10 +15,12 @@ class ManageInventoryScreen extends StatefulWidget {
 
 class _ManageInventoryScreenState extends State<ManageInventoryScreen> {
   int ind = 0;
-  List list = ['Total (12)', 'In Stock(11)', 'Stock Out (1)'];
+  List list = ['Total', 'In Stock', 'Stock Out'];
 
   @override
   Widget build(BuildContext context) {
+    final GetInventoryProvider provider =
+        Provider.of<GetInventoryProvider>(context);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -47,7 +51,7 @@ class _ManageInventoryScreenState extends State<ManageInventoryScreen> {
                           padding: EdgeInsets.symmetric(
                               horizontal: 2.w, vertical: 0.6.h),
                           child: Text(
-                            list[index],
+                            "${list[index]} ${index == 0 ? "(${provider.getInvontoryModel?.data?.length ?? '0'})" : ""}",
                             style: TextStyle(
                                 color:
                                     ind == index ? Colors.white : Colors.black,

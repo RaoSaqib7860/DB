@@ -338,7 +338,7 @@ class _CreateBrandScreenState extends State<CreateBrandScreen> {
                                   uploadMedia: dio.FormData.fromMap(map));
                               upload_brand_loading = false;
                               setState(() {});
-                              Navigator.pop(context);
+                              Navigator.of(context).pop();
                             } else {
                               Map<String, dynamic> map = {
                                 'user_id': '${user_model.data!.userId}',
@@ -360,7 +360,7 @@ class _CreateBrandScreenState extends State<CreateBrandScreen> {
                                   uploadMedia: dio.FormData.fromMap(map));
                               upload_brand_loading = false;
                               setState(() {});
-                              Navigator.pop(context);
+                              Navigator.of(context).pop();
                             }
                           } else {
                             getx.Get.snackbar('Success', 'Filed is empty');

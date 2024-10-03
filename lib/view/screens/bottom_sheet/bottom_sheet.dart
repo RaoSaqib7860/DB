@@ -239,93 +239,175 @@ class _BottomSheetScreenState extends State<BottomSheetScreen> {
                       height: 3.h,
                     ),
                     Expanded(
-                        child: ListView.builder(
-                      itemCount: 5,
-                      padding: EdgeInsets.zero,
-                      itemBuilder: (context, index) {
-                        return Column(
-                          children: [
-                            Container(
-                              decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius: BorderRadius.circular(10)),
-                              child: Padding(
-                                padding: EdgeInsets.symmetric(horizontal: 3.w),
-                                child: Column(
-                                  children: [
-                                    SizedBox(
-                                      height: 1.h,
-                                    ),
-                                    Row(
-                                      children: [
-                                        Image(
-                                          image: AssetImage(
-                                              'assets/images/book.png'),
-                                          height: 7.h,
-                                        ),
-                                        SizedBox(
-                                          width: 2.w,
-                                        ),
-                                        Expanded(
-                                            child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.start,
-                                          children: [
-                                            Row(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                              children: [
-                                                Text(
-                                                  'You have new order'.tr,
-                                                  style: TextStyle(
-                                                      color: Colors.black,
-                                                      fontSize: 9.sp,
-                                                      fontWeight:
-                                                          FontWeight.bold),
-                                                ),
-                                                Text(
-                                                  'Today'.tr,
-                                                  style: TextStyle(
-                                                    color: Colors.black,
-                                                    fontSize: 9.sp,
-                                                  ),
-                                                )
-                                              ],
-                                            ),
-                                            SizedBox(
-                                              height: 0.5.h,
-                                            ),
-                                            Text(
-                                              'Lorem Ipsum is simply dummy text of the printing and typesetting industry.'
-                                                  .tr,
-                                              style: TextStyle(
-                                                color: Colors.black,
-                                                fontSize: 7.sp,
+                        child: (allOrderModel?.data?.orderCounts?.pending ==
+                                    null ||
+                                allOrderModel!.data!.orderCounts!.pending! == 0)
+                            ? Column(
+                                children: [
+                                  Container(
+                                    decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        borderRadius:
+                                            BorderRadius.circular(10)),
+                                    child: Padding(
+                                      padding:
+                                          EdgeInsets.symmetric(horizontal: 3.w),
+                                      child: Column(
+                                        children: [
+                                          SizedBox(
+                                            height: 1.h,
+                                          ),
+                                          Row(
+                                            children: [
+                                              SizedBox(
+                                                width: 2.w,
                                               ),
-                                            )
-                                          ],
-                                        ))
-                                      ],
+                                              Expanded(
+                                                  child: Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.start,
+                                                children: [
+                                                  Row(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .spaceBetween,
+                                                    children: [
+                                                      Text(
+                                                        'You have no order'.tr,
+                                                        style: TextStyle(
+                                                            color: Colors.black,
+                                                            fontSize: 9.sp,
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .bold),
+                                                      ),
+                                                      Text(
+                                                        'Today'.tr,
+                                                        style: TextStyle(
+                                                          color: Colors.black,
+                                                          fontSize: 9.sp,
+                                                        ),
+                                                      )
+                                                    ],
+                                                  ),
+                                                  SizedBox(
+                                                    height: 0.5.h,
+                                                  ),
+                                                ],
+                                              ))
+                                            ],
+                                          ),
+                                          SizedBox(
+                                            height: 1.h,
+                                          ),
+                                        ],
+                                      ),
                                     ),
-                                    SizedBox(
-                                      height: 1.h,
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                            SizedBox(
-                              height: 1.h,
-                            ),
-                          ],
-                        );
-                      },
-                    ))
+                                  ),
+                                ],
+                              )
+                            : ListView.builder(
+                                itemCount:
+                                    allOrderModel?.data?.orderCounts?.pending ??
+                                        0,
+                                padding: EdgeInsets.zero,
+                                itemBuilder: (context, index) {
+                                  return Column(
+                                    children: [
+                                      Container(
+                                        decoration: BoxDecoration(
+                                            color: Colors.white,
+                                            borderRadius:
+                                                BorderRadius.circular(10)),
+                                        child: Padding(
+                                          padding: EdgeInsets.symmetric(
+                                              horizontal: 3.w),
+                                          child: Column(
+                                            children: [
+                                              SizedBox(
+                                                height: 1.h,
+                                              ),
+                                              Row(
+                                                children: [
+                                                  Image(
+                                                    image: AssetImage(
+                                                        'assets/images/book.png'),
+                                                    height: 7.h,
+                                                  ),
+                                                  SizedBox(
+                                                    width: 2.w,
+                                                  ),
+                                                  Expanded(
+                                                      child: Column(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment.start,
+                                                    children: [
+                                                      Row(
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .start,
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .spaceBetween,
+                                                        children: [
+                                                          Text(
+                                                            'You have new order'
+                                                                .tr,
+                                                            style: TextStyle(
+                                                                color: Colors
+                                                                    .black,
+                                                                fontSize: 9.sp,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold),
+                                                          ),
+                                                          Text(
+                                                            'Today'.tr,
+                                                            style: TextStyle(
+                                                              color:
+                                                                  Colors.black,
+                                                              fontSize: 9.sp,
+                                                            ),
+                                                          )
+                                                        ],
+                                                      ),
+                                                      SizedBox(
+                                                        height: 0.5.h,
+                                                      ),
+                                                      // Text(
+                                                      //   'Lorem Ipsum is simply dummy text of the printing and typesetting industry.'
+                                                      //       .tr,
+                                                      //   style: TextStyle(
+                                                      //     color: Colors.black,
+                                                      //     fontSize: 7.sp,
+                                                      //   ),
+                                                      // )
+                                                    ],
+                                                  ))
+                                                ],
+                                              ),
+                                              SizedBox(
+                                                height: 1.h,
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        height: 1.h,
+                                      ),
+                                    ],
+                                  );
+                                },
+                              ))
                   ],
                 ),
               ),

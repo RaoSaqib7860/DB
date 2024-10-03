@@ -113,16 +113,16 @@ class _PublishScreenState extends State<PublishScreen> {
                       ),
                       Expanded(
                           child: InkWell(
-                        onTap: () async{
+                        onTap: () async {
                           if (dropdownvalue != null) {
                             int index = items.indexOf(dropdownvalue!);
                             if (index == 3) {
-                               provider.get_product_data(map: {
+                              provider.get_product_data(map: {
                                 'user_id': '${user_model.data!.userId}',
                                 'type': '0'
                               });
                             } else {
-                             provider.get_product_data(map: {
+                              provider.get_product_data(map: {
                                 'user_id': '${user_model.data!.userId}',
                                 'type': '${index + 1}'
                               });
@@ -449,7 +449,7 @@ class _PublishScreenState extends State<PublishScreen> {
                                                               onTap: () {
                                                                 Get.to(WebView(
                                                                   url:
-                                                                      'https://octanefashion.dialboxx.com/product/${provider.allProductModel!.data!.posts![index].title}/${provider.allProductModel!.data!.posts![index].id}',
+                                                                      '${user_model.data!.fullDomain}/product/${provider.allProductModel!.data!.posts![index].slug}/${provider.allProductModel!.data!.posts![index].id}',
                                                                 ));
                                                               },
                                                               child: SvgPicture
