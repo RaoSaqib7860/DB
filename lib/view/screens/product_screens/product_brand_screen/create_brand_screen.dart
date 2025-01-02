@@ -325,11 +325,13 @@ class _CreateBrandScreenState extends State<CreateBrandScreen> {
                                 'user_id': '${user_model.data!.userId}',
                                 'action': 'add',
                                 'name': '${nameController.text}',
-                                'featured': '$selectFeaturedIndex',
+                                'featured': '${selectFeaturedIndex??1}',
                                 'domain_id': '${user_model.data!.domainId}',
-                                'file': await MultipartFile.fromFile(
-                                  logoImage!.path,
-                                ),
+                                'file': logoImage == null
+                                    ? null
+                                    : await MultipartFile.fromFile(
+                                        logoImage!.path,
+                                      ),
                               };
                               map.removeWhere((key, value) => value == null);
                               upload_brand_loading = true;
@@ -345,7 +347,7 @@ class _CreateBrandScreenState extends State<CreateBrandScreen> {
                                 'action': 'update',
                                 'brand_id': '${widget.bId}',
                                 'name': '${nameController.text}',
-                                'featured': '$selectFeaturedIndex',
+                                'featured': '${selectFeaturedIndex??1}',
                                 'domain_id': '${user_model.data!.domainId}',
                                 'file': logoImage == null
                                     ? null

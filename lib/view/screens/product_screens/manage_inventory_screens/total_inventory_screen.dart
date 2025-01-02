@@ -171,456 +171,467 @@ class _TotalInventoryScreenState extends State<TotalInventoryScreen> {
                         ? Center(
                             child: Text('No Data'),
                           )
-                        : ListView.builder(
-                            itemCount:
-                                provider.getInvontoryModel?.data?.length ?? 0,
-                            padding: EdgeInsets.only(bottom: 12.h),
-                            itemBuilder: (context, index) {
-                              if (widget.index == 1 &&
-                                  provider.getInvontoryModel!.data![index]
-                                          .stockManage !=
-                                      1) {
-                                return SizedBox();
-                              }
-                              if (widget.index == 2 &&
-                                  provider.getInvontoryModel!.data![index]
-                                          .stockManage ==
-                                      1) {
-                                return SizedBox();
-                              }
-                              return InkWell(
-                                onTap: () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) => InventoryScreen(
-                                          type: '0',
-                                          productId: provider.getInvontoryModel!
-                                              .data![index].termId
-                                              .toString(),
-                                        ),
-                                      )).then((value) {
-                                    provider.get_inventoryApi(map: {
-                                      'user_id': '${user_model.data!.userId}',
-                                      'domain_id':
-                                          '${user_model.data!.domainId}'
+                        : RefreshIndicator(
+                            onRefresh: () async {
+                              await provider.get_inventoryApi(map: {
+                                'user_id': '${user_model.data!.userId}',
+                                'domain_id': '${user_model.data!.domainId}'
+                              });
+                            },
+                            child: ListView.builder(
+                              itemCount:
+                                  provider.getInvontoryModel?.data?.length ?? 0,
+                              padding: EdgeInsets.only(bottom: 12.h),
+                              itemBuilder: (context, index) {
+                                if (widget.index == 1 &&
+                                    provider.getInvontoryModel!.data![index]
+                                            .stockManage !=
+                                        1) {
+                                  return SizedBox();
+                                }
+                                if (widget.index == 2 &&
+                                    provider.getInvontoryModel!.data![index]
+                                            .stockManage ==
+                                        1) {
+                                  return SizedBox();
+                                }
+                                return InkWell(
+                                  onTap: () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) => InventoryScreen(
+                                            type: '0',
+                                            productId: provider
+                                                .getInvontoryModel!
+                                                .data![index]
+                                                .termId
+                                                .toString(),
+                                          ),
+                                        )).then((value) {
+                                      provider.get_inventoryApi(map: {
+                                        'user_id': '${user_model.data!.userId}',
+                                        'domain_id':
+                                            '${user_model.data!.domainId}'
+                                      });
                                     });
-                                  });
-                                },
-                                child: Padding(
-                                  padding: EdgeInsets.all(1.0),
-                                  child: Column(
-                                    children: [
-                                      Container(
-                                        width: 100.w,
-                                        decoration: BoxDecoration(
-                                            color: Colors.white,
-                                            borderRadius:
-                                                BorderRadius.circular(3),
-                                            boxShadow: [
-                                              BoxShadow(
-                                                  color:
-                                                      Colors.grey.withAlpha(50),
-                                                  offset: Offset(1, 1),
-                                                  spreadRadius: 1,
-                                                  blurRadius: 2),
-                                              BoxShadow(
-                                                  color:
-                                                      Colors.grey.withAlpha(50),
-                                                  offset: Offset(-1, -1),
-                                                  spreadRadius: 1,
-                                                  blurRadius: 2),
-                                            ]),
-                                        child: Padding(
-                                          padding: EdgeInsets.symmetric(
-                                              horizontal: 2.w, vertical: 1.h),
-                                          child: Column(
-                                            children: [
-                                              Row(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.start,
-                                                children: [
-                                                  Container(
-                                                    height: 9.h,
-                                                    width: 40.w,
-                                                    decoration: BoxDecoration(
-                                                        border: Border.all(
-                                                            width: 1,
-                                                            color: Colors.grey),
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(5)),
-                                                    child: Center(
-                                                      child: CachedNetworkImage(
-                                                        imageUrl:
-                                                            "https:${provider.getInvontoryModel?.data?[index].term?.preview?.media!.url ?? ''}",
-                                                        fit: BoxFit.contain,
-                                                        progressIndicatorBuilder:
-                                                            (context, url,
-                                                                    downloadProgress) =>
-                                                                Center(
-                                                          child: CircularProgressIndicator(
-                                                              strokeWidth: 1.5,
-                                                              value:
-                                                                  downloadProgress
-                                                                      .progress),
+                                  },
+                                  child: Padding(
+                                    padding: EdgeInsets.all(1.0),
+                                    child: Column(
+                                      children: [
+                                        Container(
+                                          width: 100.w,
+                                          decoration: BoxDecoration(
+                                              color: Colors.white,
+                                              borderRadius:
+                                                  BorderRadius.circular(3),
+                                              boxShadow: [
+                                                BoxShadow(
+                                                    color: Colors.grey
+                                                        .withAlpha(50),
+                                                    offset: Offset(1, 1),
+                                                    spreadRadius: 1,
+                                                    blurRadius: 2),
+                                                BoxShadow(
+                                                    color: Colors.grey
+                                                        .withAlpha(50),
+                                                    offset: Offset(-1, -1),
+                                                    spreadRadius: 1,
+                                                    blurRadius: 2),
+                                              ]),
+                                          child: Padding(
+                                            padding: EdgeInsets.symmetric(
+                                                horizontal: 2.w, vertical: 1.h),
+                                            child: Column(
+                                              children: [
+                                                Row(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.start,
+                                                  children: [
+                                                    Container(
+                                                      height: 9.h,
+                                                      width: 40.w,
+                                                      decoration: BoxDecoration(
+                                                          border: Border.all(
+                                                              width: 1,
+                                                              color:
+                                                                  Colors.grey),
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(5)),
+                                                      child: Center(
+                                                        child:
+                                                            CachedNetworkImage(
+                                                          imageUrl:
+                                                              "https:${provider.getInvontoryModel?.data?[index].term?.preview?.media!.url ?? ''}",
+                                                          fit: BoxFit.contain,
+                                                          progressIndicatorBuilder:
+                                                              (context, url,
+                                                                      downloadProgress) =>
+                                                                  Center(
+                                                            child: CircularProgressIndicator(
+                                                                strokeWidth:
+                                                                    1.5,
+                                                                value: downloadProgress
+                                                                    .progress),
+                                                          ),
+                                                          errorWidget: (context,
+                                                                  url, error) =>
+                                                              Image.network(
+                                                                  'https://octanefashion.dialboxx.com/uploads/default.png'),
                                                         ),
-                                                        errorWidget: (context,
-                                                                url, error) =>
-                                                            Image.network(
-                                                                'https://octanefashion.dialboxx.com/uploads/default.png'),
                                                       ),
                                                     ),
-                                                  ),
-                                                  SizedBox(
-                                                    width: 2.w,
-                                                  ),
-                                                  Expanded(
-                                                    child: Padding(
-                                                      padding: EdgeInsets.only(
-                                                          top: 0.5.h),
-                                                      child: Column(
-                                                        crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .start,
-                                                        children: [
-                                                          Text(
-                                                            '${provider.getInvontoryModel!.data![index].term!.title}',
-                                                            style: TextStyle(
-                                                                fontSize: 13.sp,
-                                                                color: Color(
-                                                                    0xff3E3E3E)),
-                                                          ),
-                                                          SizedBox(
-                                                            height: 1.1.h,
-                                                          ),
-                                                          Row(
-                                                            crossAxisAlignment:
-                                                                CrossAxisAlignment
-                                                                    .end,
-                                                            mainAxisAlignment:
-                                                                MainAxisAlignment
-                                                                    .spaceBetween,
-                                                            children: [
-                                                              RichText(
-                                                                  text: TextSpan(
-                                                                      children: [
-                                                                    TextSpan(
-                                                                        text:
-                                                                            'SKU: ',
-                                                                        style: TextStyle(
-                                                                            color:
-                                                                                Color(0xff3E3E3E),
-                                                                            fontSize: 9.sp)),
-                                                                    TextSpan(
-                                                                        text:
-                                                                            '${provider.getInvontoryModel!.data![index].sku ?? ''} ',
-                                                                        style: TextStyle(
-                                                                            color:
-                                                                                Color(0xff3E3E3E).withAlpha(200),
-                                                                            fontSize: 9.sp)),
-                                                                    TextSpan(
-                                                                        text:
-                                                                            '',
-                                                                        style: TextStyle(
-                                                                            color:
-                                                                                Color(0xff3E3E3E).withAlpha(200),
-                                                                            fontSize: 9.sp,
-                                                                            decoration: TextDecoration.lineThrough))
-                                                                  ])),
-                                                              Text(
-                                                                provider.getInvontoryModel!.data![index]
-                                                                            .stockStatus ==
-                                                                        1
-                                                                    ? 'In Stock'
-                                                                    : 'Out Of Stock',
-                                                                style: TextStyle(
-                                                                    fontSize:
-                                                                        8.sp,
-                                                                    color: Color(
-                                                                        0xff0B7A3E)),
-                                                              ),
-                                                            ],
-                                                          ),
-                                                          SizedBox(
-                                                            height: 0.8.h,
-                                                          ),
-                                                          Row(
-                                                            mainAxisAlignment:
-                                                                MainAxisAlignment
-                                                                    .spaceBetween,
-                                                            children: [
-                                                              RichText(
-                                                                  text: TextSpan(
-                                                                      children: [
-                                                                    TextSpan(
-                                                                        text:
-                                                                            'STOCK MANAGE: ',
-                                                                        style: TextStyle(
-                                                                            color:
-                                                                                Colors.black,
-                                                                            fontSize: 8.sp)),
-                                                                    TextSpan(
-                                                                        text: provider.getInvontoryModel!.data![index].stockManage == 1
-                                                                            ? 'Yes'
-                                                                            : 'No',
-                                                                        style: TextStyle(
-                                                                            color:
-                                                                                redColor,
-                                                                            fontSize:
-                                                                                8.sp)),
-                                                                  ])),
-                                                              FlutterSwitch(
-                                                                activeColor: Color(
-                                                                    0xff0B7A3E),
-                                                                inactiveColor:
-                                                                    Color(
-                                                                        0xff484848),
-                                                                width: 10.w,
-                                                                height: 2.7.h,
-                                                                valueFontSize:
-                                                                    25.0,
-                                                                toggleSize:
-                                                                    2.3.h,
-                                                                disabled: true,
-                                                                value: provider
-                                                                            .getInvontoryModel!
-                                                                            .data![index]
-                                                                            .stockManage ==
-                                                                        1
-                                                                    ? true
-                                                                    : false,
-                                                                borderRadius:
-                                                                    30.0,
-                                                                padding: 1,
-                                                                onToggle:
-                                                                    (val) async {
-                                                                  if (val) {
-                                                                    provider
-                                                                        .getInvontoryModel!
-                                                                        .data![
-                                                                            index]
-                                                                        .stockManage = 1;
-                                                                    setState(
-                                                                        () {});
-                                                                    await DataProvider()
-                                                                        .inventoryInfoUpdateApi(
-                                                                            map: {
-                                                                          'user_id':
-                                                                              '${user_model.data!.userId}',
-                                                                          'domain_id':
-                                                                              '${user_model.data!.domainId}',
-                                                                          'stock_status':
-                                                                              '1',
-                                                                          'stock_qty':
-                                                                              '${provider.getInvontoryModel!.data![index].stockQty}'
-                                                                        });
-                                                                    provider.get_inventoryApi(
-                                                                        map: {
-                                                                          'user_id':
-                                                                              '${user_model.data!.userId}',
-                                                                          'domain_id':
-                                                                              '${user_model.data!.domainId}',
-                                                                        },
-                                                                        load:
-                                                                            false);
-                                                                  } else {
-                                                                    provider
-                                                                        .getInvontoryModel!
-                                                                        .data![
-                                                                            index]
-                                                                        .stockManage = 0;
-                                                                    setState(
-                                                                        () {});
-                                                                    await DataProvider()
-                                                                        .inventoryInfoUpdateApi(
-                                                                            map: {
-                                                                          'user_id':
-                                                                              '${user_model.data!.userId}',
-                                                                          'domain_id':
-                                                                              '${user_model.data!.domainId}',
-                                                                          'stock_status':
-                                                                              '0',
-                                                                          'stock_qty':
-                                                                              '${provider.getInvontoryModel!.data![index].stockQty}'
-                                                                        });
-                                                                    provider.get_inventoryApi(
-                                                                        map: {
-                                                                          'user_id':
-                                                                              '${user_model.data!.userId}',
-                                                                          'domain_id':
-                                                                              '${user_model.data!.domainId}',
-                                                                        },
-                                                                        load:
-                                                                            false);
-                                                                  }
-                                                                },
-                                                              )
-                                                            ],
-                                                          )
-                                                        ],
-                                                      ),
+                                                    SizedBox(
+                                                      width: 2.w,
                                                     ),
-                                                  )
-                                                ],
-                                              ),
-                                              SizedBox(
-                                                height: 0.5.h,
-                                              ),
-                                              Divider(
-                                                thickness: 1,
-                                                color: Colors.black26,
-                                              ),
-                                              SizedBox(
-                                                height: 0.5.h,
-                                              ),
-                                              Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
-                                                children: [
-                                                  Row(
-                                                    children: [
-                                                      SvgPicture.asset(
-                                                        'assets/svgs/scale.svg',
-                                                        height: 2.5.h,
+                                                    Expanded(
+                                                      child: Padding(
+                                                        padding:
+                                                            EdgeInsets.only(
+                                                                top: 0.5.h),
+                                                        child: Column(
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .start,
+                                                          children: [
+                                                            Text(
+                                                              '${provider.getInvontoryModel!.data![index].term!.title}',
+                                                              style: TextStyle(
+                                                                  fontSize:
+                                                                      13.sp,
+                                                                  color: Color(
+                                                                      0xff3E3E3E)),
+                                                            ),
+                                                            SizedBox(
+                                                              height: 1.1.h,
+                                                            ),
+                                                            Row(
+                                                              crossAxisAlignment:
+                                                                  CrossAxisAlignment
+                                                                      .end,
+                                                              mainAxisAlignment:
+                                                                  MainAxisAlignment
+                                                                      .spaceBetween,
+                                                              children: [
+                                                                RichText(
+                                                                    text: TextSpan(
+                                                                        children: [
+                                                                      TextSpan(
+                                                                          text:
+                                                                              'SKU: ',
+                                                                          style: TextStyle(
+                                                                              color: Color(0xff3E3E3E),
+                                                                              fontSize: 9.sp)),
+                                                                      TextSpan(
+                                                                          text:
+                                                                              '${provider.getInvontoryModel!.data![index].sku ?? ''} ',
+                                                                          style: TextStyle(
+                                                                              color: Color(0xff3E3E3E).withAlpha(200),
+                                                                              fontSize: 9.sp)),
+                                                                      TextSpan(
+                                                                          text:
+                                                                              '',
+                                                                          style: TextStyle(
+                                                                              color: Color(0xff3E3E3E).withAlpha(200),
+                                                                              fontSize: 9.sp,
+                                                                              decoration: TextDecoration.lineThrough))
+                                                                    ])),
+                                                                Text(
+                                                                  provider.getInvontoryModel!.data![index]
+                                                                              .stockStatus ==
+                                                                          1
+                                                                      ? 'In Stock'
+                                                                      : 'Out Of Stock',
+                                                                  style: TextStyle(
+                                                                      fontSize:
+                                                                          8.sp,
+                                                                      color: Color(
+                                                                          0xff0B7A3E)),
+                                                                ),
+                                                              ],
+                                                            ),
+                                                            SizedBox(
+                                                              height: 0.8.h,
+                                                            ),
+                                                            Row(
+                                                              mainAxisAlignment:
+                                                                  MainAxisAlignment
+                                                                      .spaceBetween,
+                                                              children: [
+                                                                RichText(
+                                                                    text: TextSpan(
+                                                                        children: [
+                                                                      TextSpan(
+                                                                          text:
+                                                                              'STOCK MANAGE: ',
+                                                                          style: TextStyle(
+                                                                              color: Colors.black,
+                                                                              fontSize: 8.sp)),
+                                                                      TextSpan(
+                                                                          text: provider.getInvontoryModel!.data![index].stockManage == 1
+                                                                              ? 'Yes'
+                                                                              : 'No',
+                                                                          style: TextStyle(
+                                                                              color: redColor,
+                                                                              fontSize: 8.sp)),
+                                                                    ])),
+                                                                FlutterSwitch(
+                                                                  activeColor:
+                                                                      Color(
+                                                                          0xff0B7A3E),
+                                                                  inactiveColor:
+                                                                      Color(
+                                                                          0xff484848),
+                                                                  width: 10.w,
+                                                                  height: 2.7.h,
+                                                                  valueFontSize:
+                                                                      25.0,
+                                                                  toggleSize:
+                                                                      2.3.h,
+                                                                  value: provider
+                                                                              .getInvontoryModel!
+                                                                              .data![index]
+                                                                              .stockStatus ==
+                                                                          1
+                                                                      ? true
+                                                                      : false,
+                                                                  borderRadius:
+                                                                      30.0,
+                                                                  padding: 1,
+                                                                  onToggle:
+                                                                      (val) async {
+                                                                    if (val) {
+                                                                      provider
+                                                                          .getInvontoryModel!
+                                                                          .data![
+                                                                              index]
+                                                                          .stockStatus = 1;
+                                                                      setState(
+                                                                          () {});
+                                                                      await DataProvider()
+                                                                          .inventoryInfoUpdateApi(
+                                                                              map: {
+                                                                            'user_id':
+                                                                                '${user_model.data!.userId}',
+                                                                            'product_id':
+                                                                                '${provider.getInvontoryModel!.data![index].termId}',
+                                                                            'stock_status':
+                                                                                '1',
+                                                                            'stock_qty':
+                                                                                '${provider.getInvontoryModel!.data![index].stockQty}'
+                                                                          });
+                                                                      // provider.get_inventoryApi(
+                                                                      //     map: {
+                                                                      //       'user_id':
+                                                                      //           '${user_model.data!.userId}',
+                                                                      //       'domain_id':
+                                                                      //           '${user_model.data!.domainId}',
+                                                                      //     },
+                                                                      //     load:
+                                                                      //         false);
+                                                                    } else {
+                                                                      provider
+                                                                          .getInvontoryModel!
+                                                                          .data![
+                                                                              index]
+                                                                          .stockStatus = 0;
+                                                                      setState(
+                                                                          () {});
+                                                                      await DataProvider()
+                                                                          .inventoryInfoUpdateApi(
+                                                                              map: {
+                                                                            'user_id':
+                                                                                '${user_model.data!.userId}',
+                                                                            'product_id':
+                                                                                '${provider.getInvontoryModel!.data![index].termId}',
+                                                                            'stock_status':
+                                                                                '0',
+                                                                            'stock_qty':
+                                                                                '${provider.getInvontoryModel!.data![index].stockQty}'
+                                                                          });
+                                                                      // provider.get_inventoryApi(
+                                                                      //     map: {
+                                                                      //       'user_id':
+                                                                      //           '${user_model.data!.userId}',
+                                                                      //       'domain_id':
+                                                                      //           '${user_model.data!.domainId}',
+                                                                      //     },
+                                                                      //     load:
+                                                                      //         false);
+                                                                    }
+                                                                  },
+                                                                )
+                                                              ],
+                                                            )
+                                                          ],
+                                                        ),
                                                       ),
-                                                      SizedBox(
-                                                        width: 2.w,
-                                                      ),
-                                                      Text(
-                                                        'Quantity',
-                                                        style: TextStyle(
-                                                            color: Colors.black,
-                                                            fontSize: 10.sp),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                  if (provider
-                                                          .getInvontoryModel!
-                                                          .data![index]
-                                                          .stockManage ==
-                                                      1)
+                                                    )
+                                                  ],
+                                                ),
+                                                SizedBox(
+                                                  height: 0.5.h,
+                                                ),
+                                                Divider(
+                                                  thickness: 1,
+                                                  color: Colors.black26,
+                                                ),
+                                                SizedBox(
+                                                  height: 0.5.h,
+                                                ),
+                                                Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceBetween,
+                                                  children: [
                                                     Row(
                                                       children: [
-                                                        IconButton(
-                                                          onPressed: () async {
-                                                            provider
-                                                                .getInvontoryModel!
-                                                                .data![index]
-                                                                .stockQty = provider
-                                                                    .getInvontoryModel!
-                                                                    .data![
-                                                                        index]
-                                                                    .stockQty! -
-                                                                1;
-                                                            setState(() {});
-                                                            await DataProvider()
-                                                                .inventoryInfoUpdateApi(
-                                                                    map: {
-                                                                  'user_id':
-                                                                      '${user_model.data!.userId}',
-                                                                  'product_id':
-                                                                      '${provider.getInvontoryModel!.data![index].termId}',
-                                                                  'stock_status':
-                                                                      '1',
-                                                                  'stock_qty':
-                                                                      '${provider.getInvontoryModel!.data![index].stockQty}'
-                                                                });
-                                                            provider
-                                                                .get_inventoryApi(
-                                                                    map: {
-                                                                  'user_id':
-                                                                      '${user_model.data!.userId}',
-                                                                  'domain_id':
-                                                                      '${user_model.data!.domainId}',
-                                                                },
-                                                                    load:
-                                                                        false);
-                                                          },
-                                                          icon: Icon(
-                                                            Icons.remove,
-                                                            color: Color(
-                                                                0xff050505),
-                                                            size: 1.5.h,
-                                                          ),
+                                                        SvgPicture.asset(
+                                                          'assets/svgs/scale.svg',
+                                                          height: 2.5.h,
                                                         ),
                                                         SizedBox(
                                                           width: 2.w,
                                                         ),
                                                         Text(
-                                                          '${provider.getInvontoryModel!.data![index].stockQty}',
+                                                          'Quantity',
                                                           style: TextStyle(
                                                               color:
                                                                   Colors.black,
-                                                              fontSize: 10.sp,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .bold),
-                                                        ),
-                                                        SizedBox(
-                                                          width: 1.w,
-                                                        ),
-                                                        IconButton(
-                                                          onPressed: () async {
-                                                            provider
-                                                                .getInvontoryModel!
-                                                                .data![index]
-                                                                .stockQty = provider
-                                                                    .getInvontoryModel!
-                                                                    .data![
-                                                                        index]
-                                                                    .stockQty! +
-                                                                1;
-                                                            setState(() {});
-                                                            await DataProvider()
-                                                                .inventoryInfoUpdateApi(
-                                                                    map: {
-                                                                  'user_id':
-                                                                      '${user_model.data!.userId}',
-                                                                  'product_id':
-                                                                      '${provider.getInvontoryModel!.data![index].termId}',
-                                                                  'stock_status':
-                                                                      '1',
-                                                                  'stock_qty':
-                                                                      '${provider.getInvontoryModel!.data![index].stockQty}'
-                                                                });
-                                                            provider
-                                                                .get_inventoryApi(
-                                                                    map: {
-                                                                  'user_id':
-                                                                      '${user_model.data!.userId}',
-                                                                  'domain_id':
-                                                                      '${user_model.data!.domainId}',
-                                                                },
-                                                                    load:
-                                                                        false);
-                                                          },
-                                                          icon: Icon(
-                                                            Icons.add,
-                                                            color: Color(
-                                                                0xff050505),
-                                                            size: 1.5.h,
-                                                          ),
+                                                              fontSize: 10.sp),
                                                         ),
                                                       ],
-                                                    )
-                                                ],
-                                              )
-                                            ],
+                                                    ),
+                                                    if (provider
+                                                            .getInvontoryModel!
+                                                            .data![index]
+                                                            .stockManage ==
+                                                        1)
+                                                      Row(
+                                                        children: [
+                                                          IconButton(
+                                                            onPressed:
+                                                                () async {
+                                                              provider
+                                                                  .getInvontoryModel!
+                                                                  .data![index]
+                                                                  .stockQty = provider
+                                                                      .getInvontoryModel!
+                                                                      .data![
+                                                                          index]
+                                                                      .stockQty! -
+                                                                  1;
+                                                              setState(() {});
+                                                              await DataProvider()
+                                                                  .inventoryInfoUpdateApi(
+                                                                      map: {
+                                                                    'user_id':
+                                                                        '${user_model.data!.userId}',
+                                                                    'product_id':
+                                                                        '${provider.getInvontoryModel!.data![index].termId}',
+                                                                    'stock_status':
+                                                                        '1',
+                                                                    'stock_qty':
+                                                                        '${provider.getInvontoryModel!.data![index].stockQty}'
+                                                                  });
+                                                              provider
+                                                                  .get_inventoryApi(
+                                                                      map: {
+                                                                    'user_id':
+                                                                        '${user_model.data!.userId}',
+                                                                    'domain_id':
+                                                                        '${user_model.data!.domainId}',
+                                                                  },
+                                                                      load:
+                                                                          false);
+                                                            },
+                                                            icon: Icon(
+                                                              Icons.remove,
+                                                              color: Color(
+                                                                  0xff050505),
+                                                              size: 1.5.h,
+                                                            ),
+                                                          ),
+                                                          SizedBox(
+                                                            width: 2.w,
+                                                          ),
+                                                          Text(
+                                                            '${provider.getInvontoryModel!.data![index].stockQty}',
+                                                            style: TextStyle(
+                                                                color: Colors
+                                                                    .black,
+                                                                fontSize: 10.sp,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold),
+                                                          ),
+                                                          SizedBox(
+                                                            width: 1.w,
+                                                          ),
+                                                          IconButton(
+                                                            onPressed:
+                                                                () async {
+                                                              provider
+                                                                  .getInvontoryModel!
+                                                                  .data![index]
+                                                                  .stockQty = provider
+                                                                      .getInvontoryModel!
+                                                                      .data![
+                                                                          index]
+                                                                      .stockQty! +
+                                                                  1;
+                                                              setState(() {});
+                                                              await DataProvider()
+                                                                  .inventoryInfoUpdateApi(
+                                                                      map: {
+                                                                    'user_id':
+                                                                        '${user_model.data!.userId}',
+                                                                    'product_id':
+                                                                        '${provider.getInvontoryModel!.data![index].termId}',
+                                                                    'stock_status':
+                                                                        '1',
+                                                                    'stock_qty':
+                                                                        '${provider.getInvontoryModel!.data![index].stockQty}'
+                                                                  });
+                                                              provider
+                                                                  .get_inventoryApi(
+                                                                      map: {
+                                                                    'user_id':
+                                                                        '${user_model.data!.userId}',
+                                                                    'domain_id':
+                                                                        '${user_model.data!.domainId}',
+                                                                  },
+                                                                      load:
+                                                                          false);
+                                                            },
+                                                            icon: Icon(
+                                                              Icons.add,
+                                                              color: Color(
+                                                                  0xff050505),
+                                                              size: 1.5.h,
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      )
+                                                  ],
+                                                )
+                                              ],
+                                            ),
                                           ),
                                         ),
-                                      ),
-                                      SizedBox(
-                                        height: 2.h,
-                                      )
-                                    ],
+                                        SizedBox(
+                                          height: 2.h,
+                                        )
+                                      ],
+                                    ),
                                   ),
-                                ),
-                              );
-                            },
+                                );
+                              },
+                            ),
                           ))
           ],
         ),
