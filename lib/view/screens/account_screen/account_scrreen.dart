@@ -300,7 +300,7 @@ class _AccountScreenState extends State<AccountScreen> {
                           builder: (context) => SubscriptionScreen(),
                         ));
                   },
-                  child: customRow(image: 'subb', text: 'Subscriptions Plans')),
+                  child: customRow(image: 'subb', text: 'Subscription Plan')),
               GestureDetector(
                   onTap: () {
                     Get.to(WebView(

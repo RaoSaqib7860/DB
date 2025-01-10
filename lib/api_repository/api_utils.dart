@@ -164,6 +164,7 @@ class DataProvider {
         return null;
       }
     } catch (e) {
+      //Get.snackbar('Alert', 'Email is Already exist');
       print('exception....${e}');
     }
   }

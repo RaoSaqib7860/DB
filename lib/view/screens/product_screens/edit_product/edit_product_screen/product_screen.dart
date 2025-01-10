@@ -136,7 +136,7 @@ bool loading=true;
                         Padding(
                           padding: EdgeInsets.only(left: 4.w, right: 4.w),
                           child: Text(
-                            'Short Discription'.tr,
+                            'Short Description'.tr,
                             style:
                                 TextStyle(color: Colors.black, fontSize: 11.sp),
                           ),

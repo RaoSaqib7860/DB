@@ -66,7 +66,7 @@ class LocaleString extends Translations{
       'Pending Amount':'Pending Amount',
       'Canceled Amount':'Canceled Amount',
       'Total Amount':'Total Amount',
-      'Order Complete':'Order Complete',
+      'Order Completed':'Order Completed',
       'In Processing':'In Processing',
       'Order Cancelled':'Order Cancelled',
       'Total Order':'Total Order',

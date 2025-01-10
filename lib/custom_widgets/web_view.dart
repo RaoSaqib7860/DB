@@ -8,7 +8,8 @@ import 'package:webview_flutter_wkwebview/webview_flutter_wkwebview.dart';
 
 class WebView extends StatefulWidget {
   final String? url;
-  const WebView({super.key, this.url});
+  final bool? appbar;
+  const WebView({super.key, this.url, this.appbar = true});
 
   @override
   State<WebView> createState() => _WebViewState();
@@ -70,58 +71,60 @@ class _WebViewState extends State<WebView> {
     return DataLoading(
       isLoading: load,
       child: Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.white,
-          elevation: 0,
-          title: Hero(
-            tag: 'app_logo',
-            child: Image(
-              image: AssetImage('assets/images/app_logo.png'),
-              height: 4.h,
-            ),
-          ),
-          centerTitle: true,
-          automaticallyImplyLeading: true,
-          actions: [
-            Padding(
-              padding: EdgeInsets.only(right: 4.w),
-              child: GestureDetector(
-                  onTap: () {},
-                  child: SvgPicture.asset(
-                    'assets/svgs/noti.svg',
-                    height: 3.h,
-                  )),
-            ),
-          ],
-          leadingWidth: 20.w,
-          // leading: Padding(
-          //   padding: EdgeInsets.only(left: 4.w),
-          //   child: DropdownButton(
-          //     isExpanded: true,
-          //     value: dropdownvalue,
-          //     icon: Icon(
-          //       Icons.keyboard_arrow_down,
-          //       color: Colors.black,
-          //       size: 2.h,
-          //     ),
-          //     underline: Container(),
-          //     items: items.map((String items) {
-          //       return DropdownMenuItem(
-          //         value: items,
-          //         child: Text(
-          //           items,
-          //           style: TextStyle(color: Colors.black54),
-          //         ),
-          //       );
-          //     }).toList(),
-          //     onChanged: (String? newValue) {
-          //       setState(() {
-          //         dropdownvalue = newValue!;
-          //       });
-          //     },
-          //   ),
-          // )
-        ),
+        appBar:  AppBar(
+                backgroundColor: Colors.white,
+                elevation: 0,
+                title:widget.appbar == false
+                    ? null
+                    : Hero(
+                  tag: 'app_logo',
+                  child: Image(
+                    image: AssetImage('assets/images/app_logo.png'),
+                    height: 4.h,
+                  ),
+                ),
+                centerTitle: true,
+                automaticallyImplyLeading: true,
+                // actions: [
+                //   Padding(
+                //     padding: EdgeInsets.only(right: 4.w),
+                //     child: GestureDetector(
+                //         onTap: () {},
+                //         child: SvgPicture.asset(
+                //           'assets/svgs/noti.svg',
+                //           height: 3.h,
+                //         )),
+                //   ),
+                // ],
+                leadingWidth: 20.w,
+                // leading: Padding(
+                //   padding: EdgeInsets.only(left: 4.w),
+                //   child: DropdownButton(
+                //     isExpanded: true,
+                //     value: dropdownvalue,
+                //     icon: Icon(
+                //       Icons.keyboard_arrow_down,
+                //       color: Colors.black,
+                //       size: 2.h,
+                //     ),
+                //     underline: Container(),
+                //     items: items.map((String items) {
+                //       return DropdownMenuItem(
+                //         value: items,
+                //         child: Text(
+                //           items,
+                //           style: TextStyle(color: Colors.black54),
+                //         ),
+                //       );
+                //     }).toList(),
+                //     onChanged: (String? newValue) {
+                //       setState(() {
+                //         dropdownvalue = newValue!;
+                //       });
+                //     },
+                //   ),
+                // )
+              ),
         body: WebViewWidget(controller: _controller),
       ),
     );

@@ -216,7 +216,7 @@ bool image_loading=true;
                           height: 1.h,
                         ),
                         Text(
-                          'Add Product Image (upto 7)'.tr,
+                          'Add Product Images'.tr,
                           style: TextStyle(color: Colors.grey, fontSize: 11.sp),
                         ),
                         SizedBox(

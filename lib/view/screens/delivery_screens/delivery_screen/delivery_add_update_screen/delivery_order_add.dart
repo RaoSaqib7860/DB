@@ -84,6 +84,7 @@ class _DeliveryOrderAddState extends State<DeliveryOrderAdd> {
         orderInfoModel?.orderData?.orderContent?.value?.phone ?? '';
     customer_email_controller.text =
         orderInfoModel?.orderData?.orderContent?.value?.email ?? '';
+
     ///
     receiving_city_controller.text =
         orderInfoModel?.orderData?.shippingInfo?.city?.name ?? '';
@@ -172,8 +173,9 @@ class _DeliveryOrderAddState extends State<DeliveryOrderAdd> {
                       CustomFormField(
                           enable: false,
                           name: 'Cost Center Code',
-                          hint:
-                              '${tcsInformationModel?.data?.first.costCenterCode}'),
+                          hint: tcsInformationModel!.data!.isEmpty
+                              ? ''
+                              : '${tcsInformationModel?.data?.first.costCenterCode}'),
                       Padding(
                         padding: EdgeInsets.symmetric(horizontal: 8.w),
                         child: Text(

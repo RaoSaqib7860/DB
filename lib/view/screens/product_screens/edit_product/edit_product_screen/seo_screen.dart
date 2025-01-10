@@ -188,83 +188,83 @@ class _SEOScreenState extends State<SEOScreen> {
                       SizedBox(
                         height: 2.h,
                       ),
-                      Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 6.w),
-                        child: Text(
-                          'Search Engine Optimization'.tr,
-                          style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 10.sp,
-                              fontWeight: FontWeight.w500),
-                        ),
-                      ),
-                      SizedBox(
-                        height: 1.h,
-                      ),
-                      Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 6.w),
-                        child: Container(
-                          decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(10),
-                              boxShadow: [
-                                BoxShadow(
-                                    color: Colors.grey.withAlpha(50),
-                                    offset: Offset(1, 1),
-                                    spreadRadius: 1,
-                                    blurRadius: 2),
-                                BoxShadow(
-                                    color: Colors.grey.withAlpha(50),
-                                    offset: Offset(-1, -1),
-                                    spreadRadius: 1,
-                                    blurRadius: 2),
-                              ]),
-                          child: Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 3.w),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                SizedBox(
-                                  height: 1.h,
-                                ),
-                                Text(
-                                  'Online Shopping'.tr,
-                                  style: TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 12.sp,
-                                      fontWeight: FontWeight.w500),
-                                ),
-                                SizedBox(
-                                  height: 1.h,
-                                ),
-                                Text(
-                                  'https://octanefashion.dialboxx.com/seller/product/4052/express-checkout',
-                                  style: TextStyle(
-                                    color: Color(0xff1568A8),
-                                    fontSize: 8.sp,
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: 1.h,
-                                ),
-                                Text(
-                                  'Jun 6, 2024 - if you want this this product you can call me anytime i will deliver your order than and there so you and have your product really fast.'.tr,
-                                  style: TextStyle(
-                                    color: Color(0xff454545),
-                                    fontSize: 8.sp,
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: 1.h,
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
-                      SizedBox(
-                        height: 8.h,
-                      ),
+                      // Padding(
+                      //   padding: EdgeInsets.symmetric(horizontal: 6.w),
+                      //   child: Text(
+                      //     'Search Engine Optimization'.tr,
+                      //     style: TextStyle(
+                      //         color: Colors.black,
+                      //         fontSize: 10.sp,
+                      //         fontWeight: FontWeight.w500),
+                      //   ),
+                      // ),
+                      // SizedBox(
+                      //   height: 1.h,
+                      // ),
+                      // Padding(
+                      //   padding: EdgeInsets.symmetric(horizontal: 6.w),
+                      //   child: Container(
+                      //     decoration: BoxDecoration(
+                      //         color: Colors.white,
+                      //         borderRadius: BorderRadius.circular(10),
+                      //         boxShadow: [
+                      //           BoxShadow(
+                      //               color: Colors.grey.withAlpha(50),
+                      //               offset: Offset(1, 1),
+                      //               spreadRadius: 1,
+                      //               blurRadius: 2),
+                      //           BoxShadow(
+                      //               color: Colors.grey.withAlpha(50),
+                      //               offset: Offset(-1, -1),
+                      //               spreadRadius: 1,
+                      //               blurRadius: 2),
+                      //         ]),
+                      //     child: Padding(
+                      //       padding: EdgeInsets.symmetric(horizontal: 3.w),
+                      //       child: Column(
+                      //         crossAxisAlignment: CrossAxisAlignment.start,
+                      //         children: [
+                      //           SizedBox(
+                      //             height: 1.h,
+                      //           ),
+                      //           Text(
+                      //             'Online Shopping'.tr,
+                      //             style: TextStyle(
+                      //                 color: Colors.black,
+                      //                 fontSize: 12.sp,
+                      //                 fontWeight: FontWeight.w500),
+                      //           ),
+                      //           SizedBox(
+                      //             height: 1.h,
+                      //           ),
+                      //           Text(
+                      //             'https://octanefashion.dialboxx.com/seller/product/4052/express-checkout',
+                      //             style: TextStyle(
+                      //               color: Color(0xff1568A8),
+                      //               fontSize: 8.sp,
+                      //             ),
+                      //           ),
+                      //           SizedBox(
+                      //             height: 1.h,
+                      //           ),
+                      //           Text(
+                      //             'Jun 6, 2024 - if you want this this product you can call me anytime i will deliver your order than and there so you and have your product really fast.'.tr,
+                      //             style: TextStyle(
+                      //               color: Color(0xff454545),
+                      //               fontSize: 8.sp,
+                      //             ),
+                      //           ),
+                      //           SizedBox(
+                      //             height: 1.h,
+                      //           ),
+                      //         ],
+                      //       ),
+                      //     ),
+                      //   ),
+                      // ),
+                      // SizedBox(
+                      //   height: 8.h,
+                      // ),
                       Padding(
                         padding: EdgeInsets.symmetric(horizontal: 6.w),
                         child: Row(

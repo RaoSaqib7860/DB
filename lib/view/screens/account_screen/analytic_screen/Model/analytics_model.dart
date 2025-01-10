@@ -30,20 +30,20 @@ class Data {
   Browsers? browsers;
   List<Pages>? pages;
   int? vistors;
-  double? totalTimeSpent;
+  dynamic totalTimeSpent;
   int? uniqueVistors;
   List<Cities>? cities;
   Regions? regions;
 
   Data(
       {this.url,
-        this.browsers,
-        this.pages,
-        this.vistors,
-        this.totalTimeSpent,
-        this.uniqueVistors,
-        this.cities,
-        this.regions});
+      this.browsers,
+      this.pages,
+      this.vistors,
+      this.totalTimeSpent,
+      this.uniqueVistors,
+      this.cities,
+      this.regions});
 
   Data.fromJson(Map<String, dynamic> json) {
     url = json['url'];
@@ -66,7 +66,7 @@ class Data {
       });
     }
     regions =
-    json['regions'] != null ? new Regions.fromJson(json['regions']) : null;
+        json['regions'] != null ? new Regions.fromJson(json['regions']) : null;
   }
 
   Map<String, dynamic> toJson() {
@@ -102,12 +102,12 @@ class Browsers {
 
   Browsers(
       {this.firefox,
-        this.chrome,
-        this.safari,
-        this.edge,
-        this.brave,
-        this.opera,
-        this.others});
+      this.chrome,
+      this.safari,
+      this.edge,
+      this.brave,
+      this.opera,
+      this.others});
 
   Browsers.fromJson(Map<String, dynamic> json) {
     firefox = json['firefox'];
@@ -182,13 +182,13 @@ class Regions {
 
   Regions(
       {this.punjab,
-        this.islamabad,
-        this.sindh,
-        this.balochistan,
-        this.kpk,
-        this.azadJammuKashmir,
-        this.fata,
-        this.gilgitBaltistan});
+      this.islamabad,
+      this.sindh,
+      this.balochistan,
+      this.kpk,
+      this.azadJammuKashmir,
+      this.fata,
+      this.gilgitBaltistan});
 
   Regions.fromJson(Map<String, dynamic> json) {
     punjab = json['punjab'];

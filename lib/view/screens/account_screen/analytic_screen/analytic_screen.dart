@@ -140,7 +140,7 @@ class _AnalyticScreenState extends State<AnalyticScreen> {
                                   Expanded(
                                       child: customContainer(
                                           image: 'bag',
-                                          title: 'Total Order'.tr,
+                                          title: 'Total Orders'.tr,
                                           subTitle:
                                               '${provider.getOrserHistoryModel!.data!.total}',
                                           color: Color(0xff1568A8))),
@@ -177,7 +177,7 @@ class _AnalyticScreenState extends State<AnalyticScreen> {
                                   Expanded(
                                       child: customContainer(
                                           image: 'alll',
-                                          title: 'Order Complete'.tr,
+                                          title: 'Order Completed'.tr,
                                           subTitle:
                                               '${provider.getOrserHistoryModel!.data!.completed}',
                                           color: Color(0xff0CA011),
@@ -204,7 +204,7 @@ class _AnalyticScreenState extends State<AnalyticScreen> {
                               padding: EdgeInsets.symmetric(horizontal: 4.w),
                               child: customContainer(
                                   image: 'amount',
-                                  title: 'Canceled Amount',
+                                  title: 'Cancelled Amount',
                                   subTitle:
                                       '${provider.getOrserHistoryModel!.data!.amountCancel}',
                                   color: Color(0xff9B001E),
@@ -1120,7 +1120,7 @@ class _AnalyticScreenState extends State<AnalyticScreen> {
                                             Column(
                                               children: [
                                                 Text(
-                                                  '640 mins',
+                                                  '${provider.getAnalyticsModel!.data!.totalTimeSpent} Min',
                                                   style: TextStyle(
                                                       color: Colors.black,
                                                       fontSize: 12.sp,

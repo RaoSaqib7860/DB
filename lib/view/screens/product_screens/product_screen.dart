@@ -109,7 +109,7 @@ class _ProductScreenState extends State<ProductScreen> {
                                 width: 2.w,
                               ),
                               Text(
-                                'All Product'.tr,
+                                'All Products'.tr,
                                 style: TextStyle(
                                   color: Colors.black,
                                   fontSize: 11.sp,

@@ -423,39 +423,39 @@ class _ProductBrandScreenState extends State<ProductBrandScreen> {
                                                     )
                                                   ],
                                                 ),
-                                                Column(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  children: [
-                                                    Text(
-                                                      'Created at'.tr,
-                                                      overflow:
-                                                          TextOverflow.ellipsis,
-                                                      style: TextStyle(
-                                                        color:
-                                                            Color(0xff0B7A3E),
-                                                        fontSize: 9.sp,
-                                                        overflow: TextOverflow
-                                                            .ellipsis,
-                                                      ),
-                                                    ),
-                                                    SizedBox(
-                                                      height: 0.3.h,
-                                                    ),
-                                                    Text(
-                                                      '1 month ago'.tr,
-                                                      overflow:
-                                                          TextOverflow.ellipsis,
-                                                      style: TextStyle(
-                                                        color:
-                                                            Color(0xff636363),
-                                                        fontSize: 8.5.sp,
-                                                        overflow: TextOverflow
-                                                            .ellipsis,
-                                                      ),
-                                                    ),
-                                                  ],
-                                                )
+                                                // Column(
+                                                //   crossAxisAlignment:
+                                                //       CrossAxisAlignment.start,
+                                                //   children: [
+                                                //     Text(
+                                                //       'Created at'.tr,
+                                                //       overflow:
+                                                //           TextOverflow.ellipsis,
+                                                //       style: TextStyle(
+                                                //         color:
+                                                //             Color(0xff0B7A3E),
+                                                //         fontSize: 9.sp,
+                                                //         overflow: TextOverflow
+                                                //             .ellipsis,
+                                                //       ),
+                                                //     ),
+                                                //     SizedBox(
+                                                //       height: 0.3.h,
+                                                //     ),
+                                                //     Text(
+                                                //       '1 month ago'.tr,
+                                                //       overflow:
+                                                //           TextOverflow.ellipsis,
+                                                //       style: TextStyle(
+                                                //         color:
+                                                //             Color(0xff636363),
+                                                //         fontSize: 8.5.sp,
+                                                //         overflow: TextOverflow
+                                                //             .ellipsis,
+                                                //       ),
+                                                //     ),
+                                                //   ],
+                                                // )
                                               ],
                                             )
                                           ],

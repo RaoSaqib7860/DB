@@ -802,7 +802,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     height: 1.3.h,
                                   ),
                                   Text(
-                                    'Today\' total sales'.tr,
+                                    'Today\'s Total Sales'.tr,
                                     style: TextStyle(
                                         fontSize: 12.sp,
                                         color: Colors.black,
@@ -1160,7 +1160,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    '${provider.dashboardModel!.data!.willExpired}',
+                                    'Will Expired ${provider.dashboardModel!.data!.willExpired}',
                                     style: TextStyle(
                                         fontSize: 10.sp,
                                         color: Colors.black,
