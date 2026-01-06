@@ -1,4 +1,4 @@
-package com.example.db_2_0
+package com.dialbox.pk
 
 import io.flutter.embedding.android.FlutterActivity
 

@@ -102,7 +102,7 @@ class _StoreInnfoScreenState extends State<StoreInnfoScreen> {
                       Padding(
                         padding: EdgeInsets.only(left: 4.w, right: 4.w),
                         child: Text(
-                          'Store Discription'.tr,
+                          'Store Description'.tr,
                           style:
                               TextStyle(color: Colors.black, fontSize: 11.sp),
                         ),

@@ -892,16 +892,16 @@ class _HomeScreenState extends State<HomeScreen> {
                         SizedBox(
                           height: 2.h,
                         ),
-                        Text(
-                          'How to upload store logo'.tr,
-                          style: TextStyle(
-                              fontSize: 11.sp,
-                              color: blueColor,
-                              fontWeight: FontWeight.bold),
-                        ),
-                        SizedBox(
-                          height: 1.h,
-                        ),
+                        // Text(
+                        //   'How to upload store logo'.tr,
+                        //   style: TextStyle(
+                        //       fontSize: 11.sp,
+                        //       color: blueColor,
+                        //       fontWeight: FontWeight.bold),
+                        // ),
+                        // SizedBox(
+                        //   height: 1.h,
+                        // ),
                         InkWell(
                           onTap: () async {
                             if (!await launchUrl(Uri.parse(

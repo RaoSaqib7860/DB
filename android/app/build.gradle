@@ -27,8 +27,8 @@ if (keystorePropertiesFile.exists()) {
     keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
 }
 android {
-    namespace "com.example.db_2_0"
-    compileSdk 34
+    namespace "com.dialbox.pk"
+    compileSdk 35
     ndkVersion flutter.ndkVersion
 
     compileOptions {
@@ -45,12 +45,12 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.example.db_2_0"
+        applicationId "com.dialbox.pk"
         minSdkVersion flutter.minSdkVersion
-        targetSdkVersion 34
+        targetSdkVersion 35
         multiDexEnabled true
-        versionCode flutterVersionCode.toInteger()
-        versionName flutterVersionName
+        versionCode 2
+        versionName "1.0.2"
     }
     signingConfigs {
         release {

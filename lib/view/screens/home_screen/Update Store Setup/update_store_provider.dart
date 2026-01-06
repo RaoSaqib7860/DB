@@ -40,8 +40,11 @@ class UpdateStoreProvider extends ChangeNotifier {
   XFile? favImage;
   ImagePicker favLogo = ImagePicker();
   Future upload_logo_Image() async {
-    final XFile? result =
-        await pickerLogo.pickImage(source: ImageSource.gallery);
+    final XFile? result = await pickerLogo.pickImage(
+        source: ImageSource.gallery,
+        maxHeight: 100,
+        maxWidth: 250,
+        imageQuality: 50);
     if (result != null) {
       logoImage = XFile(result.path);
       update_state();
@@ -49,7 +52,11 @@ class UpdateStoreProvider extends ChangeNotifier {
   }
 
   Future upload_fav_Image() async {
-    final XFile? result = await favLogo.pickImage(source: ImageSource.gallery);
+    final XFile? result = await favLogo.pickImage(
+        source: ImageSource.gallery,
+        maxHeight: 100,
+        maxWidth: 250,
+        imageQuality: 50);
     if (result != null) {
       favImage = XFile(result.path);
       update_state();
